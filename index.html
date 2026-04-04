@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AgenticFlowX — Spec-driven AI development</title>
+  <meta name="description" content="The spec-driven AI coding environment. Enforced specs, bidirectional @see traceability, quality gates. A VS Code extension built on the AFX Workflow.">
+  <meta property="og:title" content="AgenticFlowX — Code the right thing, not just faster">
+  <meta property="og:description" content="The spec-driven AI coding environment. Enforced specs, bidirectional traceability, quality gates.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://agenticflowx.github.io">
+  <meta property="og:image" content="assets/agenticflow_icon_minimal.svg">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' fill='%230a0a0b' rx='80'/><text x='100' y='340' font-family='system-ui' font-weight='800' font-size='260' fill='%23fff'>AF</text><text x='330' y='340' font-family='system-ui' font-weight='800' font-size='260' fill='%23f59e0b'>X</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #faf4ed;
+      --bg-subtle: #f5ede5;
+      --bg-element: #fff9f2;
+      --border: #e8ddd4;
+      --border-hover: #d4c4b8;
+      --text: #575279;
+      --text-secondary: #797593;
+      --text-tertiary: #9893a5;
+      --accent: #ea9d34;
+      --accent-dim: rgba(234, 157, 52, 0.1);
+      --iris: #907aa9;
+      --mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background:
+        radial-gradient(circle, var(--border) 1px, transparent 1px),
+        var(--bg);
+      background-size: 24px 24px, 100% 100%;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3 { color: var(--text); font-weight: 600; letter-spacing: -0.02em; }
+    a { color: var(--text-secondary); text-decoration: none; transition: color 0.15s; }
+    a:hover { color: var(--text); }
+    code { font-family: var(--mono); }
+
+    .container { max-width: 1080px; margin: 0 auto; padding: 0 2rem; }
+
+    /* ── Nav ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(250, 244, 237, 0.85);
+      backdrop-filter: blur(12px) saturate(1.4);
+      -webkit-backdrop-filter: blur(12px) saturate(1.4);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      color: var(--text);
+      font-weight: 700;
+      font-size: 0.9375rem;
+      letter-spacing: -0.01em;
+    }
+
+    .nav-brand-mark {
+      font-family: var(--mono);
+      font-weight: 800;
+      font-size: 0.75rem;
+      background: rgba(144, 122, 169, 0.1);
+      color: var(--iris);
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      list-style: none;
+    }
+
+    .nav-links a, .nav-links .disabled {
+      font-size: 0.8125rem;
+      padding: 0.375rem 0.75rem;
+      border-radius: 6px;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .nav-links a:hover { background: var(--bg-element); color: var(--text); }
+
+    .nav-links .disabled {
+      color: var(--text-tertiary);
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .nav-cta {
+      font-size: 0.8125rem !important;
+      background: var(--iris) !important;
+      color: #fff !important;
+      font-weight: 500;
+      padding: 0.375rem 0.875rem !important;
+    }
+    .nav-cta:hover { opacity: 0.9; background: var(--iris) !important; color: #fff !important; }
+
+    .nav-mobile { display: none; }
+
+    /* ── Hero ── */
+    .hero {
+      padding: 6rem 0 5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-watermark {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -55%);
+      width: 720px;
+      height: auto;
+      opacity: 0.13;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero .container { position: relative; z-index: 1; }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--iris);
+      background: rgba(144, 122, 169, 0.08);
+      border: 1px solid rgba(144, 122, 169, 0.2);
+      padding: 0.375rem 0.875rem;
+      border-radius: 100px;
+      margin-bottom: 2rem;
+      letter-spacing: 0.02em;
+    }
+
+    .hero-badge .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--iris);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .hero-tagline {
+      font-size: clamp(2.25rem, 5vw, 3.5rem);
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.25rem;
+      max-width: 680px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-tagline em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .hero-desc {
+      font-size: 1.125rem;
+      color: var(--text-secondary);
+      max-width: 480px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.625rem 1.25rem;
+      background: var(--iris);
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.875rem;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.15s, transform 0.15s;
+    }
+    .btn-primary:hover { opacity: 0.9; color: #fff; transform: translateY(-1px); }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.625rem 1.25rem;
+      background: transparent;
+      color: var(--text-secondary);
+      font-weight: 500;
+      font-size: 0.875rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: border-color 0.15s, color 0.15s, transform 0.15s;
+    }
+    .btn-secondary:hover { border-color: var(--border-hover); color: var(--text); transform: translateY(-1px); }
+
+    /* ── Sections ── */
+    section { padding: 5rem 0; }
+
+    .section-divider {
+      border: none;
+      height: 24px;
+      background: none;
+      margin: 0;
+      position: relative;
+      overflow: visible;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-size: 1.75rem;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.025em;
+    }
+
+    .section-copy {
+      max-width: 560px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+
+    /* ── Extension / Screenshot ── */
+    .extension-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 3.5rem;
+      align-items: center;
+    }
+
+    .extension-text code {
+      font-size: 0.8125rem;
+      background: var(--accent-dim);
+      color: var(--accent);
+      padding: 0.125rem 0.375rem;
+      border-radius: 3px;
+    }
+
+    .extension-screenshot {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: #2a2438;
+      box-shadow: 0 8px 30px rgba(87, 82, 121, 0.12);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .extension-screenshot:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 24px 48px rgba(87, 82, 121, 0.18);
+    }
+
+    .screenshot-titlebar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 14px;
+      background: #221e2e;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .screenshot-titlebar .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+    }
+    .screenshot-titlebar .dot.red { background: #d7827e; }
+    .screenshot-titlebar .dot.yellow { background: #ea9d34; }
+    .screenshot-titlebar .dot.green { background: #56949f; }
+
+    .screenshot-titlebar .titlebar-text {
+      flex: 1;
+      text-align: center;
+      font-size: 0.6875rem;
+      font-family: var(--mono);
+      color: var(--text-tertiary);
+      margin-right: 40px;
+    }
+
+    .extension-screenshot img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    /* ── Workflow ── */
+    .workflow { text-align: center; }
+
+    .flow-diagram {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      margin: 2.5rem 0 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .flow-node {
+      background: var(--bg-element);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.625rem 1.5rem;
+      font-weight: 500;
+      font-size: 0.875rem;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .flow-node:first-child { border-radius: 8px 0 0 8px; }
+    .flow-node:last-child { border-radius: 0 8px 8px 0; }
+    .flow-node:not(:first-child) { border-left: none; }
+    .flow-node:hover { border-color: var(--iris); background: rgba(144, 122, 169, 0.06); }
+
+    .flow-arrow {
+      color: var(--text-tertiary);
+      font-size: 0.875rem;
+      padding: 0 0.125rem;
+      display: none;
+    }
+
+    .workflow-footer {
+      color: var(--text-tertiary);
+      font-size: 0.8125rem;
+    }
+
+    .workflow-agents {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    .agent-tag {
+      font-family: var(--mono);
+      font-size: 0.6875rem;
+      color: var(--text-tertiary);
+      background: var(--bg-element);
+      border: 1px solid var(--border);
+      padding: 0.25rem 0.625rem;
+      border-radius: 100px;
+    }
+
+    /* ── Quick Start ── */
+    .quickstart-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      max-width: 720px;
+    }
+
+    .step-card {
+      background: var(--bg-element);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      transition: border-color 0.2s;
+    }
+    .step-card:hover { border-color: var(--border-hover); }
+
+    .step-number {
+      font-family: var(--mono);
+      font-size: 0.6875rem;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.05em;
+    }
+
+    .step-label {
+      color: var(--text);
+      font-weight: 500;
+      font-size: 0.9375rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .code-block {
+      position: relative;
+      background: #2a2438;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 6px;
+      padding: 0.75rem 2.5rem 0.75rem 0.75rem;
+      overflow-x: auto;
+    }
+
+    .code-block code {
+      color: #9ccfd8;
+      font-size: 0.75rem;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 767px) {
+      .code-block code {
+        white-space: pre-wrap;
+        word-break: break-all;
+      }
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 0.5rem;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: rgba(255, 255, 255, 0.5);
+      border-radius: 4px;
+      padding: 0.1875rem 0.375rem;
+      cursor: pointer;
+      font-size: 0.6875rem;
+      font-family: var(--mono);
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .copy-btn:hover { border-color: rgba(255, 255, 255, 0.25); color: #fff; }
+
+    /* ── Features (two layers) ── */
+    .layer {
+      margin-bottom: 3rem;
+    }
+
+    .layer:last-child { margin-bottom: 0; }
+
+    .layer-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .layer-tag {
+      font-family: var(--mono);
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      padding: 0.25rem 0.625rem;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    .layer-tag.base {
+      background: rgba(144, 122, 169, 0.1);
+      color: var(--iris);
+      border: 1px solid rgba(144, 122, 169, 0.2);
+    }
+
+    .layer-tag.afx {
+      background: var(--accent-dim);
+      color: var(--accent);
+      border: 1px solid rgba(234, 157, 52, 0.25);
+    }
+
+    .layer-title {
+      font-size: 0.9375rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .features-grid.three-col {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .feature-card {
+      background: var(--bg);
+      padding: 1.75rem;
+      transition: background 0.2s;
+    }
+    .feature-card:hover { background: var(--bg-element); }
+
+    .feature-icon {
+      margin-bottom: 1rem;
+      display: block;
+      color: var(--text-tertiary);
+    }
+    .feature-icon svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .feature-icon.accent { color: var(--accent); }
+
+    .feature-title {
+      color: var(--text);
+      font-weight: 600;
+      font-size: 0.875rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .feature-copy {
+      font-size: 0.8125rem;
+      line-height: 1.6;
+      color: var(--text-tertiary);
+    }
+
+    .feature-copy code {
+      font-size: 0.75rem;
+      background: var(--accent-dim);
+      color: var(--accent);
+      padding: 0.0625rem 0.25rem;
+      border-radius: 3px;
+    }
+
+    /* ── Footer ── */
+    footer {
+      padding: 2.5rem 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .footer-links a {
+      color: var(--text-tertiary);
+      font-size: 0.8125rem;
+    }
+    .footer-links a:hover { color: var(--text); }
+
+    .footer-copy {
+      color: var(--text-tertiary);
+      font-size: 0.75rem;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 767px) {
+      .nav-links { display: none; }
+      .nav-mobile { display: block; }
+      .nav-mobile summary {
+        list-style: none;
+        cursor: pointer;
+        color: var(--text-secondary);
+        font-size: 1.25rem;
+        line-height: 1;
+      }
+      .nav-mobile summary::-webkit-details-marker { display: none; }
+      .nav-mobile .dropdown {
+        position: absolute;
+        right: 2rem;
+        top: 3.5rem;
+        background: var(--bg-element);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 0.75rem 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        min-width: 160px;
+        box-shadow: 0 8px 24px rgba(87, 82, 121, 0.1);
+      }
+      .nav-mobile .dropdown a, .nav-mobile .dropdown span { font-size: 0.875rem; }
+
+      .extension-grid { grid-template-columns: 1fr; }
+      .extension-text { text-align: center; }
+      .extension-text .section-copy { margin: 0 auto; }
+      .quickstart-grid { grid-template-columns: 1fr; max-width: 100%; }
+      .step-card { text-align: center; }
+      .step-card .btn-primary { display: inline-flex; }
+      .features-grid { grid-template-columns: 1fr 1fr; }
+      .hero-tagline { font-size: 2rem; }
+      .hero-ctas { flex-direction: column; align-items: center; }
+      .footer-inner { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+
+    @media (max-width: 479px) {
+      .features-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav>
+    <div class="container nav-inner">
+      <a href="/" class="nav-brand">
+        <span class="nav-brand-mark">AFX</span>
+        AgenticFlowX
+      </a>
+
+      <ul class="nav-links">
+        <li><span class="disabled">Docs</span></li>
+        <li><a href="https://github.com/AgenticFlowX/agenticflowx" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+        <li><a href="https://marketplace.visualstudio.com/items?itemName=AgenticFlowX.agenticflowx" class="nav-cta" target="_blank" rel="noopener noreferrer">Install</a></li>
+      </ul>
+
+      <details class="nav-mobile">
+        <summary aria-label="Menu">&#9776;</summary>
+        <div class="dropdown">
+          <span class="disabled">Docs (soon)</span>
+          <a href="https://github.com/AgenticFlowX/agenticflowx" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://marketplace.visualstudio.com/items?itemName=AgenticFlowX.agenticflowx" target="_blank" rel="noopener noreferrer">Install Extension</a>
+        </div>
+      </details>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- Hero -->
+    <section class="hero" id="hero">
+      <!-- Faint logo watermark -->
+      <svg class="hero-watermark" viewBox="100 140 600 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="wmFlowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#907aa9"/><stop offset="100%" style="stop-color:#ea9d34"/>
+          </linearGradient>
+        </defs>
+        <g transform="translate(400, 300)">
+          <path d="M -140 0 C -140 -80, -70 -80, -70 0 C -70 80, 0 80, 0 0 C 0 -80, 70 -80, 70 0 C 70 80, 140 80, 140 0" stroke="url(#wmFlowGrad)" stroke-width="8" fill="none" stroke-linecap="round"/>
+          <path d="M -140 0 Q -105 -40, -70 0 Q -35 40, 0 0 Q 35 -40, 70 0 Q 105 40, 140 0" stroke="#ea9d34" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <g transform="translate(-140, 0)"><circle r="20" fill="url(#wmFlowGrad)"/><circle r="14" fill="#faf4ed"/><circle r="6" fill="#ea9d34"/></g>
+          <g transform="translate(0, 0)"><circle r="24" fill="url(#wmFlowGrad)"/><circle r="18" fill="#faf4ed"/><circle r="8" fill="#ea9d34"/></g>
+          <g transform="translate(140, 0)"><circle r="20" fill="url(#wmFlowGrad)"/><circle r="14" fill="#faf4ed"/><circle r="6" fill="#ea9d34"/></g>
+          <circle r="180" stroke="url(#wmFlowGrad)" stroke-width="1" fill="none" opacity="0.4" stroke-dasharray="4,8"/>
+        </g>
+      </svg>
+      <div class="container">
+        <div class="hero-badge"><span class="dot"></span> Early access &mdash; testing in progress</div>
+        <h1 class="hero-tagline">The spec-driven<br>AI coding environment.</h1>
+        <p class="hero-desc">Write the spec. Let agents build it. Every function traces back to a requirement &mdash; if it doesn't, it's a defect.</p>
+        <div class="hero-ctas">
+          <a href="https://marketplace.visualstudio.com/items?itemName=AgenticFlowX.agenticflowx" class="btn-primary" target="_blank" rel="noopener noreferrer">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Install from Marketplace
+          </a>
+          <a href="https://github.com/AgenticFlowX/agenticflowx" class="btn-secondary" target="_blank" rel="noopener noreferrer">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            View Source
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider" aria-hidden="true">
+      <svg width="120" height="24" viewBox="0 0 120 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 0 12 Q 15 2, 30 12 Q 45 22, 60 12 Q 75 2, 90 12 Q 105 22, 120 12" stroke="var(--border)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <circle cx="0" cy="12" r="2.5" fill="var(--border)"/><circle cx="60" cy="12" r="3" fill="var(--accent)" opacity="0.4"/><circle cx="120" cy="12" r="2.5" fill="var(--border)"/>
+      </svg>
+    </div>
+
+    <!-- Extension -->
+    <section id="extension">
+      <div class="container">
+        <div class="extension-grid">
+          <div class="extension-text">
+            <p class="section-label">VS Code Extension</p>
+            <h2 class="section-title">Specs that are enforced, not just generated.</h2>
+            <p class="section-copy">
+              A spec-aware editor that treats specs as first-class. Focused modes for authoring. A panel for the big picture.
+              Any provider, your key. Built on the <a href="https://github.com/AgenticFlowX/afx" style="color: var(--iris);">AFX Workflow</a>.
+            </p>
+          </div>
+          <div class="extension-screenshot">
+            <div class="screenshot-titlebar">
+              <span class="dot red"></span>
+              <span class="dot yellow"></span>
+              <span class="dot green"></span>
+              <span class="titlebar-text">agenticflowx &mdash; VS Code</span>
+            </div>
+            <img src="assets/screenshot.webp" alt="AgenticFlowX running in VS Code" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider" aria-hidden="true">
+      <svg width="120" height="24" viewBox="0 0 120 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 0 12 Q 15 2, 30 12 Q 45 22, 60 12 Q 75 2, 90 12 Q 105 22, 120 12" stroke="var(--border)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <circle cx="0" cy="12" r="2.5" fill="var(--border)"/><circle cx="60" cy="12" r="3" fill="var(--accent)" opacity="0.4"/><circle cx="120" cy="12" r="2.5" fill="var(--border)"/>
+      </svg>
+    </div>
+
+    <!-- Workflow -->
+    <section class="workflow" id="workflow">
+      <div class="container">
+        <p class="section-label">The AFX Workflow</p>
+        <h2 class="section-title">Pause. Think. Plan. Ship.</h2>
+        <p class="section-copy" style="margin: 0 auto 0.5rem; text-align: center;">
+          Standard agent skills for spec-driven AI development.
+          Portable and agent-agnostic &mdash; works with or without the extension.
+        </p>
+        <img src="assets/workflow-mindmap.webp" alt="AFX four-file structure: spec.md (The WHAT), design.md (The HOW), tasks.md (The WHEN), journal.md (Memory)" loading="lazy" style="display: block; max-width: 560px; width: 100%; margin: 2rem auto 1.5rem; border-radius: 10px;">
+        <p class="workflow-footer">Works with any AI coding agent.</p>
+        <div class="workflow-agents">
+          <span class="agent-tag">Claude Code</span>
+          <span class="agent-tag">Copilot</span>
+          <span class="agent-tag">Codex</span>
+          <span class="agent-tag">Gemini</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider" aria-hidden="true">
+      <svg width="120" height="24" viewBox="0 0 120 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 0 12 Q 15 2, 30 12 Q 45 22, 60 12 Q 75 2, 90 12 Q 105 22, 120 12" stroke="var(--border)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <circle cx="0" cy="12" r="2.5" fill="var(--border)"/><circle cx="60" cy="12" r="3" fill="var(--accent)" opacity="0.4"/><circle cx="120" cy="12" r="2.5" fill="var(--border)"/>
+      </svg>
+    </div>
+
+    <!-- Quick Start -->
+    <section id="quickstart">
+      <div class="container">
+        <p class="section-label">Get Started</p>
+        <h2 class="section-title" style="margin-bottom: 2rem;">Two steps. That's it.</h2>
+        <div class="quickstart-grid">
+          <div class="step-card">
+            <p class="step-number">01</p>
+            <p class="step-label">Install the extension</p>
+            <a href="https://marketplace.visualstudio.com/items?itemName=AgenticFlowX.agenticflowx" class="btn-primary" target="_blank" rel="noopener noreferrer" style="font-size: 0.8125rem; padding: 0.5rem 1rem;">
+              VS Code Marketplace
+            </a>
+          </div>
+          <div class="step-card">
+            <p class="step-number">02</p>
+            <p class="step-label">Add the workflow</p>
+            <div class="code-block">
+              <code id="curl-cmd">curl -sL https://raw.githubusercontent.com/AgenticFlowX/afx/main/afx-cli | bash -s -- .</code>
+              <button class="copy-btn" onclick="copyCmd()" aria-label="Copy to clipboard">copy</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider" aria-hidden="true">
+      <svg width="120" height="24" viewBox="0 0 120 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 0 12 Q 15 2, 30 12 Q 45 22, 60 12 Q 75 2, 90 12 Q 105 22, 120 12" stroke="var(--border)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <circle cx="0" cy="12" r="2.5" fill="var(--border)"/><circle cx="60" cy="12" r="3" fill="var(--accent)" opacity="0.4"/><circle cx="120" cy="12" r="2.5" fill="var(--border)"/>
+      </svg>
+    </div>
+
+    <!-- Features -->
+    <section id="features">
+      <div class="container">
+        <p class="section-label">What's in the extension</p>
+        <h2 class="section-title" style="margin-bottom: 0.75rem;">Built on a proven agent engine.</h2>
+        <p class="section-copy" style="text-align: center; margin: 0 auto 2.5rem; color: var(--text-tertiary); font-size: 0.875rem;">28+ providers, 23 tools, MCP support, custom modes. BYO API key &mdash; no vendor lock-in.<br>On top of that, we added:</p>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <span class="feature-icon accent" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 17H7A5 5 0 0 1 7 7h2"/><path d="M15 7h2a5 5 0 0 1 0 10h-2"/><line x1="8" y1="12" x2="16" y2="12"/></svg></span>
+            <h3 class="feature-title">@see CodeLens</h3>
+            <p class="feature-copy">Hover over any <code>@see</code> annotation to preview the linked spec inline. Jump to the requirement without leaving your code.</p>
+          </div>
+          <div class="feature-card">
+            <span class="feature-icon accent" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>
+            <h3 class="feature-title">Focus Track</h3>
+            <p class="feature-copy">Dual-track modes: General for coding, Focus for spec work. Lean prompts that fit even small models.</p>
+          </div>
+          <div class="feature-card">
+            <span class="feature-icon accent" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></span>
+            <h3 class="feature-title">Bottom Panel</h3>
+            <p class="feature-copy">7-tab dashboard: Workbench, Pipeline, Board, Analytics, Journal, Docs, Notes. The bird's-eye view.</p>
+          </div>
+          <div class="feature-card">
+            <span class="feature-icon accent" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></span>
+            <h3 class="feature-title">Agent-Agnostic Specs</h3>
+            <p class="feature-copy">Specs are standard files. Run Claude on auth, Codex on dashboard &mdash; simultaneously, same blueprint.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-inner">
+      <ul class="footer-links">
+        <li><a href="https://github.com/AgenticFlowX/agenticflowx" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+        <li><a href="https://github.com/AgenticFlowX/afx" target="_blank" rel="noopener noreferrer">AFX Workflow</a></li>
+        <li><a href="https://marketplace.visualstudio.com/items?itemName=AgenticFlowX.agenticflowx" target="_blank" rel="noopener noreferrer">Marketplace</a></li>
+      </ul>
+      <p class="footer-copy">Apache 2.0 &middot; AgenticFlowX &middot; Agent engine forked from <a href="https://github.com/RooVetGit/Roo-Code" target="_blank" rel="noopener noreferrer">Roo Code</a></p>
+    </div>
+  </footer>
+
+  <script>
+    function copyCmd() {
+      var text = document.getElementById('curl-cmd').textContent;
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(function() {
+          var btn = document.querySelector('.copy-btn');
+          btn.textContent = 'copied!';
+          setTimeout(function() { btn.textContent = 'copy'; }, 2000);
+        });
+      } else {
+        var range = document.createRange();
+        range.selectNodeContents(document.getElementById('curl-cmd'));
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+      }
+    }
+  </script>
+</body>
+</html>

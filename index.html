@@ -949,16 +949,16 @@
 
     .quickstart-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) minmax(0, 1fr);
       gap: 1.25rem;
       margin: 2rem auto 0;
-      max-width: 1000px;
+      max-width: 1080px;
       text-align: left;
     }
     .qs-panel { display: none; }
     .qs-panel.is-active { display: block; }
     .qs-panel-foot {
-      max-width: 1000px;
+      max-width: 1080px;
       margin: 1.25rem auto 0;
       text-align: left;
       font-size: 0.8125rem;
@@ -1021,6 +1021,24 @@
     .step-card .code-block { margin-top: auto; }
     .step-card .step-action { align-self: flex-start; }
 
+    /* Step-card code blocks always stack — cards are narrow at any viewport,
+       long commands would otherwise overflow under the absolute copy button. */
+    .step-card .code-block {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.5rem;
+      padding-right: 0.75rem;
+    }
+    .step-card .code-block code { white-space: pre-wrap; word-break: break-all; }
+    .step-card .code-block .copy-btn {
+      position: static;
+      top: auto;
+      right: auto;
+      transform: none;
+      align-self: flex-end;
+    }
+
     .step-action {
       display: inline-flex;
       align-items: center;
@@ -1060,17 +1078,110 @@
       top: 50%;
       transform: translateY(-50%);
       right: 0.5rem;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      color: rgba(255, 255, 255, 0.5);
+      background: var(--accent);
+      border: 1px solid var(--accent);
+      color: #1a1a1a;
       border-radius: 4px;
       padding: 0.1875rem 0.4375rem;
       cursor: pointer;
       font-size: 0.6875rem;
+      font-weight: 700;
       font-family: var(--mono);
-      transition: color 0.15s, border-color 0.15s;
+      letter-spacing: 0.03em;
+      transition: background 0.15s, border-color 0.15s, color 0.15s;
     }
-    .copy-btn:hover { border-color: rgba(255, 255, 255, 0.25); color: #fff; }
+    .copy-btn:hover {
+      background: #f5a942;
+      border-color: #f5a942;
+      color: #0d0d0d;
+    }
+
+    @media (max-width: 767px) {
+      .code-block {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+        padding-right: 0.75rem;
+      }
+      .code-block .copy-btn {
+        position: static;
+        transform: none;
+        align-self: flex-end;
+      }
+    }
+
+    /* ── Install prompt callout (Step 02, prompt-based tab) ── */
+    .install-prompt-block {
+      background: linear-gradient(135deg, rgba(234, 157, 52, 0.12), rgba(234, 157, 52, 0.06));
+      border-left: 3px solid var(--accent);
+      border-radius: 6px;
+      padding: 12px 14px 14px;
+      margin-bottom: 10px;
+      display: flex;
+      flex-direction: column;
+    }
+    .install-prompt-label {
+      font-size: 0.7em;
+      color: var(--accent);
+      margin: 0 0 8px 0;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .install-prompt-lead { font-size: 0.82em; margin: 0 0 8px 0; line-height: 1.5; }
+    .install-prompt-line { font-size: 0.8em; margin: 0 0 6px 0; line-height: 1.45; }
+    .install-prompt-line:last-of-type { margin-bottom: 0; }
+    .install-prompt-line code {
+      background: rgba(0, 0, 0, 0.06);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-family: var(--mono);
+      font-size: 0.95em;
+      word-break: break-all;
+    }
+    .install-prompt-copy {
+      position: static;
+      top: auto;
+      right: auto;
+      transform: none;
+      align-self: flex-end;
+      margin-top: 12px;
+      font-size: 0.72rem;
+      padding: 0.3125rem 0.625rem;
+      box-shadow: 0 2px 6px rgba(234, 157, 52, 0.25);
+    }
+    .install-prompt-note {
+      margin: 10px 0 0;
+      padding-top: 8px;
+      border-top: 1px solid rgba(234, 157, 52, 0.22);
+      font-size: 0.72em;
+      opacity: 0.7;
+      line-height: 1.45;
+    }
+    .install-prompt-note code {
+      background: rgba(0, 0, 0, 0.06);
+      padding: 1px 5px;
+      border-radius: 3px;
+      font-family: var(--mono);
+      font-size: 0.95em;
+    }
+
+    /* ── "Required" pill on step label ── */
+    .step-required {
+      display: inline-block;
+      margin-left: 6px;
+      padding: 2px 7px;
+      font-size: 0.62em;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      background: rgba(234, 157, 52, 0.15);
+      border: 1px solid rgba(234, 157, 52, 0.35);
+      border-radius: 10px;
+      vertical-align: middle;
+    }
 
     /* ── Closing CTA ── */
     .closing {
@@ -1971,8 +2082,8 @@ type: SPEC
           <div class="quickstart-grid">
             <div class="step-card">
               <p class="step-number">STEP 01</p>
-              <p class="step-label">Install the extension</p>
-              <p class="step-copy">From the VS Code Marketplace. No account to create &mdash; drop in your own API key and start.</p>
+              <p class="step-label">Install the AgenticFlowX extension</p>
+              <p class="step-copy">From the VS Code Marketplace. On first launch, set your Provider in Settings (OpenAI, Claude, etc.).</p>
               <a href="https://marketplace.visualstudio.com/items?itemName=AgenticFlowX.agenticflowx" class="step-action" target="_blank" rel="noopener noreferrer">
                 VS Code Marketplace
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -1980,17 +2091,41 @@ type: SPEC
             </div>
             <div class="step-card">
               <p class="step-number">STEP 02</p>
-              <p class="step-label">Add the toolchain</p>
-              <p class="step-copy">One curl installs the AFX skills into your repo. Works alongside any AI coding tool &mdash; Claude, Gemini, local.</p>
-              <div class="code-block">
-                <code data-cmd>curl -sL https://raw.githubusercontent.com/agenticflowx/afx/main/afx-cli | bash -s -- .</code>
-                <button class="copy-btn" data-copy-btn aria-label="Copy to clipboard">copy</button>
+              <p class="step-label">Install AFX skills <span class="step-required">required</span></p>
+              <p class="step-copy">Without skills, the spec workflow, slash-commands, and the bottom panel stay locked. Works with any AI coding agent.</p>
+              <div class="install-tabs" style="margin-top: 12px;">
+                <div class="tab-buttons" style="display: flex; gap: 4px; margin-bottom: 8px;">
+                  <button class="tab-btn active" data-tab="prompt" style="padding: 6px 12px; border: 1px solid var(--border); background: var(--bg-secondary); border-radius: 6px 6px 0 0; cursor: pointer; font-size: 0.8em;">Prompt-based</button>
+                  <button class="tab-btn" data-tab="cli" style="padding: 6px 12px; border: 1px solid var(--border); background: transparent; border-radius: 6px 6px 0 0; cursor: pointer; font-size: 0.8em;">CLI</button>
+                </div>
+                <div class="tab-content" data-tab-content="prompt">
+                  <div class="install-prompt-block">
+                    <p class="install-prompt-label">Your agent — paste this:</p>
+                    <p class="install-prompt-lead">Install AFX (AgenticFlowX) in this project. Source: github.com/AgenticFlowX/afx (Apache 2.0, open source).</p>
+                    <p class="install-prompt-line">Run these commands <strong>in order</strong>:</p>
+                    <p class="install-prompt-line">1. <code>curl -o /tmp/afx-install.sh -sL https://raw.githubusercontent.com/AgenticFlowX/afx/main/afx-cli</code></p>
+                    <p class="install-prompt-line">2. <code>bash /tmp/afx-install.sh .</code></p>
+                    <p class="install-prompt-line">After step 2, read the installer output and tell me which skills were installed. Do NOT run <code>/afx-hello</code> or any <code>/afx-*</code> command — those only work inside the AFX chat panel, which I'll open myself. If you can't execute bash, show me the commands so I can run them.</p>
+                    <p class="install-prompt-note">Installs to <code>.claude/skills/</code> and <code>.agents/skills/</code>. After install, open the AFX chat and run <code>/afx-hello</code> to verify. If your agent refuses the prompt, use the CLI tab above.</p>
+                    <button class="copy-btn install-prompt-copy"
+                            data-copy-btn
+                            data-cmd="Install AFX (AgenticFlowX) in this project. Source: github.com/AgenticFlowX/afx (Apache 2.0, open source). Run these commands IN ORDER: 1) curl -o /tmp/afx-install.sh -sL https://raw.githubusercontent.com/AgenticFlowX/afx/main/afx-cli  2) bash /tmp/afx-install.sh .  After step 2, read the installer output and tell me which skills were installed. Do NOT run /afx-hello or any /afx-* command — those only work inside the AFX chat panel, which I'll open myself. If you can't execute bash, show me the commands so I can run them."
+                            aria-label="Copy prompt to clipboard">copy prompt</button>
+                  </div>
+                </div>
+                <div class="tab-content" data-tab-content="cli" hidden>
+                  <p style="font-size: 0.8em; margin-bottom: 8px; opacity: 0.8;">Run from your project directory:</p>
+                  <div class="code-block">
+                    <code data-cmd>curl -sL https://raw.githubusercontent.com/AgenticFlowX/afx/main/afx-cli | bash -s -- .</code>
+                    <button class="copy-btn" data-copy-btn aria-label="Copy to clipboard">copy</button>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="step-card">
               <p class="step-number">STEP 03</p>
               <p class="step-label">Scaffold your first spec</p>
-              <p class="step-copy">In the AFX chat, name the feature. Focus mode drafts a spec, a design, and tasks &mdash; pinned to your Workbench.</p>
+              <p class="step-copy">In the AFX chat, name the feature. Focus mode drafts a spec, a design, and tasks — pinned to your Workbench.</p>
               <div class="code-block">
                 <code data-cmd>/afx-scaffold spec my-first-feature</code>
                 <button class="copy-btn" data-copy-btn aria-label="Copy to clipboard">copy</button>
@@ -2007,8 +2142,8 @@ type: SPEC
           <div class="quickstart-grid">
             <div class="step-card">
               <p class="step-number">STEP 01</p>
-              <p class="step-label">Install the extension</p>
-              <p class="step-copy">Same as before &mdash; grab AFX from the VS Code Marketplace and drop in your API key.</p>
+              <p class="step-label">Install the AgenticFlowX extension</p>
+              <p class="step-copy">Same as Path A &mdash; grab AgenticFlowX from the VS Code Marketplace, then set a Provider in Settings.</p>
               <a href="https://marketplace.visualstudio.com/items?itemName=AgenticFlowX.agenticflowx" class="step-action" target="_blank" rel="noopener noreferrer">
                 VS Code Marketplace
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -2046,7 +2181,7 @@ type: SPEC
         <h2 class="closing-title">Stop coding faster.<br>Start coding the <em style="font-style: italic; color: var(--accent);">right thing</em>.</h2>
         <p class="closing-copy">
           AFX is open source and in alpha. No login, no signup, no cloud &mdash;
-          just install, bring your own API key, and your feedback shapes the roadmap.
+          just install, bring your own Provider, and your feedback shapes the roadmap.
         </p>
         <div class="hero-ctas">
           <a href="https://marketplace.visualstudio.com/items?itemName=AgenticFlowX.agenticflowx" class="btn-primary" target="_blank" rel="noopener noreferrer">
@@ -2081,15 +2216,33 @@ type: SPEC
     (function() {
       document.querySelectorAll('[data-copy-btn]').forEach(function(btn) {
         btn.addEventListener('click', function() {
-          var code = btn.parentElement.querySelector('[data-cmd]') || btn.parentElement.querySelector('code');
+          var code = (btn.hasAttribute('data-cmd') ? btn : null) || btn.parentElement.querySelector('[data-cmd]') || btn.parentElement.querySelector('code');
           if (!code) return;
-          var text = code.textContent;
+          var text = code.getAttribute('data-cmd') || code.textContent;
           if (!navigator.clipboard) return;
           navigator.clipboard.writeText(text).then(function() {
             var prev = btn.textContent;
             btn.textContent = 'copied!';
             setTimeout(function() { btn.textContent = prev; }, 2000);
           });
+        });
+      });
+
+      // Tab switching for install options
+      document.querySelectorAll('.tab-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var tabName = btn.getAttribute('data-tab');
+          var container = btn.closest('.install-tabs');
+          container.querySelectorAll('.tab-btn').forEach(function(b) {
+            b.classList.remove('active');
+            b.style.background = 'transparent';
+          });
+          container.querySelectorAll('.tab-content').forEach(function(c) {
+            c.hidden = true;
+          });
+          btn.classList.add('active');
+          btn.style.background = 'var(--bg-secondary)';
+          container.querySelector('[data-tab-content="' + tabName + '"]').hidden = false;
         });
       });
     })();

@@ -10,40 +10,50 @@
     })(window, document, "clarity", "script", "w6nnwbv1pd");
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AgenticFlowX — Spec-driven AI coding. Finally visual.</title>
-  <meta name="description" content="Chat that remembers why. A workbench that tracks what's shipped. The spec-driven AI coding environment — all inside VS Code.">
-  <meta property="og:title" content="AgenticFlowX — Spec-driven AI coding. Finally visual.">
-  <meta property="og:description" content="Chat that remembers why. A workbench that tracks what's shipped. All inside VS Code.">
+  <title>AgenticFlowX - pi.dev coding agent + AgenticFlowX workflow in VS Code.</title>
+  <meta name="description" content="AgenticFlowX uses pi.dev as its coding agent and adds the AgenticFlowX workflow layer: provider settings, repo-native specs/tasks/journals, editor commands, and workbench views.">
+  <link rel="canonical" href="https://agenticflowx.github.io/">
+  <meta property="og:title" content="AgenticFlowX - pi.dev coding agent + AgenticFlowX workflow in VS Code.">
+  <meta property="og:description" content="pi.dev as the coding agent, AgenticFlowX as the VS Code workflow layer for providers, repo files, editor commands, and workbench views.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://agenticflowx.github.io">
-  <meta property="og:image" content="https://agenticflowx.github.io/assets/screenshot.webp">
-  <meta name="twitter:card" content="summary">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' fill='%230a0a0b' rx='80'/><text x='100' y='340' font-family='system-ui' font-weight='800' font-size='260' fill='%23fff'>AF</text><text x='330' y='340' font-family='system-ui' font-weight='800' font-size='260' fill='%23f59e0b'>X</text></svg>">
+  <meta property="og:site_name" content="AgenticFlowX">
+  <meta property="og:image" content="https://agenticflowx.github.io/assets/main.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AgenticFlowX - pi.dev coding agent + AgenticFlowX workflow in VS Code.">
+  <meta name="twitter:description" content="pi.dev as the coding agent, AgenticFlowX as the VS Code workflow layer for providers, repo files, editor commands, and workbench views.">
+  <meta name="twitter:image" content="https://agenticflowx.github.io/assets/main.webp">
+  <meta name="twitter:url" content="https://agenticflowx.github.io">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20512%20512'%3E%3Crect%20width='512'%20height='512'%20fill='%23080c1a'%20rx='80'/%3E%3Ctext%20x='100'%20y='340'%20font-family='system-ui'%20font-weight='800'%20font-size='260'%20fill='%23f4eedd'%3EAF%3C/text%3E%3Ctext%20x='330'%20y='340'%20font-family='system-ui'%20font-weight='800'%20font-size='260'%20fill='%23d4a656'%3EX%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&amp;family=Geist:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #faf4ed;
-      --bg-subtle: #f5ede5;
-      --bg-element: #fff9f2;
-      --border: #e8ddd4;
-      --border-hover: #d4c4b8;
-      --text: #575279;
-      --text-secondary: #797593;
-      --text-tertiary: #9893a5;
-      --accent: #ea9d34;
-      --accent-dim: rgba(234, 157, 52, 0.1);
-      --iris: #907aa9;
-      --iris-dim: rgba(144, 122, 169, 0.1);
-      --pine: #286983;
-      --foam: #56949f;
-      --love: #b4637a;
+      /* Meridian light — parchment + ink + brass */
+      --bg: #f5efdf;
+      --bg-subtle: #efe7d0;
+      --bg-element: #fbf6e7;
+      --bg-raised: #fffbed;
+      --border: rgba(20, 27, 53, 0.10);
+      --border-hover: rgba(20, 27, 53, 0.22);
+      --text: #141b35;
+      --text-secondary: #3d4256;
+      --text-tertiary: #6b6450;
+      --muted: #a89e85;
+      --accent: #a07e39;
+      --accent-bright: #d4a656;
+      --accent-deep: #6e5724;
+      --accent-dim: rgba(160, 126, 57, 0.10);
+      --moss: #4a6e5a;
+      --ember: #a84c30;
       --mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+      --sans: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --serif: 'Fraunces', 'Iowan Old Style', Palatino, Georgia, serif;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+    html { scroll-behavior: smooth; }
 
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
@@ -54,105 +64,53 @@
     }
 
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-family: var(--sans);
       background: var(--bg);
       color: var(--text-secondary);
       line-height: 1.6;
       min-height: 100vh;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
+      position: relative;
     }
 
-    h1, h2, h3, h4 { color: var(--text); font-weight: 600; letter-spacing: -0.02em; }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        radial-gradient(ellipse 70% 50% at 88% -10%, rgba(212, 166, 86, 0.18), transparent 60%),
+        radial-gradient(ellipse 60% 40% at 8% 100%, rgba(160, 126, 57, 0.10), transparent 65%),
+        url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='3'/%3E%3CfeColorMatrix values='0 0 0 0 .42 0 0 0 0 .32 0 0 0 0 .22 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E");
+    }
+
+    main,
+    footer {
+      position: relative;
+      z-index: 1;
+    }
+
+    h1, h2, h3, h4 { color: var(--text); font-weight: 600; letter-spacing: 0; }
     a { color: var(--text-secondary); text-decoration: none; transition: color 0.15s; }
     a:hover { color: var(--text); }
+    .text-link {
+      color: var(--accent);
+      border-bottom: 1px solid rgba(160, 126, 57, 0.35);
+    }
+    .text-link:hover {
+      color: var(--accent-deep);
+      border-bottom-color: var(--accent-deep);
+    }
     code { font-family: var(--mono); }
 
     .container { max-width: 1080px; margin: 0 auto; padding: 0 2rem; }
     .container-wide { max-width: 1280px; margin: 0 auto; padding: 0 2rem; }
 
-    /* ── Nav ── */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(250, 244, 237, 0.85);
-      backdrop-filter: blur(12px) saturate(1.4);
-      -webkit-backdrop-filter: blur(12px) saturate(1.4);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .nav-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 60px;
-    }
-
-    .nav-brand {
-      display: flex;
-      align-items: center;
-      gap: 0.625rem;
-      color: var(--text);
-      font-weight: 700;
-      font-size: 0.9375rem;
-      letter-spacing: -0.01em;
-    }
-
-    .nav-brand-mark {
-      font-family: var(--mono);
-      font-weight: 800;
-      font-size: 0.75rem;
-      background: var(--iris-dim);
-      color: var(--iris);
-      padding: 0.25rem 0.5rem;
-      border-radius: 4px;
-      letter-spacing: 0.02em;
-    }
-
-    .nav-alpha {
-      font-family: var(--mono);
-      font-size: 0.625rem;
-      color: var(--accent);
-      background: var(--accent-dim);
-      padding: 0.1875rem 0.4375rem;
-      border-radius: 3px;
-      letter-spacing: 0.05em;
-      font-weight: 600;
-      text-transform: uppercase;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 0.25rem;
-      list-style: none;
-    }
-
-    .nav-links a, .nav-links .disabled {
-      font-size: 0.8125rem;
-      padding: 0.375rem 0.75rem;
-      border-radius: 6px;
-      transition: background 0.15s, color 0.15s;
-    }
-
-    .nav-links a:hover { background: var(--bg-element); color: var(--text); }
-    .nav-links .disabled { color: var(--text-tertiary); cursor: default; pointer-events: none; }
-
-    .nav-cta {
-      font-size: 0.8125rem !important;
-      background: var(--iris) !important;
-      color: #fff !important;
-      font-weight: 500;
-      padding: 0.4375rem 0.9375rem !important;
-    }
-    .nav-cta:hover { opacity: 0.9; background: var(--iris) !important; color: #fff !important; }
-
-    .nav-mobile { display: none; }
-
-    /* ── Hero ── */
+    /* Hero */
     .hero {
-      padding: 5.5rem 0 3rem;
+      padding: 6rem 0 3rem;
       text-align: center;
       position: relative;
       overflow: hidden;
@@ -162,71 +120,78 @@
       content: "";
       position: absolute;
       inset: 0;
-      background:
-        radial-gradient(ellipse 900px 500px at 50% 0%, rgba(144, 122, 169, 0.10), transparent 70%),
-        radial-gradient(ellipse 600px 400px at 85% 30%, rgba(234, 157, 52, 0.08), transparent 70%),
-        radial-gradient(circle, var(--border) 1px, transparent 1px);
-      background-size: auto, auto, 24px 24px;
-      opacity: 0.95;
+      background: linear-gradient(180deg, var(--bg-subtle) 0%, transparent 65%);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 50% 55% at 78% 18%, rgba(244, 201, 126, 0.28), transparent 60%);
       z-index: 0;
       pointer-events: none;
     }
 
     .hero .container, .hero .container-wide { position: relative; z-index: 1; }
 
-    /* ── Alpha stamp (hero) ── */
-    .hero-alpha {
-      display: inline-flex;
-      align-items: stretch;
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      margin-bottom: 2.25rem;
-      border-radius: 5px;
-      overflow: hidden;
-      box-shadow: 0 2px 6px rgba(234, 157, 52, 0.18);
-    }
-
-    .hero-alpha-tag {
-      background: var(--accent);
-      color: #fff;
-      padding: 0.4375rem 0.75rem;
+    /* Hero status */
+    .hero-status {
       display: inline-flex;
       align-items: center;
-      gap: 0.375rem;
+      gap: 0.75rem;
+      font-family: var(--mono);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 2.25rem;
+      padding: 0.5rem 0.125rem;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
     }
 
-    .hero-alpha-tag::before {
-      content: "";
+    .hero-status-dot {
       width: 7px;
       height: 7px;
-      background: #fff;
-      border-radius: 50%;
-      opacity: 0.95;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(160, 126, 57, 0.16);
     }
 
-    .hero-alpha-ver {
-      background: rgba(234, 157, 52, 0.12);
+    .hero-status-label { color: var(--text-secondary); }
+
+    .hero-status-rule {
+      width: 1px;
+      height: 16px;
+      background: var(--border);
+    }
+
+    .hero-status-version { color: var(--accent); }
+
+    .hero-wordmark {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
       color: var(--accent);
-      padding: 0.4375rem 0.75rem;
-      border-left: 1px solid rgba(255, 255, 255, 0.35);
-      display: inline-flex;
-      align-items: center;
-      letter-spacing: 0.06em;
+      margin-bottom: 1rem;
     }
 
     .hero-tagline {
-      font-size: clamp(2.75rem, 6.5vw, 5rem);
-      font-weight: 700;
+      font-size: 4.5rem;
+      font-family: var(--serif);
+      font-weight: 500;
       color: var(--text);
       line-height: 1.02;
-      letter-spacing: -0.035em;
+      letter-spacing: 0;
       margin-bottom: 1.5rem;
       max-width: 960px;
       margin-left: auto;
       margin-right: auto;
+      font-variation-settings: "opsz" 144, "SOFT" 30;
     }
 
     .hero-tagline em {
@@ -246,7 +211,11 @@
       background: var(--accent);
       opacity: 0.25;
       border-radius: 2px;
+      transition: opacity 0.15s, background 0.15s;
     }
+
+    .hero-tagline a:hover em { color: var(--accent-deep); }
+    .hero-tagline a:hover em::after { opacity: 0.55; background: var(--accent-deep); }
 
     .hero-desc {
       font-size: 1.1875rem;
@@ -254,6 +223,25 @@
       max-width: 640px;
       margin: 0 auto 2.5rem;
       line-height: 1.6;
+    }
+
+    .hero-desc em {
+      font-style: normal;
+      color: var(--accent);
+      position: relative;
+      display: inline-block;
+    }
+
+    .hero-desc em::after {
+      content: "";
+      position: absolute;
+      left: 2%;
+      right: 2%;
+      bottom: -0.05em;
+      height: 0.1em;
+      background: var(--accent);
+      opacity: 0.35;
+      border-radius: 2px;
     }
 
     .hero-ctas {
@@ -293,37 +281,36 @@
     .btn-primary {
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      padding: 0.75rem 1.5rem;
-      background: var(--iris);
-      color: #fff;
-      font-weight: 600;
-      font-size: 0.9375rem;
-      border-radius: 8px;
-      border: none;
+      gap: 0.4375rem;
+      padding: 0.5rem 0.9375rem;
+      background: var(--accent-bright);
+      color: #1a1f35;
+      font-weight: 500;
+      font-size: 0.875rem;
+      border-radius: 6px;
+      border: 1px solid var(--accent);
       cursor: pointer;
-      transition: opacity 0.15s, transform 0.15s, box-shadow 0.15s;
-      box-shadow: 0 4px 12px rgba(144, 122, 169, 0.25);
+      transition: background 0.15s, border-color 0.15s, color 0.15s;
     }
-    .btn-primary:hover { opacity: 0.95; color: #fff; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(144, 122, 169, 0.35); }
+    .btn-primary:hover { background: var(--text); border-color: var(--text); color: var(--bg-raised); }
 
     .btn-secondary {
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      padding: 0.75rem 1.5rem;
+      gap: 0.4375rem;
+      padding: 0.5rem 0.9375rem;
       background: transparent;
       color: var(--text-secondary);
       font-weight: 500;
-      font-size: 0.9375rem;
-      border-radius: 8px;
+      font-size: 0.875rem;
+      border-radius: 6px;
       border: 1px solid var(--border);
       cursor: pointer;
-      transition: border-color 0.15s, color 0.15s, transform 0.15s;
+      transition: border-color 0.15s, color 0.15s;
     }
-    .btn-secondary:hover { border-color: var(--border-hover); color: var(--text); transform: translateY(-1px); }
+    .btn-secondary:hover { border-color: var(--border-hover); color: var(--text); }
 
-    /* ── Hero product shot ── */
+    /* Hero product shot + slideshow */
     .hero-shot {
       margin-top: 3.5rem;
       position: relative;
@@ -334,12 +321,17 @@
       position: relative;
       border-radius: 16px;
       overflow: hidden;
-      border: 1px solid var(--border);
-      background: #1e1a29;
+      border: 1px solid var(--border-hover);
+      background: var(--bg-element);
       box-shadow:
-        0 1px 0 rgba(255, 255, 255, 0.6) inset,
-        0 30px 80px -20px rgba(87, 82, 121, 0.35),
-        0 12px 32px -8px rgba(87, 82, 121, 0.18);
+        0 1px 0 rgba(255, 251, 237, 0.6) inset,
+        0 30px 80px -28px rgba(20, 27, 53, 0.30),
+        0 12px 32px -10px rgba(20, 27, 53, 0.16);
+    }
+
+    .hero-shot-frame:focus-visible {
+      outline: 2px solid var(--accent-bright);
+      outline-offset: 4px;
     }
 
     .hero-shot-titlebar {
@@ -347,8 +339,8 @@
       align-items: center;
       gap: 6px;
       padding: 11px 16px;
-      background: #1a1724;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
     }
 
     .hero-shot-titlebar .dot {
@@ -356,9 +348,9 @@
       height: 11px;
       border-radius: 50%;
     }
-    .hero-shot-titlebar .dot.red { background: #d7827e; }
-    .hero-shot-titlebar .dot.yellow { background: #ea9d34; }
-    .hero-shot-titlebar .dot.green { background: #56949f; }
+    .hero-shot-titlebar .dot.red { background: var(--ember); }
+    .hero-shot-titlebar .dot.yellow { background: var(--accent); }
+    .hero-shot-titlebar .dot.green { background: var(--moss); }
 
     .hero-shot-titlebar .titlebar-text {
       flex: 1;
@@ -369,100 +361,143 @@
       margin-right: 50px;
     }
 
-    .hero-shot img {
-      display: block;
+    .hero-slides {
+      position: relative;
       width: 100%;
-      height: auto;
-    }
-
-    .hero-shot-callouts {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      z-index: 2;
-    }
-
-    .hero-shot-callout {
-      position: absolute;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.375rem;
-      font-family: var(--mono);
-      font-size: 0.6875rem;
-      font-weight: 500;
-      letter-spacing: 0.02em;
-      padding: 0.3125rem 0.625rem;
-      border-radius: 100px;
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    }
-
-    .hero-shot-callout::before {
-      content: "";
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-    }
-
-    .hero-shot-callout.chat {
-      top: 14%;
-      right: 4%;
-      background: rgba(144, 122, 169, 0.92);
-      color: #fff;
-    }
-    .hero-shot-callout.chat::before { background: #fff; }
-
-    .hero-shot-callout.workbench {
-      bottom: 7%;
-      left: 4%;
-      background: rgba(234, 157, 52, 0.94);
-      color: #1a1724;
-    }
-    .hero-shot-callout.workbench::before { background: #1a1724; }
-
-    /* ── Proof strip ── */
-    .proof-strip {
-      padding: 2rem 0;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
+      aspect-ratio: 16 / 10;
       background: var(--bg-subtle);
     }
 
-    .proof-inner {
-      display: flex;
-      justify-content: center;
-      gap: 3rem;
-      flex-wrap: wrap;
-      align-items: center;
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.5s ease-out, visibility 0s linear 0.5s;
+      pointer-events: none;
     }
 
-    .proof-item {
+    .hero-slide.is-active {
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.5s ease-out;
+      pointer-events: auto;
+    }
+
+    .hero-slide img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+    }
+
+    .hero-slide-controls {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0.25rem;
+      gap: 0.625rem;
+      margin-top: 1.5rem;
     }
 
-    .proof-num {
+    .hero-rotate {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4375rem;
       font-family: var(--mono);
+      font-size: 0.6875rem;
       font-weight: 600;
-      font-size: 1.5rem;
-      color: var(--text);
-      letter-spacing: -0.02em;
-    }
-
-    .proof-num span { color: var(--accent); }
-
-    .proof-label {
-      font-size: 0.75rem;
-      color: var(--text-tertiary);
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
+      color: var(--text-tertiary);
+      background: var(--bg-element);
+      border: 1px solid var(--border);
+      padding: 0.3125rem 0.625rem;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: border-color 0.15s, color 0.15s, background 0.15s;
     }
 
-    /* ── Sections ── */
-    section { padding: 6rem 0; }
+    .hero-rotate:hover { border-color: var(--border-hover); color: var(--text); background: var(--bg-raised); }
+
+    .hero-slide-label {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-weight: 600;
+      min-height: 1em;
+    }
+
+    .hero-slide-caption {
+      font-family: var(--sans);
+      font-size: 0.9375rem;
+      color: var(--text-secondary);
+      text-align: center;
+      max-width: 480px;
+      line-height: 1.45;
+      min-height: 1.4em;
+      margin-top: -0.125rem;
+    }
+
+    .hero-slide-caption code,
+    .hero-slide-caption .mono {
+      font-family: var(--mono);
+      font-size: 0.875rem;
+      color: var(--accent);
+      background: var(--accent-dim);
+      padding: 0.0625rem 0.3125rem;
+      border-radius: 3px;
+    }
+
+    .hero-slide-dots {
+      display: flex;
+      gap: 0.4375rem;
+      list-style: none;
+    }
+
+    .hero-slide-dot {
+      width: 28px;
+      height: 4px;
+      background: var(--border);
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+      padding: 0;
+      transition: background 0.2s, width 0.2s;
+    }
+
+    .hero-slide-dot:hover { background: var(--border-hover); }
+
+    .hero-slide-dot.is-active {
+      background: var(--accent);
+      width: 44px;
+    }
+
+    .hero-slide-dot.is-active:hover { background: var(--accent-bright); }
+
+    .hero-rotate:focus-visible,
+    .hero-slide-dot:focus-visible {
+      outline: 2px solid var(--accent-bright);
+      outline-offset: 4px;
+    }
+
+    /* Sections */
+    section { padding: 6rem 0; position: relative; }
+
+    /* Golden thread divider between sections */
+    section + section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 220px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent) 50%, transparent);
+      opacity: 0.45;
+    }
 
     .section-label {
       font-family: var(--mono);
@@ -475,10 +510,13 @@
     }
 
     .section-title {
-      font-size: clamp(1.875rem, 3.5vw, 2.5rem);
+      font-size: 2.5rem;
+      font-family: var(--serif);
+      font-weight: 500;
       margin-bottom: 1rem;
-      letter-spacing: -0.03em;
+      letter-spacing: 0;
       line-height: 1.15;
+      font-variation-settings: "opsz" 96, "SOFT" 25;
     }
 
     .section-copy {
@@ -499,7 +537,7 @@
       max-width: 600px;
     }
 
-    /* ── Two surfaces ── */
+    /* Two surfaces */
     .two-surfaces {
       background:
         linear-gradient(180deg, transparent 0%, var(--bg-subtle) 50%, transparent 100%);
@@ -507,9 +545,40 @@
 
     .surfaces-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr auto 1fr;
       gap: 1.5rem;
       margin-top: 1rem;
+      align-items: stretch;
+    }
+
+    .surfaces-plus {
+      position: relative;
+      width: 1px;
+      align-self: stretch;
+      background: linear-gradient(180deg, transparent, var(--accent) 25%, var(--accent) 75%, transparent);
+      opacity: 0.55;
+    }
+
+    .surfaces-plus::after {
+      content: "+";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--bg-element);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-family: var(--serif);
+      font-size: 1.375rem;
+      font-weight: 400;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-variation-settings: "opsz" 96, "SOFT" 25;
     }
 
     .surface-card {
@@ -531,8 +600,38 @@
       right: 0;
       height: 3px;
     }
-    .surface-card.chat::before { background: var(--iris); }
+    .surface-card.chat::before { background: var(--accent); }
     .surface-card.workbench::before { background: var(--accent); }
+
+    .surface-brand {
+      font-family: var(--serif);
+      font-size: 1.625rem;
+      font-weight: 500;
+      color: var(--text);
+      letter-spacing: 0;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+      font-variation-settings: "opsz" 96, "SOFT" 25;
+    }
+
+    .surface-brand a {
+      color: var(--text);
+      border-bottom: 1px solid var(--accent-dim);
+    }
+    .surface-brand a:hover {
+      color: var(--accent-deep);
+      border-bottom-color: var(--accent);
+    }
+
+    .surface-role {
+      font-family: var(--mono);
+      font-size: 0.6875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+    }
 
     .surface-kicker {
       font-family: var(--mono);
@@ -542,15 +641,15 @@
       margin-bottom: 0.75rem;
       font-weight: 600;
     }
-    .surface-card.chat .surface-kicker { color: var(--iris); }
-    .surface-card.workbench .surface-kicker { color: var(--accent); }
+    .surface-card.chat .surface-kicker { color: var(--accent); }
+    .surface-card.workbench .surface-kicker { color: var(--accent-deep); }
 
     .surface-title {
       font-size: 1.375rem;
       color: var(--text);
       margin-bottom: 0.625rem;
       font-weight: 600;
-      letter-spacing: -0.02em;
+      letter-spacing: 0;
     }
 
     .surface-copy {
@@ -562,642 +661,374 @@
 
     .surface-bullets {
       list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
     }
 
     .surface-bullets li {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.5rem;
+      position: relative;
+      padding-left: 2rem;
+      margin-top: 0.75rem;
       font-size: 0.875rem;
       color: var(--text-secondary);
       line-height: 1.5;
+      overflow-wrap: anywhere;
     }
 
     .surface-bullets li::before {
-      content: "→";
+      content: "->";
       color: var(--text-tertiary);
-      flex-shrink: 0;
       font-family: var(--mono);
-      margin-top: 0.0625rem;
+      position: absolute;
+      left: 0;
+      top: 0;
     }
 
-    /* ── Workbench showcase ── */
-    .wb {
-      background:
-        radial-gradient(ellipse 1000px 600px at 50% 100%, rgba(234, 157, 52, 0.05), transparent 70%),
-        var(--bg);
-      position: relative;
+    .surface-bullets code {
+      white-space: normal;
+      overflow-wrap: anywhere;
     }
 
-    .wb-tabs-wrap {
-      position: relative;
-      margin: 0 auto;
-      max-width: 1180px;
-    }
+    /* Three things you'll notice */
+    .diff .container { max-width: 1080px; }
 
-    .wb-tabs-rail {
+    .diff-rows {
       display: flex;
-      gap: 0.25rem;
-      padding: 0.375rem;
-      background: var(--bg-element);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      margin: 0 auto 1.5rem;
-      overflow-x: auto;
-      scrollbar-width: thin;
-      scrollbar-color: var(--border) transparent;
-      max-width: 100%;
-      width: fit-content;
+      flex-direction: column;
+      gap: 5rem;
     }
 
-    .wb-tabs-rail::-webkit-scrollbar { height: 4px; }
-    .wb-tabs-rail::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
-
-    .wb-tab {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.625rem 1rem;
-      border-radius: 10px;
-      font-size: 0.875rem;
-      font-weight: 500;
-      color: var(--text-secondary);
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      white-space: nowrap;
-      font-family: inherit;
-      transition: background 0.15s, color 0.15s;
-    }
-
-    .wb-tab svg {
-      width: 14px;
-      height: 14px;
-      stroke: currentColor;
-      fill: none;
-      stroke-width: 1.75;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      opacity: 0.8;
-    }
-
-    .wb-tab:hover { color: var(--text); background: rgba(144, 122, 169, 0.06); }
-    .wb-tab.is-active {
-      background: var(--bg);
-      color: var(--text);
-      box-shadow: 0 1px 3px rgba(87, 82, 121, 0.08), 0 0 0 1px var(--border);
-    }
-    .wb-tab.is-active svg { color: var(--accent); opacity: 1; }
-
-    .wb-panel {
-      display: none;
-    }
-    .wb-panel.is-active {
-      display: block;
-      animation: wbFade 0.25s ease-out;
-    }
-
-    @keyframes wbFade {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .wb-panel-body {
+    .diff-row {
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 2rem;
-      align-items: start;
+      grid-template-columns: 1.05fr 1fr;
+      gap: 3.5rem;
+      align-items: center;
     }
 
-    .wb-caption {
-      padding: 0 0.5rem;
-      max-width: 860px;
-      margin: 0 auto;
-      text-align: center;
-    }
+    .diff-row.is-reversed > *:first-child { order: 2; }
 
-    .wb-caption-kicker {
-      font-family: var(--mono);
-      font-size: 0.6875rem;
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 0.5rem;
-      font-weight: 600;
-    }
-
-    .wb-caption-title {
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 0.625rem;
-      letter-spacing: -0.02em;
-    }
-
-    .wb-caption-copy {
-      font-size: 0.9375rem;
-      color: var(--text-secondary);
-      line-height: 1.6;
-      margin-bottom: 1rem;
-    }
-
-    .wb-subswitcher {
-      display: inline-flex;
-      gap: 0.25rem;
-      padding: 0.25rem;
-      background: var(--bg-element);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      margin-top: 0.5rem;
-    }
-
-    .wb-subtab {
-      padding: 0.375rem 0.75rem;
-      border-radius: 5px;
-      font-size: 0.75rem;
-      font-weight: 500;
-      color: var(--text-secondary);
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      font-family: inherit;
-      transition: background 0.15s, color 0.15s;
-    }
-
-    .wb-subtab:hover { color: var(--text); }
-    .wb-subtab.is-active {
-      background: var(--bg);
-      color: var(--text);
-      box-shadow: 0 1px 2px rgba(87, 82, 121, 0.08);
-    }
-
-    .wb-shot {
+    .diff-shot-frame {
+      display: block;
+      width: 100%;
+      padding: 0;
+      color: inherit;
+      font: inherit;
+      text-align: inherit;
+      appearance: none;
+      -webkit-appearance: none;
       position: relative;
       border-radius: 12px;
       overflow: hidden;
-      border: 1px solid var(--border);
-      background: #1e1a29;
+      border: 1px solid var(--border-hover);
+      background: var(--bg-element);
       box-shadow:
-        0 1px 0 rgba(255, 255, 255, 0.4) inset,
-        0 20px 60px -16px rgba(87, 82, 121, 0.28),
-        0 8px 24px -8px rgba(87, 82, 121, 0.14);
-      aspect-ratio: 1600 / 590;
+        0 1px 0 rgba(255, 251, 237, 0.6) inset,
+        0 24px 60px -28px rgba(20, 27, 53, 0.28),
+        0 10px 28px -10px rgba(20, 27, 53, 0.16);
+      aspect-ratio: 16 / 10;
     }
 
-    .wb-shot img {
-      display: block;
+    .diff-shot-frame:focus-visible {
+      outline: 2px solid var(--accent-bright);
+      outline-offset: 4px;
+    }
+
+    .diff-shot-frame img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: top center;
+      display: block;
     }
 
-    .wb-subshot { display: none; }
-    .wb-subshot.is-active { display: block; }
+    .diff-pin {
+      position: absolute;
+      font-family: var(--mono);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--text);
+      background: var(--bg-raised);
+      padding: 0.3125rem 0.5625rem;
+      border-radius: 4px;
+      border: 1px solid var(--accent);
+      box-shadow: 0 4px 14px rgba(20, 27, 53, 0.20);
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4375rem;
+      z-index: 1;
+      transform: translate(-50%, -50%);
+    }
 
-    /* ── Workflow ── */
-    .workflow { text-align: center; }
+    .diff-pin::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent-bright);
+      box-shadow: 0 0 0 3px rgba(212, 166, 86, 0.30);
+      flex-shrink: 0;
+    }
 
-    .flow-diagram {
+    .diff-num {
+      font-family: var(--mono);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .diff-title {
+      font-family: var(--serif);
+      font-size: 1.875rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 1rem;
+      line-height: 1.18;
+      letter-spacing: 0;
+      font-variation-settings: "opsz" 96, "SOFT" 25;
+    }
+
+    .diff-title em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .diff-copy {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      max-width: 420px;
+    }
+
+    @media (max-width: 767px) {
+      .diff-rows { gap: 3.5rem; }
+      .diff-row { grid-template-columns: 1fr; gap: 1.5rem; }
+      .diff-row.is-reversed > *:first-child { order: 0; }
+      .diff-title { font-size: 1.5rem; }
+    }
+
+    /* Lightbox */
+    .diff-shot-frame,
+    .hero-shot-frame {
+      cursor: zoom-in;
+    }
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(20, 27, 53, 0.78);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 2.5rem;
+      cursor: zoom-out;
+      opacity: 0;
+      transition: opacity 0.2s ease-out;
+    }
+
+    .lightbox.is-active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .lightbox img {
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 8px;
+      border: 1px solid rgba(244, 238, 221, 0.18);
+      box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.65);
+      object-fit: contain;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(244, 238, 221, 0.30);
+      background: rgba(20, 27, 53, 0.6);
+      color: #f4eedd;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.25rem;
+      line-height: 1;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0;
-      margin: 2.5rem 0 1.5rem;
-      flex-wrap: wrap;
-    }
-
-    .flow-node {
-      background: var(--bg-element);
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 0.625rem 1.5rem;
-      font-weight: 500;
-      font-size: 0.875rem;
-      transition: border-color 0.2s, background 0.2s;
-    }
-
-    .flow-node:first-child { border-radius: 8px 0 0 8px; }
-    .flow-node:last-child { border-radius: 0 8px 8px 0; }
-    .flow-node:not(:first-child) { border-left: none; }
-    .flow-node:hover { border-color: var(--iris); background: rgba(144, 122, 169, 0.06); }
-
-    .workflow-footer {
-      color: var(--text-tertiary);
-      font-size: 0.8125rem;
-    }
-
-    .workflow-agents {
-      display: flex;
-      gap: 0.5rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-top: 1rem;
-    }
-
-    .agent-tag {
       font-family: var(--mono);
-      font-size: 0.6875rem;
-      color: var(--text-tertiary);
-      background: var(--bg-element);
-      border: 1px solid var(--border);
-      padding: 0.3125rem 0.75rem;
-      border-radius: 100px;
+      transition: border-color 0.15s, background 0.15s;
     }
 
-    /* ── What AFX adds on top ── */
-    .features-intro {
+    .lightbox-close:hover {
+      border-color: var(--accent-bright);
+      background: rgba(20, 27, 53, 0.85);
+    }
+
+    /* Providers — schematic + editorial */
+    .roadmap {
+      background: var(--bg-subtle);
+    }
+
+    .route-schematic {
+      max-width: 720px;
+      margin: 0 auto 3.5rem;
+      color: var(--accent);
+    }
+
+    .route-schematic svg {
+      width: 100%;
+      height: auto;
+      display: block;
+      overflow: visible;
+    }
+
+    .route-pair {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      align-items: end;
-      margin-bottom: 3rem;
+      gap: 4rem;
+      max-width: 820px;
+      margin: 0 auto 5rem;
+      align-items: start;
     }
 
-    .features-base-card {
-      background: var(--iris-dim);
-      border: 1px solid rgba(144, 122, 169, 0.2);
-      border-radius: 12px;
-      padding: 1.25rem 1.5rem;
-    }
-
-    .features-base-tag {
+    .route-tag {
       font-family: var(--mono);
       font-size: 0.6875rem;
       font-weight: 600;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--iris);
-      margin-bottom: 0.5rem;
-    }
-
-    .features-base-text {
-      font-size: 0.875rem;
-      color: var(--text-secondary);
-      line-height: 1.6;
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      overflow: hidden;
-    }
-
-    .feature-card {
-      background: var(--bg);
-      padding: 2rem 1.75rem;
-      transition: background 0.2s;
-    }
-    .feature-card:hover { background: var(--bg-element); }
-
-    .feature-icon {
-      margin-bottom: 1.125rem;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
-      background: var(--accent-dim);
-      color: var(--accent);
-    }
-    .feature-icon svg {
-      width: 18px;
-      height: 18px;
-      stroke: currentColor;
-      fill: none;
-      stroke-width: 1.75;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .feature-title {
-      color: var(--text);
-      font-weight: 600;
-      font-size: 0.9375rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .feature-copy {
-      font-size: 0.8125rem;
-      line-height: 1.6;
-      color: var(--text-secondary);
-    }
-
-    .feature-copy code {
-      font-size: 0.75rem;
-      background: var(--accent-dim);
-      color: var(--accent);
-      padding: 0.0625rem 0.25rem;
-      border-radius: 3px;
-    }
-
-    /* ── Quickstart ── */
-    .quickstart { text-align: center; }
-
-    .qs-tabs {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.25rem;
-      padding: 0.3125rem;
-      margin: 2.25rem auto 0;
-      background: var(--bg-element);
-      border: 1px solid var(--border);
-      border-radius: 999px;
-    }
-    .qs-tab {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.5rem 1.125rem;
-      font-family: var(--font);
-      font-size: 0.8125rem;
-      font-weight: 500;
-      color: var(--text-tertiary);
-      background: transparent;
-      border: none;
-      border-radius: 999px;
-      cursor: pointer;
-      transition: color 0.15s, background 0.15s;
-      white-space: nowrap;
-    }
-    .qs-tab svg {
-      width: 14px; height: 14px;
-      color: currentColor;
-      opacity: 0.75;
-    }
-    .qs-tab:hover { color: var(--text); }
-    .qs-tab.is-active {
-      color: #fff;
-      background: var(--iris);
-    }
-    .qs-tab.is-active svg { opacity: 1; }
-    .qs-tab-hint {
-      font-family: var(--mono);
-      font-size: 0.625rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      opacity: 0.7;
-    }
-
-    .quickstart-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) minmax(0, 1fr);
-      gap: 1.25rem;
-      margin: 2rem auto 0;
-      max-width: 1080px;
-      text-align: left;
-    }
-    .qs-panel { display: none; }
-    .qs-panel.is-active { display: block; }
-    .qs-panel-foot {
-      max-width: 1080px;
-      margin: 1.25rem auto 0;
-      text-align: left;
-      font-size: 0.8125rem;
-      color: var(--text-tertiary);
-      line-height: 1.55;
-    }
-    .qs-panel-foot code {
-      background: rgba(234, 157, 52, 0.15);
-      color: var(--accent);
-      padding: 0.0625rem 0.3125rem;
-      border-radius: 3px;
-      font-family: var(--mono);
-      font-size: 0.75rem;
-    }
-    .qs-panel-foot a {
-      color: var(--accent);
-      text-decoration: none;
-      border-bottom: 1px solid rgba(234, 157, 52, 0.3);
-    }
-    .qs-panel-foot a:hover { border-bottom-color: var(--accent); }
-
-    .step-card {
-      background: var(--bg-element);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.75rem;
-      transition: border-color 0.2s, transform 0.2s;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      min-width: 0;
-    }
-    .step-card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
-
-    .step-number {
-      font-family: var(--mono);
-      font-size: 0.75rem;
       color: var(--accent);
       margin-bottom: 0.75rem;
-      letter-spacing: 0.08em;
-      font-weight: 600;
     }
 
-    .step-label {
-      color: var(--text);
-      font-weight: 600;
-      font-size: 1rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .step-copy {
-      font-size: 0.8125rem;
-      color: var(--text-tertiary);
-      line-height: 1.55;
-      margin-bottom: 1.25rem;
-    }
-
-    .step-card .step-action,
-    .step-card .code-block { margin-top: auto; }
-    .step-card .step-action { align-self: flex-start; }
-
-    /* Step-card code blocks always stack — cards are narrow at any viewport,
-       long commands would otherwise overflow under the absolute copy button. */
-    .step-card .code-block {
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-      gap: 0.5rem;
-      padding-right: 0.75rem;
-    }
-    .step-card .code-block code { white-space: pre-wrap; word-break: break-all; }
-    .step-card .code-block .copy-btn {
-      position: static;
-      top: auto;
-      right: auto;
-      transform: none;
-      align-self: flex-end;
-    }
-
-    .step-action {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.5rem 0.875rem;
-      background: var(--iris);
-      color: #fff;
+    .route-title {
+      font-family: var(--serif);
+      font-size: 1.375rem;
       font-weight: 500;
+      color: var(--text);
+      margin-bottom: 0.875rem;
+      line-height: 1.25;
+      letter-spacing: 0;
+      font-variation-settings: "opsz" 96, "SOFT" 25;
+    }
+
+    .route-copy {
+      font-size: 0.9375rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    .route-copy code {
+      font-family: var(--mono);
       font-size: 0.8125rem;
-      border-radius: 6px;
-      transition: opacity 0.15s;
-    }
-    .step-action:hover { color: #fff; opacity: 0.9; }
-
-    .code-block {
-      position: relative;
-      background: #1e1a29;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 6px;
-      padding: 0.6875rem 2.5rem 0.6875rem 0.75rem;
-      overflow-x: auto;
-      max-width: 100%;
-    }
-
-    .code-block code {
-      color: #9ccfd8;
-      font-size: 0.75rem;
+      color: var(--accent-deep);
+      background: var(--accent-dim);
+      padding: 0.0625rem 0.3125rem;
+      border-radius: 3px;
       white-space: nowrap;
     }
 
-    @media (max-width: 767px) {
-      .code-block code { white-space: pre-wrap; word-break: break-all; }
+    .provider-prose {
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
     }
 
-    .copy-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      right: 0.5rem;
-      background: var(--accent);
-      border: 1px solid var(--accent);
-      color: #1a1a1a;
-      border-radius: 4px;
-      padding: 0.1875rem 0.4375rem;
-      cursor: pointer;
+    .provider-prose::before,
+    .provider-prose::after {
+      content: "";
+      display: block;
+      width: 220px;
+      height: 1px;
+      margin: 0 auto;
+      background: linear-gradient(90deg, transparent, var(--accent) 50%, transparent);
+      opacity: 0.45;
+    }
+
+    .provider-prose::before { margin-bottom: 2.25rem; }
+    .provider-prose::after  { margin-top: 2.25rem; }
+
+    .provider-prose-label {
+      font-family: var(--mono);
       font-size: 0.6875rem;
-      font-weight: 700;
-      font-family: var(--mono);
-      letter-spacing: 0.03em;
-      transition: background 0.15s, border-color 0.15s, color 0.15s;
+      font-weight: 600;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      padding-left: 0.20em;
     }
-    .copy-btn:hover {
-      background: #f5a942;
-      border-color: #f5a942;
-      color: #0d0d0d;
+
+    .provider-prose-list {
+      font-family: var(--serif);
+      font-size: 1.125rem;
+      color: var(--text);
+      line-height: 1.85;
+      letter-spacing: 0;
+      font-variation-settings: "opsz" 24, "SOFT" 30;
+    }
+
+    .provider-prose-list .prov {
+      display: inline-block;
+      white-space: nowrap;
+    }
+
+    .provider-prose-list .prov::after {
+      content: "·";
+      color: var(--accent);
+      margin: 0 0.55em;
+      opacity: 0.65;
+    }
+
+    .provider-prose-list .prov:last-child::after {
+      content: "";
+      margin: 0;
+    }
+
+    .provider-prose-list em {
+      font-style: normal;
+      font-family: var(--mono);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-dim);
+      padding: 0.125rem 0.375rem;
+      border-radius: 3px;
+      margin-left: 0.4em;
+      vertical-align: 2px;
     }
 
     @media (max-width: 767px) {
-      .code-block {
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0.5rem;
-        padding-right: 0.75rem;
-      }
-      .code-block .copy-btn {
-        position: static;
-        transform: none;
-        align-self: flex-end;
-      }
+      .route-pair { grid-template-columns: 1fr; gap: 2.25rem; margin-bottom: 3.5rem; }
+      .route-schematic { margin: 2rem auto; }
+      .provider-prose-list { font-size: 1rem; }
     }
 
-    /* ── Install prompt callout (Step 02, prompt-based tab) ── */
-    .install-prompt-block {
-      background: linear-gradient(135deg, rgba(234, 157, 52, 0.12), rgba(234, 157, 52, 0.06));
-      border-left: 3px solid var(--accent);
-      border-radius: 6px;
-      padding: 12px 14px 14px;
-      margin-bottom: 10px;
-      display: flex;
-      flex-direction: column;
-    }
-    .install-prompt-label {
-      font-size: 0.7em;
-      color: var(--accent);
-      margin: 0 0 8px 0;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-    .install-prompt-lead { font-size: 0.82em; margin: 0 0 8px 0; line-height: 1.5; }
-    .install-prompt-line { font-size: 0.8em; margin: 0 0 6px 0; line-height: 1.45; }
-    .install-prompt-line:last-of-type { margin-bottom: 0; }
-    .install-prompt-line code {
-      background: rgba(0, 0, 0, 0.06);
-      padding: 2px 8px;
-      border-radius: 4px;
-      font-family: var(--mono);
-      font-size: 0.95em;
-      word-break: break-all;
-    }
-    .install-prompt-copy {
-      position: static;
-      top: auto;
-      right: auto;
-      transform: none;
-      align-self: flex-end;
-      margin-top: 12px;
-      font-size: 0.72rem;
-      padding: 0.3125rem 0.625rem;
-      box-shadow: 0 2px 6px rgba(234, 157, 52, 0.25);
-    }
-    .install-prompt-note {
-      margin: 10px 0 0;
-      padding-top: 8px;
-      border-top: 1px solid rgba(234, 157, 52, 0.22);
-      font-size: 0.72em;
-      opacity: 0.7;
-      line-height: 1.45;
-    }
-    .install-prompt-note code {
-      background: rgba(0, 0, 0, 0.06);
-      padding: 1px 5px;
-      border-radius: 3px;
-      font-family: var(--mono);
-      font-size: 0.95em;
-    }
-
-    /* ── "Required" pill on step label ── */
-    .step-required {
-      display: inline-block;
-      margin-left: 6px;
-      padding: 2px 7px;
-      font-size: 0.62em;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--accent);
-      background: rgba(234, 157, 52, 0.15);
-      border: 1px solid rgba(234, 157, 52, 0.35);
-      border-radius: 10px;
-      vertical-align: middle;
-    }
-
-    /* ── Closing CTA ── */
+    /* Closing CTA */
     .closing {
       text-align: center;
       padding: 5rem 0 6rem;
-      background:
-        radial-gradient(ellipse 700px 400px at 50% 50%, rgba(144, 122, 169, 0.1), transparent 70%);
+      background: var(--bg-subtle);
     }
 
     .closing-title {
-      font-size: clamp(2rem, 4vw, 2.75rem);
-      font-weight: 700;
+      font-size: 2.5rem;
+      font-family: var(--serif);
+      font-weight: 500;
       color: var(--text);
       margin-bottom: 1rem;
-      letter-spacing: -0.03em;
+      letter-spacing: 0;
       line-height: 1.1;
+      font-variation-settings: "opsz" 96, "SOFT" 25;
     }
 
     .closing-copy {
@@ -1207,7 +1038,7 @@
       margin: 0 auto 2rem;
     }
 
-    /* ── Footer ── */
+    /* Footer */
     footer {
       padding: 3rem 0;
       border-top: 1px solid var(--border);
@@ -1236,347 +1067,90 @@
       font-size: 0.75rem;
     }
 
-    /* ── Section divider (literary waveform) ── */
-    .section-divider {
-      border: none;
-      height: 24px;
-      background: none;
-      margin: 0;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+    /* Facts */
+    .facts-section { background: var(--bg); }
 
-    /* ── Spec example ── */
-    .spec-example { background: var(--bg-subtle); }
-
-    .spec-grid {
+    .facts-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1.25rem;
-      margin-top: 2.5rem;
-    }
-
-    .spec-pane {
-      background: #1e1a29;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow:
-        0 1px 0 rgba(255, 255, 255, 0.4) inset,
-        0 16px 40px -14px rgba(87, 82, 121, 0.25);
-    }
-
-    .spec-pane-head {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.6875rem 1rem;
-      background: rgba(255, 255, 255, 0.03);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      color: rgba(255, 255, 255, 0.55);
-    }
-
-    .spec-pane-head svg {
-      width: 14px;
-      height: 14px;
-      stroke: currentColor;
-      fill: none;
-      stroke-width: 1.75;
-      opacity: 0.7;
-      flex-shrink: 0;
-    }
-
-    .spec-pane-body {
-      padding: 1.25rem 1.5rem;
-      margin: 0;
-      font-family: var(--mono);
-      font-size: 0.8125rem;
-      line-height: 1.7;
-      color: #e0def4;
-      overflow-x: auto;
-      white-space: pre;
-    }
-
-    .spec-pane-body .tok-fm  { color: #6e6a86; font-style: italic; }
-    .spec-pane-body .tok-hdr { color: #eb6f92; font-weight: 600; }
-    .spec-pane-body .tok-req { color: #f6c177; font-weight: 700; background: rgba(246, 193, 119, 0.08); padding: 0 0.25rem; border-radius: 3px; }
-    .spec-pane-body .tok-req.is-ref {
-      cursor: help;
-      transition: background 0.15s ease, box-shadow 0.15s ease;
-      border-bottom: 1px dashed rgba(246, 193, 119, 0.55);
-    }
-    .spec-pane-body .tok-req.is-ref:hover,
-    .spec-pane-body .tok-req.is-ref:focus-visible {
-      background: rgba(246, 193, 119, 0.3);
-      box-shadow: 0 0 0 1px rgba(246, 193, 119, 0.45);
-      outline: none;
-    }
-    .spec-pane-body .tok-req.is-def {
-      transition: background 0.25s ease, box-shadow 0.25s ease;
-    }
-    .spec-pane-body .tok-req.is-def.is-highlight {
-      background: rgba(246, 193, 119, 0.38);
-      box-shadow: 0 0 0 2px rgba(246, 193, 119, 0.7), 0 0 16px rgba(246, 193, 119, 0.35);
-    }
-    .req-tooltip {
-      position: fixed;
-      z-index: 1000;
-      background: #2a2638;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 8px;
-      padding: 0.6875rem 0.9375rem 0.75rem;
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      color: #e0def4;
-      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.45), 0 4px 12px rgba(0, 0, 0, 0.25);
-      max-width: 360px;
-      min-width: 220px;
-      pointer-events: none;
-      opacity: 0;
-      transform: translateY(4px);
-      transition: opacity 0.15s ease, transform 0.15s ease;
-    }
-    .req-tooltip.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .req-tooltip-head {
-      display: flex;
-      align-items: baseline;
-      gap: 0.5rem;
-      font-size: 0.6875rem;
-      margin-bottom: 0.4375rem;
-      padding-bottom: 0.4375rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      letter-spacing: 0.06em;
-      font-weight: 600;
-    }
-    .req-tooltip-id { color: #f6c177; font-weight: 700; }
-    .req-tooltip-src { color: #9ccfd8; font-weight: 400; opacity: 0.85; }
-    .req-tooltip-body {
-      color: #e0def4;
-      line-height: 1.55;
-      font-family: var(--font);
-      font-size: 0.8125rem;
-      font-weight: 400;
-    }
-    .req-tooltip::before {
-      content: "";
-      position: absolute;
-      top: -5px;
-      left: 18px;
-      width: 10px;
-      height: 10px;
-      background: #2a2638;
-      border-top: 1px solid rgba(255, 255, 255, 0.12);
-      border-left: 1px solid rgba(255, 255, 255, 0.12);
-      transform: rotate(45deg);
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .req-tooltip, .spec-pane-body .tok-req.is-def, .spec-pane-body .tok-req.is-ref {
-        transition: none;
-      }
-    }
-    .spec-pane-body .tok-str { color: #f6c177; }
-    .spec-pane-body .tok-cmt { color: #6e6a86; font-style: italic; }
-    .spec-pane-body .tok-tag { color: #ebbcba; font-style: normal; font-weight: 700; }
-    .spec-pane-body .tok-key { color: #c4a7e7; }
-    .spec-pane-body .tok-fn  { color: #9ccfd8; }
-    .spec-pane-body .tok-punc { color: #908caa; }
-
-    .spec-arrow {
-      position: relative;
-      text-align: center;
-      margin-top: 0.5rem;
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      color: var(--accent);
-      letter-spacing: 0.05em;
-    }
-
-    /* ── FAQ ── */
-    .faq-section { background: var(--bg); }
-
-    .faq-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.625rem;
-      max-width: 780px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2.5rem 3rem;
+      max-width: 880px;
       margin: 0 auto;
     }
 
-    .faq-item {
-      background: var(--bg-element);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      overflow: hidden;
-      transition: border-color 0.2s, background 0.2s;
-    }
-
-    .faq-item:hover { border-color: var(--border-hover); }
-    .faq-item[open] { border-color: var(--border-hover); }
-
-    .faq-item summary {
-      list-style: none;
-      cursor: pointer;
-      padding: 1rem 1.25rem;
-      font-size: 0.9375rem;
+    .fact h3 {
+      font-family: var(--serif);
+      font-size: 1.1875rem;
       font-weight: 500;
       color: var(--text);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
-      user-select: none;
+      margin-bottom: 0.625rem;
+      line-height: 1.3;
+      letter-spacing: 0;
+      font-variation-settings: "opsz" 96, "SOFT" 25;
     }
 
-    .faq-item summary::-webkit-details-marker { display: none; }
-
-    .faq-chevron {
-      color: var(--accent);
-      font-family: var(--mono);
-      font-weight: 700;
-      flex-shrink: 0;
-      transition: transform 0.2s;
-      font-size: 1.125rem;
-      line-height: 1;
-    }
-
-    .faq-item[open] .faq-chevron { transform: rotate(45deg); }
-
-    .faq-answer {
-      padding: 0 1.25rem 1.125rem;
-      color: var(--text-secondary);
+    .fact p {
       font-size: 0.9375rem;
+      color: var(--text-secondary);
       line-height: 1.65;
     }
 
-    .faq-answer p + p { margin-top: 0.625rem; }
-
-    .faq-answer code {
-      background: var(--accent-dim);
-      color: var(--accent);
-      padding: 0.0625rem 0.3125rem;
-      border-radius: 3px;
-      font-size: 0.8125rem;
+    @media (max-width: 767px) {
+      .facts-grid { grid-template-columns: 1fr; gap: 2rem; }
     }
 
-    /* ── Responsive ── */
+    /* Responsive */
     @media (max-width: 960px) {
-      .features-grid { grid-template-columns: repeat(2, 1fr); }
-      .quickstart-grid { grid-template-columns: 1fr; }
-      .features-intro { grid-template-columns: 1fr; gap: 1.5rem; }
       .surfaces-grid { grid-template-columns: 1fr; }
-      .spec-grid { grid-template-columns: 1fr; }
+      .surfaces-plus {
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--accent) 25%, var(--accent) 75%, transparent);
+        align-self: auto;
+      }
     }
 
     @media (max-width: 767px) {
-      .nav-links { display: none; }
-      .nav-mobile { display: block; }
-      .nav-mobile summary {
-        list-style: none;
-        cursor: pointer;
-        color: var(--text-secondary);
-        font-size: 1.25rem;
-        line-height: 1;
-      }
-      .nav-mobile summary::-webkit-details-marker { display: none; }
-      .nav-mobile .dropdown {
-        position: absolute;
-        right: 2rem;
-        top: 3.5rem;
-        background: var(--bg-element);
-        border: 1px solid var(--border);
-        border-radius: 10px;
-        padding: 0.75rem 1rem;
-        display: flex;
-        flex-direction: column;
-        gap: 0.75rem;
-        min-width: 160px;
-        box-shadow: 0 8px 24px rgba(87, 82, 121, 0.1);
-      }
-      .nav-mobile .dropdown a, .nav-mobile .dropdown span { font-size: 0.875rem; }
-
       .hero { padding: 3rem 0 2rem; }
       .hero-tagline { font-size: 2.25rem; }
       .hero-desc { font-size: 1rem; }
+      .section-title { font-size: 2rem; }
+      .closing-title { font-size: 2rem; }
       .hero-ctas { flex-direction: column; align-items: stretch; }
       .hero-meta { gap: 0.75rem; font-size: 0.6875rem; }
       .hero-shot { margin-top: 2rem; }
-      .hero-shot-callout { display: none; }
+      .hero::after { display: none; }
 
       section { padding: 3.5rem 0; }
       .section-head-center { margin-bottom: 2.5rem; }
 
-      .features-grid { grid-template-columns: 1fr; }
-      .proof-inner { gap: 1.5rem; }
-      .proof-num { font-size: 1.25rem; }
       .footer-inner { flex-direction: column; gap: 1rem; text-align: center; }
-
-      .wb-caption-title { font-size: 1.25rem; }
-      .wb-tab { padding: 0.5rem 0.75rem; font-size: 0.8125rem; }
     }
   </style>
 </head>
 <body>
-
-  <!-- Nav -->
-  <nav>
-    <div class="container-wide nav-inner">
-      <a href="/" class="nav-brand">
-        <span class="nav-brand-mark">AFX</span>
-        AgenticFlowX
-        <span class="nav-alpha">Alpha</span>
-      </a>
-
-      <ul class="nav-links">
-        <li><a href="#surfaces">Surfaces</a></li>
-        <li><a href="#workbench">Workbench</a></li>
-        <li><a href="#spec">Specs</a></li>
-        <li><a href="#features">Features</a></li>
-        <li><a href="#faq">FAQ</a></li>
-        <li><a href="https://github.com/AgenticFlowX/agenticflowx" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-        <li><a href="https://marketplace.visualstudio.com/items?itemName=AgenticFlowX.agenticflowx" class="nav-cta" target="_blank" rel="noopener noreferrer">Install</a></li>
-      </ul>
-
-      <details class="nav-mobile">
-        <summary aria-label="Menu">&#9776;</summary>
-        <div class="dropdown">
-          <a href="#surfaces">Surfaces</a>
-          <a href="#workbench">Workbench</a>
-          <a href="#spec">Specs</a>
-          <a href="#features">Features</a>
-          <a href="#faq">FAQ</a>
-          <a href="https://github.com/AgenticFlowX/agenticflowx" target="_blank" rel="noopener noreferrer">GitHub</a>
-          <a href="https://marketplace.visualstudio.com/items?itemName=AgenticFlowX.agenticflowx" target="_blank" rel="noopener noreferrer">Install Extension</a>
-        </div>
-      </details>
-    </div>
-  </nav>
 
   <main>
 
     <!-- Hero -->
     <section class="hero" id="hero">
       <div class="container">
-        <div class="hero-alpha">
-          <span class="hero-alpha-tag">Alpha</span>
-          <span class="hero-alpha-ver">v1.0.8</span>
+        <div class="hero-status" aria-label="Project status">
+          <span class="hero-status-dot" aria-hidden="true"></span>
+          <span class="hero-status-label">Public alpha</span>
+          <span class="hero-status-rule" aria-hidden="true"></span>
+          <span class="hero-status-version">v2 rewrite</span>
         </div>
-        <h1 class="hero-tagline">Spec-driven AI coding.<br><em>Finally visual.</em></h1>
+        <p class="hero-wordmark">AgenticFlowX</p>
+        <h1 class="hero-tagline">A VS Code <a href="https://github.com/AgenticFlowX/afx?tab=readme-ov-file#afx-agenticflowx" class="text-link" target="_blank" rel="noopener noreferrer">workflow</a> layer around <a href="https://pi.dev" target="_blank" rel="noopener noreferrer"><em>pi.dev</em></a>.</h1>
         <p class="hero-desc">
-          Chat that remembers <em style="font-style: italic; color: var(--text);">why</em>.
-          A workbench that tracks what's shipped. All inside VS Code &mdash;
-          so your agents and your specs live in the same room.
+          Chat-first by default. Repo-backed notes, tasks, and docs you can actually see.
+          And the <em>spec-driven</em> workflow &mdash; sure, the whole buzzword. Spec &rarr; design &rarr; tasks, refined as you go. The usual ceremony, just faster. Opt-in only.
         </p>
         <div class="hero-ctas">
           <a href="https://marketplace.visualstudio.com/items?itemName=AgenticFlowX.agenticflowx" class="btn-primary" target="_blank" rel="noopener noreferrer">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            Install from Marketplace
+            Try the extension (alpha)
           </a>
           <a href="#surfaces" class="btn-secondary">
             See how it works
@@ -1584,593 +1158,298 @@
           </a>
         </div>
         <div class="hero-meta">
-          <span>No login, no signup, no cloud</span>
-          <span>Bring your own API key</span>
-          <span>Open source &mdash; always free</span>
+          <span>Open source</span>
+          <span>VS Code extension</span>
+          <span>pi.dev coding agent</span>
+          <span>Repo-native files</span>
         </div>
       </div>
 
       <div class="container-wide hero-shot">
-        <div class="hero-shot-frame">
-          <div class="hero-shot-titlebar">
-            <span class="dot red"></span>
-            <span class="dot yellow"></span>
-            <span class="dot green"></span>
-            <span class="titlebar-text">agenticflowx &mdash; dashboard feature &mdash; VS Code</span>
+        <div class="hero-shot-slideshow" data-slideshow role="region" aria-roledescription="carousel" aria-label="Product tour">
+          <div class="hero-shot-frame" role="button" tabindex="0" aria-label="Open product tour preview">
+            <div class="hero-shot-titlebar">
+              <span class="dot red" aria-hidden="true"></span>
+              <span class="dot yellow" aria-hidden="true"></span>
+              <span class="dot green" aria-hidden="true"></span>
+              <span class="titlebar-text">agenticflowx &mdash; VS Code</span>
+            </div>
+            <div class="hero-slides">
+              <div class="hero-slide is-active" role="tabpanel" id="hero-panel-0" aria-labelledby="hero-tab-0" data-label="Chat" data-caption="Chat with pi.dev. Quick commands. Model picker.">
+                <img src="assets/main.webp" alt="AgenticFlowX chat panel with quick commands and model picker" loading="eager">
+              </div>
+              <div class="hero-slide" role="tabpanel" id="hero-panel-1" aria-labelledby="hero-tab-1" data-label="Workbench" data-caption="Dashboard over the repo's workflow files.">
+                <img src="assets/workbench.webp" alt="AgenticFlowX workbench dashboard" loading="lazy">
+              </div>
+              <div class="hero-slide" role="tabpanel" id="hero-panel-2" aria-labelledby="hero-tab-2" data-label="Board" data-caption="Kanban over your tasks across stages.">
+                <img src="assets/board.webp" alt="AgenticFlowX kanban board" loading="lazy">
+              </div>
+              <div class="hero-slide" role="tabpanel" id="hero-panel-3" aria-labelledby="hero-tab-3" data-label="Pipeline" data-caption="Pipeline view across feature stages.">
+                <img src="assets/pipeline.webp" alt="AgenticFlowX pipeline view" loading="lazy">
+              </div>
+              <div class="hero-slide" role="tabpanel" id="hero-panel-4" aria-labelledby="hero-tab-4" data-label="Documents" data-caption="Specs, designs, and notes as plain markdown.">
+                <img src="assets/documents.webp" alt="AgenticFlowX documents view" loading="lazy">
+              </div>
+              <div class="hero-slide" role="tabpanel" id="hero-panel-5" aria-labelledby="hero-tab-5" data-label="Journal" data-caption="Session log with timestamped entries.">
+                <img src="assets/journal.webp" alt="AgenticFlowX journal view" loading="lazy">
+              </div>
+              <div class="hero-slide" role="tabpanel" id="hero-panel-6" aria-labelledby="hero-tab-6" data-label="Notes" data-caption="Quick notes that link to features.">
+                <img src="assets/notes.webp" alt="AgenticFlowX notes view" loading="lazy">
+              </div>
+              <div class="hero-slide" role="tabpanel" id="hero-panel-7" aria-labelledby="hero-tab-7" data-label="Trace" data-caption="@see annotations link code back to spec.">
+                <img src="assets/codelens-spec.webp" alt="Editor showing @see CodeLens annotations linked to spec.md" loading="lazy">
+              </div>
+              <div class="hero-slide" role="tabpanel" id="hero-panel-8" aria-labelledby="hero-tab-8" data-label="Map" data-caption="How spec, design, tasks, and journal connect.">
+                <img src="assets/workflow-mindmap.webp" alt="AgenticFlowX feature workflow mindmap" loading="lazy">
+              </div>
+            </div>
           </div>
-          <img src="assets/screenshot.webp" alt="AgenticFlowX running in VS Code: AFX chat side panel on the right, Workbench dashboard in the bottom panel tracking a dashboard feature at 94% progress" loading="eager">
-          <div class="hero-shot-callouts" aria-hidden="true">
-            <span class="hero-shot-callout chat">Chat (side panel)</span>
-            <span class="hero-shot-callout workbench">Workbench (bottom panel)</span>
+          <div class="hero-slide-controls">
+            <button class="hero-rotate" type="button" data-rotate-control aria-label="Stop automatic slide show">Pause</button>
+            <span class="hero-slide-label" aria-live="off">Chat</span>
+            <span class="hero-slide-caption" aria-live="off">Chat with pi.dev. Quick commands. Model picker.</span>
+            <div class="hero-slide-dots" role="tablist" aria-label="Choose slide to display">
+              <button class="hero-slide-dot is-active" type="button" role="tab" id="hero-tab-0" aria-label="Chat" aria-controls="hero-panel-0" aria-selected="true" tabindex="0"></button>
+              <button class="hero-slide-dot" type="button" role="tab" id="hero-tab-1" aria-label="Workbench" aria-controls="hero-panel-1" aria-selected="false" tabindex="-1"></button>
+              <button class="hero-slide-dot" type="button" role="tab" id="hero-tab-2" aria-label="Board" aria-controls="hero-panel-2" aria-selected="false" tabindex="-1"></button>
+              <button class="hero-slide-dot" type="button" role="tab" id="hero-tab-3" aria-label="Pipeline" aria-controls="hero-panel-3" aria-selected="false" tabindex="-1"></button>
+              <button class="hero-slide-dot" type="button" role="tab" id="hero-tab-4" aria-label="Documents" aria-controls="hero-panel-4" aria-selected="false" tabindex="-1"></button>
+              <button class="hero-slide-dot" type="button" role="tab" id="hero-tab-5" aria-label="Journal" aria-controls="hero-panel-5" aria-selected="false" tabindex="-1"></button>
+              <button class="hero-slide-dot" type="button" role="tab" id="hero-tab-6" aria-label="Notes" aria-controls="hero-panel-6" aria-selected="false" tabindex="-1"></button>
+              <button class="hero-slide-dot" type="button" role="tab" id="hero-tab-7" aria-label="Trace" aria-controls="hero-panel-7" aria-selected="false" tabindex="-1"></button>
+              <button class="hero-slide-dot" type="button" role="tab" id="hero-tab-8" aria-label="Map" aria-controls="hero-panel-8" aria-selected="false" tabindex="-1"></button>
+            </div>
           </div>
         </div>
       </div>
     </section>
-
-    <!-- Proof strip -->
-    <div class="proof-strip">
-      <div class="container">
-        <div class="proof-inner">
-          <div class="proof-item">
-            <span class="proof-num"><span>7</span>&nbsp;panels</span>
-            <span class="proof-label">Bottom panel</span>
-          </div>
-          <div class="proof-item">
-            <span class="proof-num"><span>28</span>+&nbsp;providers</span>
-            <span class="proof-label">BYO API key</span>
-          </div>
-          <div class="proof-item">
-            <span class="proof-num"><span>23</span>&nbsp;tools</span>
-            <span class="proof-label">MCP + native</span>
-          </div>
-          <div class="proof-item">
-            <span class="proof-num"><span>0</span>&nbsp;accounts</span>
-            <span class="proof-label">No login, no cloud</span>
-          </div>
-          <div class="proof-item">
-            <span class="proof-num">Apache&nbsp;<span>2.0</span></span>
-            <span class="proof-label">Always free</span>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <!-- Two surfaces -->
     <section id="surfaces" class="two-surfaces">
       <div class="container">
         <div class="section-head-center">
-          <p class="section-label">Two surfaces, one loop</p>
-          <h2 class="section-title">Chat on the side. Workbench on the bottom.</h2>
+          <p class="section-label">How it works</p>
+          <h2 class="section-title"><a href="https://pi.dev" class="text-link" target="_blank" rel="noopener noreferrer">pi.dev</a> runs the coding. AgenticFlowX owns the <a href="https://github.com/AgenticFlowX/afx?tab=readme-ov-file#afx-agenticflowx" class="text-link" target="_blank" rel="noopener noreferrer">workflow</a>.</h2>
           <p class="section-copy">
-            Most AI coding tools give you a chat and hope you remember everything else.
-            AFX keeps the conversation in one surface and the project's memory in another &mdash;
-            so the agent can talk about real progress, not just tokens.
+            pi.dev handles the coding agent. AgenticFlowX adds the VS Code surface, provider settings,
+            and repo-backed views around it.
           </p>
         </div>
 
         <div class="surfaces-grid">
           <div class="surface-card chat">
-            <p class="surface-kicker">Side panel · Chat</p>
-            <h3 class="surface-title">An agent that reads your specs, not just your cursor.</h3>
+            <p class="surface-role">The coding agent</p>
+            <h3 class="surface-brand"><a href="https://pi.dev" target="_blank" rel="noopener noreferrer">pi.dev</a></h3>
             <p class="surface-copy">
-              Dual-track modes. Pick <strong>General</strong> when you're coding; switch to <strong>Focus</strong>
-              for spec, design, tasks, research, or discovery &mdash; lean prompts tuned for one job at a time.
+              Day-to-day coding stays in chat. AgenticFlowX runs pi.dev through the Pi CLI or
+              the Pi SDK with API providers &mdash; same chat, same settings, same workbench.
             </p>
             <ul class="surface-bullets">
-              <li>Focus modes: Spec, Design, Tasks, Research, Discover, Next</li>
-              <li>Context strips pull in the right files automatically</li>
-              <li>Bring your own key &mdash; Claude, GPT, Gemini, local, anything</li>
+              <li>Use your existing Pi setup, or bring your own provider keys</li>
+              <li>Streaming, tool calls, file mentions, model switching</li>
+              <li>Steer or follow up while a turn is running</li>
             </ul>
           </div>
+
+          <span class="surfaces-plus" aria-hidden="true"></span>
 
           <div class="surface-card workbench">
-            <p class="surface-kicker">Bottom panel · Workbench</p>
-            <h3 class="surface-title">The bird's-eye view your chat has been missing.</h3>
+            <p class="surface-role">The workflow layer</p>
+            <h3 class="surface-brand">AgenticFlowX</h3>
             <p class="surface-copy">
-              Seven tabs across the bottom, each one a different lens on the same project:
-              what's in flight, what's specced, what's shipped, what's still thinking.
+              Project structure around pi.dev: notes, tasks, journals, and docs
+              that live as plain markdown in your workspace.
             </p>
             <ul class="surface-bullets">
-              <li>Workbench, Pipeline, Documents, Analytics, Journal, Board, Notes</li>
-              <li>Click any tab &mdash; chat stays open, context stays loaded</li>
-              <li>Everything reads from your repo &mdash; nothing phones home</li>
+              <li>Tasks, notes, journals, and docs stay in the repo</li>
+              <li>Workbench views over those files, no separate database</li>
+              <li>Trace from intent &rarr; design &rarr; tasks &rarr; code, when the work calls for it</li>
             </ul>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Workbench showcase -->
-    <section id="workbench" class="wb">
-      <div class="container-wide">
+    <!-- Three things you'll notice -->
+    <section class="diff" id="differentiators">
+      <div class="container">
         <div class="section-head-center">
-          <p class="section-label">Inside the workbench</p>
-          <h2 class="section-title">Seven views. One project. Zero context switching.</h2>
+          <p class="section-label">Three things you'll notice</p>
+        </div>
+
+        <div class="diff-rows">
+          <div class="diff-row">
+            <figure class="diff-shot">
+              <button class="diff-shot-frame" type="button" aria-label="Open preview: Provider keys">
+                <img src="assets/settings.webp" alt="AgenticFlowX Providers settings panel" loading="lazy">
+                <span class="diff-pin" style="left:24%;top:22%;">Provider keys</span>
+              </button>
+            </figure>
+            <div class="diff-text">
+              <p class="diff-num">01 &mdash; Settings</p>
+              <h3 class="diff-title">Settings you can read in a glance.</h3>
+              <p class="diff-copy">
+                Provider keys live in VS Code SecretStorage. Runtime knobs sit in the standard Settings UI.
+                No JSON to edit by hand.
+              </p>
+            </div>
+          </div>
+
+          <div class="diff-row is-reversed">
+            <figure class="diff-shot">
+              <button class="diff-shot-frame" type="button" aria-label="Open preview: /afx skills">
+                <img src="assets/main.webp" alt="AgenticFlowX chat panel showing bundled /afx commands" loading="lazy">
+                <span class="diff-pin" style="left:14%;top:32%;">/afx skills</span>
+              </button>
+            </figure>
+            <div class="diff-text">
+              <p class="diff-num">02 &mdash; Skills</p>
+              <h3 class="diff-title"><em>/afx</em> commands, already there.</h3>
+              <p class="diff-copy">
+                Scaffold, plan, check, review, capture &mdash; installed with the extension.
+                Nothing extra to set up.
+              </p>
+            </div>
+          </div>
+
+          <div class="diff-row">
+            <figure class="diff-shot">
+              <button class="diff-shot-frame" type="button" aria-label="Open preview: @see to spec">
+                <img src="assets/codelens-spec.webp" alt="Editor showing @see CodeLens annotations linked to spec.md" loading="lazy">
+                <span class="diff-pin" style="left:14%;top:18%;">@see &rarr; spec</span>
+              </button>
+            </figure>
+            <div class="diff-text">
+              <p class="diff-num">03 &mdash; Integration</p>
+              <h3 class="diff-title">Editor-native, not file-adjacent.</h3>
+              <p class="diff-copy">
+                CodeLens links code back to spec. Context menus reach the workflow.
+                The files stay plain markdown &mdash; the editor just knows about them.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Providers -->
+    <section class="roadmap" id="providers">
+      <div class="container">
+        <div class="section-head-center">
+          <p class="section-label">Providers</p>
+          <h2 class="section-title">Two routes. Same models.</h2>
           <p class="section-copy">
-            Click through the tabs your future self will actually use.
-            Same keystrokes as the bottom panel in VS Code.
+            Whether or not you have <a href="https://pi.dev" class="text-link" target="_blank" rel="noopener noreferrer">pi.dev</a> installed, AgenticFlowX uses Pi to reach the providers below.
           </p>
         </div>
 
-        <div class="wb-tabs-wrap">
-          <div class="wb-tabs-rail" role="tablist" aria-label="Workbench panels">
-            <button class="wb-tab is-active" role="tab" aria-selected="true" data-wb="workbench">
-              <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-              Workbench
-            </button>
-            <button class="wb-tab" role="tab" aria-selected="false" data-wb="pipeline">
-              <svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/><circle cx="7" cy="6" r="1.5" fill="currentColor"/><circle cx="14" cy="12" r="1.5" fill="currentColor"/><circle cx="10" cy="18" r="1.5" fill="currentColor"/></svg>
-              Pipeline
-            </button>
-            <button class="wb-tab" role="tab" aria-selected="false" data-wb="documents">
-              <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="14" y2="17"/></svg>
-              Documents
-            </button>
-            <button class="wb-tab" role="tab" aria-selected="false" data-wb="analytics">
-              <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-              Analytics
-            </button>
-            <button class="wb-tab" role="tab" aria-selected="false" data-wb="journal">
-              <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-              Journal
-            </button>
-            <button class="wb-tab" role="tab" aria-selected="false" data-wb="board">
-              <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg>
-              Board
-            </button>
-            <button class="wb-tab" role="tab" aria-selected="false" data-wb="notes">
-              <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="14" x2="15" y2="14"/><line x1="9" y1="18" x2="12" y2="18"/></svg>
-              Notes
-            </button>
-          </div>
+        <figure class="route-schematic" aria-label="AgenticFlowX talks to providers either through your installed Pi CLI via RPC, or through the bundled Pi SDK">
+          <svg viewBox="0 0 720 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+            <!-- routes -->
+            <path d="M 40 110 C 120 110, 160 50, 280 50 L 440 50 C 560 50, 600 110, 680 110"
+                  fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+            <path d="M 40 110 C 120 110, 160 170, 280 170 L 440 170 C 560 170, 600 110, 680 110"
+                  fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
 
-          <!-- Workbench -->
-          <div class="wb-panel is-active" data-wb-panel="workbench" role="tabpanel">
-            <div class="wb-panel-body">
-              <div class="wb-caption">
-                <p class="wb-caption-kicker">Workbench · side-by-side editor</p>
-                <h3 class="wb-caption-title">Spec, design, tasks &mdash; in the same view.</h3>
-                <p class="wb-caption-copy">
-                  Pick a feature, toggle which columns you want open, and edit inline.
-                  Resizable columns, persistent widths, live progress and freshness indicators,
-                  and a one-click jump to the full VS Code editor when you need more room.
-                </p>
-              </div>
-              <div class="wb-shot">
-                <img src="assets/workbench.webp" alt="AFX Workbench showing a feature with SPEC, DESIGN, and TASKS columns open side by side with a 94% progress bar" loading="lazy">
-              </div>
-            </div>
-          </div>
+            <!-- left junction (AFX) -->
+            <circle cx="40" cy="110" r="8" fill="#fbf6e7" stroke="currentColor" stroke-width="1.5"/>
+            <circle cx="40" cy="110" r="3" fill="currentColor"/>
 
-          <!-- Pipeline -->
-          <div class="wb-panel" data-wb-panel="pipeline" role="tabpanel">
-            <div class="wb-panel-body">
-              <div class="wb-caption">
-                <p class="wb-caption-kicker">Pipeline · feature status</p>
-                <h3 class="wb-caption-title">Where every feature stands &mdash; three ways to see it.</h3>
-                <p class="wb-caption-copy">
-                  Search, filter by status (In&nbsp;Progress, Ready, Complete, Blocked, Not&nbsp;Started),
-                  sort by name or progress, and drill into any feature's spec, design, and tasks.
-                  Pivot between a <strong>Timeline</strong> grouped by stage, a scrollable <strong>Grid</strong> of cards,
-                  or a <strong>Kanban</strong> laned by next action.
-                </p>
-                <div class="wb-subswitcher" role="tablist" aria-label="Pipeline view">
-                  <button class="wb-subtab is-active" data-sub="timeline" data-parent="pipeline">Timeline</button>
-                  <button class="wb-subtab" data-sub="kanban" data-parent="pipeline">Kanban</button>
-                </div>
-                <p style="font-size: 0.75rem; color: var(--text-tertiary); margin-top: 0.75rem;">Grid view available in-editor.</p>
-              </div>
-              <div class="wb-shot wb-subshot is-active" data-subshot="pipeline-timeline">
-                <img src="assets/pipeline-timeline.webp" alt="AFX Pipeline timeline view: features grouped by stage with next-action rails" loading="lazy">
-              </div>
-              <div class="wb-shot wb-subshot" data-subshot="pipeline-kanban">
-                <img src="assets/pipeline-kanban.webp" alt="AFX Pipeline kanban view: feature lanes by next action" loading="lazy">
-              </div>
-            </div>
-          </div>
+            <!-- right junction (provider) -->
+            <circle cx="680" cy="110" r="8" fill="#fbf6e7" stroke="currentColor" stroke-width="1.5"/>
+            <circle cx="680" cy="110" r="3" fill="currentColor"/>
 
-          <!-- Documents -->
-          <div class="wb-panel" data-wb-panel="documents" role="tabpanel">
-            <div class="wb-panel-body">
-              <div class="wb-caption">
-                <p class="wb-caption-kicker">Documents · repo-wide browser</p>
-                <h3 class="wb-caption-title">Every doc in your repo, tree-browsable.</h3>
-                <p class="wb-caption-copy">
-                  Markdown, PDFs, images, and anything else &mdash; all reachable from one filterable tree.
-                  Markdown renders inline with syntax highlighting; PDFs and binaries hand off to VS Code's
-                  native preview. Content search across everything in the workspace.
-                </p>
-                <div class="wb-subswitcher" role="tablist" aria-label="Documents view">
-                  <button class="wb-subtab is-active" data-sub="home" data-parent="documents">Home</button>
-                  <button class="wb-subtab" data-sub="view" data-parent="documents">Reader</button>
-                </div>
-              </div>
-              <div class="wb-shot wb-subshot is-active" data-subshot="documents-home">
-                <img src="assets/documents-home.webp" alt="AFX Documents home with a filterable tree sidebar and document picker" loading="lazy">
-              </div>
-              <div class="wb-shot wb-subshot" data-subshot="documents-view">
-                <img src="assets/document-view.webp" alt="AFX Document reader showing a rendered markdown file with syntax-highlighted blocks" loading="lazy">
-              </div>
-            </div>
-          </div>
+            <!-- top branch label: Pi CLI · RPC -->
+            <rect x="280" y="35" width="160" height="30" rx="4" fill="#fbf6e7" stroke="currentColor" stroke-width="1"/>
+            <text x="360" y="55" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" font-weight="600" fill="currentColor" letter-spacing="2.4">PI CLI &middot; RPC</text>
 
-          <!-- Analytics -->
-          <div class="wb-panel" data-wb-panel="analytics" role="tabpanel">
-            <div class="wb-panel-body">
-              <div class="wb-caption">
-                <p class="wb-caption-kicker">Analytics · portfolio health</p>
-                <h3 class="wb-caption-title">Feature health, velocity, and where to look next.</h3>
-                <p class="wb-caption-copy">
-                  A true portfolio dashboard: overall health, velocity, shipped count, and a weekly activity heatmap.
-                  Attention cards surface features that are almost done; traceability coverage shows how many functions
-                  link back to their specs. Switch ranges across <strong>7D · 30D · 90D · All</strong>.
-                </p>
-              </div>
-              <div class="wb-shot">
-                <img src="assets/analytics.webp" alt="AFX Analytics dashboard showing health percentage, velocity, portfolio rows, attention cards, and a heatmap" loading="lazy">
-              </div>
-            </div>
-          </div>
+            <!-- bottom branch label: Pi SDK -->
+            <rect x="280" y="155" width="160" height="30" rx="4" fill="#fbf6e7" stroke="currentColor" stroke-width="1"/>
+            <text x="360" y="175" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" font-weight="600" fill="currentColor" letter-spacing="2.4">PI SDK</text>
 
-          <!-- Journal -->
-          <div class="wb-panel" data-wb-panel="journal" role="tabpanel">
-            <div class="wb-panel-body">
-              <div class="wb-caption">
-                <p class="wb-caption-kicker">Journal · discussion timeline</p>
-                <h3 class="wb-caption-title">Every decision, searchable and timestamped.</h3>
-                <p class="wb-caption-copy">
-                  A dated timeline of discussions, context, summaries, and decisions &mdash; filterable by
-                  feature, status, and date. Left sidebar for the timeline, right pane for the entry,
-                  every item linking straight back to the source markdown.
-                </p>
-              </div>
-              <div class="wb-shot">
-                <img src="assets/journal.webp" alt="AFX Journal with a timeline of dated entries on the left and a full discussion entry on the right" loading="lazy">
-              </div>
-            </div>
-          </div>
+            <!-- side labels -->
+            <text x="40" y="138" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" font-weight="600" fill="#6b6450" letter-spacing="2">AFX</text>
+            <text x="680" y="138" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" font-weight="600" fill="#6b6450" letter-spacing="2">PROVIDER</text>
+          </svg>
+        </figure>
 
-          <!-- Board -->
-          <div class="wb-panel" data-wb-panel="board" role="tabpanel">
-            <div class="wb-panel-body">
-              <div class="wb-caption">
-                <p class="wb-caption-kicker">Board · markdown kanban</p>
-                <h3 class="wb-caption-title">Kanban boards that live in your repo.</h3>
-                <p class="wb-caption-copy">
-                  Create named boards, drag cards between columns, reorder columns, edit cards inline &mdash;
-                  then flip to the raw markdown any time. Each board is just a file on disk;
-                  version it, branch it, review it like any other code.
-                </p>
-              </div>
-              <div class="wb-shot">
-                <img src="assets/board.webp" alt="AFX Board with a kanban view of cards in columns, backed by a markdown file" loading="lazy">
-              </div>
-            </div>
+        <div class="route-pair">
+          <div class="route">
+            <p class="route-tag">Already use Pi</p>
+            <h3 class="route-title">Your Pi, your config, your keys.</h3>
+            <p class="route-copy">
+              AgenticFlowX detects your installed <code>Pi CLI</code> and routes every call through
+              <code>Pi RPC</code>. Whatever you&rsquo;ve configured &mdash; providers, models, defaults &mdash;
+              stays where it is. Nothing copied, nothing re-entered.
+            </p>
           </div>
+          <div class="route">
+            <p class="route-tag">New to Pi</p>
+            <h3 class="route-title">Pi bundled. Bring your keys.</h3>
+            <p class="route-copy">
+              The <code>Pi SDK</code> ships inside the extension. Add provider keys in Settings &mdash;
+              they&rsquo;re stored in <code>VS Code SecretStorage</code> and passed through the bundled SDK.
+              No separate Pi install required.
+            </p>
+          </div>
+        </div>
 
-          <!-- Notes -->
-          <div class="wb-panel" data-wb-panel="notes" role="tabpanel">
-            <div class="wb-panel-body">
-              <div class="wb-caption">
-                <p class="wb-caption-kicker">Notes · quick capture</p>
-                <h3 class="wb-caption-title">Type. Enter. Done.</h3>
-                <p class="wb-caption-copy">
-                  A capture box on the left, a dated timeline on the right. Press Enter to save
-                  (Shift+Enter for a newline), filter by <strong>Today · Week · Month · All</strong>,
-                  search across everything. Stored in <code style="background: var(--accent-dim); color: var(--accent); padding: 0.0625rem 0.25rem; border-radius: 3px;">.afx/notes.md</code> &mdash; just a file.
-                </p>
-              </div>
-              <div class="wb-shot">
-                <img src="assets/notes.webp" alt="AFX Notes with a capture box on the left and a dated timeline of short notes on the right" loading="lazy">
-              </div>
-            </div>
-          </div>
+        <div class="provider-prose" aria-label="Supported providers">
+          <p class="provider-prose-label">Providers Pi supports upstream</p>
+          <p class="provider-prose-list">
+            <span class="prov">OpenAI</span>
+            <span class="prov">Anthropic</span>
+            <span class="prov">Google Gemini</span>
+            <span class="prov">Google Vertex</span>
+            <span class="prov">GitHub Copilot</span>
+            <span class="prov">OpenRouter</span>
+            <span class="prov">Amazon Bedrock</span>
+            <span class="prov">Azure OpenAI</span>
+            <span class="prov">Groq</span>
+            <span class="prov">DeepSeek</span>
+            <span class="prov">Mistral</span>
+            <span class="prov">MiniMax</span>
+            <span class="prov">Kimi</span>
+            <span class="prov">Fireworks</span>
+            <span class="prov">Cerebras</span>
+            <span class="prov">Hugging Face</span>
+            <span class="prov">Vercel AI Gateway</span>
+            <span class="prov">xAI</span>
+            <span class="prov">Z.ai</span>
+            <span class="prov">Ollama<em>local</em></span>
+          </p>
         </div>
       </div>
     </section>
 
-    <!-- Workflow -->
-    <section class="workflow" id="workflow">
-      <div class="container">
-        <p class="section-label">The AFX Workflow</p>
-        <h2 class="section-title">Pause. Think. Plan. Ship.</h2>
-        <p class="section-copy" style="margin: 0 auto 0.5rem; text-align: center;">
-          Standard agent skills for spec-driven AI development.
-          Portable and agent-agnostic &mdash; works with or without the extension.
-        </p>
-        <img src="assets/workflow-mindmap.webp" alt="AFX four-file structure: spec.md (The WHAT), design.md (The HOW), tasks.md (The WHEN), journal.md (Memory)" loading="lazy" style="display: block; max-width: 900px; width: 100%; margin: 3rem auto 2rem; border-radius: 12px;">
-        <p class="workflow-footer">Plain markdown files &mdash; readable by any AI coding agent, inside the extension or out.</p>
-      </div>
-    </section>
-
-    <!-- What a spec looks like -->
-    <section class="spec-example" id="spec">
+    <!-- Facts -->
+    <section class="facts-section" id="facts">
       <div class="container">
         <div class="section-head-center">
-          <p class="section-label">On disk</p>
-          <h2 class="section-title">A spec is just a file. Code points back to it.</h2>
-          <p class="section-copy">
-            No proprietary format, no lock-in. Just markdown with a header &mdash;
-            and plain <code style="background: var(--accent-dim); color: var(--accent); padding: 0.0625rem 0.3125rem; border-radius: 3px; font-family: var(--mono); font-size: 0.8125rem;">@see</code> annotations that VS Code can jump through.
-          </p>
+          <p class="section-label">Facts</p>
+          <h2 class="section-title">Things worth knowing.</h2>
         </div>
 
-        <div class="spec-grid">
-          <div class="spec-pane">
-            <div class="spec-pane-head">
-              <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-              <span>docs/specs/user-auth/spec.md</span>
-            </div>
-<pre class="spec-pane-body"><code><span class="tok-fm">---
-afx: true
-type: SPEC
----</span>
-
-<span class="tok-hdr"># User Authentication</span>
-
-<span class="tok-hdr">## Requirements</span>
-
-- <span class="tok-req is-def" data-def="FR-1">FR-1</span> Users log in with email + password
-- <span class="tok-req is-def" data-def="FR-2">FR-2</span> Sessions expire after 24h idle
-- <span class="tok-req is-def" data-def="NFR-1">NFR-1</span> Reset tokens are single-use
-
-<span class="tok-hdr">## Non-goals</span>
-
-- Social login (out of scope for v1)
-</code></pre>
+        <div class="facts-grid">
+          <div class="fact">
+            <h3>How do pi.dev and provider keys work together?</h3>
+            <p>If you already use <a href="https://pi.dev" class="text-link" target="_blank" rel="noopener noreferrer">pi.dev</a>, AgenticFlowX talks to your installed Pi CLI and uses your existing config. If you don&rsquo;t, AgenticFlowX stores provider keys in VS Code SecretStorage and passes them through the Pi SDK.</p>
           </div>
 
-          <div class="spec-pane">
-            <div class="spec-pane-head">
-              <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-              <span>src/auth/auth.service.ts</span>
-            </div>
-<pre class="spec-pane-body"><code><span class="tok-cmt">/**
- * Authentication service &mdash; login,
- * session refresh, and token issuance.
- *
- * <span class="tok-tag">@see</span> docs/specs/user-auth/spec.md <span class="tok-req is-ref" data-ref="FR-1" tabindex="0">FR-1</span> <span class="tok-req is-ref" data-ref="FR-2" tabindex="0">FR-2</span>
- * <span class="tok-tag">@see</span> docs/specs/user-auth/design.md <span class="tok-req is-ref" data-ref="DES-AUTH" tabindex="0">DES-AUTH</span>
- */</span>
-<span class="tok-key">export class</span> <span class="tok-fn">AuthService</span> <span class="tok-punc">{</span>
-  <span class="tok-key">async</span> <span class="tok-fn">login</span><span class="tok-punc">(</span>email<span class="tok-punc">,</span> password<span class="tok-punc">)</span> <span class="tok-punc">{</span>
-    <span class="tok-cmt">// Implementation traces to FR-1</span>
-  <span class="tok-punc">}</span>
-<span class="tok-punc">}</span>
-</code></pre>
+          <div class="fact">
+            <h3>Where does my code or data live?</h3>
+            <p>AgenticFlowX workflow files are plain markdown in your workspace. AI requests go through <a href="https://pi.dev" class="text-link" target="_blank" rel="noopener noreferrer">pi.dev</a> using either the Pi CLI or the Pi SDK.</p>
           </div>
-        </div>
 
-        <p class="spec-arrow">↑ hover <code style="background: rgba(234,157,52,0.15); padding: 0.0625rem 0.3125rem; border-radius: 3px; color: var(--accent);">FR-1</code>, <code style="background: rgba(234,157,52,0.15); padding: 0.0625rem 0.3125rem; border-radius: 3px; color: var(--accent);">FR-2</code>, or <code style="background: rgba(234,157,52,0.15); padding: 0.0625rem 0.3125rem; border-radius: 3px; color: var(--accent);">DES-AUTH</code> above &mdash; same preview you get from AFX&rsquo;s <code style="background: rgba(234,157,52,0.15); padding: 0.0625rem 0.3125rem; border-radius: 3px; color: var(--accent);">@see</code> CodeLens in VS Code · run <code style="background: rgba(234,157,52,0.15); padding: 0.0625rem 0.3125rem; border-radius: 3px; color: var(--accent);">/afx-check trace</code> to enforce it across the repo</p>
-      </div>
-    </section>
-
-    <!-- What AFX adds on top -->
-    <section id="features">
-      <div class="container">
-        <div class="section-head-center">
-          <p class="section-label">What AFX adds on top</p>
-          <h2 class="section-title">A capable agent engine &mdash; plus a brain that remembers.</h2>
-          <p class="section-copy">
-            28+ providers, 23 tools, MCP support, custom modes, no lock-in &mdash;
-            the chat underneath can do what you'd expect.
-            AFX layers a spec-aware brain and a visual workbench on top.
-          </p>
-        </div>
-
-        <div class="features-grid">
-          <div class="feature-card">
-            <span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 17H7A5 5 0 0 1 7 7h2"/><path d="M15 7h2a5 5 0 0 1 0 10h-2"/><line x1="8" y1="12" x2="16" y2="12"/></svg></span>
-            <h3 class="feature-title">@see CodeLens</h3>
-            <p class="feature-copy">Hover any <code>@see</code> annotation to preview the linked spec inline. Jump to the requirement without leaving your code.</p>
+          <div class="fact">
+            <h3>Do I have to use the spec-driven workflow?</h3>
+            <p>No. Most coding stays in chat. The spec-driven workflow is opt-in &mdash; reach for it when a piece of work needs traceability between intent, design, tasks, and code.</p>
           </div>
-          <div class="feature-card">
-            <span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="9"/><line x1="12" y1="3" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="21"/><line x1="3" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="21" y2="12"/></svg></span>
-            <h3 class="feature-title">Focus Track</h3>
-            <p class="feature-copy">Dual-track modes: General for coding, Focus for spec work. Lean prompts that fit even small models &mdash; with context strips that follow you.</p>
+
+          <div class="fact">
+            <h3>What&rsquo;s the current status, and is it free?</h3>
+            <p>Public alpha. The v2 rewrite is usable now, but provider settings, modes, and examples are still moving. AgenticFlowX is open source under Apache 2.0.</p>
           </div>
-          <div class="feature-card">
-            <span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></span>
-            <h3 class="feature-title">7-tab Workbench</h3>
-            <p class="feature-copy">Workbench, Pipeline, Documents, Analytics, Journal, Board, Notes. A bird's-eye view pinned to the bottom of your editor.</p>
-          </div>
-          <div class="feature-card">
-            <span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="9" y1="7" x2="15" y2="7"/><line x1="9" y1="11" x2="15" y2="11"/></svg></span>
-            <h3 class="feature-title">Session continuity</h3>
-            <p class="feature-copy">Every session appends a <code>journal.md</code> entry. Pick up where you (or another agent) left off &mdash; with the decisions intact.</p>
-          </div>
-          <div class="feature-card">
-            <span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></span>
-            <h3 class="feature-title">Agent-agnostic specs</h3>
-            <p class="feature-copy">Specs are plain markdown. Run any agent on any feature &mdash; in parallel, same blueprint, zero conflict.</p>
-          </div>
-          <div class="feature-card">
-            <span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12l5-5 4 4 7-7"/><polyline points="14 4 19 4 19 9"/></svg></span>
-            <h3 class="feature-title">Bidirectional traceability</h3>
-            <p class="feature-copy">Every function links to a spec requirement. Every requirement maps to code. <code>/afx-check trace</code> enforces it.</p>
-          </div>
-          <div class="feature-card">
-            <span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span>
-            <h3 class="feature-title">Quality gates</h3>
-            <p class="feature-copy">Structural, path, link, and trace checks &mdash; run via <code>/afx-check</code>. Ship with confidence, not just vibes.</p>
-          </div>
-          <div class="feature-card">
-            <span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20.94c1.5 0 2.75 1.06 4 1.06 3 0 6-8 6-12.22A4.91 4.91 0 0 0 17 5c-2.22 0-4 1.44-5 2-1-.56-2.78-2-5-2a4.9 4.9 0 0 0-5 4.78C2 14 5 22 8 22c1.25 0 2.5-1.06 4-1.06z"/><path d="M10 2c1 .5 2 2 2 5"/></svg></span>
-            <h3 class="feature-title">No login. BYO API.</h3>
-            <p class="feature-copy">No account, no cloud, no proxy. Claude, GPT, Gemini, Mistral, Groq, local Ollama &mdash; your keys, your data, your call.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FAQ -->
-    <section class="faq-section" id="faq">
-      <div class="container">
-        <div class="section-head-center">
-          <p class="section-label">FAQ</p>
-          <h2 class="section-title">Anticipated questions.</h2>
-        </div>
-
-        <div class="faq-list">
-          <details class="faq-item">
-            <summary>What makes AFX different from a regular AI chat sidebar?<span class="faq-chevron">+</span></summary>
-            <div class="faq-answer">
-              <p>A chat sidebar is one surface. AFX pairs it with a <strong>workbench</strong> &mdash; a seven-tab bottom panel that tracks your features, specs, tasks, and journal &mdash; plus <strong>Focus modes</strong> tuned for writing specs, designs, and research. Context lives across sessions, and the agent builds what you meant instead of what you typed.</p>
-            </div>
-          </details>
-
-          <details class="faq-item">
-            <summary>Which AI providers can I use?<span class="faq-chevron">+</span></summary>
-            <div class="faq-answer">
-              <p>28+ out of the box: Anthropic, OpenAI, Google, Mistral, Groq, DeepSeek, xAI, local Ollama and LM Studio, and others. The agent engine is forked from <a href="https://github.com/RooVetGit/Roo-Code" style="color: var(--iris);">Roo Code</a>, so anything Roo supports, AFX supports.</p>
-            </div>
-          </details>
-
-          <details class="faq-item">
-            <summary>Where does my code or data live?<span class="faq-chevron">+</span></summary>
-            <div class="faq-answer">
-              <p>In your repo, on your machine. AFX has <strong>no cloud backend</strong> &mdash; no login, no signup, nothing leaves your editor except the calls you explicitly make to your chosen AI provider using your own API key. Journals, boards, and specs are all plain markdown files checked into your repo.</p>
-            </div>
-          </details>
-
-          <details class="faq-item">
-            <summary>Can I use AFX without the VS Code extension?<span class="faq-chevron">+</span></summary>
-            <div class="faq-answer">
-              <p>Yes. The AFX Workflow is a standalone <code>afx</code> CLI and a set of agent skills you drop into any repo. It works with any AI coding agent that reads markdown &mdash; specs and journals are just plain text files. The VS Code extension adds the visual workbench on top, but it's entirely optional.</p>
-            </div>
-          </details>
-
-          <details class="faq-item">
-            <summary>Is there a learning curve?<span class="faq-chevron">+</span></summary>
-            <div class="faq-answer">
-              <p>If you already write markdown, not really. Scaffold a feature with <code>/afx-scaffold spec &lt;name&gt;</code>, answer a few prompts, and the agent fills in the spec. From there, it's chat as usual &mdash; with the workbench keeping everyone honest.</p>
-            </div>
-          </details>
-
-          <details class="faq-item">
-            <summary>Will AFX always be free?<span class="faq-chevron">+</span></summary>
-            <div class="faq-answer">
-              <p>Yes. The core extension is open source under Apache 2.0 and stays free. A hosted tier may come later for teams that want cross-repo syncing or shared boards &mdash; but the local-first, BYO-key, no-account experience is permanent.</p>
-            </div>
-          </details>
-        </div>
-      </div>
-    </section>
-
-    <!-- Quickstart -->
-    <section id="quickstart" class="quickstart">
-      <div class="container">
-        <p class="section-label">Get started</p>
-        <h2 class="section-title">Three steps to your first spec.</h2>
-        <p class="section-copy" style="margin: 0 auto; color: var(--text-secondary);">
-          Start blank, or drop a working example into your repo. Under two minutes either way.
-        </p>
-
-        <div class="qs-tabs" role="tablist" aria-label="Quickstart path">
-          <button class="qs-tab is-active" role="tab" aria-selected="true" data-qs="scaffold">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-            Scaffold a new spec
-          </button>
-          <button class="qs-tab" role="tab" aria-selected="false" data-qs="example">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
-            Try an example
-          </button>
-        </div>
-
-        <!-- Path A — Scaffold -->
-        <div class="qs-panel is-active" data-qs-panel="scaffold" role="tabpanel">
-          <div class="quickstart-grid">
-            <div class="step-card">
-              <p class="step-number">STEP 01</p>
-              <p class="step-label">Install the AgenticFlowX extension</p>
-              <p class="step-copy">From the VS Code Marketplace. On first launch, set your Provider in Settings (OpenAI, Claude, etc.).</p>
-              <a href="https://marketplace.visualstudio.com/items?itemName=AgenticFlowX.agenticflowx" class="step-action" target="_blank" rel="noopener noreferrer">
-                VS Code Marketplace
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-              </a>
-            </div>
-            <div class="step-card">
-              <p class="step-number">STEP 02</p>
-              <p class="step-label">Install AFX skills <span class="step-required">required</span></p>
-              <p class="step-copy">Without skills, the spec workflow, slash-commands, and the bottom panel stay locked. Works with any AI coding agent.</p>
-              <div class="install-tabs" style="margin-top: 12px;">
-                <div class="tab-buttons" style="display: flex; gap: 4px; margin-bottom: 8px;">
-                  <button class="tab-btn active" data-tab="prompt" style="padding: 6px 12px; border: 1px solid var(--border); background: var(--bg-secondary); border-radius: 6px 6px 0 0; cursor: pointer; font-size: 0.8em;">Prompt-based</button>
-                  <button class="tab-btn" data-tab="cli" style="padding: 6px 12px; border: 1px solid var(--border); background: transparent; border-radius: 6px 6px 0 0; cursor: pointer; font-size: 0.8em;">CLI</button>
-                </div>
-                <div class="tab-content" data-tab-content="prompt">
-                  <div class="install-prompt-block">
-                    <p class="install-prompt-label">Your agent — paste this:</p>
-                    <p class="install-prompt-lead">Install AFX (AgenticFlowX) in this project. Source: github.com/AgenticFlowX/afx (Apache 2.0, open source).</p>
-                    <p class="install-prompt-line">Run these commands <strong>in order</strong>:</p>
-                    <p class="install-prompt-line">1. <code>curl -o /tmp/afx-install.sh -sL https://raw.githubusercontent.com/AgenticFlowX/afx/main/afx-cli</code></p>
-                    <p class="install-prompt-line">2. <code>bash /tmp/afx-install.sh .</code></p>
-                    <p class="install-prompt-line">After step 2, read the installer output and tell me which skills were installed. Do NOT run <code>/afx-hello</code> or any <code>/afx-*</code> command — those only work inside the AFX chat panel, which I'll open myself. If you can't execute bash, show me the commands so I can run them.</p>
-                    <p class="install-prompt-note">Installs to <code>.claude/skills/</code> and <code>.agents/skills/</code>. After install, open the AFX chat and run <code>/afx-hello</code> to verify. If your agent refuses the prompt, use the CLI tab above.</p>
-                    <button class="copy-btn install-prompt-copy"
-                            data-copy-btn
-                            data-cmd="Install AFX (AgenticFlowX) in this project. Source: github.com/AgenticFlowX/afx (Apache 2.0, open source). Run these commands IN ORDER: 1) curl -o /tmp/afx-install.sh -sL https://raw.githubusercontent.com/AgenticFlowX/afx/main/afx-cli  2) bash /tmp/afx-install.sh .  After step 2, read the installer output and tell me which skills were installed. Do NOT run /afx-hello or any /afx-* command — those only work inside the AFX chat panel, which I'll open myself. If you can't execute bash, show me the commands so I can run them."
-                            aria-label="Copy prompt to clipboard">copy prompt</button>
-                  </div>
-                </div>
-                <div class="tab-content" data-tab-content="cli" hidden>
-                  <p style="font-size: 0.8em; margin-bottom: 8px; opacity: 0.8;">Run from your project directory:</p>
-                  <div class="code-block">
-                    <code data-cmd>curl -sL https://raw.githubusercontent.com/AgenticFlowX/afx/main/afx-cli | bash -s -- .</code>
-                    <button class="copy-btn" data-copy-btn aria-label="Copy to clipboard">copy</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="step-card">
-              <p class="step-number">STEP 03</p>
-              <p class="step-label">Scaffold your first spec</p>
-              <p class="step-copy">In the AFX chat, name the feature. Focus mode drafts a spec, a design, and tasks — pinned to your Workbench.</p>
-              <div class="code-block">
-                <code data-cmd>/afx-scaffold spec my-first-feature</code>
-                <button class="copy-btn" data-copy-btn aria-label="Copy to clipboard">copy</button>
-              </div>
-            </div>
-          </div>
-          <p class="qs-panel-foot">
-            Want the full command list? Run <code>/afx-help</code> inside the AFX chat once the skills are installed.
-          </p>
-        </div>
-
-        <!-- Path B — Example -->
-        <div class="qs-panel" data-qs-panel="example" role="tabpanel" hidden>
-          <div class="quickstart-grid">
-            <div class="step-card">
-              <p class="step-number">STEP 01</p>
-              <p class="step-label">Install the AgenticFlowX extension</p>
-              <p class="step-copy">Same as Path A &mdash; grab AgenticFlowX from the VS Code Marketplace, then set a Provider in Settings.</p>
-              <a href="https://marketplace.visualstudio.com/items?itemName=AgenticFlowX.agenticflowx" class="step-action" target="_blank" rel="noopener noreferrer">
-                VS Code Marketplace
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-              </a>
-            </div>
-            <div class="step-card">
-              <p class="step-number">STEP 02</p>
-              <p class="step-label">Pull RoomLedger into a folder</p>
-              <p class="step-copy">A real project with spec, design, and tasks already wired up &mdash; ready to build. Drops into any empty folder.</p>
-              <div class="code-block">
-                <code data-cmd>curl -sL https://raw.githubusercontent.com/agenticflowx/afx/main/afx-cli | bash -s -- example full .</code>
-                <button class="copy-btn" data-copy-btn aria-label="Copy to clipboard">copy</button>
-              </div>
-            </div>
-            <div class="step-card">
-              <p class="step-number">STEP 03</p>
-              <p class="step-label">Resume where it left off</p>
-              <p class="step-copy">Open the folder in VS Code, launch the AFX chat, and ask where you are. The example ships with an in-progress ticket.</p>
-              <div class="code-block">
-                <code data-cmd>/afx-next</code>
-                <button class="copy-btn" data-copy-btn aria-label="Copy to clipboard">copy</button>
-              </div>
-            </div>
-          </div>
-          <p class="qs-panel-foot">
-            Three flavors ship with AFX &mdash; <code>starter</code> (spec only), <code>basic</code> (one feature, ready to build), <code>full</code> (four features). List them with <code>afx-cli example list</code>.
-          </p>
         </div>
       </div>
     </section>
@@ -2178,10 +1457,9 @@ type: SPEC
     <!-- Closing CTA -->
     <section class="closing">
       <div class="container">
-        <h2 class="closing-title">Stop coding faster.<br>Start coding the <em style="font-style: italic; color: var(--accent);">right thing</em>.</h2>
+        <h2 class="closing-title">pi.dev for coding.<br>AgenticFlowX for the <a href="https://github.com/AgenticFlowX/afx?tab=readme-ov-file#afx-agenticflowx" class="text-link" target="_blank" rel="noopener noreferrer">workflow</a>.</h2>
         <p class="closing-copy">
-          AFX is open source and in alpha. No login, no signup, no cloud &mdash;
-          just install, bring your own Provider, and your feedback shapes the roadmap.
+          Open source, in alpha. Use the extension with pi.dev, and expect things to keep changing.
         </p>
         <div class="hero-ctas">
           <a href="https://marketplace.visualstudio.com/items?itemName=AgenticFlowX.agenticflowx" class="btn-primary" target="_blank" rel="noopener noreferrer">
@@ -2203,190 +1481,247 @@ type: SPEC
     <div class="container footer-inner">
       <ul class="footer-links">
         <li><a href="https://github.com/AgenticFlowX/agenticflowx" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-        <li><a href="https://github.com/AgenticFlowX/afx" target="_blank" rel="noopener noreferrer">AFX Workflow</a></li>
+        <li><a href="https://pi.dev" target="_blank" rel="noopener noreferrer">pi.dev</a></li>
+        <li><a href="https://github.com/AgenticFlowX/afx?tab=readme-ov-file#afx-agenticflowx" target="_blank" rel="noopener noreferrer">AgenticFlowX Workflow</a></li>
         <li><a href="https://marketplace.visualstudio.com/items?itemName=AgenticFlowX.agenticflowx" target="_blank" rel="noopener noreferrer">Marketplace</a></li>
         <li><a href="https://github.com/AgenticFlowX/agenticflowx/blob/main/PRIVACY.md" target="_blank" rel="noopener noreferrer">Privacy</a></li>
       </ul>
-      <p class="footer-copy">Apache 2.0 &middot; AgenticFlowX &middot; Agent engine forked from <a href="https://github.com/RooVetGit/Roo-Code" target="_blank" rel="noopener noreferrer">Roo Code</a></p>
+      <p class="footer-copy">Apache 2.0 &middot; AgenticFlowX</p>
     </div>
   </footer>
 
+  <!-- Lightbox -->
+  <div class="lightbox" data-lightbox role="dialog" aria-modal="true" aria-label="Image preview">
+    <button class="lightbox-close" type="button" aria-label="Close preview">&times;</button>
+    <img alt="">
+  </div>
+
   <script>
-    // Copy any code-block command — resolves target relative to the clicked button
-    (function() {
-      document.querySelectorAll('[data-copy-btn]').forEach(function(btn) {
-        btn.addEventListener('click', function() {
-          var code = (btn.hasAttribute('data-cmd') ? btn : null) || btn.parentElement.querySelector('[data-cmd]') || btn.parentElement.querySelector('code');
-          if (!code) return;
-          var text = code.getAttribute('data-cmd') || code.textContent;
-          if (!navigator.clipboard) return;
-          navigator.clipboard.writeText(text).then(function() {
-            var prev = btn.textContent;
-            btn.textContent = 'copied!';
-            setTimeout(function() { btn.textContent = prev; }, 2000);
-          });
-        });
-      });
+    (function () {
+      var slideshow = document.querySelector('[data-slideshow]');
+      if (!slideshow) return;
 
-      // Tab switching for install options
-      document.querySelectorAll('.tab-btn').forEach(function(btn) {
-        btn.addEventListener('click', function() {
-          var tabName = btn.getAttribute('data-tab');
-          var container = btn.closest('.install-tabs');
-          container.querySelectorAll('.tab-btn').forEach(function(b) {
-            b.classList.remove('active');
-            b.style.background = 'transparent';
-          });
-          container.querySelectorAll('.tab-content').forEach(function(c) {
-            c.hidden = true;
-          });
-          btn.classList.add('active');
-          btn.style.background = 'var(--bg-secondary)';
-          container.querySelector('[data-tab-content="' + tabName + '"]').hidden = false;
-        });
-      });
-    })();
+      var slides = slideshow.querySelectorAll('.hero-slide');
+      var tabs = slideshow.querySelectorAll('.hero-slide-dot');
+      var label = slideshow.querySelector('.hero-slide-label');
+      var caption = slideshow.querySelector('.hero-slide-caption');
+      var rotateBtn = slideshow.querySelector('[data-rotate-control]');
+      if (!slides.length) return;
 
-    // Quickstart path switcher (Scaffold vs Example)
-    (function() {
-      var tabs = document.querySelectorAll('.qs-tab');
-      var panels = document.querySelectorAll('.qs-panel');
-      if (!tabs.length) return;
-      tabs.forEach(function(tab) {
-        tab.addEventListener('click', function() {
-          var key = tab.getAttribute('data-qs');
-          tabs.forEach(function(t) {
-            var match = t.getAttribute('data-qs') === key;
-            t.classList.toggle('is-active', match);
-            t.setAttribute('aria-selected', match ? 'true' : 'false');
-          });
-          panels.forEach(function(p) {
-            var match = p.getAttribute('data-qs-panel') === key;
-            p.classList.toggle('is-active', match);
-            if (match) { p.removeAttribute('hidden'); } else { p.setAttribute('hidden', ''); }
-          });
-        });
-      });
-    })();
-
-    // Workbench tab switching
-    (function() {
-      var tabs = document.querySelectorAll('.wb-tab');
-      var panels = document.querySelectorAll('.wb-panel');
-
-      function activate(key) {
-        tabs.forEach(function(t) {
-          var match = t.getAttribute('data-wb') === key;
-          t.classList.toggle('is-active', match);
-          t.setAttribute('aria-selected', match ? 'true' : 'false');
-        });
-        panels.forEach(function(p) {
-          p.classList.toggle('is-active', p.getAttribute('data-wb-panel') === key);
-        });
+      var current = 0;
+      for (var i = 0; i < slides.length; i++) {
+        if (slides[i].classList.contains('is-active')) { current = i; break; }
       }
 
-      tabs.forEach(function(tab, idx) {
-        tab.addEventListener('click', function() { activate(tab.getAttribute('data-wb')); });
-        tab.addEventListener('keydown', function(e) {
-          if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
-            e.preventDefault();
-            var dir = e.key === 'ArrowRight' ? 1 : -1;
-            var next = (idx + dir + tabs.length) % tabs.length;
-            tabs[next].focus();
-            activate(tabs[next].getAttribute('data-wb'));
-          }
-        });
-      });
-    })();
+      var timer = null;
+      var interval = 5000;
+      var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var isPlaying = !reduceMotion;
+      var ignorePauses = false;
+      var hovering = false;
+      var focusWithin = false;
 
-    // Sub-switcher (Pipeline timeline/kanban, Documents library/reader)
-    (function() {
-      var subtabs = document.querySelectorAll('.wb-subtab');
-      subtabs.forEach(function(st) {
-        st.addEventListener('click', function() {
-          var parent = st.getAttribute('data-parent');
-          var sub = st.getAttribute('data-sub');
-          var key = parent + '-' + sub;
-          // activate this subtab
-          document.querySelectorAll('.wb-subtab[data-parent="' + parent + '"]').forEach(function(s) {
-            s.classList.toggle('is-active', s === st);
-          });
-          // show matching subshot
-          var panel = document.querySelector('[data-wb-panel="' + parent + '"]');
-          if (!panel) return;
-          panel.querySelectorAll('.wb-subshot').forEach(function(shot) {
-            shot.classList.toggle('is-active', shot.getAttribute('data-subshot') === key);
-          });
-        });
-      });
-    })();
-
-    // @see CodeLens hover preview — mirrors AFX's real in-editor hover card.
-    (function() {
-      var reqs = {
-        'FR-1':     { src: 'spec.md',   label: 'Functional requirement',     text: 'Users log in with email + password.' },
-        'FR-2':     { src: 'spec.md',   label: 'Functional requirement',     text: 'Sessions expire after 24h idle.' },
-        'NFR-1':    { src: 'spec.md',   label: 'Non-functional requirement', text: 'Reset tokens are single-use.' },
-        'DES-AUTH': { src: 'design.md', label: 'Design section',             text: 'Authentication flow — token issuance, rotation, and revocation.' }
-      };
-
-      var tip = document.createElement('div');
-      tip.className = 'req-tooltip';
-      tip.setAttribute('role', 'tooltip');
-      tip.innerHTML =
-        '<div class="req-tooltip-head">' +
-          '<span class="req-tooltip-id"></span>' +
-          '<span class="req-tooltip-src"></span>' +
-        '</div>' +
-        '<div class="req-tooltip-body"></div>';
-      document.body.appendChild(tip);
-
-      var elId   = tip.querySelector('.req-tooltip-id');
-      var elSrc  = tip.querySelector('.req-tooltip-src');
-      var elBody = tip.querySelector('.req-tooltip-body');
-
-      function showTip(target) {
-        var id = target.getAttribute('data-ref');
-        var data = reqs[id];
-        if (!data) return;
-        elId.textContent   = id;
-        elSrc.textContent  = data.label + ' · ' + data.src;
-        elBody.textContent = data.text;
-
-        // Position first (off-screen measure), then pin
-        tip.style.left = '-9999px';
-        tip.style.top  = '-9999px';
-        tip.classList.add('is-visible');
-        var tipRect = tip.getBoundingClientRect();
-        var rect    = target.getBoundingClientRect();
-        var left    = Math.min(window.innerWidth - tipRect.width - 8, Math.max(8, rect.left - 12));
-        var top     = rect.bottom + 10;
-        // flip above if there's no room below
-        if (top + tipRect.height > window.innerHeight - 8 && rect.top - tipRect.height - 14 > 8) {
-          top = rect.top - tipRect.height - 14;
+      function stopTimer() {
+        if (timer) {
+          clearInterval(timer);
+          timer = null;
         }
-        tip.style.left = left + 'px';
-        tip.style.top  = top + 'px';
-
-        var def = document.querySelector('[data-def="' + id + '"]');
-        if (def) def.classList.add('is-highlight');
       }
 
-      function hideTip() {
-        tip.classList.remove('is-visible');
-        document.querySelectorAll('[data-def].is-highlight').forEach(function(el) {
-          el.classList.remove('is-highlight');
+      function updateLiveMode() {
+        var mode = isPlaying ? 'off' : 'polite';
+        if (label) label.setAttribute('aria-live', mode);
+        if (caption) caption.setAttribute('aria-live', mode);
+      }
+
+      function updateRotateControl() {
+        if (!rotateBtn) return;
+        if (isPlaying) {
+          rotateBtn.setAttribute('aria-label', 'Stop automatic slide show');
+          rotateBtn.textContent = 'Pause';
+        } else {
+          rotateBtn.setAttribute('aria-label', 'Start automatic slide show');
+          rotateBtn.textContent = 'Play';
+        }
+      }
+
+      function go(next) {
+        var n = ((next % slides.length) + slides.length) % slides.length;
+        if (n === current) return;
+        slides[current].classList.remove('is-active');
+        tabs[current].classList.remove('is-active');
+        tabs[current].setAttribute('aria-selected', 'false');
+        tabs[current].setAttribute('tabindex', '-1');
+        slides[n].classList.add('is-active');
+        tabs[n].classList.add('is-active');
+        tabs[n].setAttribute('aria-selected', 'true');
+        tabs[n].setAttribute('tabindex', '0');
+        if (label) label.textContent = slides[n].dataset.label || '';
+        if (caption) caption.textContent = slides[n].dataset.caption || '';
+        current = n;
+      }
+
+      function startTimer() {
+        if (!isPlaying || reduceMotion) return;
+        if (hovering && !ignorePauses) return;
+        if (document.hidden) return;
+        stopTimer();
+        timer = setInterval(function () { go(current + 1); }, interval);
+      }
+
+      function refreshRotation() {
+        updateLiveMode();
+        updateRotateControl();
+        if (isPlaying) startTimer(); else stopTimer();
+      }
+
+      Array.prototype.forEach.call(tabs, function (tab, i) {
+        tab.addEventListener('click', function () {
+          go(i);
+        });
+
+        tab.addEventListener('keydown', function (e) {
+          var key = e.key;
+          var nextIndex = null;
+          if (key === 'ArrowRight') nextIndex = (i + 1) % tabs.length;
+          else if (key === 'ArrowLeft') nextIndex = (i - 1 + tabs.length) % tabs.length;
+          else if (key === 'Home') nextIndex = 0;
+          else if (key === 'End') nextIndex = tabs.length - 1;
+          else if (key === 'Enter' || key === ' ') { go(i); return; }
+          else return;
+
+          e.preventDefault();
+          tabs[nextIndex].focus();
+          go(nextIndex);
+        });
+      });
+
+      if (rotateBtn) {
+        rotateBtn.addEventListener('click', function () {
+          isPlaying = !isPlaying;
+          ignorePauses = isPlaying;
+          hovering = false;
+          refreshRotation();
         });
       }
 
-      document.querySelectorAll('[data-ref]').forEach(function(el) {
-        el.addEventListener('mouseenter', function(e) { showTip(e.currentTarget); });
-        el.addEventListener('mouseleave', hideTip);
-        el.addEventListener('focus',      function(e) { showTip(e.currentTarget); });
-        el.addEventListener('blur',       hideTip);
+      slideshow.addEventListener('mouseenter', function () {
+        hovering = true;
+        if (!ignorePauses) stopTimer();
       });
 
-      window.addEventListener('scroll', hideTip, { passive: true });
+      slideshow.addEventListener('mouseleave', function () {
+        hovering = false;
+        if (!ignorePauses) startTimer();
+      });
+
+      slideshow.addEventListener('focusin', function () {
+        if (focusWithin) return;
+        focusWithin = true;
+        if (!isPlaying || ignorePauses) return;
+        isPlaying = false;
+        refreshRotation();
+      });
+
+      slideshow.addEventListener('focusout', function (e) {
+        if (slideshow.contains(e.relatedTarget)) return;
+        focusWithin = false;
+      });
+
+      document.addEventListener('visibilitychange', function () {
+        if (document.hidden) stopTimer(); else startTimer();
+      });
+
+      updateLiveMode();
+      updateRotateControl();
+      startTimer();
+    })();
+
+    (function () {
+      var lightbox = document.querySelector('[data-lightbox]');
+      if (!lightbox) return;
+      var lbImg = lightbox.querySelector('img');
+      var closeBtn = lightbox.querySelector('.lightbox-close');
+      var main = document.querySelector('main');
+      var footer = document.querySelector('footer');
+      var lastFocused = null;
+
+      function setInert(node, inert) {
+        if (!node) return;
+        if ('inert' in node) node.inert = inert;
+      }
+
+      function focusableIn(node) {
+        if (!node) return [];
+        return Array.prototype.slice.call(node.querySelectorAll(
+          'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex=\"-1\"])'
+        )).filter(function (el) { return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length); });
+      }
+
+      function open(src, alt, opener) {
+        lbImg.src = src;
+        lbImg.alt = alt || '';
+        lightbox.classList.add('is-active');
+        document.body.style.overflow = 'hidden';
+        lastFocused = opener || document.activeElement;
+        setInert(main, true);
+        setInert(footer, true);
+        if (closeBtn) closeBtn.focus();
+      }
+
+      function close() {
+        lightbox.classList.remove('is-active');
+        document.body.style.overflow = '';
+        setInert(main, false);
+        setInert(footer, false);
+        setTimeout(function () { if (!lightbox.classList.contains('is-active')) lbImg.src = ''; }, 250);
+        if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+      }
+
+      function bind(frame) {
+        frame.addEventListener('click', function (e) {
+          if (e.target.closest('a')) return;
+          var active = frame.querySelector('.hero-slide.is-active img');
+          var img = active || frame.querySelector('img');
+          if (img && img.src) open(img.src, img.alt, frame);
+        });
+
+        if (frame.getAttribute('role') === 'button') {
+          frame.addEventListener('keydown', function (e) {
+            if (e.key !== 'Enter' && e.key !== ' ') return;
+            e.preventDefault();
+            var active = frame.querySelector('.hero-slide.is-active img');
+            var img = active || frame.querySelector('img');
+            if (img && img.src) open(img.src, img.alt, frame);
+          });
+        }
+      }
+
+      Array.prototype.forEach.call(document.querySelectorAll('.diff-shot-frame'), bind);
+      Array.prototype.forEach.call(document.querySelectorAll('.hero-shot-frame'), bind);
+
+      lightbox.addEventListener('click', function (e) {
+        if (e.target === lightbox || e.target === closeBtn || e.target.closest('.lightbox-close')) close();
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && lightbox.classList.contains('is-active')) close();
+      });
+
+      lightbox.addEventListener('keydown', function (e) {
+        if (e.key !== 'Tab' || !lightbox.classList.contains('is-active')) return;
+        var focusables = focusableIn(lightbox);
+        if (!focusables.length) { e.preventDefault(); return; }
+        var first = focusables[0];
+        var last = focusables[focusables.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      });
     })();
   </script>
 </body>

@@ -1099,6 +1099,78 @@
       .facts-grid { grid-template-columns: 1fr; gap: 2rem; }
     }
 
+    /* Headless / CLI */
+    .headless {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+    }
+
+    .headless-card {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 2rem 2.25rem;
+      background: var(--bg-raised);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    .headless-label {
+      font-size: 0.75rem;
+      color: var(--text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.75rem;
+    }
+
+    .headless-code {
+      font-family: var(--mono);
+      font-size: 0.875rem;
+      background: var(--bg-element);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.875rem 1rem;
+      overflow-x: auto;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+
+    .headless-code code { background: none; padding: 0; font-family: inherit; }
+
+    .headless-meta {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      margin-bottom: 1.75rem;
+    }
+
+    .headless-agents-label {
+      font-size: 0.75rem;
+      color: var(--text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.625rem;
+    }
+
+    .headless-agents {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      list-style: none;
+    }
+
+    .headless-agents li {
+      font-size: 0.8125rem;
+      color: var(--text-secondary);
+      background: var(--bg-element);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.25rem 0.75rem;
+    }
+
+    @media (max-width: 767px) {
+      .headless-card { padding: 1.5rem 1.25rem; }
+      .headless-code { font-size: 0.75rem; }
+    }
+
     /* Responsive */
     @media (max-width: 960px) {
       .surfaces-grid { grid-template-columns: 1fr; }
@@ -1450,6 +1522,35 @@
             <h3>What&rsquo;s the current status, and is it free?</h3>
             <p>Public alpha. The v2 rewrite is usable now, but provider settings, modes, and examples are still moving. AgenticFlowX is open source under Apache 2.0.</p>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Headless / CLI -->
+    <section class="headless" id="headless">
+      <div class="container">
+        <div class="section-head-center">
+          <p class="section-label">Headless</p>
+          <h2 class="section-title">No VS Code? Run the same workflow elsewhere.</h2>
+          <p class="section-copy">
+            AgenticFlowX is a VS Code extension. The workflow behind it &mdash; specs, designs, tasks, journals, traceability &mdash; also runs headless via the AFX CLI. Same skills, same files, same rules.
+          </p>
+        </div>
+
+        <div class="headless-card">
+          <p class="headless-label">One-line install (from your project directory)</p>
+          <pre class="headless-code"><code>curl -sL https://raw.githubusercontent.com/AgenticFlowX/afx/main/afx-cli | bash -s -- .</code></pre>
+          <p class="headless-meta">
+            <a href="https://github.com/AgenticFlowX/afx" class="text-link" target="_blank" rel="noopener noreferrer">CLI source &amp; docs</a>
+          </p>
+
+          <p class="headless-agents-label">Tested with</p>
+          <ul class="headless-agents">
+            <li>Claude Code</li>
+            <li>GitHub Codex</li>
+            <li>Gemini CLI</li>
+            <li>GitHub Copilot</li>
+          </ul>
         </div>
       </div>
     </section>

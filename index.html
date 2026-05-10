@@ -1211,13 +1211,13 @@
           <span class="hero-status-dot" aria-hidden="true"></span>
           <span class="hero-status-label">Public alpha</span>
           <span class="hero-status-rule" aria-hidden="true"></span>
-          <span class="hero-status-version">v2 rewrite</span>
+          <span class="hero-status-version">Apache 2.0</span>
         </div>
         <p class="hero-wordmark">AgenticFlowX</p>
-        <h1 class="hero-tagline">A VS Code <a href="https://github.com/AgenticFlowX/afx?tab=readme-ov-file#afx-agenticflowx" class="text-link" target="_blank" rel="noopener noreferrer">workflow</a> layer around <a href="https://pi.dev" target="_blank" rel="noopener noreferrer"><em>pi.dev</em></a>.</h1>
+        <h1 class="hero-tagline">Your AI coding agent, with the <a href="https://github.com/AgenticFlowX/afx?tab=readme-ov-file#afx-agenticflowx" class="text-link" target="_blank" rel="noopener noreferrer">workflow</a> already wired up.</h1>
         <p class="hero-desc">
-          Chat-first by default. Repo-backed notes, tasks, and docs you can actually see.
-          And the <em>spec-driven</em> workflow &mdash; sure, the whole buzzword. Spec &rarr; design &rarr; tasks, refined as you go. The usual ceremony, just faster. Opt-in only.
+          Chat-first by default. Spec-driven when the work calls for it.
+          Same chat, same files, same panels &mdash; the workflow lives in your repo as plain markdown, not a separate database. Backed by <a href="https://pi.dev" target="_blank" rel="noopener noreferrer"><em>pi.dev</em></a> at the moment, swappable in principle.
         </p>
         <div class="hero-ctas">
           <a href="https://marketplace.visualstudio.com/items?itemName=AgenticFlowX.agenticflowx" class="btn-primary" target="_blank" rel="noopener noreferrer">
@@ -1232,7 +1232,7 @@
         <div class="hero-meta">
           <span>Open source</span>
           <span>VS Code extension</span>
-          <span>pi.dev coding agent</span>
+          <span>Code &middot; Explore &middot; Spec modes</span>
           <span>Repo-native files</span>
         </div>
       </div>
@@ -1274,6 +1274,9 @@
               <div class="hero-slide" role="tabpanel" id="hero-panel-8" aria-labelledby="hero-tab-8" data-label="Map" data-caption="How spec, design, tasks, and journal connect.">
                 <img src="assets/workflow-mindmap.webp" alt="AgenticFlowX feature workflow mindmap" loading="lazy">
               </div>
+              <div class="hero-slide" role="tabpanel" id="hero-panel-9" aria-labelledby="hero-tab-9" data-label="Modes" data-caption="Code, Explore, Spec — switch lanes at the chatbox.">
+                <img src="assets/vscode-tab-chat-mode-picker.webp" alt="Mode picker open at the chatbox showing Code (default), Explore (experimental), and Spec (SDD)" loading="lazy">
+              </div>
             </div>
           </div>
           <div class="hero-slide-controls">
@@ -1290,6 +1293,7 @@
               <button class="hero-slide-dot" type="button" role="tab" id="hero-tab-6" aria-label="Notes" aria-controls="hero-panel-6" aria-selected="false" tabindex="-1"></button>
               <button class="hero-slide-dot" type="button" role="tab" id="hero-tab-7" aria-label="Trace" aria-controls="hero-panel-7" aria-selected="false" tabindex="-1"></button>
               <button class="hero-slide-dot" type="button" role="tab" id="hero-tab-8" aria-label="Map" aria-controls="hero-panel-8" aria-selected="false" tabindex="-1"></button>
+              <button class="hero-slide-dot" type="button" role="tab" id="hero-tab-9" aria-label="Modes" aria-controls="hero-panel-9" aria-selected="false" tabindex="-1"></button>
             </div>
           </div>
         </div>
@@ -1301,10 +1305,11 @@
       <div class="container">
         <div class="section-head-center">
           <p class="section-label">How it works</p>
-          <h2 class="section-title"><a href="https://pi.dev" class="text-link" target="_blank" rel="noopener noreferrer">pi.dev</a> runs the coding. AgenticFlowX owns the <a href="https://github.com/AgenticFlowX/afx?tab=readme-ov-file#afx-agenticflowx" class="text-link" target="_blank" rel="noopener noreferrer">workflow</a>.</h2>
+          <h2 class="section-title">Your coding agent. Plus the <a href="https://github.com/AgenticFlowX/afx?tab=readme-ov-file#afx-agenticflowx" class="text-link" target="_blank" rel="noopener noreferrer">workflow</a> around it.</h2>
           <p class="section-copy">
-            pi.dev handles the coding agent. AgenticFlowX adds the VS Code surface, provider settings,
-            and repo-backed views around it.
+            Backed by <a href="https://pi.dev" class="text-link" target="_blank" rel="noopener noreferrer">pi.dev</a> at the moment, swappable in principle.
+            AgenticFlowX adds the VS Code surface, the mode picker, provider settings, and the
+            repo-backed views around it.
           </p>
         </div>
 
@@ -1313,8 +1318,8 @@
             <p class="surface-role">The coding agent</p>
             <h3 class="surface-brand"><a href="https://pi.dev" target="_blank" rel="noopener noreferrer">pi.dev</a></h3>
             <p class="surface-copy">
-              Day-to-day coding stays in chat. AgenticFlowX runs pi.dev through the Pi CLI or
-              the Pi SDK with API providers &mdash; same chat, same settings, same workbench.
+              Day-to-day coding stays in chat. AFX routes through Pi CLI/RPC if you have it,
+              or the bundled Pi SDK with your provider keys &mdash; same chat, same settings, same workbench.
             </p>
             <ul class="surface-bullets">
               <li>Use your existing Pi setup, or bring your own provider keys</li>
@@ -1342,6 +1347,76 @@
       </div>
     </section>
 
+    <!-- Three modes -->
+    <section id="modes">
+      <div class="container">
+        <div class="section-head-center">
+          <p class="section-label">Three modes</p>
+          <h2 class="section-title">Code, Explore, or Spec &mdash; switch lanes at the chatbox.</h2>
+          <p class="section-copy">
+            Code is the default. Explore is read-only inspection. Spec is for Spec-Driven Development.
+            One keystroke to switch &mdash; <code>&#8984;&#8679;M</code> on macOS, <code>Ctrl+Shift+M</code> on Windows/Linux.
+          </p>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;margin-top:1rem;">
+          <div class="surface-card">
+            <p class="surface-role">Code &middot; default</p>
+            <h3 class="surface-brand">Full access</h3>
+            <p class="surface-copy">
+              Chat-first by default. Repo-backed notes, tasks, and docs you can actually see.
+              Most coding stays here.
+            </p>
+          </div>
+
+          <div class="surface-card">
+            <p class="surface-role">Explore &middot; read-only</p>
+            <h3 class="surface-brand">Inspect, don&rsquo;t edit</h3>
+            <p class="surface-copy">
+              Read-only. Use it to inspect code, trace behavior, and plan changes &mdash; runtime
+              tools are blocked, so the agent can&rsquo;t accidentally edit files or run commands.
+            </p>
+          </div>
+
+          <div class="surface-card">
+            <p class="surface-role">Spec &middot; planning-only</p>
+            <h3 class="surface-brand">Plan before you code</h3>
+            <p class="surface-copy">
+              We&rsquo;ll refine requirements, validate structure, and gate approval &mdash; without
+              touching production code. Same discipline as SDD, lower friction to start.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Spec mode showcase -->
+    <section id="spec-mode" class="two-surfaces">
+      <div class="container">
+        <div class="section-head-center">
+          <p class="section-label">Spec mode</p>
+          <h2 class="section-title">Spec-driven, at the chatbox.</h2>
+          <p class="section-copy">
+            Same discipline as SDD &mdash; <code>spec.md</code> &rarr; <code>design.md</code> &rarr; <code>tasks.md</code>, with a <code>journal.md</code> that survives the session &mdash; lower friction to start.
+            The pipeline strip shows where you are. The action row drives each phase. Approval gates the next.
+          </p>
+        </div>
+
+        <figure style="margin:2.5rem auto 0;max-width:920px;">
+          <div style="border:1px solid var(--border);border-radius:16px;overflow:hidden;background:var(--bg-element);box-shadow:0 18px 48px rgba(0,0,0,0.06);">
+            <img src="assets/vscode-tab-chat-mode-spec.webp" alt="Spec mode active on design.md — the SpecStepper shows 1 Spec ✓ 2 Design ✓ 3 Tasks, with an action row of Refine, Author, Validate, Review, Approve, and a planning-only composer below" loading="lazy" style="display:block;width:100%;height:auto;">
+          </div>
+          <figcaption style="margin-top:1rem;text-align:center;font-family:var(--mono);font-size:0.75rem;letter-spacing:0.04em;color:var(--text-muted);">
+            Spec mode on <code>design.md</code> &mdash; pipeline strip, <em>Refine / Author / Validate / Review / Approve</em>, planning-only composer. <code>&#8984;&#8679;M</code> to switch lanes.
+          </figcaption>
+        </figure>
+
+        <p style="margin-top:2rem;text-align:center;font-size:0.875rem;color:var(--text-muted);max-width:640px;margin-left:auto;margin-right:auto;">
+          Opt-in only. Most coding stays in chat. Reach for Spec mode when the work needs traceability between intent, design, tasks, and code &mdash; or when you want a paper trail that survives Friday.
+        </p>
+      </div>
+    </section>
+
     <!-- Three things you'll notice -->
     <section class="diff" id="differentiators">
       <div class="container">
@@ -1352,17 +1427,19 @@
         <div class="diff-rows">
           <div class="diff-row">
             <figure class="diff-shot">
-              <button class="diff-shot-frame" type="button" aria-label="Open preview: Provider keys">
-                <img src="assets/settings.webp" alt="AgenticFlowX Providers settings panel" loading="lazy">
-                <span class="diff-pin" style="left:24%;top:22%;">Provider keys</span>
+              <button class="diff-shot-frame" type="button" aria-label="Open preview: Provider keys and presets">
+                <img src="assets/vscode-tab-settings.webp" alt="AgenticFlowX Settings — Models tab showing 22 providers, 3 ready, 46 models, with provider rows and an Anthropic API key field" loading="lazy">
+                <span class="diff-pin" style="left:18%;top:32%;">22 providers</span>
               </button>
             </figure>
             <div class="diff-text">
               <p class="diff-num">01 &mdash; Settings</p>
               <h3 class="diff-title">Settings you can read in a glance.</h3>
               <p class="diff-copy">
-                Provider keys live in VS Code SecretStorage. Runtime knobs sit in the standard Settings UI.
-                No JSON to edit by hand.
+                Provider keys live in VS Code SecretStorage &mdash; never logged, never echoed.
+                Runtime knobs sit in the standard Settings UI. Custom Models presets cover Ollama,
+                LM Studio, vLLM, OpenRouter, Vercel AI Gateway, Moonshot/Kimi, and any
+                OpenAI-compatible endpoint. No JSON to edit by hand.
               </p>
             </div>
           </div>
@@ -1387,16 +1464,17 @@
           <div class="diff-row">
             <figure class="diff-shot">
               <button class="diff-shot-frame" type="button" aria-label="Open preview: @see to spec">
-                <img src="assets/codelens-spec.webp" alt="Editor showing @see CodeLens annotations linked to spec.md" loading="lazy">
-                <span class="diff-pin" style="left:14%;top:18%;">@see &rarr; spec</span>
+                <img src="assets/codelens-markdown.webp" alt="Editor showing @see CodeLens hover preview — a notes.md file with an @see annotation, and the linked design.md DES-EVENT-FORM section open as an inline preview" loading="lazy">
+                <span class="diff-pin" style="left:38%;top:22%;">@see &rarr; spec</span>
               </button>
             </figure>
             <div class="diff-text">
               <p class="diff-num">03 &mdash; Integration</p>
               <h3 class="diff-title">Editor-native, not file-adjacent.</h3>
               <p class="diff-copy">
-                CodeLens links code back to spec. Context menus reach the workflow.
-                The files stay plain markdown &mdash; the editor just knows about them.
+                <code>@see</code> CodeLens links code back to spec. Hover any annotation
+                to preview the linked requirement or design section inline. Context menus reach
+                the workflow. The files stay plain markdown &mdash; the editor just knows about them.
               </p>
             </div>
           </div>
@@ -1411,7 +1489,9 @@
           <p class="section-label">Providers</p>
           <h2 class="section-title">Two routes. Same models.</h2>
           <p class="section-copy">
-            Whether or not you have <a href="https://pi.dev" class="text-link" target="_blank" rel="noopener noreferrer">pi.dev</a> installed, AgenticFlowX uses Pi to reach the providers below.
+            Backed by <a href="https://pi.dev" class="text-link" target="_blank" rel="noopener noreferrer">pi.dev</a> at the moment.
+            Whether or not you have Pi installed, AgenticFlowX uses Pi to reach the providers below &mdash;
+            and the AFX skills also run standalone outside the extension with Claude Code, Codex, Gemini CLI, or Copilot Chat.
           </p>
         </div>
 
@@ -1490,6 +1570,18 @@
             <span class="prov">Z.ai</span>
             <span class="prov">Ollama<em>local</em></span>
           </p>
+          <p class="provider-prose-label" style="margin-top:1.5rem;">Plus presets for OpenAI-compatible endpoints &amp; local runtimes</p>
+          <p class="provider-prose-list">
+            <span class="prov">Ollama<em>local</em></span>
+            <span class="prov">LM Studio<em>local</em></span>
+            <span class="prov">vLLM<em>local</em></span>
+            <span class="prov">OpenRouter</span>
+            <span class="prov">Vercel AI Gateway</span>
+            <span class="prov">Moonshot / Kimi</span>
+            <span class="prov">Anthropic-compatible proxy</span>
+            <span class="prov">Google AI Studio</span>
+            <span class="prov">Custom (OpenAI-compatible)</span>
+          </p>
         </div>
       </div>
     </section>
@@ -1520,7 +1612,7 @@
 
           <div class="fact">
             <h3>What&rsquo;s the current status, and is it free?</h3>
-            <p>Public alpha. The v2 rewrite is usable now, but provider settings, modes, and examples are still moving. AgenticFlowX is open source under Apache 2.0.</p>
+            <p>Public alpha. Stable enough for daily use; provider settings, modes, and examples are still moving. AgenticFlowX is open source under Apache 2.0. No vendor billing &mdash; you bring your own provider keys (or your own coding agent).</p>
           </div>
         </div>
       </div>
@@ -1558,9 +1650,9 @@
     <!-- Closing CTA -->
     <section class="closing">
       <div class="container">
-        <h2 class="closing-title">pi.dev for coding.<br>AgenticFlowX for the <a href="https://github.com/AgenticFlowX/afx?tab=readme-ov-file#afx-agenticflowx" class="text-link" target="_blank" rel="noopener noreferrer">workflow</a>.</h2>
+        <h2 class="closing-title">Your AI coding agent.<br>With the <a href="https://github.com/AgenticFlowX/afx?tab=readme-ov-file#afx-agenticflowx" class="text-link" target="_blank" rel="noopener noreferrer">workflow</a> already wired up.</h2>
         <p class="closing-copy">
-          Open source, in alpha. Use the extension with pi.dev, and expect things to keep changing.
+          Open source. Apache 2.0. Stable enough for daily use; modes and examples still moving.
         </p>
         <div class="hero-ctas">
           <a href="https://marketplace.visualstudio.com/items?itemName=AgenticFlowX.agenticflowx" class="btn-primary" target="_blank" rel="noopener noreferrer">

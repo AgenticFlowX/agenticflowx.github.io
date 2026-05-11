@@ -10,18 +10,18 @@
     })(window, document, "clarity", "script", "w6nnwbv1pd");
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AgenticFlowX - pi.dev coding agent + AgenticFlowX workflow in VS Code.</title>
-  <meta name="description" content="AgenticFlowX uses pi.dev as its coding agent and adds the AgenticFlowX workflow layer: provider settings, repo-native specs/tasks/journals, editor commands, and workbench views.">
+  <title>AgenticFlowX - Low-barrier spec-driven AI coding in VS Code.</title>
+  <meta name="description" content="Install one VS Code extension for AI coding chat, Code/Explore/Spec modes, clickable workflow steps, and repo-owned markdown files for spec-driven development.">
   <link rel="canonical" href="https://agenticflowx.github.io/">
-  <meta property="og:title" content="AgenticFlowX - pi.dev coding agent + AgenticFlowX workflow in VS Code.">
-  <meta property="og:description" content="pi.dev as the coding agent, AgenticFlowX as the VS Code workflow layer for providers, repo files, editor commands, and workbench views.">
+  <meta property="og:title" content="AgenticFlowX - Low-barrier spec-driven AI coding in VS Code.">
+  <meta property="og:description" content="Chat first. Switch to Spec mode when the work needs traceability. One VS Code extension for coding chat, workflow steps, and repo-owned markdown files.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://agenticflowx.github.io">
   <meta property="og:site_name" content="AgenticFlowX">
   <meta property="og:image" content="https://agenticflowx.github.io/assets/main.webp">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="AgenticFlowX - pi.dev coding agent + AgenticFlowX workflow in VS Code.">
-  <meta name="twitter:description" content="pi.dev as the coding agent, AgenticFlowX as the VS Code workflow layer for providers, repo files, editor commands, and workbench views.">
+  <meta name="twitter:title" content="AgenticFlowX - Low-barrier spec-driven AI coding in VS Code.">
+  <meta name="twitter:description" content="Chat first. Switch to Spec mode when the work needs traceability. One VS Code extension for coding chat, workflow steps, and repo-owned markdown files.">
   <meta name="twitter:image" content="https://agenticflowx.github.io/assets/main.webp">
   <meta name="twitter:url" content="https://agenticflowx.github.io">
   <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20512%20512'%3E%3Crect%20width='512'%20height='512'%20fill='%23080c1a'%20rx='80'/%3E%3Ctext%20x='100'%20y='340'%20font-family='system-ui'%20font-weight='800'%20font-size='260'%20fill='%23f4eedd'%3EAF%3C/text%3E%3Ctext%20x='330'%20y='340'%20font-family='system-ui'%20font-weight='800'%20font-size='260'%20fill='%23d4a656'%3EX%3C/text%3E%3C/svg%3E">
@@ -217,6 +217,29 @@
     .hero-tagline a:hover em { color: var(--accent-deep); }
     .hero-tagline a:hover em::after { opacity: 0.55; background: var(--accent-deep); }
 
+    .hero-tagline-mark {
+      position: relative;
+      display: inline-block;
+      color: var(--accent-deep);
+      font-style: italic;
+      white-space: nowrap;
+      padding: 0 0.06em 0.04em;
+      z-index: 0;
+    }
+
+    .hero-tagline-mark::before {
+      content: "";
+      position: absolute;
+      left: -0.06em;
+      right: -0.06em;
+      bottom: 0.02em;
+      height: 0.3em;
+      background: linear-gradient(90deg, rgba(212, 166, 86, 0.18), rgba(143, 107, 45, 0.28));
+      border-radius: 999px;
+      z-index: -1;
+      transform: rotate(-1deg);
+    }
+
     .hero-desc {
       font-size: 1.1875rem;
       color: var(--text-secondary);
@@ -310,177 +333,11 @@
     }
     .btn-secondary:hover { border-color: var(--border-hover); color: var(--text); }
 
-    /* Hero product shot + slideshow */
+    /* Hero product shot */
     .hero-shot {
       margin-top: 3.5rem;
       position: relative;
       z-index: 1;
-    }
-
-    .hero-shot-frame {
-      position: relative;
-      border-radius: 16px;
-      overflow: hidden;
-      border: 1px solid var(--border-hover);
-      background: var(--bg-element);
-      box-shadow:
-        0 1px 0 rgba(255, 251, 237, 0.6) inset,
-        0 30px 80px -28px rgba(20, 27, 53, 0.30),
-        0 12px 32px -10px rgba(20, 27, 53, 0.16);
-    }
-
-    .hero-shot-frame:focus-visible {
-      outline: 2px solid var(--accent-bright);
-      outline-offset: 4px;
-    }
-
-    .hero-shot-titlebar {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 11px 16px;
-      background: var(--bg);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .hero-shot-titlebar .dot {
-      width: 11px;
-      height: 11px;
-      border-radius: 50%;
-    }
-    .hero-shot-titlebar .dot.red { background: var(--ember); }
-    .hero-shot-titlebar .dot.yellow { background: var(--accent); }
-    .hero-shot-titlebar .dot.green { background: var(--moss); }
-
-    .hero-shot-titlebar .titlebar-text {
-      flex: 1;
-      text-align: center;
-      font-size: 0.75rem;
-      font-family: var(--mono);
-      color: var(--text-tertiary);
-      margin-right: 50px;
-    }
-
-    .hero-slides {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 16 / 10;
-      background: var(--bg-subtle);
-    }
-
-    .hero-slide {
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.5s ease-out, visibility 0s linear 0.5s;
-      pointer-events: none;
-    }
-
-    .hero-slide.is-active {
-      opacity: 1;
-      visibility: visible;
-      transition: opacity 0.5s ease-out;
-      pointer-events: auto;
-    }
-
-    .hero-slide img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: top center;
-    }
-
-    .hero-slide-controls {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.625rem;
-      margin-top: 1.5rem;
-    }
-
-    .hero-rotate {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4375rem;
-      font-family: var(--mono);
-      font-size: 0.6875rem;
-      font-weight: 600;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--text-tertiary);
-      background: var(--bg-element);
-      border: 1px solid var(--border);
-      padding: 0.3125rem 0.625rem;
-      border-radius: 999px;
-      cursor: pointer;
-      transition: border-color 0.15s, color 0.15s, background 0.15s;
-    }
-
-    .hero-rotate:hover { border-color: var(--border-hover); color: var(--text); background: var(--bg-raised); }
-
-    .hero-slide-label {
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      font-weight: 600;
-      min-height: 1em;
-    }
-
-    .hero-slide-caption {
-      font-family: var(--sans);
-      font-size: 0.9375rem;
-      color: var(--text-secondary);
-      text-align: center;
-      max-width: 480px;
-      line-height: 1.45;
-      min-height: 1.4em;
-      margin-top: -0.125rem;
-    }
-
-    .hero-slide-caption code,
-    .hero-slide-caption .mono {
-      font-family: var(--mono);
-      font-size: 0.875rem;
-      color: var(--accent);
-      background: var(--accent-dim);
-      padding: 0.0625rem 0.3125rem;
-      border-radius: 3px;
-    }
-
-    .hero-slide-dots {
-      display: flex;
-      gap: 0.4375rem;
-      list-style: none;
-    }
-
-    .hero-slide-dot {
-      width: 28px;
-      height: 4px;
-      background: var(--border);
-      border: none;
-      border-radius: 2px;
-      cursor: pointer;
-      padding: 0;
-      transition: background 0.2s, width 0.2s;
-    }
-
-    .hero-slide-dot:hover { background: var(--border-hover); }
-
-    .hero-slide-dot.is-active {
-      background: var(--accent);
-      width: 44px;
-    }
-
-    .hero-slide-dot.is-active:hover { background: var(--accent-bright); }
-
-    .hero-rotate:focus-visible,
-    .hero-slide-dot:focus-visible {
-      outline: 2px solid var(--accent-bright);
-      outline-offset: 4px;
     }
 
     /* Sections */
@@ -537,7 +394,7 @@
       max-width: 600px;
     }
 
-    /* Two surfaces */
+    /* Product surfaces */
     .two-surfaces {
       background:
         linear-gradient(180deg, transparent 0%, var(--bg-subtle) 50%, transparent 100%);
@@ -545,7 +402,7 @@
 
     .surfaces-grid {
       display: grid;
-      grid-template-columns: 1fr auto 1fr;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 1.5rem;
       margin-top: 1rem;
       align-items: stretch;
@@ -601,6 +458,7 @@
       height: 3px;
     }
     .surface-card.chat::before { background: var(--accent); }
+    .surface-card.spec::before { background: var(--accent-deep); }
     .surface-card.workbench::before { background: var(--accent); }
 
     .surface-brand {
@@ -802,16 +660,127 @@
       max-width: 420px;
     }
 
+    .workflow-video-figure {
+      margin: 3rem auto 0;
+      max-width: 1040px;
+    }
+
+    .workflow-video-frame {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      background: var(--bg-element);
+      box-shadow: 0 18px 48px rgba(0,0,0,0.06);
+    }
+
+    .workflow-video {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 9;
+      background: var(--bg-element);
+    }
+
+    .workflow-video-caption {
+      margin-top: 1rem;
+      text-align: center;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .product-gallery {
+      margin: 2rem auto 0;
+      max-width: 1040px;
+    }
+
+    .product-gallery-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      padding: 0 0.25rem;
+    }
+
+    .product-gallery-title {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .product-gallery-copy {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+      text-align: right;
+    }
+
+    .product-gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.875rem;
+    }
+
+    .product-gallery-frame {
+      display: block;
+      width: 100%;
+      padding: 0;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--bg-element);
+      overflow: hidden;
+      cursor: zoom-in;
+      transition: transform 0.16s, border-color 0.16s, box-shadow 0.16s;
+    }
+
+    .product-gallery-frame:hover {
+      transform: translateY(-2px);
+      border-color: var(--border-hover);
+      box-shadow: 0 14px 30px -24px rgba(20, 27, 53, 0.36);
+    }
+
+    .product-gallery-frame:focus-visible {
+      outline: 2px solid var(--accent-bright);
+      outline-offset: 4px;
+    }
+
+    .product-gallery-frame img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      object-position: top center;
+    }
+
+    .product-gallery-frame span {
+      display: block;
+      padding: 0.625rem 0.75rem;
+      font-family: var(--mono);
+      font-size: 0.6875rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-align: left;
+    }
+
     @media (max-width: 767px) {
       .diff-rows { gap: 3.5rem; }
       .diff-row { grid-template-columns: 1fr; gap: 1.5rem; }
       .diff-row.is-reversed > *:first-child { order: 0; }
       .diff-title { font-size: 1.5rem; }
+      .product-gallery-head { display: block; }
+      .product-gallery-copy { text-align: left; margin-top: 0.25rem; }
+      .product-gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
 
     /* Lightbox */
-    .diff-shot-frame,
-    .hero-shot-frame {
+    .diff-shot-frame {
       cursor: zoom-in;
     }
 
@@ -1214,10 +1183,10 @@
           <span class="hero-status-version">Apache 2.0</span>
         </div>
         <p class="hero-wordmark">AgenticFlowX</p>
-        <h1 class="hero-tagline">Your AI coding agent, with the <a href="https://github.com/AgenticFlowX/afx?tab=readme-ov-file#afx-agenticflowx" class="text-link" target="_blank" rel="noopener noreferrer">workflow</a> already wired up.</h1>
+        <h1 class="hero-tagline"><span class="hero-tagline-mark">Low-barrier</span> spec-driven AI coding in VS Code. Chat first, Spec mode when the work needs traceability.</h1>
         <p class="hero-desc">
-          Chat-first by default. Spec-driven when the work calls for it.
-          Same chat, same files, same panels &mdash; the workflow lives in your repo as plain markdown, not a separate database. Backed by <a href="https://pi.dev" target="_blank" rel="noopener noreferrer"><em>pi.dev</em></a> at the moment, swappable in principle.
+          Install one extension for coding chat, Code / Explore / Spec modes, clickable workflow steps,
+          and repo-owned markdown files. Backed by <a href="https://pi.dev" target="_blank" rel="noopener noreferrer"><em>pi.dev</em></a> today.
         </p>
         <div class="hero-ctas">
           <a href="https://marketplace.visualstudio.com/items?itemName=AgenticFlowX.agenticflowx" class="btn-primary" target="_blank" rel="noopener noreferrer">
@@ -1232,110 +1201,106 @@
         <div class="hero-meta">
           <span>Open source</span>
           <span>VS Code extension</span>
-          <span>Code &middot; Explore &middot; Spec modes</span>
-          <span>Repo-native files</span>
+          <span>Chat &middot; Explore &middot; Spec modes</span>
+          <span>Plain markdown in your repo</span>
         </div>
       </div>
 
       <div class="container-wide hero-shot">
-        <div class="hero-shot-slideshow" data-slideshow role="region" aria-roledescription="carousel" aria-label="Product tour">
-          <div class="hero-shot-frame" role="button" tabindex="0" aria-label="Open product tour preview">
-            <div class="hero-shot-titlebar">
-              <span class="dot red" aria-hidden="true"></span>
-              <span class="dot yellow" aria-hidden="true"></span>
-              <span class="dot green" aria-hidden="true"></span>
-              <span class="titlebar-text">agenticflowx &mdash; VS Code</span>
-            </div>
-            <div class="hero-slides">
-              <div class="hero-slide is-active" role="tabpanel" id="hero-panel-0" aria-labelledby="hero-tab-0" data-label="Chat" data-caption="Chat with pi.dev. Quick commands. Model picker.">
-                <img src="assets/main.webp" alt="AgenticFlowX chat panel with quick commands and model picker" loading="eager">
-              </div>
-              <div class="hero-slide" role="tabpanel" id="hero-panel-1" aria-labelledby="hero-tab-1" data-label="Workbench" data-caption="Dashboard over the repo's workflow files.">
-                <img src="assets/workbench.webp" alt="AgenticFlowX workbench dashboard" loading="lazy">
-              </div>
-              <div class="hero-slide" role="tabpanel" id="hero-panel-2" aria-labelledby="hero-tab-2" data-label="Board" data-caption="Kanban over your tasks across stages.">
-                <img src="assets/board.webp" alt="AgenticFlowX kanban board" loading="lazy">
-              </div>
-              <div class="hero-slide" role="tabpanel" id="hero-panel-3" aria-labelledby="hero-tab-3" data-label="Pipeline" data-caption="Pipeline view across feature stages.">
-                <img src="assets/pipeline.webp" alt="AgenticFlowX pipeline view" loading="lazy">
-              </div>
-              <div class="hero-slide" role="tabpanel" id="hero-panel-4" aria-labelledby="hero-tab-4" data-label="Documents" data-caption="Specs, designs, and notes as plain markdown.">
-                <img src="assets/documents.webp" alt="AgenticFlowX documents view" loading="lazy">
-              </div>
-              <div class="hero-slide" role="tabpanel" id="hero-panel-5" aria-labelledby="hero-tab-5" data-label="Journal" data-caption="Session log with timestamped entries.">
-                <img src="assets/journal.webp" alt="AgenticFlowX journal view" loading="lazy">
-              </div>
-              <div class="hero-slide" role="tabpanel" id="hero-panel-6" aria-labelledby="hero-tab-6" data-label="Notes" data-caption="Quick notes that link to features.">
-                <img src="assets/notes.webp" alt="AgenticFlowX notes view" loading="lazy">
-              </div>
-              <div class="hero-slide" role="tabpanel" id="hero-panel-7" aria-labelledby="hero-tab-7" data-label="Trace" data-caption="@see annotations link code back to spec.">
-                <img src="assets/codelens-spec.webp" alt="Editor showing @see CodeLens annotations linked to spec.md" loading="lazy">
-              </div>
-              <div class="hero-slide" role="tabpanel" id="hero-panel-8" aria-labelledby="hero-tab-8" data-label="Map" data-caption="How spec, design, tasks, and journal connect.">
-                <img src="assets/workflow-mindmap.webp" alt="AgenticFlowX feature workflow mindmap" loading="lazy">
-              </div>
-              <div class="hero-slide" role="tabpanel" id="hero-panel-9" aria-labelledby="hero-tab-9" data-label="Modes" data-caption="Code, Explore, Spec — switch lanes at the chatbox.">
-                <img src="assets/vscode-tab-chat-mode-picker.webp" alt="Mode picker open at the chatbox showing Code (default), Explore (experimental), and Spec (SDD)" loading="lazy">
-              </div>
-            </div>
+        <figure class="workflow-video-figure">
+          <div class="workflow-video-frame">
+            <video class="workflow-video" controls preload="metadata" playsinline poster="assets/vscode/product/workbench.webp">
+              <source src="assets/site/sdd-demo-full.webm" type="video/webm">
+              Your browser does not support embedded video. The workflow demo is available at <a href="assets/site/sdd-demo-full.webm">assets/site/sdd-demo-full.webm</a>.
+            </video>
           </div>
-          <div class="hero-slide-controls">
-            <button class="hero-rotate" type="button" data-rotate-control aria-label="Stop automatic slide show">Pause</button>
-            <span class="hero-slide-label" aria-live="off">Chat</span>
-            <span class="hero-slide-caption" aria-live="off">Chat with pi.dev. Quick commands. Model picker.</span>
-            <div class="hero-slide-dots" role="tablist" aria-label="Choose slide to display">
-              <button class="hero-slide-dot is-active" type="button" role="tab" id="hero-tab-0" aria-label="Chat" aria-controls="hero-panel-0" aria-selected="true" tabindex="0"></button>
-              <button class="hero-slide-dot" type="button" role="tab" id="hero-tab-1" aria-label="Workbench" aria-controls="hero-panel-1" aria-selected="false" tabindex="-1"></button>
-              <button class="hero-slide-dot" type="button" role="tab" id="hero-tab-2" aria-label="Board" aria-controls="hero-panel-2" aria-selected="false" tabindex="-1"></button>
-              <button class="hero-slide-dot" type="button" role="tab" id="hero-tab-3" aria-label="Pipeline" aria-controls="hero-panel-3" aria-selected="false" tabindex="-1"></button>
-              <button class="hero-slide-dot" type="button" role="tab" id="hero-tab-4" aria-label="Documents" aria-controls="hero-panel-4" aria-selected="false" tabindex="-1"></button>
-              <button class="hero-slide-dot" type="button" role="tab" id="hero-tab-5" aria-label="Journal" aria-controls="hero-panel-5" aria-selected="false" tabindex="-1"></button>
-              <button class="hero-slide-dot" type="button" role="tab" id="hero-tab-6" aria-label="Notes" aria-controls="hero-panel-6" aria-selected="false" tabindex="-1"></button>
-              <button class="hero-slide-dot" type="button" role="tab" id="hero-tab-7" aria-label="Trace" aria-controls="hero-panel-7" aria-selected="false" tabindex="-1"></button>
-              <button class="hero-slide-dot" type="button" role="tab" id="hero-tab-8" aria-label="Map" aria-controls="hero-panel-8" aria-selected="false" tabindex="-1"></button>
-              <button class="hero-slide-dot" type="button" role="tab" id="hero-tab-9" aria-label="Modes" aria-controls="hero-panel-9" aria-selected="false" tabindex="-1"></button>
-            </div>
+          <figcaption class="workflow-video-caption">
+            A fast walkthrough from chat to spec, tasks, implementation, and project memory.
+          </figcaption>
+        </figure>
+
+        <div class="product-gallery" aria-label="Product screenshots">
+          <div class="product-gallery-head">
+            <p class="product-gallery-title">Want the slower tour?</p>
+            <p class="product-gallery-copy">Open a focused screenshot when you want to inspect a specific part of the flow.</p>
+          </div>
+          <div class="product-gallery-grid">
+            <button class="product-gallery-frame" type="button" aria-label="Open preview: Chat first">
+              <img src="assets/vscode/product/chat-first.webp" alt="AgenticFlowX chat panel inside VS Code" loading="lazy">
+              <span>Chat</span>
+            </button>
+            <button class="product-gallery-frame" type="button" aria-label="Open preview: Mode switcher">
+              <img src="assets/vscode/product/mode-picker.webp" alt="AgenticFlowX chat mode picker with Code, Explore, and Spec modes" loading="lazy">
+              <span>Modes</span>
+            </button>
+            <button class="product-gallery-frame" type="button" aria-label="Open preview: Spec mode actions">
+              <img src="assets/vscode/product/spec-mode-actions.webp" alt="Spec mode action row for refining, authoring, validating, reviewing, and approving" loading="lazy">
+              <span>Spec</span>
+            </button>
+            <button class="product-gallery-frame" type="button" aria-label="Open preview: Workbench">
+              <img src="assets/vscode/product/workbench.webp" alt="AgenticFlowX workbench view in VS Code" loading="lazy">
+              <span>Workbench</span>
+            </button>
+            <button class="product-gallery-frame" type="button" aria-label="Open preview: Repo documents">
+              <img src="assets/vscode/product/repo-documents.webp" alt="Spec, design, tasks, and journal markdown files in the VS Code explorer" loading="lazy">
+              <span>Docs</span>
+            </button>
+            <button class="product-gallery-frame" type="button" aria-label="Open preview: Traceability">
+              <img src="assets/vscode/product/traceability.webp" alt="CodeLens traceability links from source code back to spec documents" loading="lazy">
+              <span>Trace</span>
+            </button>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Two surfaces -->
+    <!-- Product surfaces -->
     <section id="surfaces" class="two-surfaces">
       <div class="container">
         <div class="section-head-center">
           <p class="section-label">How it works</p>
-          <h2 class="section-title">Your coding agent. Plus the <a href="https://github.com/AgenticFlowX/afx?tab=readme-ov-file#afx-agenticflowx" class="text-link" target="_blank" rel="noopener noreferrer">workflow</a> around it.</h2>
+          <h2 class="section-title">Chat, code, and spec-driven work &mdash; one flow inside VS Code.</h2>
           <p class="section-copy">
-            Backed by <a href="https://pi.dev" class="text-link" target="_blank" rel="noopener noreferrer">pi.dev</a> at the moment, swappable in principle.
-            AgenticFlowX adds the VS Code surface, the mode picker, provider settings, and the
-            repo-backed views around it.
+            Start in chat. Switch into structure when the work needs it. Keep decisions,
+            tasks, notes, and journals in the same repo your team already reviews.
           </p>
         </div>
 
         <div class="surfaces-grid">
           <div class="surface-card chat">
-            <p class="surface-role">The coding agent</p>
-            <h3 class="surface-brand"><a href="https://pi.dev" target="_blank" rel="noopener noreferrer">pi.dev</a></h3>
+            <p class="surface-role">Chat</p>
+            <h3 class="surface-brand">Code in conversation</h3>
             <p class="surface-copy">
-              Day-to-day coding stays in chat. AFX routes through Pi CLI/RPC if you have it,
-              or the bundled Pi SDK with your provider keys &mdash; same chat, same settings, same workbench.
+              Day-to-day coding stays in chat: ask, mention files, switch models, and follow up
+              while the work is still fresh.
             </p>
             <ul class="surface-bullets">
-              <li>Use your existing Pi setup, or bring your own provider keys</li>
-              <li>Streaming, tool calls, file mentions, model switching</li>
+              <li>File mentions and quick commands</li>
+              <li>Streaming, tool calls, and model switching</li>
               <li>Steer or follow up while a turn is running</li>
             </ul>
           </div>
 
-          <span class="surfaces-plus" aria-hidden="true"></span>
+          <div class="surface-card spec">
+            <p class="surface-role">Spec mode</p>
+            <h3 class="surface-brand">Make the next step obvious</h3>
+            <p class="surface-copy">
+              When the work needs a paper trail, switch modes and move through the workflow with
+              clickable actions.
+            </p>
+            <ul class="surface-bullets">
+              <li>Refine requirements and shape the design</li>
+              <li>Break work into tasks before implementation</li>
+              <li>Validate, review, and approve each stage</li>
+            </ul>
+          </div>
 
           <div class="surface-card workbench">
-            <p class="surface-role">The workflow layer</p>
-            <h3 class="surface-brand">AgenticFlowX</h3>
+            <p class="surface-role">Workbench</p>
+            <h3 class="surface-brand">Project memory you can see</h3>
             <p class="surface-copy">
-              Project structure around pi.dev: notes, tasks, journals, and docs
-              that live as plain markdown in your workspace.
+              Notes, docs, kanban, journals, and pipeline views sit over plain markdown files in
+              your workspace.
             </p>
             <ul class="surface-bullets">
               <li>Tasks, notes, journals, and docs stay in the repo</li>
@@ -1390,33 +1355,6 @@
       </div>
     </section>
 
-    <!-- Spec mode showcase -->
-    <section id="spec-mode" class="two-surfaces">
-      <div class="container">
-        <div class="section-head-center">
-          <p class="section-label">Spec mode</p>
-          <h2 class="section-title">Spec-driven, at the chatbox.</h2>
-          <p class="section-copy">
-            Same discipline as SDD &mdash; <code>spec.md</code> &rarr; <code>design.md</code> &rarr; <code>tasks.md</code>, with a <code>journal.md</code> that survives the session &mdash; lower friction to start.
-            The pipeline strip shows where you are. The action row drives each phase. Approval gates the next.
-          </p>
-        </div>
-
-        <figure style="margin:2.5rem auto 0;max-width:920px;">
-          <div style="border:1px solid var(--border);border-radius:16px;overflow:hidden;background:var(--bg-element);box-shadow:0 18px 48px rgba(0,0,0,0.06);">
-            <img src="assets/vscode-tab-chat-mode-spec.webp" alt="Spec mode active on design.md — the SpecStepper shows 1 Spec ✓ 2 Design ✓ 3 Tasks, with an action row of Refine, Author, Validate, Review, Approve, and a planning-only composer below" loading="lazy" style="display:block;width:100%;height:auto;">
-          </div>
-          <figcaption style="margin-top:1rem;text-align:center;font-family:var(--mono);font-size:0.75rem;letter-spacing:0.04em;color:var(--text-muted);">
-            Spec mode on <code>design.md</code> &mdash; pipeline strip, <em>Refine / Author / Validate / Review / Approve</em>, planning-only composer. <code>&#8984;&#8679;M</code> to switch lanes.
-          </figcaption>
-        </figure>
-
-        <p style="margin-top:2rem;text-align:center;font-size:0.875rem;color:var(--text-muted);max-width:640px;margin-left:auto;margin-right:auto;">
-          Opt-in only. Most coding stays in chat. Reach for Spec mode when the work needs traceability between intent, design, tasks, and code &mdash; or when you want a paper trail that survives Friday.
-        </p>
-      </div>
-    </section>
-
     <!-- Three things you'll notice -->
     <section class="diff" id="differentiators">
       <div class="container">
@@ -1433,13 +1371,12 @@
               </button>
             </figure>
             <div class="diff-text">
-              <p class="diff-num">01 &mdash; Settings</p>
-              <h3 class="diff-title">Settings you can read in a glance.</h3>
+              <p class="diff-num">01 &mdash; Setup</p>
+              <h3 class="diff-title">No extra SDD stack.</h3>
               <p class="diff-copy">
-                Provider keys live in VS Code SecretStorage &mdash; never logged, never echoed.
-                Runtime knobs sit in the standard Settings UI. Custom Models presets cover Ollama,
-                LM Studio, vLLM, OpenRouter, Vercel AI Gateway, Moonshot/Kimi, and any
-                OpenAI-compatible endpoint. No JSON to edit by hand.
+                You do not need a separate spec app, task database, or methodology toolkit to start.
+                The extension gives you chat, modes, workflow actions, and repo-backed markdown files
+                from inside VS Code.
               </p>
             </div>
           </div>
@@ -1452,11 +1389,11 @@
               </button>
             </figure>
             <div class="diff-text">
-              <p class="diff-num">02 &mdash; Skills</p>
-              <h3 class="diff-title"><em>/afx</em> commands, already there.</h3>
+              <p class="diff-num">02 &mdash; Actions</p>
+              <h3 class="diff-title">Clickable next steps.</h3>
               <p class="diff-copy">
-                Scaffold, plan, check, review, capture &mdash; installed with the extension.
-                Nothing extra to set up.
+                Scaffold, refine, validate, review, approve, and continue from where you left off.
+                The workflow is available from chat and from AFX markdown files.
               </p>
             </div>
           </div>
@@ -1469,8 +1406,8 @@
               </button>
             </figure>
             <div class="diff-text">
-              <p class="diff-num">03 &mdash; Integration</p>
-              <h3 class="diff-title">Editor-native, not file-adjacent.</h3>
+              <p class="diff-num">03 &mdash; Memory</p>
+              <h3 class="diff-title">Project memory in markdown.</h3>
               <p class="diff-copy">
                 <code>@see</code> CodeLens links code back to spec. Hover any annotation
                 to preview the linked requirement or design section inline. Context menus reach
@@ -1489,9 +1426,8 @@
           <p class="section-label">Providers</p>
           <h2 class="section-title">Two routes. Same models.</h2>
           <p class="section-copy">
-            Backed by <a href="https://pi.dev" class="text-link" target="_blank" rel="noopener noreferrer">pi.dev</a> at the moment.
-            Whether or not you have Pi installed, AgenticFlowX uses Pi to reach the providers below &mdash;
-            and the AFX skills also run standalone outside the extension with Claude Code, Codex, Gemini CLI, or Copilot Chat.
+            Backed by <a href="https://pi.dev" class="text-link" target="_blank" rel="noopener noreferrer">pi.dev</a> today.
+            Whether or not you have Pi installed, AgenticFlowX uses Pi to reach the providers below.
           </p>
         </div>
 
@@ -1601,8 +1537,8 @@
           </div>
 
           <div class="fact">
-            <h3>Where does my code or data live?</h3>
-            <p>AgenticFlowX workflow files are plain markdown in your workspace. AI requests go through <a href="https://pi.dev" class="text-link" target="_blank" rel="noopener noreferrer">pi.dev</a> using either the Pi CLI or the Pi SDK.</p>
+            <h3>Do I need to install another SDD tool?</h3>
+            <p>No. The VS Code extension includes the chat surface, Spec mode, Workbench views, and AFX workflow actions. Specs, tasks, notes, and journals stay as plain markdown in your workspace.</p>
           </div>
 
           <div class="fact">
@@ -1612,7 +1548,7 @@
 
           <div class="fact">
             <h3>What&rsquo;s the current status, and is it free?</h3>
-            <p>Public alpha. Stable enough for daily use; provider settings, modes, and examples are still moving. AgenticFlowX is open source under Apache 2.0. No vendor billing &mdash; you bring your own provider keys (or your own coding agent).</p>
+            <p>Public alpha. Stable enough for daily use; provider settings, modes, and examples are still moving. AgenticFlowX is open source under Apache 2.0. No vendor billing &mdash; you bring your own provider keys.</p>
           </div>
         </div>
       </div>
@@ -1650,7 +1586,7 @@
     <!-- Closing CTA -->
     <section class="closing">
       <div class="container">
-        <h2 class="closing-title">Your AI coding agent.<br>With the <a href="https://github.com/AgenticFlowX/afx?tab=readme-ov-file#afx-agenticflowx" class="text-link" target="_blank" rel="noopener noreferrer">workflow</a> already wired up.</h2>
+        <h2 class="closing-title">Start in chat.<br>Add structure when the work needs it.</h2>
         <p class="closing-copy">
           Open source. Apache 2.0. Stable enough for daily use; modes and examples still moving.
         </p>
@@ -1690,146 +1626,6 @@
   </div>
 
   <script>
-    (function () {
-      var slideshow = document.querySelector('[data-slideshow]');
-      if (!slideshow) return;
-
-      var slides = slideshow.querySelectorAll('.hero-slide');
-      var tabs = slideshow.querySelectorAll('.hero-slide-dot');
-      var label = slideshow.querySelector('.hero-slide-label');
-      var caption = slideshow.querySelector('.hero-slide-caption');
-      var rotateBtn = slideshow.querySelector('[data-rotate-control]');
-      if (!slides.length) return;
-
-      var current = 0;
-      for (var i = 0; i < slides.length; i++) {
-        if (slides[i].classList.contains('is-active')) { current = i; break; }
-      }
-
-      var timer = null;
-      var interval = 5000;
-      var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      var isPlaying = !reduceMotion;
-      var ignorePauses = false;
-      var hovering = false;
-      var focusWithin = false;
-
-      function stopTimer() {
-        if (timer) {
-          clearInterval(timer);
-          timer = null;
-        }
-      }
-
-      function updateLiveMode() {
-        var mode = isPlaying ? 'off' : 'polite';
-        if (label) label.setAttribute('aria-live', mode);
-        if (caption) caption.setAttribute('aria-live', mode);
-      }
-
-      function updateRotateControl() {
-        if (!rotateBtn) return;
-        if (isPlaying) {
-          rotateBtn.setAttribute('aria-label', 'Stop automatic slide show');
-          rotateBtn.textContent = 'Pause';
-        } else {
-          rotateBtn.setAttribute('aria-label', 'Start automatic slide show');
-          rotateBtn.textContent = 'Play';
-        }
-      }
-
-      function go(next) {
-        var n = ((next % slides.length) + slides.length) % slides.length;
-        if (n === current) return;
-        slides[current].classList.remove('is-active');
-        tabs[current].classList.remove('is-active');
-        tabs[current].setAttribute('aria-selected', 'false');
-        tabs[current].setAttribute('tabindex', '-1');
-        slides[n].classList.add('is-active');
-        tabs[n].classList.add('is-active');
-        tabs[n].setAttribute('aria-selected', 'true');
-        tabs[n].setAttribute('tabindex', '0');
-        if (label) label.textContent = slides[n].dataset.label || '';
-        if (caption) caption.textContent = slides[n].dataset.caption || '';
-        current = n;
-      }
-
-      function startTimer() {
-        if (!isPlaying || reduceMotion) return;
-        if (hovering && !ignorePauses) return;
-        if (document.hidden) return;
-        stopTimer();
-        timer = setInterval(function () { go(current + 1); }, interval);
-      }
-
-      function refreshRotation() {
-        updateLiveMode();
-        updateRotateControl();
-        if (isPlaying) startTimer(); else stopTimer();
-      }
-
-      Array.prototype.forEach.call(tabs, function (tab, i) {
-        tab.addEventListener('click', function () {
-          go(i);
-        });
-
-        tab.addEventListener('keydown', function (e) {
-          var key = e.key;
-          var nextIndex = null;
-          if (key === 'ArrowRight') nextIndex = (i + 1) % tabs.length;
-          else if (key === 'ArrowLeft') nextIndex = (i - 1 + tabs.length) % tabs.length;
-          else if (key === 'Home') nextIndex = 0;
-          else if (key === 'End') nextIndex = tabs.length - 1;
-          else if (key === 'Enter' || key === ' ') { go(i); return; }
-          else return;
-
-          e.preventDefault();
-          tabs[nextIndex].focus();
-          go(nextIndex);
-        });
-      });
-
-      if (rotateBtn) {
-        rotateBtn.addEventListener('click', function () {
-          isPlaying = !isPlaying;
-          ignorePauses = isPlaying;
-          hovering = false;
-          refreshRotation();
-        });
-      }
-
-      slideshow.addEventListener('mouseenter', function () {
-        hovering = true;
-        if (!ignorePauses) stopTimer();
-      });
-
-      slideshow.addEventListener('mouseleave', function () {
-        hovering = false;
-        if (!ignorePauses) startTimer();
-      });
-
-      slideshow.addEventListener('focusin', function () {
-        if (focusWithin) return;
-        focusWithin = true;
-        if (!isPlaying || ignorePauses) return;
-        isPlaying = false;
-        refreshRotation();
-      });
-
-      slideshow.addEventListener('focusout', function (e) {
-        if (slideshow.contains(e.relatedTarget)) return;
-        focusWithin = false;
-      });
-
-      document.addEventListener('visibilitychange', function () {
-        if (document.hidden) stopTimer(); else startTimer();
-      });
-
-      updateLiveMode();
-      updateRotateControl();
-      startTimer();
-    })();
-
     (function () {
       var lightbox = document.querySelector('[data-lightbox]');
       if (!lightbox) return;
@@ -1874,8 +1670,7 @@
       function bind(frame) {
         frame.addEventListener('click', function (e) {
           if (e.target.closest('a')) return;
-          var active = frame.querySelector('.hero-slide.is-active img');
-          var img = active || frame.querySelector('img');
+          var img = frame.querySelector('img');
           if (img && img.src) open(img.src, img.alt, frame);
         });
 
@@ -1883,15 +1678,14 @@
           frame.addEventListener('keydown', function (e) {
             if (e.key !== 'Enter' && e.key !== ' ') return;
             e.preventDefault();
-            var active = frame.querySelector('.hero-slide.is-active img');
-            var img = active || frame.querySelector('img');
+            var img = frame.querySelector('img');
             if (img && img.src) open(img.src, img.alt, frame);
           });
         }
       }
 
       Array.prototype.forEach.call(document.querySelectorAll('.diff-shot-frame'), bind);
-      Array.prototype.forEach.call(document.querySelectorAll('.hero-shot-frame'), bind);
+      Array.prototype.forEach.call(document.querySelectorAll('.product-gallery-frame'), bind);
 
       lightbox.addEventListener('click', function (e) {
         if (e.target === lightbox || e.target === closeBtn || e.target.closest('.lightbox-close')) close();

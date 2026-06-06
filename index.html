@@ -40,6 +40,7 @@
       --text: #141b35;
       --text-secondary: #3d4256;
       --text-tertiary: #6b6450;
+      --text-muted: #837861;
       --muted: #a89e85;
       --accent: #a07e39;
       --accent-bright: #d4a656;
@@ -140,22 +141,28 @@
     .hero-status {
       display: inline-flex;
       align-items: center;
-      gap: 0.75rem;
+      gap: 0.625rem;
+      flex-wrap: wrap;
       font-family: var(--mono);
       font-size: 0.6875rem;
       font-weight: 600;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--text-tertiary);
       margin-bottom: 2.25rem;
-      padding: 0.5rem 0.125rem;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
+      padding: 0.5625rem 0.75rem;
+      border: 1px solid rgba(160, 126, 57, 0.22);
+      border-radius: 999px;
+      background: rgba(255, 251, 237, 0.74);
+      box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.72) inset,
+        0 12px 34px -28px rgba(20, 27, 53, 0.38);
     }
 
     .hero-status-dot {
       width: 7px;
       height: 7px;
+      border-radius: 50%;
       background: var(--accent);
       box-shadow: 0 0 0 4px rgba(160, 126, 57, 0.16);
     }
@@ -169,6 +176,33 @@
     }
 
     .hero-status-version { color: var(--accent); }
+
+    .hero-status-date { color: var(--text-tertiary); }
+
+    .hero-status-actions {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      margin-left: 0.125rem;
+    }
+
+    .hero-status-link {
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      border: 1px solid rgba(160, 126, 57, 0.22);
+      background: var(--accent-dim);
+      border-radius: 999px;
+      padding: 0.1875rem 0.5rem;
+      white-space: nowrap;
+      transition: border-color 0.15s, background 0.15s, color 0.15s;
+    }
+
+    .hero-status-link:hover {
+      color: var(--accent-deep);
+      border-color: rgba(160, 126, 57, 0.42);
+      background: rgba(244, 201, 126, 0.24);
+    }
 
     .hero-wordmark {
       font-family: var(--mono);
@@ -313,6 +347,93 @@
       opacity: 0.5;
     }
 
+    .story-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.75rem;
+      max-width: 900px;
+      margin: 1.75rem auto 0;
+      padding: 0.5rem;
+      border: 1px solid rgba(160, 126, 57, 0.16);
+      border-radius: 14px;
+      background: rgba(255, 251, 237, 0.56);
+      box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.68) inset,
+        0 18px 48px -40px rgba(20, 27, 53, 0.42);
+    }
+
+    .story-strip a {
+      display: grid;
+      gap: 0.25rem;
+      min-width: 0;
+      padding: 0.75rem 0.875rem;
+      border-radius: 10px;
+      color: var(--text-secondary);
+      text-align: left;
+      transition: background 0.15s, color 0.15s, transform 0.15s;
+    }
+
+    .story-strip a:hover {
+      background: rgba(212, 166, 86, 0.14);
+      color: var(--text);
+      transform: translateY(-1px);
+    }
+
+    .story-strip strong {
+      font-family: var(--mono);
+      font-size: 0.625rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .story-strip span {
+      font-size: 0.875rem;
+      font-weight: 600;
+      line-height: 1.25;
+      overflow-wrap: anywhere;
+    }
+
+    .inline-callouts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.25rem;
+    }
+
+    .section-head-center .inline-callouts {
+      justify-content: center;
+    }
+
+    .inline-callout {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4375rem;
+      max-width: 100%;
+      padding: 0.4375rem 0.625rem;
+      border: 1px solid rgba(160, 126, 57, 0.16);
+      border-radius: 999px;
+      background: rgba(255, 251, 237, 0.54);
+      color: var(--text-secondary);
+      font-family: var(--mono);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      line-height: 1.2;
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.56) inset;
+    }
+
+    .inline-callout::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-bright);
+      box-shadow: 0 0 0 3px rgba(212, 166, 86, 0.18);
+      flex: 0 0 auto;
+    }
+
     .btn-primary {
       display: inline-flex;
       align-items: center;
@@ -325,9 +446,9 @@
       border-radius: 6px;
       border: 1px solid var(--accent);
       cursor: pointer;
-      transition: background 0.15s, border-color 0.15s, color 0.15s;
+      transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.15s;
     }
-    .btn-primary:hover { background: var(--text); border-color: var(--text); color: var(--bg-raised); }
+    .btn-primary:hover { background: var(--text); border-color: var(--text); color: var(--bg-raised); transform: translateY(-1px); }
 
     .btn-secondary {
       display: inline-flex;
@@ -341,9 +462,9 @@
       border-radius: 6px;
       border: 1px solid var(--border);
       cursor: pointer;
-      transition: border-color 0.15s, color 0.15s;
+      transition: border-color 0.15s, color 0.15s, transform 0.15s, background 0.15s;
     }
-    .btn-secondary:hover { border-color: var(--border-hover); color: var(--text); }
+    .btn-secondary:hover { border-color: var(--border-hover); color: var(--text); background: rgba(255, 251, 237, 0.48); transform: translateY(-1px); }
 
     /* Hero product shot */
     .hero-shot {
@@ -369,12 +490,19 @@
     }
 
     .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
       font-family: var(--mono);
       font-size: 0.75rem;
       font-weight: 500;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--accent);
+      background: var(--accent-dim);
+      border: 1px solid rgba(160, 126, 57, 0.16);
+      border-radius: 999px;
+      padding: 0.25rem 0.625rem;
       margin-bottom: 1rem;
     }
 
@@ -406,48 +534,388 @@
       max-width: 600px;
     }
 
-    /* Product surfaces */
-    .two-surfaces {
+    /* AFX Viewer */
+    .viewer-section {
+      background:
+        linear-gradient(180deg, transparent 0%, rgba(251, 246, 231, 0.68) 46%, transparent 100%);
+      overflow: hidden;
+    }
+
+    .viewer-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
+      gap: 2.25rem;
+      align-items: end;
+      margin-bottom: 2rem;
+    }
+
+    .viewer-copy .section-copy {
+      max-width: 640px;
+    }
+
+    .viewer-points {
+      display: grid;
+      gap: 0.875rem;
+      list-style: none;
+      margin-top: 1.5rem;
+    }
+
+    .viewer-points li {
+      padding: 0.75rem 0.875rem 0.75rem 1rem;
+      border-left: 2px solid rgba(212, 166, 86, 0.72);
+      border-radius: 0 10px 10px 0;
+      background: rgba(255, 251, 237, 0.42);
+    }
+
+    .viewer-points strong {
+      display: block;
+      color: var(--text);
+      font-size: 0.9375rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .viewer-points span {
+      display: block;
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      line-height: 1.55;
+    }
+
+    .viewer-detail,
+    .viewer-showcase {
+      margin: 0;
+    }
+
+    .viewer-shot-frame {
+      display: block;
+      width: 100%;
+      padding: 0;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--bg-element);
+      overflow: hidden;
+      box-shadow:
+        0 1px 0 rgba(255, 251, 237, 0.55) inset,
+        0 24px 60px -38px rgba(20, 27, 53, 0.44);
+      transition: transform 0.16s, border-color 0.16s, box-shadow 0.16s;
+    }
+
+    .viewer-shot-frame:hover {
+      transform: translateY(-2px);
+      border-color: var(--border-hover);
+      box-shadow:
+        0 1px 0 rgba(255, 251, 237, 0.55) inset,
+        0 30px 70px -42px rgba(20, 27, 53, 0.52);
+    }
+
+    .viewer-shot-frame:focus-visible {
+      outline: 2px solid var(--accent-bright);
+      outline-offset: 4px;
+    }
+
+    .viewer-shot-frame img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .viewer-caption {
+      margin-top: 0.875rem;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .viewer-showcase {
+      max-width: 1460px;
+      margin: 0 auto;
+    }
+
+    /* Product story sections */
+    .workflow-section {
       background:
         linear-gradient(180deg, transparent 0%, var(--bg-subtle) 50%, transparent 100%);
     }
 
+    .mode-lanes {
+      margin-top: 2.75rem;
+      padding: 1rem;
+      border: 1px solid rgba(160, 126, 57, 0.16);
+      border-radius: 18px;
+      background:
+        linear-gradient(180deg, rgba(255, 251, 237, 0.64), rgba(251, 246, 231, 0.34));
+      box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.66) inset,
+        0 24px 70px -56px rgba(20, 27, 53, 0.5);
+    }
+
+    .mode-showcase {
+      display: grid;
+      grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+      gap: 1.5rem;
+      align-items: stretch;
+    }
+
+    .mode-copy {
+      padding: 1rem;
+    }
+
+    .mode-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.625rem;
+    }
+
+    .mode-title {
+      font-family: var(--serif);
+      font-size: 1.75rem;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.14;
+      margin-bottom: 0.75rem;
+      font-variation-settings: "opsz" 96, "SOFT" 25;
+    }
+
+    .mode-copy-text {
+      max-width: 470px;
+      color: var(--text-secondary);
+      font-size: 0.9375rem;
+      line-height: 1.65;
+      margin-bottom: 1.25rem;
+    }
+
+    .mode-lane-grid {
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .mode-lane {
+      display: block;
+      width: 100%;
+      padding: 1rem;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: rgba(255, 251, 237, 0.55);
+      color: inherit;
+      font: inherit;
+      text-align: left;
+      appearance: none;
+      -webkit-appearance: none;
+      cursor: pointer;
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.52) inset;
+      transition: background 0.15s, border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+    }
+
+    .mode-lane:hover {
+      transform: translateY(-1px);
+      border-color: var(--border-hover);
+      background: rgba(255, 251, 237, 0.76);
+    }
+
+    .mode-lane:focus-visible {
+      outline: 2px solid var(--accent-bright);
+      outline-offset: 3px;
+    }
+
+    .mode-lane.is-selected {
+      border-color: rgba(160, 126, 57, 0.36);
+      background: rgba(212, 166, 86, 0.13);
+      box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.64) inset,
+        0 14px 36px -30px rgba(20, 27, 53, 0.5);
+    }
+
+    .mode-lane strong {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text);
+      font-size: 0.9375rem;
+      margin-bottom: 0.375rem;
+    }
+
+    .mode-lane strong::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 3px rgba(212, 166, 86, 0.18);
+      flex: 0 0 auto;
+    }
+
+    .mode-lane.is-selected strong::after {
+      content: "Selected";
+      font-family: var(--mono);
+      font-size: 0.625rem;
+      letter-spacing: 0.12em;
+      color: var(--accent-deep);
+      border: 1px solid rgba(160, 126, 57, 0.22);
+      border-radius: 999px;
+      padding: 0.125rem 0.375rem;
+      margin-left: auto;
+    }
+
+    .mode-lane.is-featured.is-selected strong::after {
+      content: "Structured";
+    }
+
+    .mode-lane span {
+      display: block;
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      line-height: 1.55;
+    }
+
+    .mode-shot {
+      margin: 0;
+      min-width: 0;
+    }
+
+    .mode-shot-frame {
+      display: block;
+      width: 100%;
+      padding: 0;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--bg-element);
+      overflow: hidden;
+      box-shadow:
+        0 1px 0 rgba(255, 251, 237, 0.55) inset,
+        0 28px 70px -44px rgba(20, 27, 53, 0.46);
+      transition: transform 0.16s, border-color 0.16s, box-shadow 0.16s;
+    }
+
+    .mode-shot-frame:hover {
+      transform: translateY(-2px);
+      border-color: var(--border-hover);
+      box-shadow:
+        0 1px 0 rgba(255, 251, 237, 0.55) inset,
+        0 34px 78px -48px rgba(20, 27, 53, 0.55);
+    }
+
+    .mode-shot-frame img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      height: auto;
+      object-fit: contain;
+      object-position: top center;
+      background: #20242d;
+    }
+
+    .mode-caption {
+      margin-top: 0.75rem;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .canvas-section {
+      background:
+        linear-gradient(180deg, transparent 0%, rgba(239, 231, 208, 0.78) 48%, transparent 100%);
+      overflow: hidden;
+    }
+
+    .canvas-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
+      gap: 2.25rem;
+      align-items: end;
+      margin-bottom: 2rem;
+    }
+
+    .canvas-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4375rem;
+      font-family: var(--mono);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent-deep);
+      background: var(--accent-dim);
+      border: 1px solid rgba(160, 126, 57, 0.18);
+      border-radius: 999px;
+      padding: 0.25rem 0.625rem;
+      margin-bottom: 1rem;
+    }
+
+    .canvas-detail-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.7fr) minmax(0, 1fr);
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .canvas-shot-frame {
+      display: block;
+      width: 100%;
+      padding: 0;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--bg-element);
+      overflow: hidden;
+      box-shadow:
+        0 1px 0 rgba(255, 251, 237, 0.55) inset,
+        0 24px 60px -38px rgba(20, 27, 53, 0.44);
+      transition: transform 0.16s, border-color 0.16s, box-shadow 0.16s;
+    }
+
+    .canvas-shot-frame:hover {
+      transform: translateY(-2px);
+      border-color: var(--border-hover);
+      box-shadow:
+        0 1px 0 rgba(255, 251, 237, 0.55) inset,
+        0 30px 70px -42px rgba(20, 27, 53, 0.52);
+    }
+
+    .canvas-shot-frame:focus-visible {
+      outline: 2px solid var(--accent-bright);
+      outline-offset: 4px;
+    }
+
+    .canvas-shot-frame img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .canvas-detail-grid .canvas-shot-frame img {
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      object-position: top center;
+    }
+
+    .canvas-caption {
+      margin-top: 0.875rem;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .workbench-tour {
+      background: var(--bg);
+    }
+
+    /* Workflow cards */
     .surfaces-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 1.5rem;
       margin-top: 1rem;
       align-items: stretch;
-    }
-
-    .surfaces-plus {
-      position: relative;
-      width: 1px;
-      align-self: stretch;
-      background: linear-gradient(180deg, transparent, var(--accent) 25%, var(--accent) 75%, transparent);
-      opacity: 0.55;
-    }
-
-    .surfaces-plus::after {
-      content: "+";
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: var(--bg-element);
-      border: 1px solid var(--accent);
-      color: var(--accent);
-      font-family: var(--serif);
-      font-size: 1.375rem;
-      font-weight: 400;
-      line-height: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-variation-settings: "opsz" 96, "SOFT" 25;
     }
 
     .surface-card {
@@ -457,9 +925,18 @@
       padding: 2rem;
       position: relative;
       overflow: hidden;
-      transition: border-color 0.2s, transform 0.2s;
+      box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.62) inset,
+        0 20px 54px -46px rgba(20, 27, 53, 0.42);
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
     }
-    .surface-card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+    .surface-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+      box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.7) inset,
+        0 28px 68px -48px rgba(20, 27, 53, 0.52);
+    }
 
     .surface-card::before {
       content: "";
@@ -503,25 +980,6 @@
       margin-bottom: 1.25rem;
     }
 
-    .surface-kicker {
-      font-family: var(--mono);
-      font-size: 0.6875rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 0.75rem;
-      font-weight: 600;
-    }
-    .surface-card.chat .surface-kicker { color: var(--accent); }
-    .surface-card.workbench .surface-kicker { color: var(--accent-deep); }
-
-    .surface-title {
-      font-size: 1.375rem;
-      color: var(--text);
-      margin-bottom: 0.625rem;
-      font-weight: 600;
-      letter-spacing: 0;
-    }
-
     .surface-copy {
       font-size: 0.9375rem;
       color: var(--text-secondary);
@@ -557,24 +1015,7 @@
       overflow-wrap: anywhere;
     }
 
-    /* Three things you'll notice */
-    .diff .container { max-width: 1080px; }
-
-    .diff-rows {
-      display: flex;
-      flex-direction: column;
-      gap: 5rem;
-    }
-
-    .diff-row {
-      display: grid;
-      grid-template-columns: 1.05fr 1fr;
-      gap: 3.5rem;
-      align-items: center;
-    }
-
-    .diff-row.is-reversed > *:first-child { order: 2; }
-
+    /* Lightbox-enabled screenshots */
     .diff-shot-frame {
       display: block;
       width: 100%;
@@ -609,67 +1050,39 @@
       display: block;
     }
 
-    .diff-pin {
-      position: absolute;
-      font-family: var(--mono);
-      font-size: 0.6875rem;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      color: var(--text);
-      background: var(--bg-raised);
-      padding: 0.3125rem 0.5625rem;
-      border-radius: 4px;
-      border: 1px solid var(--accent);
-      box-shadow: 0 4px 14px rgba(20, 27, 53, 0.20);
-      white-space: nowrap;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4375rem;
-      z-index: 1;
-      transform: translate(-50%, -50%);
+    .viewer-shot-frame.diff-shot-frame,
+    .canvas-shot-frame.diff-shot-frame {
+      aspect-ratio: auto;
     }
 
-    .diff-pin::before {
-      content: "";
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--accent-bright);
-      box-shadow: 0 0 0 3px rgba(212, 166, 86, 0.30);
-      flex-shrink: 0;
+    .provider-access-frame.diff-shot-frame {
+      aspect-ratio: 16 / 10;
     }
 
-    .diff-num {
-      font-family: var(--mono);
-      font-size: 0.6875rem;
-      font-weight: 600;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1rem;
+    .mode-shot-frame.diff-shot-frame {
+      aspect-ratio: 4 / 3;
     }
 
-    .diff-title {
-      font-family: var(--serif);
-      font-size: 1.875rem;
-      font-weight: 500;
-      color: var(--text);
-      margin-bottom: 1rem;
-      line-height: 1.18;
-      letter-spacing: 0;
-      font-variation-settings: "opsz" 96, "SOFT" 25;
+    .canvas-detail-grid .canvas-shot-frame.diff-shot-frame {
+      aspect-ratio: 16 / 10;
     }
 
-    .diff-title em {
-      font-style: normal;
-      color: var(--accent);
+    .viewer-shot-frame.diff-shot-frame img,
+    .canvas-shot-frame.diff-shot-frame img {
+      height: auto;
+      object-fit: contain;
     }
 
-    .diff-copy {
-      font-size: 1rem;
-      color: var(--text-secondary);
-      line-height: 1.65;
-      max-width: 420px;
+    .canvas-detail-grid .canvas-shot-frame.diff-shot-frame img,
+    .provider-access-frame.diff-shot-frame img {
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .mode-shot-frame.diff-shot-frame img {
+      height: 100%;
+      object-fit: contain;
+      background: #20242d;
     }
 
     .workflow-video-figure {
@@ -704,8 +1117,8 @@
     }
 
     .product-gallery {
-      margin: 2rem auto 0;
-      max-width: 1040px;
+      margin: 2.5rem auto 0;
+      max-width: 1320px;
     }
 
     .product-gallery-head {
@@ -735,14 +1148,15 @@
 
     .product-gallery-grid {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 0.875rem;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.25rem;
     }
 
     .product-gallery-frame {
       display: block;
       width: 100%;
       padding: 0;
+      position: relative;
       border: 1px solid var(--border);
       border-radius: 10px;
       background: var(--bg-element);
@@ -782,18 +1196,50 @@
     }
 
     @media (max-width: 767px) {
-      .diff-rows { gap: 3.5rem; }
-      .diff-row { grid-template-columns: 1fr; gap: 1.5rem; }
-      .diff-row.is-reversed > *:first-child { order: 0; }
-      .diff-title { font-size: 1.5rem; }
       .product-gallery-head { display: block; }
       .product-gallery-copy { text-align: left; margin-top: 0.25rem; }
       .product-gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
 
+    @media (max-width: 520px) {
+      .product-gallery-grid { grid-template-columns: 1fr; }
+    }
+
     /* Lightbox */
     .diff-shot-frame {
       cursor: zoom-in;
+    }
+
+    .diff-shot-frame::after,
+    .product-gallery-frame::after {
+      content: "Expand";
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      z-index: 2;
+      font-family: var(--mono);
+      font-size: 0.625rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text);
+      background: rgba(255, 251, 237, 0.82);
+      border: 1px solid rgba(160, 126, 57, 0.22);
+      border-radius: 999px;
+      padding: 0.25rem 0.5rem;
+      box-shadow: 0 8px 24px -18px rgba(20, 27, 53, 0.42);
+      opacity: 0;
+      transform: translateY(-2px);
+      transition: opacity 0.15s, transform 0.15s;
+      pointer-events: none;
+    }
+
+    .diff-shot-frame:hover::after,
+    .diff-shot-frame:focus-visible::after,
+    .product-gallery-frame:hover::after,
+    .product-gallery-frame:focus-visible::after {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .lightbox {
@@ -915,6 +1361,97 @@
       white-space: nowrap;
     }
 
+    .provider-access {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.75rem;
+      max-width: 1280px;
+      margin: 0 auto 4.5rem;
+    }
+
+    .provider-access-card {
+      min-width: 0;
+    }
+
+    .provider-access-card:first-child {
+      grid-column: 1 / -1;
+    }
+
+    .provider-access-frame {
+      display: block;
+      width: 100%;
+      padding: 0;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--bg-element);
+      overflow: hidden;
+      box-shadow:
+        0 1px 0 rgba(255, 251, 237, 0.55) inset,
+        0 18px 46px -36px rgba(20, 27, 53, 0.36);
+      transition: transform 0.16s, border-color 0.16s, box-shadow 0.16s;
+    }
+
+    .provider-access-frame:hover {
+      transform: translateY(-2px);
+      border-color: var(--border-hover);
+      box-shadow:
+        0 1px 0 rgba(255, 251, 237, 0.55) inset,
+        0 24px 56px -38px rgba(20, 27, 53, 0.46);
+    }
+
+    .provider-access-frame:focus-visible {
+      outline: 2px solid var(--accent-bright);
+      outline-offset: 4px;
+    }
+
+    .provider-access-frame img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      object-position: top center;
+    }
+
+    .provider-access-card:first-child .provider-access-frame,
+    .provider-access-card:first-child .provider-access-frame.diff-shot-frame {
+      aspect-ratio: auto;
+    }
+
+    .provider-access-card:first-child .provider-access-frame img {
+      aspect-ratio: auto;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .provider-access-card:not(:first-child) .provider-access-frame,
+    .provider-access-card:not(:first-child) .provider-access-frame.diff-shot-frame {
+      aspect-ratio: 4 / 3;
+    }
+
+    .provider-access-card:not(:first-child) .provider-access-frame img {
+      aspect-ratio: 4 / 3;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .provider-access-caption {
+      margin-top: 0.875rem;
+    }
+
+    .provider-access-caption strong {
+      display: block;
+      color: var(--text);
+      font-size: 0.9375rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .provider-access-caption span {
+      display: block;
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      line-height: 1.55;
+    }
+
     .provider-prose {
       max-width: 760px;
       margin: 0 auto;
@@ -988,8 +1525,14 @@
       vertical-align: 2px;
     }
 
+    @media (max-width: 960px) {
+      .provider-access { grid-template-columns: 1fr; }
+    }
+
     @media (max-width: 767px) {
       .route-pair { grid-template-columns: 1fr; gap: 2.25rem; margin-bottom: 3.5rem; }
+      .provider-access { grid-template-columns: 1fr; margin-bottom: 3.5rem; }
+      .provider-access-frame img { aspect-ratio: 16 / 10; }
       .route-schematic { margin: 2rem auto; }
       .provider-prose-list { font-size: 1rem; }
     }
@@ -1155,12 +1698,11 @@
     /* Responsive */
     @media (max-width: 960px) {
       .surfaces-grid { grid-template-columns: 1fr; }
-      .surfaces-plus {
-        width: 100%;
-        height: 1px;
-        background: linear-gradient(90deg, transparent, var(--accent) 25%, var(--accent) 75%, transparent);
-        align-self: auto;
-      }
+      .viewer-layout { grid-template-columns: 1fr; align-items: start; }
+      .canvas-layout { grid-template-columns: 1fr; align-items: start; }
+      .mode-lane-grid { grid-template-columns: 1fr; }
+      .mode-showcase { grid-template-columns: 1fr; }
+      .story-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
 
     @media (max-width: 767px) {
@@ -1171,7 +1713,21 @@
       .closing-title { font-size: 2rem; }
       .hero-ctas { flex-direction: column; align-items: stretch; }
       .hero-meta { gap: 0.75rem; font-size: 0.6875rem; }
+      .story-strip { grid-template-columns: 1fr; margin-top: 1.25rem; }
+      .story-strip a { padding: 0.625rem 0.75rem; }
+      .inline-callouts { gap: 0.375rem; margin-top: 1rem; }
+      .inline-callout { font-size: 0.625rem; }
+      .mode-lanes { padding: 0.75rem; }
+      .mode-copy { padding: 0.5rem; }
+      .mode-title { font-size: 1.45rem; }
+      .mode-shot-frame { border-radius: 10px; }
       .hero-shot { margin-top: 2rem; }
+      .viewer-layout { gap: 1.5rem; margin-bottom: 1.5rem; }
+      .viewer-points { gap: 0.75rem; }
+      .viewer-shot-frame { border-radius: 10px; }
+      .canvas-layout { gap: 1.5rem; margin-bottom: 1.5rem; }
+      .canvas-detail-grid { grid-template-columns: 1fr; }
+      .canvas-shot-frame { border-radius: 10px; }
       .hero::after { display: none; }
 
       section { padding: 3.5rem 0; }
@@ -1188,11 +1744,16 @@
     <!-- Hero -->
     <section class="hero" id="hero">
       <div class="container">
-        <div class="hero-status" aria-label="Project status">
+        <div class="hero-status" aria-label="Latest release">
           <span class="hero-status-dot" aria-hidden="true"></span>
-          <span class="hero-status-label">Public alpha</span>
+          <span class="hero-status-label">Latest release</span>
           <span class="hero-status-rule" aria-hidden="true"></span>
-          <span class="hero-status-version">Apache 2.0</span>
+          <span class="hero-status-version">v2.3.0</span>
+          6s06n class="hero-status-date">Released 2026-06-06</span>
+          <span class="hero-status-actions">
+            <a href="https://github.com/AgenticFlowX/agenticflowx/blob/main/CHANGELOG.md" class="hero-status-link" target="_blank" rel="noopener noreferrer">Changelog</a>
+            <a href="https://www.reddit.com/r/agenticflowx/" class="hero-status-link" target="_blank" rel="noopener noreferrer">r/agenticflowx</a>
+          </span>
         </div>
         <p class="hero-wordmark">AgenticFlowX</p>
         <h1 class="hero-tagline"><span class="hero-tagline-mark">Low-barrier</span> spec-driven AI coding in VS Code. Chat first, Spec mode when the work needs traceability.</h1>
@@ -1203,7 +1764,7 @@
         <div class="hero-ctas">
           <a href="https://marketplace.visualstudio.com/items?itemName=AgenticFlowX.agenticflowx" class="btn-primary" target="_blank" rel="noopener noreferrer">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            Try the extension (alpha)
+            Install the extension
           </a>
           <a href="#surfaces" class="btn-secondary">
             See how it works
@@ -1213,15 +1774,34 @@
         <p class="hero-install-alt">
           <a href="https://marketplace.visualstudio.com/items?itemName=AgenticFlowX.agenticflowx" class="text-link" target="_blank" rel="noopener noreferrer">VS Code Marketplace</a>
           &middot; <a href="https://open-vsx.org/extension/agenticflowx/agenticflowx" class="text-link" target="_blank" rel="noopener noreferrer">Open VSX</a>
+          &middot; <a href="https://github.com/AgenticFlowX/agenticflowx/blob/main/CHANGELOG.md" class="text-link" target="_blank" rel="noopener noreferrer">Changelog</a>
           &middot; <a href="https://www.reddit.com/r/agenticflowx/" class="text-link" target="_blank" rel="noopener noreferrer">r/agenticflowx</a>
         </p>
         <p class="hero-compat">Works in VS Code, VS Code Insiders, VSCodium &amp; Antigravity (pre-2.0).</p>
         <div class="hero-meta">
           <span>Open source</span>
           <span>VS Code extension</span>
-          <span>Chat &middot; Explore &middot; Spec modes</span>
+          <span>Code &middot; Explore &middot; Spec modes</span>
           <span>Plain markdown in your repo</span>
         </div>
+        <nav class="story-strip" aria-label="AgenticFlowX product story">
+          <a href="#surfaces">
+            <strong>01</strong>
+            <span>Choose a mode</span>
+          </a>
+          <a href="#viewer">
+            <strong>02</strong>
+            <span>Act on markdown</span>
+          </a>
+          <a href="#canvas">
+            <strong>03</strong>
+            <span>Think visually</span>
+          </a>
+          <a href="#providers">
+            <strong>04</strong>
+            <span>Bring your model access</span>
+          </a>
+        </nav>
       </div>
 
       <div class="container-wide hero-shot">
@@ -1237,51 +1817,24 @@
           </figcaption>
         </figure>
 
-        <div class="product-gallery" aria-label="Product screenshots">
-          <div class="product-gallery-head">
-            <p class="product-gallery-title">Want the slower tour?</p>
-            <p class="product-gallery-copy">Open a focused screenshot when you want to inspect a specific part of the flow.</p>
-          </div>
-          <div class="product-gallery-grid">
-            <button class="product-gallery-frame" type="button" aria-label="Open preview: Chat first">
-              <img src="assets/vscode/product/chat-first.webp" alt="AgenticFlowX chat panel inside VS Code" loading="lazy">
-              <span>Chat</span>
-            </button>
-            <button class="product-gallery-frame" type="button" aria-label="Open preview: Mode switcher">
-              <img src="assets/vscode/product/mode-picker.webp" alt="AgenticFlowX chat mode picker with Code, Explore, and Spec modes" loading="lazy">
-              <span>Modes</span>
-            </button>
-            <button class="product-gallery-frame" type="button" aria-label="Open preview: Spec mode actions">
-              <img src="assets/vscode/product/spec-mode-actions.webp" alt="Spec mode action row for refining, authoring, validating, reviewing, and approving" loading="lazy">
-              <span>Spec</span>
-            </button>
-            <button class="product-gallery-frame" type="button" aria-label="Open preview: Workbench">
-              <img src="assets/vscode/product/workbench.webp" alt="AgenticFlowX workbench view in VS Code" loading="lazy">
-              <span>Workbench</span>
-            </button>
-            <button class="product-gallery-frame" type="button" aria-label="Open preview: Repo documents">
-              <img src="assets/vscode/product/repo-documents.webp" alt="Spec, design, tasks, and journal markdown files in the VS Code explorer" loading="lazy">
-              <span>Docs</span>
-            </button>
-            <button class="product-gallery-frame" type="button" aria-label="Open preview: Traceability">
-              <img src="assets/vscode/product/traceability.webp" alt="CodeLens traceability links from source code back to spec documents" loading="lazy">
-              <span>Trace</span>
-            </button>
-          </div>
-        </div>
       </div>
     </section>
 
-    <!-- Product surfaces -->
-    <section id="surfaces" class="two-surfaces">
+    <!-- Core workflow -->
+    <section id="surfaces" class="workflow-section">
       <div class="container">
         <div class="section-head-center">
-          <p class="section-label">How it works</p>
-          <h2 class="section-title">Chat, code, and spec-driven work &mdash; one flow inside VS Code.</h2>
+          <p class="section-label">Core workflow</p>
+          <h2 class="section-title">Start in chat. Add structure when the work needs it.</h2>
           <p class="section-copy">
-            Start in chat. Switch into structure when the work needs it. Keep decisions,
-            tasks, notes, and journals in the same repo your team already reviews.
+            AgenticFlowX keeps daily coding conversational while giving serious work a traceable
+            path through specs, designs, tasks, notes, journals, and code.
           </p>
+          <div class="inline-callouts" aria-label="Core workflow highlights">
+            <span class="inline-callout">Conversation first</span>
+            <span class="inline-callout">Structure on demand</span>
+            <span class="inline-callout">Repo-owned files</span>
+          </div>
         </div>
 
         <div class="surfaces-grid">
@@ -1289,22 +1842,22 @@
             <p class="surface-role">Chat</p>
             <h3 class="surface-brand">Code in conversation</h3>
             <p class="surface-copy">
-              Day-to-day coding stays in chat: ask, mention files, switch models, and follow up
-              while the work is still fresh.
+              Ask questions, mention files, switch models, and steer the work while the context is
+              still fresh.
             </p>
             <ul class="surface-bullets">
               <li>File mentions and quick commands</li>
-              <li>Streaming, tool calls, and model switching</li>
-              <li>Steer or follow up while a turn is running</li>
+              <li>Streaming turns, tool calls, and model switching</li>
+              <li>Follow up while work is still in flight</li>
             </ul>
           </div>
 
           <div class="surface-card spec">
-            <p class="surface-role">Spec mode</p>
+            <p class="surface-role">Spec workflow</p>
             <h3 class="surface-brand">Make the next step obvious</h3>
             <p class="surface-copy">
-              When the work needs a paper trail, switch modes and move through the workflow with
-              clickable actions.
+              Move from requirements to design, tasks, implementation, review, and approval without
+              leaving VS Code.
             </p>
             <ul class="surface-bullets">
               <li>Refine requirements and shape the design</li>
@@ -1317,136 +1870,218 @@
             <p class="surface-role">Workbench</p>
             <h3 class="surface-brand">Project memory you can see</h3>
             <p class="surface-copy">
-              Notes, docs, kanban, journals, and pipeline views sit over plain markdown files in
+              Notes, docs, boards, journals, and pipeline views sit over plain markdown files in
               your workspace.
             </p>
             <ul class="surface-bullets">
               <li>Tasks, notes, journals, and docs stay in the repo</li>
               <li>Workbench views over those files, no separate database</li>
-              <li>Trace from intent &rarr; design &rarr; tasks &rarr; code, when the work calls for it</li>
+              <li>Trace from intent to design, tasks, and code</li>
             </ul>
           </div>
         </div>
+
+        <div class="mode-lanes" aria-label="AgenticFlowX Code, Explore, and Spec modes">
+          <div class="mode-showcase">
+            <div class="mode-copy">
+              <p class="mode-eyebrow">Code / Explore / Spec</p>
+              <h3 class="mode-title">Choose how much structure the next turn needs.</h3>
+              <p class="mode-copy-text">
+                AgenticFlowX is not locked into one workflow. Stay loose in Code mode, inspect
+                safely in Explore mode, then switch into Spec mode when the work needs a planned
+                path from requirements to design, tasks, and implementation.
+              </p>
+
+              <div class="mode-lane-grid">
+                <button
+                  class="mode-lane"
+                  type="button"
+                  data-mode-preview
+                  data-mode-src="assets/vscode/product/chat-first.webp"
+                  data-mode-alt="AgenticFlowX Code mode chat panel for everyday implementation and debugging"
+                  data-mode-caption="Code mode keeps the default chat flow focused on implementation, debugging, edits, and fast follow-up."
+                  aria-pressed="false"
+                >
+                  <strong>Code mode</strong>
+                  <span>The default lane for everyday implementation, debugging, edits, and fast follow-up.</span>
+                </button>
+                <button
+                  class="mode-lane"
+                  type="button"
+                  data-mode-preview
+                  data-mode-src="assets/vscode/product/mode-picker.webp"
+                  data-mode-alt="AgenticFlowX mode picker showing Code, Explore, and Spec mode choices"
+                  data-mode-caption="Explore mode is the safer inspection lane: trace behavior, inspect code, and plan changes before editing."
+                  aria-pressed="false"
+                >
+                  <strong>Explore mode</strong>
+                  <span>Read-only inspection for tracing behavior, planning changes, and understanding unfamiliar code.</span>
+                </button>
+                <button
+                  class="mode-lane is-featured is-selected"
+                  type="button"
+                  data-mode-preview
+                  data-mode-src="assets/vscode-tab-chat-mode-spec.webp"
+                  data-mode-alt="AgenticFlowX Spec mode showing design workflow actions, step navigation, related journal and work sessions, and a Spec mode prompt"
+                  data-mode-caption="Spec mode adds the workflow rail: refine, author, validate, review, approve, then move from spec to design to tasks."
+                  aria-pressed="true"
+                >
+                  <strong>Spec mode</strong>
+                  <span>The planning lane for requirements, design, tasks, validation, review, approval, and traceability.</span>
+                </button>
+              </div>
+            </div>
+
+            <figure class="mode-shot">
+              <button class="mode-shot-frame diff-shot-frame" type="button" aria-label="Open preview: Spec mode workflow controls" data-mode-preview-frame>
+                <img data-mode-preview-image src="assets/vscode-tab-chat-mode-spec.webp" alt="AgenticFlowX Spec mode showing design workflow actions, step navigation, related journal and work sessions, and a Spec mode prompt" loading="lazy" width="1200" height="900">
+              </button>
+              <figcaption class="mode-caption" data-mode-preview-caption aria-live="polite">
+                Spec mode adds the workflow rail: refine, author, validate, review, approve, then move from spec to design to tasks.
+              </figcaption>
+            </figure>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- Three modes -->
-    <section id="modes">
+    <!-- AFX Viewer -->
+    <section id="viewer" class="viewer-section">
       <div class="container">
-        <div class="section-head-center">
-          <p class="section-label">Three modes</p>
-          <h2 class="section-title">Code, Explore, or Spec &mdash; switch lanes at the chatbox.</h2>
-          <p class="section-copy">
-            Code is the default. Explore is read-only inspection. Spec is for Spec-Driven Development.
-            One keystroke to switch &mdash; <code>&#8984;&#8679;M</code> on macOS, <code>Ctrl+Shift+M</code> on Windows/Linux.
-          </p>
+        <div class="viewer-layout">
+          <div class="viewer-copy">
+            <p class="section-label">AFX Viewer</p>
+            <h2 class="section-title">Markdown you can act on.</h2>
+            <p class="section-copy">
+              AFX Viewer turns repo markdown into an interactive workflow surface. Specs,
+              designs, tasks, ADRs, notes, and journals stay as plain files, while the rendered
+              view gives each document and section the commands it needs.
+            </p>
+            <div class="inline-callouts" aria-label="AFX Viewer highlights">
+              <span class="inline-callout">Rendered markdown</span>
+              <span class="inline-callout">Section commands</span>
+              <span class="inline-callout">Send to chat</span>
+            </div>
+            <ul class="viewer-points">
+              <li>
+                <strong>Run document commands from the page</strong>
+                <span>Refine, author, validate, review, approve, pick, or code without leaving the rendered document.</span>
+              </li>
+              <li>
+                <strong>Act on the section you are reading</strong>
+                <span>Use section and phase commands to send the right context to chat or execute the next workflow step.</span>
+              </li>
+              <li>
+                <strong>Keep markdown as the source of truth</strong>
+                <span>The viewer adds navigation and actions over the file you already review in Git.</span>
+              </li>
+            </ul>
+          </div>
+
+          <figure class="viewer-detail">
+            <button class="viewer-shot-frame diff-shot-frame" type="button" aria-label="Open preview: AFX Viewer task commands">
+              <img src="assets/viewer-2.webp" alt="AFX Viewer rendering a tasks markdown file with phase commands and a command popover" loading="lazy" width="1652" height="1000">
+            </button>
+            <figcaption class="viewer-caption">
+              Task and phase commands are available directly inside the rendered markdown view.
+            </figcaption>
+          </figure>
         </div>
+      </div>
 
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;margin-top:1rem;">
-          <div class="surface-card">
-            <p class="surface-role">Code &middot; default</p>
-            <h3 class="surface-brand">Full access</h3>
-            <p class="surface-copy">
-              Chat-first by default. Repo-backed notes, tasks, and docs you can actually see.
-              Most coding stays here.
-            </p>
-          </div>
-
-          <div class="surface-card">
-            <p class="surface-role">Explore &middot; read-only</p>
-            <h3 class="surface-brand">Inspect, don&rsquo;t edit</h3>
-            <p class="surface-copy">
-              Read-only. Use it to inspect code, trace behavior, and plan changes &mdash; runtime
-              tools are blocked, so the agent can&rsquo;t accidentally edit files or run commands.
-            </p>
-          </div>
-
-          <div class="surface-card">
-            <p class="surface-role">Spec &middot; planning-only</p>
-            <h3 class="surface-brand">Plan before you code</h3>
-            <p class="surface-copy">
-              We&rsquo;ll refine requirements, validate structure, and gate approval &mdash; without
-              touching production code. Same discipline as SDD, lower friction to start.
-            </p>
-          </div>
-        </div>
+      <div class="container-wide">
+        <figure class="viewer-showcase">
+          <button class="viewer-shot-frame diff-shot-frame" type="button" aria-label="Open preview: raw markdown and AFX Viewer side by side">
+            <img src="assets/viewer-1.webp" alt="Raw markdown source beside the rendered AFX Viewer for a design document" loading="lazy" width="2574" height="1398">
+          </button>
+          <figcaption class="viewer-caption">
+            Plain markdown on the left, interactive AFX Viewer on the right.
+          </figcaption>
+        </figure>
       </div>
     </section>
 
-    <!-- Three things you'll notice -->
-    <section class="diff" id="differentiators">
+    <!-- Experimental Canvas -->
+    <section id="canvas" class="canvas-section">
       <div class="container">
-        <div class="section-head-center">
-          <p class="section-label">Three things you'll notice</p>
+        <div class="canvas-layout">
+          <div class="viewer-copy">
+            <span class="canvas-kicker">Experimental</span>
+            <p class="section-label">Project Canvas</p>
+            <h2 class="section-title">Think visually without leaving your repo.</h2>
+            <p class="section-copy">
+              Canvas is a freeform workspace for specs, markdown files, notes, ADRs, labels, and
+              architecture ideas. Link cards, follow project context, and send selected canvas
+              material back into chat when an idea is ready to become work.
+            </p>
+            <div class="inline-callouts" aria-label="Project Canvas highlights">
+              <span class="inline-callout">project.canvas</span>
+              <span class="inline-callout">Linked markdown</span>
+              <span class="inline-callout">Ideation to spec</span>
+            </div>
+            <ul class="viewer-points">
+              <li>
+                <strong>Map specs, files, and notes together</strong>
+                <span>Use cards and file nodes to sketch how product questions connect to implementation details.</span>
+              </li>
+              <li>
+                <strong>Label relationships as the thinking evolves</strong>
+                <span>Connect cards with named edges like <code>promote into spec</code> or <code>@see trace</code>.</span>
+              </li>
+              <li>
+                <strong>Send selected context to chat</strong>
+                <span>Turn the useful part of the canvas into a focused chat handoff instead of rewriting the whole map.</span>
+              </li>
+            </ul>
+          </div>
+
+          <figure>
+            <button class="canvas-shot-frame diff-shot-frame" type="button" aria-label="Open preview: Project Canvas map">
+              <img src="assets/canvas-1.webp" alt="AgenticFlowX Canvas showing linked spec cards, notes, file nodes, labels, and chat context" loading="lazy" width="2824" height="1551">
+            </button>
+            <figcaption class="canvas-caption">
+              A project canvas connects product questions, specs, implementation notes, file context, and chat handoff.
+            </figcaption>
+          </figure>
         </div>
 
-        <div class="diff-rows">
-          <div class="diff-row">
-            <figure class="diff-shot">
-              <button class="diff-shot-frame" type="button" aria-label="Open preview: Provider keys and presets">
-                <img src="assets/vscode-tab-settings.webp" alt="AgenticFlowX Settings — Models tab showing 22 providers, 3 ready, 46 models, with provider rows and an Anthropic API key field" loading="lazy">
-                <span class="diff-pin" style="left:18%;top:32%;">22 providers</span>
-              </button>
-            </figure>
-            <div class="diff-text">
-              <p class="diff-num">01 &mdash; Setup</p>
-              <h3 class="diff-title">No extra SDD stack.</h3>
-              <p class="diff-copy">
-                You do not need a separate spec app, task database, or methodology toolkit to start.
-                The extension gives you chat, modes, workflow actions, and repo-backed markdown files
-                from inside VS Code.
-              </p>
-            </div>
-          </div>
+        <div class="canvas-detail-grid">
+          <figure>
+            <button class="canvas-shot-frame diff-shot-frame" type="button" aria-label="Open preview: selected canvas card actions">
+              <img src="assets/canvas-2.webp" alt="AgenticFlowX Canvas selected card actions for editing, linking, commenting, clipboard, deleting, and resizing" loading="lazy" width="670" height="406">
+            </button>
+            <figcaption class="canvas-caption">
+              Selected cards expose the small actions needed for ideation: edit, link, comment, clipboard, delete, and resize.
+            </figcaption>
+          </figure>
 
-          <div class="diff-row is-reversed">
-            <figure class="diff-shot">
-              <button class="diff-shot-frame" type="button" aria-label="Open preview: /afx skills">
-                <img src="assets/main.webp" alt="AgenticFlowX chat panel showing bundled /afx commands" loading="lazy">
-                <span class="diff-pin" style="left:14%;top:32%;">/afx skills</span>
-              </button>
-            </figure>
-            <div class="diff-text">
-              <p class="diff-num">02 &mdash; Actions</p>
-              <h3 class="diff-title">Clickable next steps.</h3>
-              <p class="diff-copy">
-                Scaffold, refine, validate, review, approve, and continue from where you left off.
-                The workflow is available from chat and from AFX markdown files.
-              </p>
-            </div>
-          </div>
-
-          <div class="diff-row">
-            <figure class="diff-shot">
-              <button class="diff-shot-frame" type="button" aria-label="Open preview: @see to spec">
-                <img src="assets/codelens-markdown.webp" alt="Editor showing @see CodeLens hover preview — a notes.md file with an @see annotation, and the linked design.md DES-EVENT-FORM section open as an inline preview" loading="lazy">
-                <span class="diff-pin" style="left:38%;top:22%;">@see &rarr; spec</span>
-              </button>
-            </figure>
-            <div class="diff-text">
-              <p class="diff-num">03 &mdash; Memory</p>
-              <h3 class="diff-title">Project memory in markdown.</h3>
-              <p class="diff-copy">
-                <code>@see</code> CodeLens links code back to spec. Hover any annotation
-                to preview the linked requirement or design section inline. Context menus reach
-                the workflow. The files stay plain markdown &mdash; the editor just knows about them.
-              </p>
-            </div>
-          </div>
+          <figure>
+            <button class="canvas-shot-frame diff-shot-frame" type="button" aria-label="Open preview: project.canvas source file">
+              <img src="assets/canvas-3.webp" alt="A project.canvas JSON Canvas source file beside the rendered AgenticFlowX Canvas view" loading="lazy" width="1968" height="2018">
+            </button>
+            <figcaption class="canvas-caption">
+              The visual map is still a plain <code>project.canvas</code> file in the workspace.
+            </figcaption>
+          </figure>
         </div>
       </div>
     </section>
 
     <!-- Providers -->
     <section class="roadmap" id="providers">
-      <div class="container">
+      <div class="container-wide">
         <div class="section-head-center">
           <p class="section-label">Providers</p>
-          <h2 class="section-title">Two routes. Same models.</h2>
+          <h2 class="section-title">Bring the access you already have.</h2>
           <p class="section-copy">
-            Backed by <a href="https://pi.dev" class="text-link" target="_blank" rel="noopener noreferrer">pi.dev</a> today.
-            Whether or not you have Pi installed, AgenticFlowX uses Pi to reach the providers below.
+            Use subscription-backed sign-ins, API keys, or local-compatible runtimes from one
+            settings surface. Backed by <a href="https://pi.dev" class="text-link" target="_blank" rel="noopener noreferrer">pi.dev</a> today.
           </p>
+          <div class="inline-callouts" aria-label="Provider access highlights">
+            <span class="inline-callout">Subscription sign-ins</span>
+            <span class="inline-callout">API keys</span>
+            <span class="inline-callout">Local-compatible runtimes</span>
+          </div>
         </div>
 
         <figure class="route-schematic" aria-label="AgenticFlowX talks to providers either through your installed Pi CLI via RPC, or through the bundled Pi SDK">
@@ -1500,6 +2135,38 @@
           </div>
         </div>
 
+        <div class="provider-access" aria-label="Provider setup screenshots">
+          <figure class="provider-access-card">
+            <button class="provider-access-frame diff-shot-frame" type="button" aria-label="Open preview: subscription account sign-ins">
+              <img src="assets/model-subscription-codex.webp" alt="AgenticFlowX Settings showing subscription account sign-ins for Claude and Anthropic, ChatGPT Codex, and GitHub Copilot" loading="lazy" width="1872" height="1118">
+            </button>
+            <figcaption class="provider-access-caption">
+              <strong>Subscription accounts</strong>
+              <span>Sign in with supported subscription-backed accounts such as Claude/Anthropic, ChatGPT/Codex, and GitHub Copilot.</span>
+            </figcaption>
+          </figure>
+
+          <figure class="provider-access-card">
+            <button class="provider-access-frame diff-shot-frame" type="button" aria-label="Open preview: API key provider setup">
+              <img src="assets/model-api-deepseek.webp" alt="AgenticFlowX Settings showing a saved API key provider and default model selection" loading="lazy" width="1866" height="1480">
+            </button>
+            <figcaption class="provider-access-caption">
+              <strong>Bring your own keys</strong>
+              <span>Store provider keys in VS Code SecretStorage and choose defaults for hosted API providers.</span>
+            </figcaption>
+          </figure>
+
+          <figure class="provider-access-card">
+            <button class="provider-access-frame diff-shot-frame" type="button" aria-label="Open preview: local runtime provider setup">
+              <img src="assets/model-local-llama-cpp.webp" alt="AgenticFlowX Settings showing local-compatible Llama Cpp model setup" loading="lazy" width="1856" height="1520">
+            </button>
+            <figcaption class="provider-access-caption">
+              <strong>Local-compatible runtimes</strong>
+              <span>Use local and OpenAI-compatible providers, including Ollama and llama.cpp-style runtimes.</span>
+            </figcaption>
+          </figure>
+        </div>
+
         <div class="provider-prose" aria-label="Supported providers">
           <p class="provider-prose-label">Providers Pi supports upstream</p>
           <p class="provider-prose-list">
@@ -1540,6 +2207,65 @@
       </div>
     </section>
 
+    <!-- Workbench tour -->
+    <section id="tour" class="workbench-tour">
+      <div class="container-wide">
+        <div class="section-head-center">
+          <p class="section-label">Workbench tour</p>
+          <h2 class="section-title">Inspect the surfaces when you want the slower tour.</h2>
+          <p class="section-copy">
+            The main flow is chat first, but the workbench gives you visual access to documents,
+            notes, boards, journals, traceability, and project context when you need to slow down.
+          </p>
+        </div>
+
+        <div class="product-gallery" aria-label="Product screenshots">
+          <div class="product-gallery-head">
+            <p class="product-gallery-title">Screenshots</p>
+            <p class="product-gallery-copy">Open a focused screenshot to inspect a specific part of the workflow.</p>
+          </div>
+          <div class="product-gallery-grid">
+            <button class="product-gallery-frame" type="button" aria-label="Open preview: Chat first">
+              <img src="assets/vscode/product/chat-first.webp" alt="AgenticFlowX chat panel inside VS Code" loading="lazy" width="710" height="1030">
+              <span>Chat</span>
+            </button>
+            <button class="product-gallery-frame" type="button" aria-label="Open preview: Mode switcher">
+              <img src="assets/vscode/product/mode-picker.webp" alt="AgenticFlowX chat mode picker with Code, Explore, and Spec modes" loading="lazy" width="766" height="1051">
+              <span>Modes</span>
+            </button>
+            <button class="product-gallery-frame" type="button" aria-label="Open preview: Spec mode actions">
+              <img src="assets/vscode/product/spec-mode-actions.webp" alt="Spec mode action row for refining, authoring, validating, reviewing, and approving" loading="lazy" width="710" height="1030">
+              <span>Spec</span>
+            </button>
+            <button class="product-gallery-frame" type="button" aria-label="Open preview: Workbench">
+              <img src="assets/vscode/product/workbench.webp" alt="AgenticFlowX workbench view in VS Code" loading="lazy" width="1832" height="1106">
+              <span>Workbench</span>
+            </button>
+            <button class="product-gallery-frame" type="button" aria-label="Open preview: Repo documents">
+              <img src="assets/vscode/product/repo-documents.webp" alt="Spec, design, tasks, and journal markdown files in the VS Code explorer" loading="lazy" width="1832" height="1106">
+              <span>Docs</span>
+            </button>
+            <button class="product-gallery-frame" type="button" aria-label="Open preview: Traceability">
+              <img src="assets/vscode/product/traceability.webp" alt="CodeLens traceability links from source code back to spec documents" loading="lazy" width="1830" height="1100">
+              <span>Trace</span>
+            </button>
+            <button class="product-gallery-frame" type="button" aria-label="Open preview: Board">
+              <img src="assets/board.webp" alt="AgenticFlowX board view for tracking project work" loading="lazy" width="1600" height="1000">
+              <span>Board</span>
+            </button>
+            <button class="product-gallery-frame" type="button" aria-label="Open preview: Notes">
+              <img src="assets/notes.webp" alt="AgenticFlowX notes view with repo-owned workspace notes" loading="lazy" width="1600" height="1000">
+              <span>Notes</span>
+            </button>
+            <button class="product-gallery-frame" type="button" aria-label="Open preview: Journal">
+              <img src="assets/journal.webp" alt="AgenticFlowX journal view for project history and session captures" loading="lazy" width="1600" height="1000">
+              <span>Journal</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Facts -->
     <section class="facts-section" id="facts">
       <div class="container">
@@ -1566,7 +2292,7 @@
 
           <div class="fact">
             <h3>What&rsquo;s the current status, and is it free?</h3>
-            <p>Public alpha. Stable enough for daily use; provider settings, modes, and examples are still moving. AgenticFlowX is open source under Apache 2.0. No vendor billing &mdash; you bring your own provider keys.</p>
+            <p>The current release is v2.3.0, published 2026-06-06. AgenticFlowX is open source under Apache 2.0. No vendor billing &mdash; you bring your own provider keys. Provider settings, modes, and examples are still evolving.</p>
           </div>
         </div>
       </div>
@@ -1606,7 +2332,7 @@
       <div class="container">
         <h2 class="closing-title">Start in chat.<br>Add structure when the work needs it.</h2>
         <p class="closing-copy">
-          Open source. Apache 2.0. Stable enough for daily use; modes and examples still moving.
+          Apache 2.0 open source.
         </p>
         <div class="hero-ctas">
           <a href="https://marketplace.visualstudio.com/items?itemName=AgenticFlowX.agenticflowx" class="btn-primary" target="_blank" rel="noopener noreferrer">
@@ -1632,6 +2358,7 @@
         <li><a href="https://github.com/AgenticFlowX/afx?tab=readme-ov-file#afx-agenticflowx" target="_blank" rel="noopener noreferrer">AgenticFlowX Workflow</a></li>
         <li><a href="https://marketplace.visualstudio.com/items?itemName=AgenticFlowX.agenticflowx" target="_blank" rel="noopener noreferrer">VS Code Marketplace</a></li>
         <li><a href="https://open-vsx.org/extension/agenticflowx/agenticflowx" target="_blank" rel="noopener noreferrer">Open VSX</a></li>
+        <li><a href="https://github.com/AgenticFlowX/agenticflowx/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer">Changelog</a></li>
         <li><a href="https://www.reddit.com/r/agenticflowx/" target="_blank" rel="noopener noreferrer">Reddit</a></li>
         <li><a href="https://github.com/AgenticFlowX/agenticflowx/blob/main/PRIVACY.md" target="_blank" rel="noopener noreferrer">Privacy</a></li>
       </ul>
@@ -1704,6 +2431,37 @@
         }
       }
 
+      function initModePreview() {
+        var lanes = Array.prototype.slice.call(document.querySelectorAll('[data-mode-preview]'));
+        var frame = document.querySelector('[data-mode-preview-frame]');
+        var img = document.querySelector('[data-mode-preview-image]');
+        var caption = document.querySelector('[data-mode-preview-caption]');
+        if (!lanes.length || !frame || !img || !caption) return;
+
+        function selectMode(lane) {
+          var src = lane.getAttribute('data-mode-src');
+          var alt = lane.getAttribute('data-mode-alt');
+          var text = lane.getAttribute('data-mode-caption');
+          if (!src || !alt || !text) return;
+
+          lanes.forEach(function (item) {
+            var active = item === lane;
+            item.classList.toggle('is-selected', active);
+            item.setAttribute('aria-pressed', active ? 'true' : 'false');
+          });
+
+          img.src = src;
+          img.alt = alt;
+          caption.textContent = text;
+          frame.setAttribute('aria-label', 'Open preview: ' + lane.querySelector('strong').textContent);
+        }
+
+        lanes.forEach(function (lane) {
+          lane.addEventListener('click', function () { selectMode(lane); });
+        });
+      }
+
+      initModePreview();
       Array.prototype.forEach.call(document.querySelectorAll('.diff-shot-frame'), bind);
       Array.prototype.forEach.call(document.querySelectorAll('.product-gallery-frame'), bind);
 

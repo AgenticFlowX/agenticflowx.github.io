@@ -485,7 +485,7 @@
     }
 
     /* Sections */
-    section { padding: 6rem 0; position: relative; }
+    section { padding: 5.25rem 0; position: relative; }
 
     /* Golden thread divider between sections */
     section + section::before {
@@ -518,7 +518,7 @@
     }
 
     .section-title {
-      font-size: 2.5rem;
+      font-size: 2.25rem;
       font-family: var(--serif);
       font-weight: 500;
       margin-bottom: 1rem;
@@ -545,11 +545,16 @@
       max-width: 600px;
     }
 
+    .section-head-center .section-title {
+      font-size: 2.375rem;
+    }
+
     /* AFX Viewer */
     .viewer-section {
       background:
         linear-gradient(180deg, transparent 0%, rgba(251, 246, 231, 0.68) 46%, transparent 100%);
       overflow: hidden;
+      padding-top: 3.5rem;
     }
 
     .viewer-layout {
@@ -768,29 +773,38 @@
     .workflow-section {
       background:
         linear-gradient(180deg, transparent 0%, var(--bg-subtle) 50%, transparent 100%);
+      padding-bottom: 3.5rem;
+    }
+
+    .workflow-section .section-head-center {
+      margin-bottom: 2.5rem;
     }
 
     .mode-lanes {
-      margin-top: 2.75rem;
-      padding: 1rem;
+      margin-top: 1.5rem;
+      padding: clamp(0.875rem, 2vw, 1.25rem);
       border: 1px solid rgba(160, 126, 57, 0.16);
-      border-radius: 18px;
+      border-radius: 12px;
       background:
-        linear-gradient(180deg, rgba(255, 251, 237, 0.64), rgba(251, 246, 231, 0.34));
+        linear-gradient(145deg, rgba(255, 251, 237, 0.76), rgba(251, 246, 231, 0.36));
       box-shadow:
         0 1px 0 rgba(255, 255, 255, 0.66) inset,
-        0 24px 70px -56px rgba(20, 27, 53, 0.5);
+        0 24px 70px -58px rgba(20, 27, 53, 0.5);
     }
 
     .mode-showcase {
       display: grid;
-      grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
-      gap: 1.5rem;
-      align-items: stretch;
+      gap: 1.125rem;
+      align-items: start;
     }
 
-    .mode-copy {
-      padding: 1rem;
+    .mode-header {
+      padding: 0.625rem 0.625rem 0.125rem;
+    }
+
+    .mode-header-main {
+      min-width: 0;
+      max-width: 720px;
     }
 
     .mode-eyebrow {
@@ -805,145 +819,156 @@
 
     .mode-title {
       font-family: var(--serif);
-      font-size: 1.75rem;
+      font-size: 1.5rem;
       font-weight: 500;
       color: var(--text);
-      line-height: 1.14;
-      margin-bottom: 0.75rem;
+      line-height: 1.16;
+      margin-bottom: 0.625rem;
       font-variation-settings: "opsz" 96, "SOFT" 25;
     }
 
     .mode-copy-text {
-      max-width: 470px;
+      max-width: 720px;
       color: var(--text-secondary);
       font-size: 0.9375rem;
-      line-height: 1.65;
-      margin-bottom: 1.25rem;
-    }
-
-    .mode-lane-grid {
-      display: grid;
-      gap: 0.75rem;
-    }
-
-    .mode-lane {
-      display: block;
-      width: 100%;
-      padding: 1rem;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      background: rgba(255, 251, 237, 0.55);
-      color: inherit;
-      font: inherit;
-      text-align: left;
-      appearance: none;
-      -webkit-appearance: none;
-      cursor: pointer;
-      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.52) inset;
-      transition: background 0.15s, border-color 0.15s, box-shadow 0.15s, transform 0.15s;
-    }
-
-    .mode-lane:hover {
-      transform: translateY(-1px);
-      border-color: var(--border-hover);
-      background: rgba(255, 251, 237, 0.76);
-    }
-
-    .mode-lane:focus-visible {
-      outline: 2px solid var(--accent-bright);
-      outline-offset: 3px;
-    }
-
-    .mode-lane.is-selected {
-      border-color: rgba(160, 126, 57, 0.36);
-      background: rgba(212, 166, 86, 0.13);
-      box-shadow:
-        0 1px 0 rgba(255, 255, 255, 0.64) inset,
-        0 14px 36px -30px rgba(20, 27, 53, 0.5);
-    }
-
-    .mode-lane strong {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: var(--text);
-      font-size: 0.9375rem;
-      margin-bottom: 0.375rem;
-    }
-
-    .mode-lane strong::before {
-      content: "";
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 0 3px rgba(212, 166, 86, 0.18);
-      flex: 0 0 auto;
-    }
-
-    .mode-lane.is-selected strong::after {
-      content: "Selected";
-      font-family: var(--mono);
-      font-size: 0.625rem;
-      letter-spacing: 0.12em;
-      color: var(--accent-deep);
-      border: 1px solid rgba(160, 126, 57, 0.22);
-      border-radius: 999px;
-      padding: 0.125rem 0.375rem;
-      margin-left: auto;
-    }
-
-    .mode-lane span {
-      display: block;
-      color: var(--text-secondary);
-      font-size: 0.875rem;
       line-height: 1.55;
     }
 
-    .mode-shot {
+    .mode-feature-list {
+      display: grid;
+      gap: 0.875rem;
+    }
+
+    .mode-feature {
+      display: grid;
+      grid-template-columns: minmax(220px, 0.29fr) minmax(0, 0.71fr);
+      gap: clamp(1rem, 2vw, 1.5rem);
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: clamp(0.875rem, 1.8vw, 1.125rem);
+      border: 1px solid rgba(160, 126, 57, 0.18);
+      border-radius: 12px;
+      background:
+        linear-gradient(145deg, rgba(255, 251, 237, 0.66), rgba(251, 246, 231, 0.3));
+      box-shadow:
+        0 1px 0 rgba(255, 251, 237, 0.68) inset,
+        0 18px 48px -48px rgba(20, 27, 53, 0.44);
+    }
+
+    .mode-feature::before {
+      content: "";
+      position: absolute;
+      top: 0.875rem;
+      bottom: 0.875rem;
+      left: 0;
+      width: 2px;
+      border-radius: 0 999px 999px 0;
+      background: rgba(160, 126, 57, 0.72);
+    }
+
+    .mode-feature.explore::before {
+      background: rgba(74, 110, 90, 0.66);
+    }
+
+    .mode-feature.spec::before {
+      background: rgba(212, 166, 86, 0.82);
+    }
+
+    .mode-feature-copy {
+      min-width: 0;
+      padding-left: 0.125rem;
+    }
+
+    .mode-feature-kicker {
+      font-family: var(--mono);
+      font-size: 0.625rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .mode-feature-title {
+      color: var(--text);
+      font-size: 1.0625rem;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+
+    .mode-feature-text {
+      color: var(--text-secondary);
+      font-size: 0.9375rem;
+      line-height: 1.55;
+      margin-bottom: 0.875rem;
+    }
+
+    .mode-chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.375rem;
+      list-style: none;
+    }
+
+    .mode-chip-row li {
+      color: var(--text-tertiary);
+      border: 1px solid rgba(160, 126, 57, 0.18);
+      border-radius: 999px;
+      background: rgba(255, 251, 237, 0.58);
+      font-family: var(--mono);
+      font-size: 0.5625rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      line-height: 1.2;
+      padding: 0.1875rem 0.375rem;
+      text-transform: uppercase;
+    }
+
+    .mode-feature-shot {
       margin: 0;
       min-width: 0;
     }
 
-    .mode-shot-frame {
-      display: block;
-      width: 100%;
-      padding: 0;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      background: var(--bg-element);
-      overflow: hidden;
-      box-shadow:
-        0 1px 0 rgba(255, 251, 237, 0.55) inset,
-        0 28px 70px -44px rgba(20, 27, 53, 0.46);
-      transition: transform 0.16s, border-color 0.16s, box-shadow 0.16s;
-    }
-
-    .mode-shot-frame:hover {
-      transform: translateY(-2px);
-      border-color: var(--border-hover);
-      box-shadow:
-        0 1px 0 rgba(255, 251, 237, 0.55) inset,
-        0 34px 78px -48px rgba(20, 27, 53, 0.55);
-    }
-
-    .mode-shot-frame img {
-      display: block;
-      width: 100%;
-      aspect-ratio: 189 / 200;
-      height: auto;
-      object-fit: contain;
-      object-position: top center;
+    .mode-feature-frame.diff-shot-frame {
+      border-color: rgba(20, 27, 53, 0.16);
+      border-radius: 10px;
+      aspect-ratio: 16 / 10;
       background: #f3f2ef;
+      box-shadow:
+        0 1px 0 rgba(255, 251, 237, 0.6) inset,
+        0 22px 54px -38px rgba(20, 27, 53, 0.44);
+      cursor: zoom-in;
+      transition: border-color 0.16s, box-shadow 0.16s, transform 0.16s;
     }
 
-    .mode-caption {
-      margin-top: 0.75rem;
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      letter-spacing: 0.04em;
+    .mode-feature-frame.diff-shot-frame:hover,
+    .mode-feature-frame.diff-shot-frame:focus-visible {
+      transform: translateY(-1px);
+      border-color: rgba(160, 126, 57, 0.34);
+      box-shadow:
+        0 1px 0 rgba(255, 251, 237, 0.64) inset,
+        0 28px 66px -42px rgba(20, 27, 53, 0.52);
+    }
+
+    .mode-feature-frame.diff-shot-frame img {
+      height: 100%;
+      object-fit: cover;
+      object-position: 50% 88%;
+    }
+
+    .mode-feature.spec .mode-feature-frame.diff-shot-frame img {
+      object-position: 50% 92%;
+    }
+
+    .mode-feature-shot-caption {
+      max-width: 92%;
+      margin-top: 0.5rem;
       color: var(--text-muted);
-      line-height: 1.5;
+      font-family: var(--mono);
+      font-size: 0.625rem;
+      letter-spacing: 0.04em;
+      line-height: 1.45;
     }
 
     .canvas-section {
@@ -1056,110 +1081,136 @@
       background: var(--bg);
     }
 
-    /* Workflow cards */
-    .surfaces-grid {
+    /* Workflow loop */
+    .workflow-loop {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1.5rem;
-      margin-top: 1rem;
+      grid-template-columns: minmax(240px, 0.72fr) minmax(0, 1.28fr);
+      gap: clamp(1.25rem, 3vw, 2rem);
       align-items: stretch;
-    }
-
-    .surface-card {
-      background: var(--bg-element);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 2rem;
-      position: relative;
-      overflow: hidden;
+      margin-top: 0.75rem;
+      padding: clamp(1rem, 2vw, 1.25rem);
+      border: 1px solid rgba(160, 126, 57, 0.18);
+      border-radius: 12px;
+      background:
+        linear-gradient(145deg, rgba(255, 251, 237, 0.78), rgba(251, 246, 231, 0.38));
       box-shadow:
-        0 1px 0 rgba(255, 255, 255, 0.62) inset,
-        0 20px 54px -46px rgba(20, 27, 53, 0.42);
-      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
-    }
-    .surface-card:hover {
-      border-color: var(--border-hover);
-      transform: translateY(-2px);
-      box-shadow:
-        0 1px 0 rgba(255, 255, 255, 0.7) inset,
-        0 28px 68px -48px rgba(20, 27, 53, 0.52);
+        0 1px 0 rgba(255, 255, 255, 0.68) inset,
+        0 22px 62px -54px rgba(20, 27, 53, 0.5);
     }
 
-    .surface-card::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-    }
-    .surface-card.chat::before { background: var(--accent); }
-    .surface-card.spec::before { background: var(--accent-deep); }
-    .surface-card.workbench::before { background: var(--accent); }
-
-    .surface-brand {
-      font-family: var(--serif);
-      font-size: 1.625rem;
-      font-weight: 500;
-      color: var(--text);
-      letter-spacing: 0;
-      line-height: 1;
-      margin-bottom: 0.5rem;
-      font-variation-settings: "opsz" 96, "SOFT" 25;
+    .workflow-loop-hook {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-width: 0;
+      padding: 0.5rem 0.5rem 0.5rem 0.625rem;
     }
 
-    .surface-brand a {
-      color: var(--text);
-      border-bottom: 1px solid var(--accent-dim);
-    }
-    .surface-brand a:hover {
-      color: var(--accent-deep);
-      border-bottom-color: var(--accent);
-    }
-
-    .surface-role {
+    .workflow-loop-kicker,
+    .workflow-step-label,
+    .workflow-loop-result strong {
       font-family: var(--mono);
-      font-size: 0.6875rem;
+      font-size: 0.625rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      line-height: 1.3;
       text-transform: uppercase;
-      letter-spacing: 0.18em;
-      font-weight: 600;
+    }
+
+    .workflow-loop-kicker {
       color: var(--accent);
-      margin-bottom: 1.25rem;
+      margin-bottom: 0.625rem;
     }
 
-    .surface-copy {
-      font-size: 0.9375rem;
+    .workflow-loop-title {
+      color: var(--text);
+      font-size: 1.35rem;
+      line-height: 1.15;
+      margin-bottom: 0.625rem;
+    }
+
+    .workflow-loop-copy {
       color: var(--text-secondary);
-      line-height: 1.65;
-      margin-bottom: 1.25rem;
+      font-size: 0.9375rem;
+      line-height: 1.55;
     }
 
-    .surface-bullets {
+    .workflow-thread {
+      min-width: 0;
+      border: 1px solid rgba(160, 126, 57, 0.16);
+      border-radius: 10px;
+      background: rgba(255, 251, 237, 0.5);
+      overflow: hidden;
+    }
+
+    .workflow-steps {
+      display: grid;
+      gap: 0;
       list-style: none;
     }
 
-    .surface-bullets li {
+    .workflow-step {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 0.875rem;
+      padding: 1rem;
       position: relative;
-      padding-left: 2rem;
-      margin-top: 0.75rem;
-      font-size: 0.875rem;
-      color: var(--text-secondary);
-      line-height: 1.5;
-      overflow-wrap: anywhere;
     }
 
-    .surface-bullets li::before {
-      content: "->";
-      color: var(--text-tertiary);
+    .workflow-step + .workflow-step {
+      border-top: 1px solid rgba(160, 126, 57, 0.14);
+    }
+
+    .workflow-step-index {
+      display: inline-grid;
+      place-items: center;
+      width: 2rem;
+      height: 2rem;
+      border: 1px solid rgba(160, 126, 57, 0.24);
+      border-radius: 999px;
+      background: rgba(255, 251, 237, 0.82);
+      color: var(--accent-deep);
       font-family: var(--mono);
-      position: absolute;
-      left: 0;
-      top: 0;
+      font-size: 0.6875rem;
+      font-weight: 700;
+      line-height: 1;
+      box-shadow: 0 0 0 4px rgba(212, 166, 86, 0.08);
     }
 
-    .surface-bullets code {
-      white-space: normal;
-      overflow-wrap: anywhere;
+    .workflow-step-label {
+      display: block;
+      color: var(--accent);
+      margin-bottom: 0.375rem;
+    }
+
+    .workflow-step h4 {
+      color: var(--text);
+      font-size: 1rem;
+      line-height: 1.25;
+      margin-bottom: 0.3125rem;
+    }
+
+    .workflow-step p {
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      line-height: 1.55;
+    }
+
+    .workflow-loop-result {
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      padding: 0.875rem 1rem;
+      border-top: 1px solid rgba(160, 126, 57, 0.14);
+      background: rgba(212, 166, 86, 0.08);
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      line-height: 1.45;
+    }
+
+    .workflow-loop-result strong {
+      color: var(--accent-deep);
+      flex: 0 0 auto;
     }
 
     /* Lightbox-enabled screenshots */
@@ -1206,10 +1257,6 @@
       aspect-ratio: 16 / 10;
     }
 
-    .mode-shot-frame.diff-shot-frame {
-      aspect-ratio: 189 / 200;
-    }
-
     .canvas-detail-grid .canvas-shot-frame.diff-shot-frame {
       aspect-ratio: 16 / 10;
     }
@@ -1224,12 +1271,6 @@
     .provider-access-frame.diff-shot-frame img {
       height: 100%;
       object-fit: cover;
-    }
-
-    .mode-shot-frame.diff-shot-frame img {
-      height: 100%;
-      object-fit: contain;
-      background: #f3f2ef;
     }
 
     .workflow-video-figure {
@@ -1856,15 +1897,13 @@
 
     /* Responsive */
     @media (max-width: 960px) {
-      .surfaces-grid { grid-template-columns: 1fr; }
+      .workflow-loop { grid-template-columns: 1fr; }
       .viewer-layout { grid-template-columns: 1fr; align-items: start; }
       .viewer-action-grid { grid-template-columns: 1fr; }
       .trace-layout { grid-template-columns: 1fr; align-items: start; }
       .canvas-layout { grid-template-columns: 1fr; align-items: start; }
       .canvas-points { grid-template-columns: 1fr; }
       .canvas-detail-grid { grid-template-columns: 1fr; }
-      .mode-lane-grid { grid-template-columns: 1fr; }
-      .mode-showcase { grid-template-columns: 1fr; }
       .story-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
 
@@ -1950,10 +1989,20 @@
       .story-strip a { padding: 0.625rem 0.75rem; }
       .inline-callouts { gap: 0.375rem; margin-top: 1rem; }
       .inline-callout { font-size: 0.625rem; }
+      .workflow-section .section-head-center { margin-bottom: 2rem; }
+      .workflow-loop { padding: 0.75rem; }
+      .workflow-loop-hook { padding: 0.375rem 0.375rem 0.125rem; }
+      .workflow-loop-title { font-size: 1.2rem; }
+      .workflow-step { gap: 0.75rem; padding: 0.875rem; }
+      .workflow-loop-result {
+        display: grid;
+        gap: 0.375rem;
+      }
       .mode-lanes { padding: 0.75rem; }
-      .mode-copy { padding: 0.5rem; }
+      .mode-header { padding: 0.5rem 0.5rem 0; }
       .mode-title { font-size: 1.45rem; }
-      .mode-shot-frame { border-radius: 10px; }
+      .mode-feature { grid-template-columns: 1fr; padding: 0.75rem; }
+      .mode-feature-frame.diff-shot-frame { aspect-ratio: 16 / 10; }
       .hero-shot { margin-top: 2rem; }
       .viewer-layout { gap: 1.5rem; margin-bottom: 1.5rem; }
       .viewer-points { gap: 0.75rem; }
@@ -2064,121 +2113,158 @@
       <div class="container">
         <div class="section-head-center">
           <p class="section-label">Core workflow</p>
-          <h2 class="section-title">Start in chat. Add structure when the work needs it.</h2>
+          <h2 class="section-title">Start loose. Leave a trail when it matters.</h2>
           <p class="section-copy">
-            AgenticFlowX keeps daily coding conversational while giving serious work a traceable
-            path through specs, designs, tasks, notes, journals, and code.
+            AgenticFlowX keeps daily coding conversational, then lets serious work become specs,
+            designs, tasks, notes, journals, and code context in the repo.
           </p>
           <div class="inline-callouts" aria-label="Core workflow highlights">
-            <span class="inline-callout">Conversation first</span>
-            <span class="inline-callout">Structure on demand</span>
-            <span class="inline-callout">Repo-owned files</span>
+            <span class="inline-callout">Fast chat</span>
+            <span class="inline-callout">Guardrails on demand</span>
+            <span class="inline-callout">Durable repo memory</span>
           </div>
         </div>
 
-        <div class="surfaces-grid">
-          <div class="surface-card chat">
-            <p class="surface-role">Chat</p>
-            <h3 class="surface-brand">Code in conversation</h3>
-            <p class="surface-copy">
-              Ask questions, mention files, switch models, and steer the work while the context is
-              still fresh.
+        <div class="workflow-loop" aria-label="How AgenticFlowX turns chat into durable work">
+          <div class="workflow-loop-hook">
+            <p class="workflow-loop-kicker">Working loop</p>
+            <h3 class="workflow-loop-title">The conversation can become the project record.</h3>
+            <p class="workflow-loop-copy">
+              A normal coding chat stays lightweight. When the work needs decisions, review, or
+              traceability, AFX turns that same flow into files your team can inspect later.
             </p>
-            <ul class="surface-bullets">
-              <li>File mentions and quick commands</li>
-              <li>Streaming turns, tool calls, and model switching</li>
-              <li>Follow up while work is still in flight</li>
-            </ul>
           </div>
 
-          <div class="surface-card spec">
-            <p class="surface-role">Spec workflow</p>
-            <h3 class="surface-brand">Make the next step obvious</h3>
-            <p class="surface-copy">
-              Move from requirements to design, tasks, implementation, review, and approval without
-              leaving VS Code.
-            </p>
-            <ul class="surface-bullets">
-              <li>Refine requirements and shape the design</li>
-              <li>Break work into tasks before implementation</li>
-              <li>Validate, review, and approve each stage</li>
-            </ul>
-          </div>
-
-          <div class="surface-card workbench">
-            <p class="surface-role">Workbench</p>
-            <h3 class="surface-brand">Project memory you can see</h3>
-            <p class="surface-copy">
-              Notes, docs, boards, journals, and pipeline views sit over plain markdown files in
-              your workspace.
-            </p>
-            <ul class="surface-bullets">
-              <li>Tasks, notes, journals, and docs stay in the repo</li>
-              <li>Workbench views over those files, no separate database</li>
-              <li>Trace from intent to design, tasks, and code</li>
-            </ul>
+          <div class="workflow-thread">
+            <ol class="workflow-steps">
+              <li class="workflow-step">
+                <span class="workflow-step-index">01</span>
+                <div>
+                  <span class="workflow-step-label">Chat</span>
+                  <h4>Keep the fast path fast.</h4>
+                  <p>
+                    Ask questions, mention files, switch models, run commands, and follow up while
+                    the context is still fresh.
+                  </p>
+                </div>
+              </li>
+              <li class="workflow-step">
+                <span class="workflow-step-index">02</span>
+                <div>
+                  <span class="workflow-step-label">Structure</span>
+                  <h4>Add guardrails at the moment of risk.</h4>
+                  <p>
+                    Move from requirements to design, tasks, implementation, validation, review, and
+                    approval without leaving VS Code.
+                  </p>
+                </div>
+              </li>
+              <li class="workflow-step">
+                <span class="workflow-step-index">03</span>
+                <div>
+                  <span class="workflow-step-label">Repo memory</span>
+                  <h4>Preserve the reason, not just the change.</h4>
+                  <p>
+                    Notes, docs, boards, journals, and pipeline views sit over plain markdown files
+                    in your workspace.
+                  </p>
+                </div>
+              </li>
+            </ol>
+            <div class="workflow-loop-result">
+              <strong>Result</strong>
+              <span>Ship the quick turn, or keep a traceable path from intent to spec, task, and code.</span>
+            </div>
           </div>
         </div>
 
         <div class="mode-lanes" aria-label="AgenticFlowX Code, Explore, and Spec modes">
           <div class="mode-showcase">
-            <div class="mode-copy">
-              <p class="mode-eyebrow">Code / Explore / Spec</p>
-              <h3 class="mode-title">Choose how much structure the next turn needs.</h3>
-              <p class="mode-copy-text">
-                AgenticFlowX is not locked into one workflow. Stay loose in Code mode, inspect
-                safely in Explore mode, then switch into Spec mode when the work needs a planned
-                path from requirements to design, tasks, and implementation.
-              </p>
-
-              <div class="mode-lane-grid">
-                <button
-                  class="mode-lane is-selected"
-                  type="button"
-                  data-mode-preview
-                  data-mode-src="assets/vscode/product/mode-code.webp"
-                  data-mode-alt="AgenticFlowX Code mode showing capabilities, available commands, and the Code intent controls"
-                  data-mode-caption="Code mode keeps the default chat flow open for implementation, debugging, edits, shell commands, tests, and fast follow-up."
-                  aria-pressed="true"
-                >
-                  <strong>Code mode</strong>
-                  <span>The default lane for everyday implementation, debugging, edits, and fast follow-up.</span>
-                </button>
-                <button
-                  class="mode-lane"
-                  type="button"
-                  data-mode-preview
-                  data-mode-src="assets/vscode/product/mode-explore.webp"
-                  data-mode-alt="AgenticFlowX Explore mode showing read-only capabilities, boundaries, and PRD intent controls"
-                  data-mode-caption="Explore mode is the safer inspection lane: trace behavior, inspect code, and plan changes before editing."
-                  aria-pressed="false"
-                >
-                  <strong>Explore mode</strong>
-                  <span>Read-only inspection for tracing behavior, planning changes, and understanding unfamiliar code.</span>
-                </button>
-                <button
-                  class="mode-lane is-featured"
-                  type="button"
-                  data-mode-preview
-                  data-mode-src="assets/vscode/product/mode-spec.webp"
-                  data-mode-alt="AgenticFlowX Spec mode showing planning boundaries, permitted spec commands, and the Spec workflow rail"
-                  data-mode-caption="Spec mode adds the workflow rail: refine, author, validate, review, approve, then move from spec to design to tasks."
-                  aria-pressed="false"
-                >
-                  <strong>Spec mode</strong>
-                  <span>The planning lane for requirements, design, tasks, validation, review, approval, and traceability.</span>
-                </button>
+            <div class="mode-header">
+              <div class="mode-header-main">
+                <p class="mode-eyebrow">Code / Explore / Spec</p>
+                <h3 class="mode-title">Choose how much structure the next turn needs.</h3>
+                <p class="mode-copy-text">
+                  AgenticFlowX is not locked into one workflow. Stay loose in Code mode, inspect
+                  safely in Explore mode, then switch into Spec mode when the work needs a planned
+                  path from requirements to design, tasks, and implementation.
+                </p>
               </div>
             </div>
 
-            <figure class="mode-shot">
-              <button class="mode-shot-frame diff-shot-frame" type="button" aria-label="Open preview: Code mode" data-mode-preview-frame>
-                <img data-mode-preview-image src="assets/vscode/product/mode-code.webp" alt="AgenticFlowX Code mode showing capabilities, available commands, and the Code intent controls" loading="lazy" width="1890" height="2000">
-              </button>
-              <figcaption class="mode-caption" data-mode-preview-caption aria-live="polite">
-                Code mode keeps the default chat flow open for implementation, debugging, edits, shell commands, tests, and fast follow-up.
-              </figcaption>
-            </figure>
+            <div class="mode-feature-list" aria-label="AgenticFlowX mode screenshots">
+              <article class="mode-feature code">
+                <div class="mode-feature-copy">
+                  <p class="mode-feature-kicker">Code mode / Default</p>
+                  <h4 class="mode-feature-title">Everyday implementation stays conversational.</h4>
+                  <p class="mode-feature-text">
+                    The default lane keeps chat open for edits, shell commands, tests, debugging,
+                    and fast follow-up.
+                  </p>
+                  <ul class="mode-chip-row" aria-label="Code mode controls">
+                    <li>Intent rail</li>
+                    <li>Mode switch</li>
+                    <li>.afx.yaml</li>
+                  </ul>
+                </div>
+                <figure class="mode-feature-shot">
+                  <button class="mode-feature-frame diff-shot-frame" type="button" aria-label="Open preview: Code mode">
+                    <img src="assets/vscode/product/mode-code.webp" alt="AgenticFlowX Code mode showing capabilities, available commands, and the Code intent controls" loading="lazy" decoding="async" width="1890" height="2000">
+                  </button>
+                  <figcaption class="mode-feature-shot-caption">
+                    Bottom rail: intent, mode, .afx.yaml, and memory stay visible.
+                  </figcaption>
+                </figure>
+              </article>
+
+              <article class="mode-feature explore">
+                <div class="mode-feature-copy">
+                  <p class="mode-feature-kicker">Explore mode / Read-only</p>
+                  <h4 class="mode-feature-title">Inspect before you let the agent edit.</h4>
+                  <p class="mode-feature-text">
+                    Use Explore when you want behavior tracing, option comparison, and planning
+                    without mutation.
+                  </p>
+                  <ul class="mode-chip-row" aria-label="Explore mode controls">
+                    <li>Default intent</li>
+                    <li>PRD lane</li>
+                    <li>Read-only input</li>
+                  </ul>
+                </div>
+                <figure class="mode-feature-shot">
+                  <button class="mode-feature-frame diff-shot-frame" type="button" aria-label="Open preview: Explore mode">
+                    <img src="assets/vscode/product/mode-explore.webp" alt="AgenticFlowX Explore mode showing read-only capabilities, boundaries, and PRD intent controls" loading="lazy" decoding="async" width="1890" height="2000">
+                  </button>
+                  <figcaption class="mode-feature-shot-caption">
+                    Read-only status is visible in the prompt, footer, and intent rail.
+                  </figcaption>
+                </figure>
+              </article>
+
+              <article class="mode-feature spec">
+                <div class="mode-feature-copy">
+                  <p class="mode-feature-kicker">Spec mode / Planned</p>
+                  <h4 class="mode-feature-title">Workflow guardrails for traceable work.</h4>
+                  <p class="mode-feature-text">
+                    Spec mode adds the workflow rail for refining requirements, authoring designs,
+                    slicing tasks, validation, review, and approval.
+                  </p>
+                  <ul class="mode-chip-row" aria-label="Spec mode controls">
+                    <li>Spec workflow</li>
+                    <li>Actions</li>
+                    <li>spec.md</li>
+                  </ul>
+                </div>
+                <figure class="mode-feature-shot">
+                  <button class="mode-feature-frame diff-shot-frame" type="button" aria-label="Open preview: Spec mode">
+                    <img src="assets/vscode/product/mode-spec.webp" alt="AgenticFlowX Spec mode showing planning boundaries, permitted spec commands, and the Spec workflow rail" loading="lazy" decoding="async" width="1890" height="2000">
+                  </button>
+                  <figcaption class="mode-feature-shot-caption">
+                    Spec rail shows phases, document actions, and the active spec file.
+                  </figcaption>
+                </figure>
+              </article>
+            </div>
           </div>
         </div>
       </div>
@@ -2715,37 +2801,6 @@
         }
       }
 
-      function initModePreview() {
-        var lanes = Array.prototype.slice.call(document.querySelectorAll('[data-mode-preview]'));
-        var frame = document.querySelector('[data-mode-preview-frame]');
-        var img = document.querySelector('[data-mode-preview-image]');
-        var caption = document.querySelector('[data-mode-preview-caption]');
-        if (!lanes.length || !frame || !img || !caption) return;
-
-        function selectMode(lane) {
-          var src = lane.getAttribute('data-mode-src');
-          var alt = lane.getAttribute('data-mode-alt');
-          var text = lane.getAttribute('data-mode-caption');
-          if (!src || !alt || !text) return;
-
-          lanes.forEach(function (item) {
-            var active = item === lane;
-            item.classList.toggle('is-selected', active);
-            item.setAttribute('aria-pressed', active ? 'true' : 'false');
-          });
-
-          img.src = src;
-          img.alt = alt;
-          caption.textContent = text;
-          frame.setAttribute('aria-label', 'Open preview: ' + lane.querySelector('strong').textContent);
-        }
-
-        lanes.forEach(function (lane) {
-          lane.addEventListener('click', function () { selectMode(lane); });
-        });
-      }
-
-      initModePreview();
       Array.prototype.forEach.call(document.querySelectorAll('.diff-shot-frame'), bind);
       Array.prototype.forEach.call(document.querySelectorAll('.product-gallery-frame'), bind);
 

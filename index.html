@@ -251,6 +251,17 @@
     .hero-tagline a:hover em { color: var(--accent-deep); }
     .hero-tagline a:hover em::after { opacity: 0.55; background: var(--accent-deep); }
 
+    .hero-promise {
+      max-width: 920px;
+      margin: -0.5rem auto 1rem;
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3.75rem);
+      font-weight: 500;
+      line-height: 1.06;
+      color: var(--text);
+      font-variation-settings: "opsz" 128, "SOFT" 28;
+    }
+
     .hero-tagline-mark {
       position: relative;
       display: inline-block;
@@ -543,10 +554,10 @@
 
     .viewer-layout {
       display: grid;
-      grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
-      gap: 2.25rem;
-      align-items: end;
-      margin-bottom: 2rem;
+      grid-template-columns: minmax(340px, 0.86fr) minmax(0, 1.14fr);
+      gap: clamp(2rem, 3vw, 3rem);
+      align-items: start;
+      margin-bottom: 1.75rem;
     }
 
     .viewer-copy .section-copy {
@@ -581,6 +592,22 @@
       line-height: 1.55;
     }
 
+    .viewer-action-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      margin: 0 0 2rem;
+    }
+
+    .viewer-action-grid li {
+      min-height: 100%;
+      padding: 1rem 1rem 1.0625rem 1.125rem;
+      background:
+        linear-gradient(180deg, rgba(255, 251, 237, 0.68), rgba(255, 251, 237, 0.34));
+      box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.58) inset,
+        0 18px 44px -40px rgba(20, 27, 53, 0.42);
+    }
+
     .viewer-detail,
     .viewer-showcase {
       margin: 0;
@@ -599,6 +626,78 @@
         0 24px 60px -38px rgba(20, 27, 53, 0.44);
       transition: transform 0.16s, border-color 0.16s, box-shadow 0.16s;
     }
+
+    .annotated-shot {
+      position: relative;
+    }
+
+    .shot-annotation {
+      position: absolute;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      max-width: 220px;
+      padding: 0.375rem 0.5625rem;
+      border: 1px solid rgba(160, 126, 57, 0.28);
+      border-radius: 999px;
+      background: rgba(255, 251, 237, 0.88);
+      color: var(--text);
+      font-family: var(--mono);
+      font-size: 0.625rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      line-height: 1.2;
+      text-transform: uppercase;
+      box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.68) inset,
+        0 16px 32px -26px rgba(20, 27, 53, 0.5);
+      pointer-events: none;
+    }
+
+    .shot-annotation::before {
+      content: "";
+      width: 0.45rem;
+      height: 0.45rem;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 3px rgba(212, 166, 86, 0.18);
+      flex: 0 0 auto;
+    }
+
+    .shot-annotation::after {
+      content: "";
+      position: absolute;
+      width: var(--line-w, 64px);
+      height: 1px;
+      background: rgba(160, 126, 57, 0.52);
+      transform: rotate(var(--line-rotate, 0deg));
+      transform-origin: left center;
+    }
+
+    .shot-annotation.top-left { top: 27%; left: 5%; }
+    .shot-annotation.top-left::after { left: 100%; top: 50%; --line-w: 76px; --line-rotate: -8deg; }
+
+    .shot-annotation.mid-right { top: 34%; right: 5%; }
+    .shot-annotation.mid-right::after { right: 100%; top: 50%; --line-w: 88px; --line-rotate: 172deg; }
+
+    .shot-annotation.bottom-left { left: 6%; bottom: 6%; }
+    .shot-annotation.bottom-left::after { left: 100%; top: 44%; --line-w: 96px; --line-rotate: -22deg; }
+
+    .shot-annotation.raw-left { left: 5%; top: 18%; }
+    .shot-annotation.raw-left::after { left: 100%; top: 50%; --line-w: 74px; --line-rotate: 5deg; }
+
+    .shot-annotation.rendered-right { right: 7%; top: 20%; }
+    .shot-annotation.rendered-right::after { right: 100%; top: 50%; --line-w: 84px; --line-rotate: 178deg; }
+
+    .shot-annotation.trace-lens { left: 10%; top: 27%; }
+    .shot-annotation.trace-lens::after { left: 100%; top: 50%; --line-w: 82px; --line-rotate: -7deg; }
+
+    .shot-annotation.trace-hover { right: 20%; top: 30%; }
+    .shot-annotation.trace-hover::after { right: 100%; top: 50%; --line-w: 98px; --line-rotate: 176deg; }
+
+    .shot-annotation.trace-repo { right: 6%; top: 16%; }
+    .shot-annotation.trace-repo::after { right: 100%; top: 50%; --line-w: 70px; --line-rotate: 188deg; }
 
     .viewer-shot-frame:hover {
       transform: translateY(-2px);
@@ -631,6 +730,38 @@
     .viewer-showcase {
       max-width: 1460px;
       margin: 0 auto;
+    }
+
+    /* IDE traceability */
+    .trace-section {
+      background:
+        radial-gradient(circle at 78% 22%, rgba(212, 166, 86, 0.12), transparent 34%),
+        linear-gradient(180deg, transparent 0%, rgba(251, 246, 231, 0.52) 56%, transparent 100%);
+      overflow: hidden;
+    }
+
+    .trace-layout {
+      display: grid;
+      grid-template-columns: minmax(340px, 0.78fr) minmax(0, 1.22fr);
+      gap: clamp(2rem, 3vw, 3rem);
+      align-items: start;
+      margin-bottom: 1.75rem;
+    }
+
+    .trace-copy .section-copy {
+      max-width: 620px;
+    }
+
+    .trace-shot {
+      margin: 0;
+    }
+
+    .trace-shot-frame {
+      background: #20242d;
+    }
+
+    .trace-points {
+      margin-bottom: 0;
     }
 
     /* Product story sections */
@@ -762,10 +893,6 @@
       margin-left: auto;
     }
 
-    .mode-lane.is-featured.is-selected strong::after {
-      content: "Structured";
-    }
-
     .mode-lane span {
       display: block;
       color: var(--text-secondary);
@@ -803,11 +930,11 @@
     .mode-shot-frame img {
       display: block;
       width: 100%;
-      aspect-ratio: 4 / 3;
+      aspect-ratio: 189 / 200;
       height: auto;
       object-fit: contain;
       object-position: top center;
-      background: #20242d;
+      background: #f3f2ef;
     }
 
     .mode-caption {
@@ -827,10 +954,14 @@
 
     .canvas-layout {
       display: grid;
-      grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
-      gap: 2.25rem;
-      align-items: end;
-      margin-bottom: 2rem;
+      grid-template-columns: minmax(340px, 0.86fr) minmax(0, 1.14fr);
+      gap: clamp(2rem, 3vw, 3rem);
+      align-items: start;
+      margin-bottom: 1.75rem;
+    }
+
+    .canvas-main-figure {
+      margin: 0;
     }
 
     .canvas-kicker {
@@ -850,11 +981,27 @@
       margin-bottom: 1rem;
     }
 
+    .canvas-points {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      margin: 0 0 2rem;
+    }
+
+    .canvas-points li {
+      min-height: 100%;
+      padding: 1rem 1rem 1.0625rem 1.125rem;
+      background:
+        linear-gradient(180deg, rgba(255, 251, 237, 0.68), rgba(255, 251, 237, 0.34));
+      box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.58) inset,
+        0 18px 44px -40px rgba(20, 27, 53, 0.42);
+    }
+
     .canvas-detail-grid {
       display: grid;
-      grid-template-columns: minmax(0, 0.7fr) minmax(0, 1fr);
-      gap: 1rem;
-      margin-top: 1rem;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.25rem;
+      margin-top: 0;
     }
 
     .canvas-shot-frame {
@@ -1060,7 +1207,7 @@
     }
 
     .mode-shot-frame.diff-shot-frame {
-      aspect-ratio: 4 / 3;
+      aspect-ratio: 189 / 200;
     }
 
     .canvas-detail-grid .canvas-shot-frame.diff-shot-frame {
@@ -1082,7 +1229,7 @@
     .mode-shot-frame.diff-shot-frame img {
       height: 100%;
       object-fit: contain;
-      background: #20242d;
+      background: #f3f2ef;
     }
 
     .workflow-video-figure {
@@ -1179,9 +1326,12 @@
     .product-gallery-frame img {
       display: block;
       width: 100%;
-      aspect-ratio: 16 / 10;
-      object-fit: cover;
-      object-position: top center;
+      height: clamp(220px, 22vw, 300px);
+      object-fit: contain;
+      object-position: center;
+      background:
+        linear-gradient(135deg, rgba(255, 251, 237, 0.84), rgba(239, 231, 208, 0.74)),
+        var(--bg-subtle);
     }
 
     .product-gallery-frame span {
@@ -1203,6 +1353,7 @@
 
     @media (max-width: 520px) {
       .product-gallery-grid { grid-template-columns: 1fr; }
+      .product-gallery-frame img { height: clamp(240px, 72vw, 340px); }
     }
 
     /* Lightbox */
@@ -1699,7 +1850,11 @@
     @media (max-width: 960px) {
       .surfaces-grid { grid-template-columns: 1fr; }
       .viewer-layout { grid-template-columns: 1fr; align-items: start; }
+      .viewer-action-grid { grid-template-columns: 1fr; }
+      .trace-layout { grid-template-columns: 1fr; align-items: start; }
       .canvas-layout { grid-template-columns: 1fr; align-items: start; }
+      .canvas-points { grid-template-columns: 1fr; }
+      .canvas-detail-grid { grid-template-columns: 1fr; }
       .mode-lane-grid { grid-template-columns: 1fr; }
       .mode-showcase { grid-template-columns: 1fr; }
       .story-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -1724,9 +1879,11 @@
       .hero-shot { margin-top: 2rem; }
       .viewer-layout { gap: 1.5rem; margin-bottom: 1.5rem; }
       .viewer-points { gap: 0.75rem; }
+      .viewer-action-grid { margin-bottom: 1.5rem; }
       .viewer-shot-frame { border-radius: 10px; }
+      .shot-annotation { display: none; }
       .canvas-layout { gap: 1.5rem; margin-bottom: 1.5rem; }
-      .canvas-detail-grid { grid-template-columns: 1fr; }
+      .canvas-points { margin-bottom: 1.5rem; }
       .canvas-shot-frame { border-radius: 10px; }
       .hero::after { display: none; }
 
@@ -1749,17 +1906,19 @@
           <span class="hero-status-label">Latest release</span>
           <span class="hero-status-rule" aria-hidden="true"></span>
           <span class="hero-status-version">v2.3.0</span>
-          6s06n class="hero-status-date">Released 2026-06-06</span>
+          <span class="hero-status-date">Released 2026-06-06</span>
           <span class="hero-status-actions">
             <a href="https://github.com/AgenticFlowX/agenticflowx/blob/main/CHANGELOG.md" class="hero-status-link" target="_blank" rel="noopener noreferrer">Changelog</a>
             <a href="https://www.reddit.com/r/agenticflowx/" class="hero-status-link" target="_blank" rel="noopener noreferrer">r/agenticflowx</a>
           </span>
         </div>
-        <p class="hero-wordmark">AgenticFlowX</p>
-        <h1 class="hero-tagline"><span class="hero-tagline-mark">Low-barrier</span> spec-driven AI coding in VS Code. Chat first, Spec mode when the work needs traceability.</h1>
+        <p class="hero-wordmark">VS Code extension</p>
+        <h1 class="hero-tagline">AgenticFlowX</h1>
+        <p class="hero-promise"><span class="hero-tagline-mark">Low-barrier</span> spec-driven AI coding.</p>
         <p class="hero-desc">
-          Install one extension for coding chat, Code / Explore / Spec modes, clickable workflow steps,
-          and repo-owned markdown files. Backed by <a href="https://pi.dev" target="_blank" rel="noopener noreferrer"><em>pi.dev</em></a> today.
+          Chat first in VS Code. Add Code / Explore / Spec structure when the work needs
+          traceability, clickable workflow steps, and repo-owned markdown. Backed by
+          <a href="https://pi.dev" target="_blank" rel="noopener noreferrer"><em>pi.dev</em></a> today.
         </p>
         <div class="hero-ctas">
           <a href="https://marketplace.visualstudio.com/items?itemName=AgenticFlowX.agenticflowx" class="btn-primary" target="_blank" rel="noopener noreferrer">
@@ -1894,13 +2053,13 @@
 
               <div class="mode-lane-grid">
                 <button
-                  class="mode-lane"
+                  class="mode-lane is-selected"
                   type="button"
                   data-mode-preview
-                  data-mode-src="assets/vscode/product/chat-first.webp"
-                  data-mode-alt="AgenticFlowX Code mode chat panel for everyday implementation and debugging"
-                  data-mode-caption="Code mode keeps the default chat flow focused on implementation, debugging, edits, and fast follow-up."
-                  aria-pressed="false"
+                  data-mode-src="assets/vscode/product/mode-code.webp"
+                  data-mode-alt="AgenticFlowX Code mode showing capabilities, available commands, and the Code intent controls"
+                  data-mode-caption="Code mode keeps the default chat flow open for implementation, debugging, edits, shell commands, tests, and fast follow-up."
+                  aria-pressed="true"
                 >
                   <strong>Code mode</strong>
                   <span>The default lane for everyday implementation, debugging, edits, and fast follow-up.</span>
@@ -1909,8 +2068,8 @@
                   class="mode-lane"
                   type="button"
                   data-mode-preview
-                  data-mode-src="assets/vscode/product/mode-picker.webp"
-                  data-mode-alt="AgenticFlowX mode picker showing Code, Explore, and Spec mode choices"
+                  data-mode-src="assets/vscode/product/mode-explore.webp"
+                  data-mode-alt="AgenticFlowX Explore mode showing read-only capabilities, boundaries, and PRD intent controls"
                   data-mode-caption="Explore mode is the safer inspection lane: trace behavior, inspect code, and plan changes before editing."
                   aria-pressed="false"
                 >
@@ -1918,13 +2077,13 @@
                   <span>Read-only inspection for tracing behavior, planning changes, and understanding unfamiliar code.</span>
                 </button>
                 <button
-                  class="mode-lane is-featured is-selected"
+                  class="mode-lane is-featured"
                   type="button"
                   data-mode-preview
-                  data-mode-src="assets/vscode-tab-chat-mode-spec.webp"
-                  data-mode-alt="AgenticFlowX Spec mode showing design workflow actions, step navigation, related journal and work sessions, and a Spec mode prompt"
+                  data-mode-src="assets/vscode/product/mode-spec.webp"
+                  data-mode-alt="AgenticFlowX Spec mode showing planning boundaries, permitted spec commands, and the Spec workflow rail"
                   data-mode-caption="Spec mode adds the workflow rail: refine, author, validate, review, approve, then move from spec to design to tasks."
-                  aria-pressed="true"
+                  aria-pressed="false"
                 >
                   <strong>Spec mode</strong>
                   <span>The planning lane for requirements, design, tasks, validation, review, approval, and traceability.</span>
@@ -1933,11 +2092,11 @@
             </div>
 
             <figure class="mode-shot">
-              <button class="mode-shot-frame diff-shot-frame" type="button" aria-label="Open preview: Spec mode workflow controls" data-mode-preview-frame>
-                <img data-mode-preview-image src="assets/vscode-tab-chat-mode-spec.webp" alt="AgenticFlowX Spec mode showing design workflow actions, step navigation, related journal and work sessions, and a Spec mode prompt" loading="lazy" width="1200" height="900">
+              <button class="mode-shot-frame diff-shot-frame" type="button" aria-label="Open preview: Code mode" data-mode-preview-frame>
+                <img data-mode-preview-image src="assets/vscode/product/mode-code.webp" alt="AgenticFlowX Code mode showing capabilities, available commands, and the Code intent controls" loading="lazy" width="1890" height="2000">
               </button>
               <figcaption class="mode-caption" data-mode-preview-caption aria-live="polite">
-                Spec mode adds the workflow rail: refine, author, validate, review, approve, then move from spec to design to tasks.
+                Code mode keeps the default chat flow open for implementation, debugging, edits, shell commands, tests, and fast follow-up.
               </figcaption>
             </figure>
           </div>
@@ -1951,53 +2110,109 @@
         <div class="viewer-layout">
           <div class="viewer-copy">
             <p class="section-label">AFX Viewer</p>
-            <h2 class="section-title">Markdown you can act on.</h2>
+            <h2 class="section-title">Markdown that can start the work.</h2>
             <p class="section-copy">
-              AFX Viewer turns repo markdown into an interactive workflow surface. Specs,
-              designs, tasks, ADRs, notes, and journals stay as plain files, while the rendered
-              view gives each document and section the commands it needs.
+              AFX Viewer is not just a nicer markdown preview. It puts workflow commands directly
+              on top of your repo files, so a spec, design, task list, ADR, note, or journal can
+              send focused context to chat, refine a section, or start coding the selected task.
             </p>
             <div class="inline-callouts" aria-label="AFX Viewer highlights">
-              <span class="inline-callout">Rendered markdown</span>
-              <span class="inline-callout">Section commands</span>
+              <span class="inline-callout">Inline toolbar</span>
+              <span class="inline-callout">Code task sections</span>
               <span class="inline-callout">Send to chat</span>
             </div>
-            <ul class="viewer-points">
-              <li>
-                <strong>Run document commands from the page</strong>
-                <span>Refine, author, validate, review, approve, pick, or code without leaving the rendered document.</span>
-              </li>
-              <li>
-                <strong>Act on the section you are reading</strong>
-                <span>Use section and phase commands to send the right context to chat or execute the next workflow step.</span>
-              </li>
-              <li>
-                <strong>Keep markdown as the source of truth</strong>
-                <span>The viewer adds navigation and actions over the file you already review in Git.</span>
-              </li>
-            </ul>
           </div>
 
           <figure class="viewer-detail">
-            <button class="viewer-shot-frame diff-shot-frame" type="button" aria-label="Open preview: AFX Viewer task commands">
+            <button class="viewer-shot-frame diff-shot-frame annotated-shot" type="button" aria-label="Open preview: AFX Viewer task commands">
               <img src="assets/viewer-2.webp" alt="AFX Viewer rendering a tasks markdown file with phase commands and a command popover" loading="lazy" width="1652" height="1000">
+              <span class="shot-annotation top-left" aria-hidden="true">Inline toolbar</span>
+              <span class="shot-annotation mid-right" aria-hidden="true">Phase commands</span>
+              <span class="shot-annotation bottom-left" aria-hidden="true">Code exact task</span>
             </button>
             <figcaption class="viewer-caption">
               Task and phase commands are available directly inside the rendered markdown view.
             </figcaption>
           </figure>
         </div>
+
+        <ul class="viewer-points viewer-action-grid" aria-label="AFX Viewer workflow actions">
+          <li>
+            <strong>Run document commands from the page</strong>
+            <span>Refine a spec, author a design, validate, review, approve, pick, or code from the rendered document.</span>
+          </li>
+          <li>
+            <strong>Code the exact task section</strong>
+            <span>Open <code>tasks.md</code>, choose a phase or task row, and draft the focused code command into chat.</span>
+          </li>
+          <li>
+            <strong>PM flow and dev flow in one place</strong>
+            <span>Review sections like a PM, then send the right context to chat or start implementation like a developer.</span>
+          </li>
+        </ul>
       </div>
 
       <div class="container-wide">
         <figure class="viewer-showcase">
-          <button class="viewer-shot-frame diff-shot-frame" type="button" aria-label="Open preview: raw markdown and AFX Viewer side by side">
+          <button class="viewer-shot-frame diff-shot-frame annotated-shot" type="button" aria-label="Open preview: raw markdown and AFX Viewer side by side">
             <img src="assets/viewer-1.webp" alt="Raw markdown source beside the rendered AFX Viewer for a design document" loading="lazy" width="2574" height="1398">
+            <span class="shot-annotation raw-left" aria-hidden="true">Plain markdown source</span>
+            <span class="shot-annotation rendered-right" aria-hidden="true">Clickable workflow view</span>
           </button>
           <figcaption class="viewer-caption">
             Plain markdown on the left, interactive AFX Viewer on the right.
           </figcaption>
         </figure>
+      </div>
+    </section>
+
+    <!-- IDE traceability -->
+    <section id="traceability" class="trace-section">
+      <div class="container">
+        <div class="trace-layout">
+          <div class="trace-copy">
+            <p class="section-label">IDE traceability</p>
+            <h2 class="section-title">Code that remembers why it exists.</h2>
+            <p class="section-copy">
+              AFX teaches VS Code to understand <code>@see</code> links in source comments. Hover
+              a requirement or design anchor to preview the linked markdown inline, use CodeLens to
+              open the source document, or jump directly to anchors like <code>[FR-1]</code>,
+              <code>[DES-API]</code>, and <code>[2.1]</code>.
+            </p>
+            <div class="inline-callouts" aria-label="IDE traceability highlights">
+              <span class="inline-callout">@see links</span>
+              <span class="inline-callout">CodeLens</span>
+              <span class="inline-callout">Hover previews</span>
+            </div>
+          </div>
+
+          <figure class="trace-shot">
+            <button class="viewer-shot-frame diff-shot-frame annotated-shot trace-shot-frame" type="button" aria-label="Open preview: IDE traceability hover and CodeLens">
+              <img src="assets/vscode/product/traceability.webp" alt="VS Code editor showing @see CodeLens links and a hover preview for a linked design section" loading="lazy" width="1830" height="1100">
+              <span class="shot-annotation trace-lens" aria-hidden="true">CodeLens links</span>
+              <span class="shot-annotation trace-hover" aria-hidden="true">Hover preview</span>
+              <span class="shot-annotation trace-repo" aria-hidden="true">Repo docs</span>
+            </button>
+            <figcaption class="viewer-caption">
+              Source comments stay plain text; the IDE adds navigation, previews, and trace-aware shortcuts.
+            </figcaption>
+          </figure>
+        </div>
+
+        <ul class="viewer-points viewer-action-grid trace-points" aria-label="IDE traceability workflow">
+          <li>
+            <strong>Preview intent without leaving code</strong>
+            <span>Hover a linked anchor to see the matching spec, design, or task section while your editor focus stays put.</span>
+          </li>
+          <li>
+            <strong>Jump from implementation to source of truth</strong>
+            <span>CodeLens and go-to-definition turn <code>@see</code> references into native VS Code navigation.</span>
+          </li>
+          <li>
+            <strong>Keep the trail reviewable in Git</strong>
+            <span>The links are ordinary comments pointing at ordinary markdown, so traceability survives outside the extension.</span>
+          </li>
+        </ul>
       </div>
     </section>
 
@@ -2019,23 +2234,9 @@
               <span class="inline-callout">Linked markdown</span>
               <span class="inline-callout">Ideation to spec</span>
             </div>
-            <ul class="viewer-points">
-              <li>
-                <strong>Map specs, files, and notes together</strong>
-                <span>Use cards and file nodes to sketch how product questions connect to implementation details.</span>
-              </li>
-              <li>
-                <strong>Label relationships as the thinking evolves</strong>
-                <span>Connect cards with named edges like <code>promote into spec</code> or <code>@see trace</code>.</span>
-              </li>
-              <li>
-                <strong>Send selected context to chat</strong>
-                <span>Turn the useful part of the canvas into a focused chat handoff instead of rewriting the whole map.</span>
-              </li>
-            </ul>
           </div>
 
-          <figure>
+          <figure class="canvas-main-figure">
             <button class="canvas-shot-frame diff-shot-frame" type="button" aria-label="Open preview: Project Canvas map">
               <img src="assets/canvas-1.webp" alt="AgenticFlowX Canvas showing linked spec cards, notes, file nodes, labels, and chat context" loading="lazy" width="2824" height="1551">
             </button>
@@ -2044,6 +2245,21 @@
             </figcaption>
           </figure>
         </div>
+
+        <ul class="viewer-points canvas-points" aria-label="Project Canvas capabilities">
+          <li>
+            <strong>Map specs, files, and notes together</strong>
+            <span>Use cards and file nodes to sketch how product questions connect to implementation details.</span>
+          </li>
+          <li>
+            <strong>Label relationships as the thinking evolves</strong>
+            <span>Connect cards with named edges like <code>promote into spec</code> or <code>@see trace</code>.</span>
+          </li>
+          <li>
+            <strong>Send selected context to chat</strong>
+            <span>Turn the useful part of the canvas into a focused chat handoff instead of rewriting the whole map.</span>
+          </li>
+        </ul>
 
         <div class="canvas-detail-grid">
           <figure>
@@ -2212,31 +2428,19 @@
       <div class="container-wide">
         <div class="section-head-center">
           <p class="section-label">Workbench tour</p>
-          <h2 class="section-title">Inspect the surfaces when you want the slower tour.</h2>
+          <h2 class="section-title">Inspect the surfaces when you need the slower tour.</h2>
           <p class="section-copy">
-            The main flow is chat first, but the workbench gives you visual access to documents,
-            notes, boards, journals, traceability, and project context when you need to slow down.
+            The main flow is chat first. The workbench is where the repo-owned pieces become
+            visible: documents, analytics, boards, notes, journals, and project context.
           </p>
         </div>
 
         <div class="product-gallery" aria-label="Product screenshots">
           <div class="product-gallery-head">
-            <p class="product-gallery-title">Screenshots</p>
-            <p class="product-gallery-copy">Open a focused screenshot to inspect a specific part of the workflow.</p>
+            <p class="product-gallery-title">Workbench surfaces</p>
+            <p class="product-gallery-copy">A focused tour of the repo views, without repeating the chat mode story above.</p>
           </div>
           <div class="product-gallery-grid">
-            <button class="product-gallery-frame" type="button" aria-label="Open preview: Chat first">
-              <img src="assets/vscode/product/chat-first.webp" alt="AgenticFlowX chat panel inside VS Code" loading="lazy" width="710" height="1030">
-              <span>Chat</span>
-            </button>
-            <button class="product-gallery-frame" type="button" aria-label="Open preview: Mode switcher">
-              <img src="assets/vscode/product/mode-picker.webp" alt="AgenticFlowX chat mode picker with Code, Explore, and Spec modes" loading="lazy" width="766" height="1051">
-              <span>Modes</span>
-            </button>
-            <button class="product-gallery-frame" type="button" aria-label="Open preview: Spec mode actions">
-              <img src="assets/vscode/product/spec-mode-actions.webp" alt="Spec mode action row for refining, authoring, validating, reviewing, and approving" loading="lazy" width="710" height="1030">
-              <span>Spec</span>
-            </button>
             <button class="product-gallery-frame" type="button" aria-label="Open preview: Workbench">
               <img src="assets/vscode/product/workbench.webp" alt="AgenticFlowX workbench view in VS Code" loading="lazy" width="1832" height="1106">
               <span>Workbench</span>
@@ -2245,9 +2449,9 @@
               <img src="assets/vscode/product/repo-documents.webp" alt="Spec, design, tasks, and journal markdown files in the VS Code explorer" loading="lazy" width="1832" height="1106">
               <span>Docs</span>
             </button>
-            <button class="product-gallery-frame" type="button" aria-label="Open preview: Traceability">
-              <img src="assets/vscode/product/traceability.webp" alt="CodeLens traceability links from source code back to spec documents" loading="lazy" width="1830" height="1100">
-              <span>Trace</span>
+            <button class="product-gallery-frame" type="button" aria-label="Open preview: Analytics">
+              <img src="assets/analytics.webp" alt="AgenticFlowX analytics view for project workflow metrics and status" loading="lazy" width="1600" height="1000">
+              <span>Analytics</span>
             </button>
             <button class="product-gallery-frame" type="button" aria-label="Open preview: Board">
               <img src="assets/board.webp" alt="AgenticFlowX board view for tracking project work" loading="lazy" width="1600" height="1000">
@@ -2291,8 +2495,8 @@
           </div>
 
           <div class="fact">
-            <h3>What&rsquo;s the current status, and is it free?</h3>
-            <p>The current release is v2.3.0, published 2026-06-06. AgenticFlowX is open source under Apache 2.0. No vendor billing &mdash; you bring your own provider keys. Provider settings, modes, and examples are still evolving.</p>
+            <h3>Is it free?</h3>
+            <p>AgenticFlowX is open source under Apache 2.0. No vendor billing &mdash; you bring your own provider keys, subscription sign-ins, or local runtimes.</p>
           </div>
         </div>
       </div>

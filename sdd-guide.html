@@ -1,0 +1,1179 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "w6nnwbv1pd");
+  </script>
+  
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The SDD guide — AgenticFlowX</title>
+<meta name="description" content="Dash, Sprint, or the full four-file spec — a complete guide to AFX's spec-driven workflows: which to pick, every command, every gate, and the controls that drive them." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&family=Geist:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #f5efdf;
+    --bg-subtle: #efe7d0;
+    --bg-element: #fbf6e7;
+    --bg-raised: #fffbed;
+    --border: rgba(20, 27, 53, 0.10);
+    --border-strong: rgba(20, 27, 53, 0.16);
+    --text: #141b35;
+    --text-secondary: #3d4256;
+    --text-tertiary: #6b6450;
+    --text-muted: #8a8069;
+    --accent: #a07e39;
+    --accent-bright: #d4a656;
+    --accent-deep: #6e5724;
+    --moss: #4a6e5a;
+    --ember: #a84c30;
+    --mono: 'JetBrains Mono', 'SF Mono', monospace;
+    --sans: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --serif: 'Fraunces', 'Iowan Old Style', Palatino, Georgia, serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background-color: var(--bg); overflow-x: clip;
+    background-image:
+      radial-gradient(1300px 700px at 88% -18%, rgba(160,126,57,0.06), transparent 60%),
+      radial-gradient(1100px 780px at -8% 4%, rgba(74,110,90,0.045), transparent 58%);
+    background-attachment: fixed;
+    background-repeat: no-repeat; color: var(--text); font-family: var(--sans); font-size: 16px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  .wrap-wide { width: min(1400px, 94vw); margin: 0 auto; }
+  .mono { font-family: var(--mono); }
+
+  nav.site { position: sticky; top: 0; z-index: 60; background: rgba(245,239,223,0.88); backdrop-filter: blur(8px); border-bottom: 1px solid transparent; transition: background .25s ease, backdrop-filter .25s ease, border-color .25s ease, box-shadow .25s ease; }
+  nav.site.scrolled { background: rgba(245,239,223,0.66); backdrop-filter: blur(18px) saturate(1.15); border-bottom-color: var(--border); box-shadow: 0 8px 30px -22px rgba(20,27,53,0.5); }
+  .nav-in { display: flex; align-items: center; height: 58px; gap: 18px; }
+  .nav-name { font-family: var(--serif); font-weight: 600; font-size: 17px; }
+  .nav-name a { display: inline-flex; align-items: center; gap: 10px; }
+  .nav-glyph { width: 34px; height: auto; display: block; }
+  .nav-name a:hover { color: var(--ember); }
+  .nav-crumb { font-family: var(--mono); font-size: 12px; color: var(--text-muted); }
+  .nav-crumb a:hover { color: var(--ember); }
+  .nav-crumb b { color: var(--accent-deep); font-weight: 500; }
+  .nav-right { display: flex; align-items: center; gap: 16px; margin-left: auto; }
+  .nav-right a.ghost { font-size: 13.5px; color: var(--text-secondary); }
+  .nav-right a.ghost:hover { color: var(--ember); }
+  @media (max-width: 640px) { .nav-right a.ghost { display: none; } .nav-crumb { display: none; } }
+  .btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0.95rem; background: var(--text); color: var(--bg-raised); font-weight: 500; font-size: 0.87rem; border-radius: 6px; border: 1px solid var(--text); transition: background .15s; }
+  .btn-primary:hover { background: var(--ember); border-color: var(--ember); }
+  /* mobile hamburger — toggles the doc sidebar */
+  .nav-burger { display: none; align-items: center; justify-content: center; width: 38px; height: 38px; margin-left: 4px; border: 1px solid var(--border-strong); border-radius: 8px; background: transparent; color: var(--text); cursor: pointer; }
+  .nav-burger svg { width: 19px; height: 19px; }
+
+
+  .docs { display: grid; grid-template-columns: 252px minmax(0, 1fr); gap: clamp(32px, 4vw, 60px); padding: clamp(32px, 4vw, 48px) 0 72px; }
+  @media (max-width: 920px) {
+    .docs { grid-template-columns: 1fr; }
+    .nav-burger { display: inline-flex; }
+    .sidebar { position: fixed; top: 58px; left: 0; right: 0; z-index: 55; display: none; max-height: calc(100vh - 58px); overflow-y: auto; padding: 10px 22px 22px; border-right: none; background: rgba(245,239,223,0.98); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border-strong); box-shadow: 0 22px 44px -26px rgba(20,27,53,0.45); }
+    .sidebar.open { display: block; }
+  }
+  .sidebar { position: sticky; top: 82px; align-self: start; max-height: calc(100vh - 100px); overflow-y: auto; padding-right: 18px; border-right: 1px solid var(--border); font-size: 13.5px; }
+  .sb-group { margin-bottom: 22px; }
+  .sb-label { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin: 0 0 6px; }
+  .sidebar a { display: block; padding: 5px 0 5px 12px; border-left: 2px solid transparent; color: var(--text-secondary); transition: color .15s, border-color .15s; }
+  .sidebar a:hover { color: var(--ember); }
+  .sidebar a.active { color: var(--ember); border-left-color: var(--ember); }
+  .sb-cta { margin-top: 26px; padding: 14px 16px; border: 1px solid var(--border); border-radius: 10px; background: var(--bg-element); font-size: 12.5px; color: var(--text-secondary); }
+  .sb-cta a { display: inline; padding: 0; border: none; color: var(--accent-deep); }
+  .sb-cta a:hover { color: var(--ember); }
+
+  article { min-width: 0; max-width: 1000px; }
+  .doc-head { padding-bottom: 26px; border-bottom: 1px solid var(--border-strong); }
+  .doc-head .kicker { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ember); margin: 0 0 12px; }
+  h1 { font-family: var(--serif); font-weight: 500; font-size: clamp(1.9rem, 3.4vw, 2.6rem); line-height: 1.1; margin: 0; letter-spacing: -0.01em; }
+  h1 em { color: var(--ember); font-style: italic; }
+  .doc-head p { margin: 12px 0 0; color: var(--text-secondary); font-size: 1.02rem; max-width: 680px; }
+
+  article section { padding-top: clamp(40px, 5vw, 56px); }
+  h2 { font-family: var(--serif); font-weight: 500; font-size: 1.65rem; margin: 0 0 4px; letter-spacing: -0.005em; scroll-margin-top: 90px; }
+  h2 .n { font-family: var(--mono); font-size: 0.72em; color: var(--ember); margin-right: 10px; }
+  .sec-lede { color: var(--text-secondary); font-size: 15px; margin: 8px 0 0; max-width: 680px; }
+  h3 { font-family: var(--serif); font-weight: 600; font-size: 1.2rem; margin: 26px 0 8px; scroll-margin-top: 90px; }
+  h4 { font-family: var(--serif); font-weight: 600; font-size: 1.02rem; margin: 20px 0 6px; }
+  article p { color: var(--text-secondary); font-size: 14.5px; max-width: 680px; }
+  article ul.pl { color: var(--text-secondary); font-size: 14.5px; padding-left: 20px; max-width: 680px; margin: 8px 0 0; }
+  article ul.pl li { margin: 5px 0; }
+  article ul.pl b { color: var(--text); font-weight: 500; }
+  article a.tx { color: var(--accent-deep); } article a.tx:hover { color: var(--ember); }
+  code { font-family: var(--mono); font-size: 0.85em; background: var(--bg-subtle); border: 1px solid var(--border); border-radius: 4px; padding: 1px 6px; color: var(--accent-deep); }
+
+  .frame { border: 1px solid var(--border-strong); border-radius: 10px; overflow: hidden; background: var(--bg-raised); box-shadow: 0 28px 64px -44px rgba(20,27,53,0.5); }
+  .frame > img { display: block; width: 100%; height: auto; cursor: zoom-in; }
+  .frame.on-dark { background: #0c1017; }
+  .frame.flat { box-shadow: none; background: transparent; border: none; }
+  .shot { margin: 22px 0 0; }
+  .shot-cap { margin-top: 10px; font-size: 12.5px; color: var(--text-tertiary); }
+  .gen { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); border: 1px solid var(--border-strong); border-radius: 4px; padding: 1px 6px; margin-left: 8px; vertical-align: 1px; }
+
+  .codeblock { margin: 14px 0 0; background: #10131c; border-radius: 8px; padding: 15px 18px; overflow-x: auto; max-width: 720px; }
+  .codeblock code { font-family: var(--mono); font-size: 12.5px; color: #e0b872; white-space: pre; background: none; border: none; padding: 0; }
+  .codeblock .cm { color: #6c7488; }
+
+  .callout { border: 1px solid rgba(160,126,57,0.35); background: rgba(160,126,57,0.06); border-radius: 10px; padding: 14px 17px; font-size: 14px; color: var(--text-secondary); margin: 20px 0 0; max-width: 680px; }
+  .callout b { color: var(--accent-deep); }
+  .callout.warn { border-color: rgba(168,76,48,0.4); background: rgba(168,76,48,0.05); }
+  .callout.warn b { color: var(--ember); }
+  .callout.go { border-color: rgba(74,110,90,0.45); background: rgba(74,110,90,0.06); }
+  .callout.go b { color: var(--moss); }
+
+  .cmd-table { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 13px; }
+  .cmd-table th { text-align: left; font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text-muted); font-weight: 500; padding: 8px 14px 8px 0; border-bottom: 1.5px solid var(--border-strong); }
+  .cmd-table td { padding: 10px 14px 10px 0; border-bottom: 1px solid var(--border); vertical-align: top; color: var(--text-secondary); }
+  .cmd-table td:first-child { white-space: nowrap; }
+  .cmd-table code { white-space: nowrap; }
+
+  .track { border: 1px solid var(--border-strong); border-radius: 12px; background: var(--bg-element); padding: 20px 24px; margin-top: 18px; max-width: 760px; }
+  .track .tk { font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; border-radius: 999px; padding: 3px 10px; }
+  .track .tk.fast { color: var(--accent-deep); border: 1px solid rgba(160,126,57,0.4); background: rgba(160,126,57,0.07); }
+  .track .tk.formal { color: var(--moss); border: 1px solid rgba(74,110,90,0.4); background: rgba(74,110,90,0.06); }
+  .track h3 { margin-top: 10px; }
+
+  /* annotated real screenshot — numbered pins over the live UI */
+  .anno { position: relative; border-radius: 10px; overflow: hidden; border: 1px solid var(--border-strong); background: #0c1017; box-shadow: 0 28px 64px -44px rgba(20,27,53,0.5); }
+  .anno > img { display: block; width: 100%; height: auto; }
+  .anno-pin { position: absolute; transform: translate(-50%, -50%); width: 28px; height: 28px; border-radius: 50%; background: var(--accent-bright); color: #14161e; font-family: var(--mono); font-weight: 600; font-size: 12.5px; display: grid; place-items: center; border: 2px solid #fffbed; box-shadow: 0 2px 10px rgba(0,0,0,.55); z-index: 3; transition: transform .15s, background .15s; }
+  .anno-pin::before { content: ""; position: absolute; inset: -5px; border-radius: 50%; border: 1.5px solid var(--accent-bright); opacity: .55; animation: anno-ping 2.6s ease-out infinite; }
+  .anno-pin:nth-of-type(2)::before { animation-delay: .3s; } .anno-pin:nth-of-type(3)::before { animation-delay: .6s; }
+  .anno-pin:nth-of-type(4)::before { animation-delay: .9s; } .anno-pin:nth-of-type(5)::before { animation-delay: 1.2s; }
+  .anno-pin:nth-of-type(6)::before { animation-delay: 1.5s; } .anno-pin:nth-of-type(7)::before { animation-delay: 1.8s; }
+  .anno-pin:nth-of-type(8)::before { animation-delay: 2.1s; } .anno-pin:nth-of-type(9)::before { animation-delay: .45s; }
+  .anno-pin:nth-of-type(10)::before { animation-delay: 1.05s; }
+  .anno-pin.lit { transform: translate(-50%, -50%) scale(1.35); background: var(--ember); z-index: 4; }
+  @keyframes anno-ping { 0% { transform: scale(1); opacity: .55; } 70%, 100% { transform: scale(2); opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .anno-pin::before { animation: none; } }
+  .anno-legend { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 30px; margin-top: 24px; }
+  @media (max-width: 720px) { .anno-legend { grid-template-columns: 1fr; } }
+  .anno-item { display: grid; grid-template-columns: 28px 1fr; gap: 12px; padding: 12px 10px; border-radius: 10px; transition: background .15s; cursor: default; }
+  .anno-item:hover { background: var(--bg-element); }
+  .anno-item .num { width: 28px; height: 28px; border-radius: 50%; background: var(--bg-raised); border: 1.5px solid var(--accent); color: var(--accent-deep); font-family: var(--mono); font-weight: 600; font-size: 12.5px; display: grid; place-items: center; }
+  .anno-item h5 { font-family: var(--serif); font-weight: 600; font-size: 1rem; margin: 2px 0 3px; color: var(--text); }
+  .anno-item p { font-size: 13px; color: var(--text-secondary); margin: 0; max-width: none; }
+  .anno-item .do { display: block; margin-top: 5px; font-family: var(--mono); font-size: 11px; color: var(--ember); }
+
+  /* 60-second on-ramp */
+  .quickstart { margin-top: 28px; border: 1px solid var(--accent); border-radius: 14px; background: linear-gradient(180deg, rgba(160,126,57,0.07), rgba(160,126,57,0.02)); padding: 26px 30px; }
+  .quickstart .qs-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ember); }
+  .quickstart .qs-h { font-family: var(--serif); font-weight: 600; font-size: 1.5rem; margin: 8px 0 0; color: var(--text); }
+  .quickstart .qs-lead { margin: 8px 0 0; color: var(--text-secondary); font-size: 15px; max-width: none; }
+  .quickstart .qs-steps { counter-reset: q; list-style: none; padding: 0; margin: 18px 0 0; }
+  .quickstart .qs-steps li { position: relative; padding: 0 0 13px 40px; color: var(--text-secondary); font-size: 14.5px; }
+  .quickstart .qs-steps li::before { counter-increment: q; content: counter(q); position: absolute; left: 0; top: -1px; width: 27px; height: 27px; border-radius: 50%; background: var(--accent-bright); color: #14161e; font-family: var(--mono); font-weight: 600; font-size: 12.5px; display: grid; place-items: center; }
+  .quickstart .qs-steps b { color: var(--text); font-weight: 600; }
+  .quickstart .qs-foot { margin: 6px 0 0; font-size: 14px; color: var(--text); font-weight: 500; max-width: none; }
+
+  /* journey stage cards */
+  .stage-card { border: 1px solid var(--border-strong); border-radius: 12px; background: var(--bg-element); padding: 22px 26px; margin-top: 18px; max-width: 780px; }
+  .stage-card .sk { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ember); }
+  .stage-card h3 { margin: 8px 0 0; }
+  .stage-card .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 28px; margin-top: 14px; }
+  @media (max-width: 720px) { .stage-card .cols { grid-template-columns: 1fr; } }
+  .stage-card .col h5 { font-family: var(--mono); font-size: 10px; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text-muted); margin: 10px 0 4px; font-weight: 500; }
+  .stage-card .col p, .stage-card .col li { font-size: 13.5px; color: var(--text-secondary); margin: 0; }
+  .stage-card .col ul { padding-left: 16px; margin: 2px 0 0; }
+  .stage-card .done { margin-top: 14px; padding: 10px 14px; border-radius: 8px; background: rgba(74,110,90,0.08); border: 1px solid rgba(74,110,90,0.3); font-size: 13.5px; color: var(--text-secondary); }
+  .stage-card .done b { color: var(--moss); }
+  .stage-card .codeblock { max-width: none; }
+
+  .uip { margin-top: 14px; padding: 13px 16px; border-radius: 10px; background: rgba(168,76,48,0.06); border: 1px solid rgba(168,76,48,0.35); font-size: 14px; color: var(--text-secondary); }
+  .uip b { display: block; color: var(--ember); font-family: var(--mono); font-size: 10px; letter-spacing: 0.07em; text-transform: uppercase; margin-bottom: 4px; }
+  .hl-line { margin-top: 10px; font-family: var(--mono); font-size: 11.5px; color: var(--text-muted); }
+  .hl-line b { font-size: 9.5px; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text-muted); margin-right: 8px; font-weight: 500; }
+  .duo { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 22px; }
+  @media (max-width: 760px) { .duo { grid-template-columns: 1fr; } }
+  .duo figure { margin: 0; }
+  .duo figcaption { margin-top: 9px; font-size: 12.5px; color: var(--text-tertiary); }
+  .duo figcaption b { color: var(--text-secondary); font-weight: 500; }
+
+  /* use-case cards */
+  .case { border: 1px solid var(--border-strong); border-radius: 12px; background: var(--bg-element); padding: 22px 26px; margin-top: 18px; max-width: 780px; }
+  .case .case-head { display: flex; align-items: baseline; flex-wrap: wrap; gap: 10px; }
+  .case .case-head h3 { margin: 0; }
+  .case .rung { font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; border-radius: 999px; padding: 3px 10px; }
+  .rung.dash { color: var(--moss); border: 1px solid rgba(74,110,90,0.4); background: rgba(74,110,90,0.06); }
+  .rung.sprint { color: var(--accent-deep); border: 1px solid rgba(160,126,57,0.4); background: rgba(160,126,57,0.07); }
+  .rung.full { color: var(--ember); border: 1px solid rgba(168,76,48,0.4); background: rgba(168,76,48,0.06); }
+  .case .time { margin-left: auto; font-family: var(--mono); font-size: 10.5px; color: var(--text-muted); }
+  .case p.scene { margin: 8px 0 0; font-size: 14px; color: var(--text-secondary); font-style: italic; }
+  .case .codeblock { max-width: none; }
+
+  /* side-by-side comparison */
+  .compare-wrap { overflow-x: auto; margin-top: 20px; }
+  .compare { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 640px; }
+  .compare th, .compare td { padding: 11px 14px; border-bottom: 1px solid var(--border); text-align: left; vertical-align: top; }
+  .compare thead th { font-family: var(--serif); font-weight: 600; font-size: 1.05rem; border-bottom: 1.5px solid var(--border-strong); color: var(--text); }
+  .compare thead th small { display: block; font-family: var(--mono); font-size: 9.5px; font-weight: 400; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-muted); margin-top: 2px; }
+  .compare thead th.rec { color: var(--accent-deep); }
+  .compare td:first-child, .compare th:first-child { font-family: var(--mono); font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-muted); white-space: nowrap; }
+  .compare .rec-col { background: rgba(160,126,57,0.05); }
+  .compare code { white-space: nowrap; font-size: 11px; }
+  .compare td b { color: var(--text); font-weight: 500; }
+
+  /* sample document card */
+  .doctype { border: 1px solid var(--border-strong); border-radius: 12px; background: var(--bg-element); padding: 22px 26px; margin-top: 20px; }
+  .doctype .dt-top { display: flex; align-items: baseline; flex-wrap: wrap; gap: 10px 16px; }
+  .doctype .dt-top h3 { margin: 0; }
+  .doctype .dt-type { font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent-deep); border: 1px solid rgba(160,126,57,0.4); border-radius: 999px; padding: 3px 10px; }
+  .doctype .dt-where { margin-left: auto; font-family: var(--mono); font-size: 11px; color: var(--text-tertiary); }
+  .doctype p.dt-use { margin: 10px 0 0; font-size: 14px; color: var(--text-secondary); }
+  .doctype .dt-meta { display: flex; flex-wrap: wrap; gap: 6px 20px; margin-top: 12px; font-family: var(--mono); font-size: 11.5px; color: var(--text-secondary); }
+  .doctype .dt-meta b { color: var(--text-muted); font-weight: 500; margin-right: 6px; }
+  .doctype .codeblock { max-width: none; }
+
+  /* bare markdown vs rendered previewer, side by side */
+  .bare-render { display: grid; grid-template-columns: 1fr auto 1fr; gap: 16px; align-items: center; margin-top: 22px; }
+  @media (max-width: 820px) { .bare-render { grid-template-columns: 1fr; } .br-arrow { transform: rotate(90deg); margin: 4px 0; } }
+  .br-side { min-width: 0; }
+  .br-label { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); margin: 0 0 8px; }
+  .br-arrow { display: grid; place-items: center; text-align: center; color: var(--accent); font-size: 24px; }
+  .br-arrow span { display: block; font-family: var(--mono); font-size: 9.5px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 4px; max-width: 84px; line-height: 1.3; }
+  .bare-render .codeblock { margin: 0; max-width: none; max-height: 360px; overflow: auto; }
+  .bare-render .frame { margin: 0; }
+
+  .tscroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  footer { border-top: 1px solid var(--border); padding: 30px 0; color: var(--text-tertiary); font-size: 13px; }
+  .foot-in { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; }
+  .foot-links { display: flex; flex-wrap: wrap; gap: 20px; } .foot-links a:hover { color: var(--ember); }
+
+  .doc-next { display: flex; justify-content: space-between; gap: 14px; margin-top: clamp(48px, 6vw, 64px); padding-top: 22px; border-top: 1px solid var(--border-strong); }
+  .doc-next a { display: block; padding: 14px 18px; border: 1px solid var(--border); border-radius: 10px; background: var(--bg-element); transition: border-color .15s; max-width: 46%; }
+  .doc-next a:hover { border-color: var(--ember); }
+  .doc-next .lbl { font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); }
+  .doc-next .ttl { display: block; font-family: var(--serif); font-weight: 600; font-size: 1rem; color: var(--text); margin-top: 3px; }
+
+  .lightbox { position: fixed; inset: 0; z-index: 200; display: none; align-items: center; justify-content: center; background: rgba(20,27,53,.85); backdrop-filter: blur(8px); padding: 3vw; }
+  .lightbox.open { display: flex; }
+  .lightbox img { max-width: 96vw; max-height: 92vh; object-fit: contain; border-radius: 8px; box-shadow: 0 40px 100px -30px rgba(0,0,0,.7); background: #0c1017; }
+  .lb-close { position: absolute; top: 18px; right: 22px; width: 42px; height: 42px; border-radius: 50%; border: 1px solid rgba(255,251,237,.25); background: rgba(20,27,53,.6); color: #fbf6e7; font-size: 18px; cursor: pointer; }
+
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<nav class="site" aria-label="Site">
+  <div class="wrap-wide nav-in">
+    <span class="nav-name"><a href="index.html"><img class="nav-glyph" src="assets/afx-glyph.svg" alt="" /> AgenticFlowX</a></span>
+    <span class="nav-crumb">/ <a href="help.html">Help</a> / <b>SDD guide</b></span>
+    <div class="nav-right">
+      <a class="ghost" href="help.html">← Help</a>
+      <a class="ghost" href="https://github.com/AgenticFlowX/agenticflowx" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a class="btn-primary" href="https://marketplace.visualstudio.com/items?itemName=AgenticFlowX.agenticflowx" target="_blank" rel="noopener noreferrer">Install</a>
+      <button class="nav-burger" aria-label="Menu" aria-expanded="false" aria-controls="doc-nav">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap-wide docs">
+  <aside class="sidebar" id="doc-nav" aria-label="Guide navigation">
+    <div class="sb-group">
+      <p class="sb-label">Start here · 5 min</p>
+      <a href="#ladder">One discipline, three sizes</a>
+      <a href="#chooser">Which one do I need?</a>
+      <a href="#first">Your first feature</a>
+    </div>
+    <div class="sb-group">
+      <p class="sb-label">See it in action</p>
+      <a href="#journey">The journey, end to end</a>
+      <a href="#ui-first">The context engine</a>
+      <a href="#previewer">The previewer</a>
+      <a href="#templates">The documents</a>
+    </div>
+    <div class="sb-group">
+      <p class="sb-label">The three ways, in depth</p>
+      <a href="#dash">Dash</a>
+      <a href="#sprint">Sprint</a>
+      <a href="#full">The full spec</a>
+      <a href="#adr-research">ADRs &amp; research</a>
+    </div>
+    <div class="sb-group">
+      <p class="sb-label">Go further</p>
+      <a href="#controls">The assisted loop</a>
+      <a href="#oriented">Staying oriented</a>
+      <a href="#cases">Use cases</a>
+    </div>
+    <div class="sb-group">
+      <p class="sb-label">Reference</p>
+      <a href="#headless-typed">The typed path</a>
+      <a href="#cheatsheet">Cheat sheet</a>
+    </div>
+    <div class="sb-cta">Setting up? Start with the <a href="help.html">Help &amp; setup guide</a>.</div>
+  </aside>
+
+  <article>
+    <div class="doc-head">
+      <p class="kicker">The SDD guide</p>
+      <h1>From a thought to a shipped, <em>traceable</em> feature.</h1>
+      <p>AFX gives you three ways to work — Dash, Sprint, and the full four-file spec — all speaking the same language. This guide covers which to pick, every command and gate, what each document looks like, and the controls that drive it all. No prior SDD experience assumed.</p>
+    </div>
+
+    <div class="quickstart">
+      <span class="qs-label">The 60-second version</span>
+      <p class="qs-h">You don't have to read all of this.</p>
+      <p class="qs-lead">The whole workflow is four moves. Do these — come back for the detail only when a project actually asks for it.</p>
+      <ol class="qs-steps">
+        <li><b>Open</b> the AFX panel and click <b>Start a sprint</b>. Give your feature a name.</li>
+        <li>The agent drafts the <b>spec</b>, then <b>design</b>, then <b>tasks</b> — one step at a time. Read each, push back in chat, click <b>Approve</b>.</li>
+        <li>Click <b>Code</b>. It builds each task with links back to the spec.</li>
+        <li>Click <b>Verify</b>, then <b>Sign Off</b>. Done — with a spec, tasks, and traceable code to show for it.</li>
+      </ol>
+      <p class="qs-foot">That's spec-driven development. Everything below is depth you can pull in when you want it — not homework.</p>
+    </div>
+
+    <!-- LADDER -->
+    <section id="ladder">
+      <h2><span class="n">01</span>One discipline, three sizes</h2>
+      <p class="sec-lede">The single most misunderstood thing about AFX: you don't choose between "structure" and "no structure." You choose <em>how much</em> — and you can change your mind later without losing anything.</p>
+      <p>All three shapes share the same bones: <code>### N.N</code> task IDs, the same six-column Work Sessions log, and the same <code>[FR-N]</code> / <code>[DES-*]</code> anchor vocabulary. That's why <b>graduation is lossless</b> — moving up carries your tasks, checkboxes, file scopes, and history byte-for-byte.</p>
+      <div class="shot">
+        <div class="frame flat"><img src="assets/illustrations/sdd-ladder.svg" alt="The three ways, drawn as a ladder: Dash (purpose + tasks), Sprint (spec + design + tasks in one file, recommended start), Full spec (four files, formal gates) — with lossless graduation arrows" loading="lazy" decoding="async" /></div>
+        <p class="shot-cap">Three shapes, one discipline. Graduate when scope grows — never rewrite. <span class="gen">illustration</span></p>
+      </div>
+    </section>
+
+    <!-- CHOOSER -->
+    <section id="chooser">
+      <h2><span class="n">02</span>Which one do I need?</h2>
+      <p class="sec-lede">Three questions, in order. The first "yes" is your answer.</p>
+      <div class="shot">
+        <div class="frame flat"><img src="assets/illustrations/sdd-chooser.svg" alt="Decision flow: one purpose and known scope leads to Dash; needs requirements and design but solo and tight leads to Sprint; cross-cutting, multi-team or high-risk leads to Full spec. Not sure? Start with Sprint." loading="lazy" decoding="async" /></div>
+        <p class="shot-cap">The chooser. When in doubt: Sprint. <span class="gen">illustration</span></p>
+      </div>
+      <div class="callout go"><b>The honest default:</b> if you're new to AFX, start every feature as a <b>Sprint</b>. It's one file, the discipline is complete, and graduating later costs nothing. Reach for Dash once you can feel what "one purpose, known scope" means; reach for the full spec when someone else needs to approve your work in stages.</div>
+      <div class="callout warn"><b>You won't get stuck:</b> after every Dash action, AFX re-checks the fit and <em>recommends</em> graduating when scope creeps — it never graduates silently. Only three signals hard-block further Dash coding: auth/security boundary changes, unauthorized new architecture, and destructive migrations. Even then your Dash is preserved untouched; you just graduate first.</div>
+
+      <h3 style="margin-top:30px">Side by side</h3>
+      <div class="compare-wrap">
+        <table class="compare">
+          <thead><tr>
+            <th></th>
+            <th>Dash<small>surgical</small></th>
+            <th class="rec">Sprint<small>recommended start</small></th>
+            <th>Full spec<small>formal</small></th>
+          </tr></thead>
+          <tbody>
+            <tr><td>Start with</td><td><code>/afx-dash new</code></td><td class="rec-col"><code>/afx-sprint new</code></td><td><code>/afx-spec create</code></td></tr>
+            <tr><td>Files</td><td>one — <code>&lt;name&gt;.md</code></td><td class="rec-col">one + <code>journal.md</code></td><td><b>four</b> — spec · design · tasks · journal</td></tr>
+            <tr><td>Lives in</td><td colspan="3" style="font-family:var(--mono);font-size:11px"><code>docs/specs/&lt;name&gt;/</code> for all three</td></tr>
+            <tr><td>Type</td><td><code>DASH</code></td><td class="rec-col"><code>SPRINT</code></td><td><code>SPEC · DESIGN · TASKS · JOURNAL</code></td></tr>
+            <tr><td>Sections</td><td>Purpose · Tasks · Work Sessions</td><td class="rec-col">References · 1&nbsp;Spec · 2&nbsp;Design · 3&nbsp;Tasks · 4&nbsp;Work Sessions</td><td>the full template, one per file</td></tr>
+            <tr><td>Status / version</td><td>none — progress comes from the tasks</td><td class="rec-col">status + version + approval block</td><td>per file</td></tr>
+            <tr><td>Approvals</td><td>none</td><td class="rec-col">per section: Spec → Design → Tasks</td><td>per file: Spec → Design → Tasks</td></tr>
+            <tr><td>Requirement IDs</td><td>task IDs only <code>### N.N</code></td><td class="rec-col"><code>[FR] [NFR] [DES]</code> in one file</td><td><code>[FR] [NFR] [DES]</code> across files</td></tr>
+            <tr><td>Best for</td><td>known-scope fixes &amp; refactors</td><td class="rec-col">solo features, tight scope</td><td>cross-cutting · multi-team · high-risk</td></tr>
+            <tr><td>Ceremony</td><td>lowest</td><td class="rec-col">medium</td><td>highest</td></tr>
+            <tr><td>Grows into</td><td>Sprint or Full <span style="color:var(--text-muted)">(lossless)</span></td><td class="rec-col">Full <span style="color:var(--text-muted)">(lossless)</span></td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top:10px; font-size:13px; color:var(--text-tertiary)">The one thing to remember: they share the same task IDs and history, so moving right along this table never costs you work.</p>
+
+      <h3 style="margin-top:34px">Where the files land — and what they're called</h3>
+      <p>This is the part that trips people up, so look closely: <b>Dash and Sprint name the file after your feature</b> (one file); <b>the full spec uses four fixed names</b> — <code>spec.md</code>, <code>design.md</code>, <code>tasks.md</code>, <code>journal.md</code>. Everything sits under the same folder.</p>
+      <div class="shot"><div class="frame flat"><img src="assets/illustrations/file-tree.svg" alt="Directory tree: a Dash folder holds one feature-named file; a Sprint folder holds a feature-named file plus journal.md; a full-spec folder holds fixed spec/design/tasks/journal files plus a research subfolder; global ADRs live under docs/adr" loading="lazy" decoding="async" /></div>
+        <p class="shot-cap">One tree, every document type — real paths, real filenames. <span class="gen">illustration</span></p></div>
+      <div class="compare-wrap">
+        <table class="cmd-table" style="min-width:640px">
+          <thead><tr><th>Type</th><th>Folder</th><th>File(s)</th><th>Named</th></tr></thead>
+          <tbody>
+            <tr><td>Dash</td><td><code>docs/specs/&lt;feature&gt;/</code></td><td><code>&lt;feature&gt;.md</code></td><td>after your feature</td></tr>
+            <tr><td>Sprint</td><td><code>docs/specs/&lt;feature&gt;/</code></td><td><code>&lt;feature&gt;.md</code> + <code>journal.md</code></td><td>after your feature</td></tr>
+            <tr><td>Full spec</td><td><code>docs/specs/&lt;feature&gt;/</code></td><td><code>spec.md</code> · <code>design.md</code> · <code>tasks.md</code> · <code>journal.md</code></td><td><b>fixed names</b></td></tr>
+            <tr><td>Research</td><td><code>docs/specs/&lt;feature&gt;/research/</code></td><td><code>&lt;topic&gt;.md</code></td><td>after the topic</td></tr>
+            <tr><td>ADR (global)</td><td><code>docs/adr/</code></td><td><code>ADR-NNNN-&lt;slug&gt;.md</code></td><td>numbered</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- FIRST FEATURE -->
+    <section id="first">
+      <h2><span class="n">03</span>Your first feature — by clicking</h2>
+      <p class="sec-lede">You don't start by memorising commands. Open the AFX panel and the moves are already on screen. This is the welcome view a fresh project greets you with — every highlighted spot is a button, not something to type.</p>
+
+      <figure class="anno" style="margin: 26px 0 0">
+        <img src="assets/screenshots/chat-light.png" alt="The AFX chat welcome screen, annotated — Chat/Workflow/Spec cards, Start-here buttons, quick commands, and the intent selector" />
+        <span class="anno-pin" data-n="1" style="left:57%; top:41%">1</span>
+        <span class="anno-pin" data-n="2" style="left:56%; top:51.5%">2</span>
+        <span class="anno-pin" data-n="3" style="left:40%; top:51.5%">3</span>
+        <span class="anno-pin" data-n="4" style="left:44%; top:55.6%">4</span>
+        <span class="anno-pin" data-n="5" style="left:49%; top:63%">5</span>
+        <span class="anno-pin" data-n="6" style="left:6%; top:80%">6</span>
+      </figure>
+      <p class="shot-cap">The real welcome screen — where a new feature actually begins.</p>
+
+      <div class="anno-legend">
+        <div class="anno-item" data-n="1"><span class="num">1</span><div><h5>Start planning</h5><p>The <em>Spec</em> card's <em>Plan</em> opens traceable planning. Your first structured feature is a click away.</p></div></div>
+        <div class="anno-item" data-n="2"><span class="num">2</span><div><h5>Start a sprint</h5><p>The move we'd suggest first: one document, the whole discipline. Click it, give it a name, go.</p></div></div>
+        <div class="anno-item" data-n="3"><span class="num">3</span><div><h5>Plan a new feature</h5><p>The same flow, opened from a feature idea instead of a blank page.</p></div></div>
+        <div class="anno-item" data-n="4"><span class="num">4</span><div><h5>"What do I do next?"</h5><p>This button is <code>/afx-next</code> — it reads your project and tells you the next step. You'll lean on it daily.</p></div></div>
+        <div class="anno-item" data-n="5"><span class="num">5</span><div><h5>Quick commands</h5><p>Every command is one tap here too — for when you'd rather pick from a list than type.</p></div></div>
+        <div class="anno-item" data-n="6"><span class="num">6</span><div><h5>How your message is sent</h5><p><em>Default</em> sends exactly what you type — no hidden prompt, no extra tokens. Ask, Architect, and Code change how a turn is handled.</p></div></div>
+      </div>
+
+      <h3 style="margin-top:34px">Then it's six clicks to shipped</h3>
+      <ol class="steps" style="margin-top:14px">
+        <li><b>Start</b> — click <em>Start a sprint</em> (or the <em>New SDD</em> button in the Studio). Name it; the document and its journal appear.</li>
+        <li><b>Spec</b> — the action row offers <em>Refine</em>. Click it, add your pushback in plain words, send. When the score looks good, click <em>Approve</em>.</li>
+        <li><b>Design, then Tasks</b> — each step unlocks as you approve the one before. The buttons change to match wherever you are.</li>
+        <li><b>Code</b> — task tiles appear. Click one and the agent builds it, with links back to the spec baked in.</li>
+        <li><b>Verify</b> — click <em>Verify</em> on the tile; the evidence comes back. On the <em>Work</em> step, <b>Sign Off</b> adds your signature.</li>
+      </ol>
+      <p style="margin-top:12px">The one idea worth keeping: <b>you approve the thinking before the agent writes the code.</b> The buttons just make that fast.</p>
+      <p style="margin-top:14px; font-size:14px; color:var(--text-tertiary)">No extension — running as skills in a terminal? The same feature, fully typed, is in <a class="tx" href="#headless-typed">the typed path</a>.</p>
+
+      <div class="callout"><b>Coming back tomorrow?</b> Click <em>What do I do next?</em> (or run <code>/afx-next</code>). It reads where you left off and hands you the next move — you never re-explain yourself.</div>
+    </section>
+
+    <!-- JOURNEY -->
+    <section id="journey">
+      <h2><span class="n">04</span>The journey, end to end</h2>
+      <p class="sec-lede">One feature, six stops. We'll follow <code>room-export</code> — "export a room's ledger as CSV" — from a sentence to shipped code, showing exactly what you type, what AFX does, and which control does it in the chat. (Sprint track; the full spec is the same journey with one file per artifact.)</p>
+      <div class="shot"><div class="frame flat"><img src="assets/illustrations/journey-thread.svg" alt="The six-stop journey: spec it, refine it, design it, task it, code it, verify and ship" loading="lazy" decoding="async" /></div></div>
+
+      <div class="stage-card">
+        <span class="sk">Stop 1 · Spec it</span>
+        <h3>Say what "done" means</h3><div class="uip"><b>In the extension</b>From the welcome card: <em>Start traceable planning → Plan</em>, or <em>New SDD</em> in the SDD Studio — name it and the scaffold appears.</div>
+        <div class="cols">
+          <div class="col"><h5>AFX does</h5><ul><li>Scaffolds <code>docs/specs/room-export/room-export.md</code> + <code>journal.md</code></li><li>Drafts Problem Statement, User Stories, an FR/NFR table with sequential IDs, Acceptance Criteria, Non-Goals</li></ul></div>
+          <div class="col"><h5>You see</h5><ul><li>The stepper appears: <b>Spec ●</b> Design 🔒 Tasks 🔒</li><li>The doc opens in the previewer, Quality Pulse already grading it</li></ul></div>
+        </div>
+        
+        <div class="hl-line"><b>Headless / typed</b><code>/afx-sprint new room-export</code></div>
+        <div class="done"><b>Done when:</b> every acceptance criterion reads like a test you could run. Not before.</div>
+      </div>
+
+      <div class="stage-card">
+        <span class="sk">Stop 2 · Refine it</span>
+        <h3>Push back until it's right</h3><div class="uip"><b>In the extension</b>Doc-actions dropdown → <em>Refine</em>. Push back in plain chat; hit <em>Sign off</em> when the Pulse is green.</div>
+        <div class="cols">
+          <div class="col"><h5>AFX does</h5><ul><li>Gap analysis: asks what's missing, tightens requirements in place</li><li>Captures the discussion to <code>journal.md</code> — decisions survive the session</li></ul></div>
+          <div class="col"><h5>You see</h5><ul><li>Quality Pulse improving as gaps close; the Coach suggests what's still weak</li><li>Open Questions shrinking to zero</li></ul></div>
+        </div>
+        
+        <div class="hl-line"><b>Headless / typed</b><code>/afx-sprint spec room-export</code></div>
+        <div class="done"><b>Done when:</b> you'd defend this spec in review. Hit <b>Approve</b> in the action strip (that's <code>--approve</code>) — the Spec pill turns ✓ and Design unlocks.</div>
+      </div>
+
+      <div class="stage-card">
+        <span class="sk">Stop 3 · Design it</span>
+        <h3>Decide how — with anchors</h3><div class="uip"><b>In the extension</b>Click the <em>Design</em> pill — the strip re-resolves → <em>Refine</em> / <em>Author</em> → <em>Approve</em>.</div>
+        <div class="cols">
+          <div class="col"><h5>AFX does</h5><ul><li>Authors the Design section from the approved spec: <code>[DES-ARCH]</code>, <code>[DES-API]</code>, <code>[DES-ERR]</code>…</li><li>Every heading gets a <code>[DES-ID]</code> code will link back to</li></ul></div>
+          <div class="col"><h5>You see</h5><ul><li><b>Design ●</b> active in the stepper; switch pills any time without losing the thread</li><li>The Architect intent is your friend here (<code>⌃⌥M</code>)</li></ul></div>
+        </div>
+        
+        <div class="hl-line"><b>Headless / typed</b><code>/afx-sprint design room-export</code></div>
+        <div class="done"><b>Done when:</b> the key decisions are written down with their why — not just the what. Sign off; Tasks unlock.</div>
+      </div>
+
+      <div class="stage-card">
+        <span class="sk">Stop 4 · Task it</span>
+        <h3>Slice it into provable pieces</h3><div class="uip"><b>In the extension</b>Click the <em>Tasks</em> pill → strip becomes <em>Refine · Code · Verify · Approve</em>. The WBS dropdown fills as tasks land.</div>
+        <div class="cols">
+          <div class="col"><h5>AFX does</h5><ul><li>Phases of <code>### N.N</code> tasks, each with checkbox criteria and a <code>&lt;!-- files: --&gt;</code> scope</li><li>A cross-reference index tying tasks back to FRs</li></ul></div>
+          <div class="col"><h5>You see</h5><ul><li>The WBS dropdown fills with tasks — jump to any of them</li><li>Approving the trio flips the document to <code>status: Approved</code></li></ul></div>
+        </div>
+        
+        <div class="hl-line"><b>Headless / typed</b><code>/afx-sprint task room-export</code></div>
+        <div class="done"><b>Done when:</b> every task is one sitting's work with criteria a verifier could check. Sign off — you're cleared to build.</div>
+      </div>
+
+      <div class="stage-card">
+        <span class="sk">Stop 5 · Code it</span>
+        <h3>Now the agent writes code</h3><div class="uip"><b>In the extension</b>Click a task tile, or pick from the WBS dropdown → <em>Code</em>. No command needed.</div>
+        <div class="cols">
+          <div class="col"><h5>AFX does</h5><ul><li>Implements task by task, stamping <code>@see room-export.md [FR-1] [DES-ARCH]</code> on every function</li><li>The drift guardrail keeps changes inside the task's file scope; big multi-file writes pause for your checkpoint confirmation</li></ul></div>
+          <div class="col"><h5>You see</h5><ul><li>Code action tiles in chat per task; the Code intent takes over</li><li>Work Sessions rows appearing as tasks land</li></ul></div>
+        </div>
+        
+        <div class="hl-line"><b>Headless / typed</b><code>/afx-sprint code room-export</code></div>
+        <div class="done"><b>Done when:</b> the task's checkboxes are true — which is the next stop's job to prove.</div>
+      </div>
+
+      <div class="stage-card">
+        <span class="sk">Stop 6 · Verify &amp; ship</span>
+        <h3>Evidence, then two signatures</h3><div class="uip"><b>In the extension</b>Task tile → <em>Verify</em>; then the <em>Work</em> pill → <b>Sign Off</b> ticks the Human [x] for you — your signature, one click.</div>
+        <div class="cols">
+          <div class="col"><h5>AFX does</h5><ul><li>Per task: files exist? <code>@see</code> backlinks present? stray TODOs? session logged?</li><li>Routes you: <code>[OK]</code> → complete · <code>[PARTIAL]</code> → keep coding · <code>[MISSING]</code> → start</li></ul></div>
+          <div class="col"><h5>You see</h5><ul><li>An evidence table per task; the agent's <code>[x]</code> lands in Work Sessions</li><li>The Human <code>[x]</code> column waits for you — nothing ships on the model's word alone</li></ul></div>
+        </div>
+        
+        <div class="hl-line"><b>Headless / typed</b><code>/afx-sprint verify room-export</code></div>
+        <div class="done"><b>Done when:</b> both columns are checked and <code>/afx-check trace</code> finds no orphans. Scope grew along the way? <code>graduate</code> — losslessly.</div>
+      </div>
+    </section>
+
+    <!-- UI-FIRST -->
+    <section id="ui-first">
+      <h2><span class="n">05</span>In the extension, you click — the commands come to you</h2>
+      <p class="sec-lede">Everything in the journey above can be driven without typing a single slash command. The chat watches which AFX document is active — spec, design, tasks, journal, sprint, or dash — and surfaces <em>that document's</em> commands as dropdowns, buttons, and suggestions. Typed commands are the headless path; in VS Code, context does the driving.</p>
+
+      <h3>The context engine</h3>
+      <p>Open or select an AFX file and the chat header picks it up: a document chip shows what's active, the doc-actions dropdown fills with the right verbs, and the stepper reflects its approval state. Switch files, and the whole surface follows.</p>
+      <div class="tscroll"><table class="cmd-table">
+        <thead><tr><th>Active document</th><th>The dropdown offers</th></tr></thead>
+        <tbody>
+          <tr><td><code>spec.md</code></td><td>Refine · Author · Validate · Review · Approve</td></tr>
+          <tr><td><code>design.md</code></td><td>Refine · Author · Validate · Review · Approve — gated until the spec is approved</td></tr>
+          <tr><td><code>tasks.md</code></td><td>Pick · Code · Verify · Status · Brief</td></tr>
+          <tr><td><code>journal.md</code></td><td>Recap · Promote (discussion → ADR)</td></tr>
+          <tr><td>Sprint file</td><td>The section commands per pill, plus Sign off — same actions, one document</td></tr>
+          <tr><td>Dash file</td><td>The task actions (Pick · Code · Verify) work directly on its <code>### N.N</code> tasks</td></tr>
+        </tbody>
+      </table></div>
+      <div class="duo">
+        <figure>
+          <div class="frame on-dark"><img src="assets/screenshots/ctx-doc-header.png" alt="The chat header showing the active AFX document chip with its doc-actions" loading="lazy" decoding="async" /></div>
+          <figcaption><b>The document chip</b> — chat knows what you're looking at.</figcaption>
+        </figure>
+        <figure>
+          <div class="frame on-dark"><img src="assets/screenshots/ctx-intent-header.png" alt="The preview intent header offering document-appropriate actions" loading="lazy" decoding="async" /></div>
+          <figcaption><b>Context actions</b> — the verbs match the document type.</figcaption>
+        </figure>
+      </div>
+      <div class="shot">
+        <div class="frame on-dark"><img src="assets/screenshots/ctx-compact-switcher.png" alt="The compact doc-actions switcher listing commands for the selected AFX document" loading="lazy" decoding="async" /></div>
+        <p class="shot-cap">The switcher, expanded — every entry is one of the slash commands from this guide, pre-targeted at the active document.</p>
+      </div>
+      <h3>The dynamic strip — the row that follows you</h3>
+      <p>Directly under the four pills lives the action strip. It re-resolves on every pill click and file switch — and it knows sprint from standard. Two behaviors, by design:</p>
+      <ul class="pl">
+        <li><b>Some buttons draft first.</b> Refine, Author, Note, Capture drop their command into the composer and wait — because they're better with your context attached. Add your pushback, then send.</li>
+        <li><b>Some buttons run right away.</b> Validate, Review, Approve, Verify, Status run immediately — there's nothing to add.</li>
+      </ul>
+      <p>The strip's header also carries the <b>Memory</b> menu — Session Memory (re-load the context bundle, re-orient) and Discussion actions — so continuity is one click away from wherever you are.</p>
+      <figure class="anno" style="margin: 22px 0 0; max-width: 840px">
+        <img src="assets/screenshots/docactions-header.png" alt="The real doc-actions surface annotated: the run-next suggestion, the four-step stepper, the live action strip, the preview link and the model picker" />
+        <span class="anno-pin" data-n="1" style="left:11%; top:27%">1</span>
+        <span class="anno-pin" data-n="2" style="left:85%; top:65.3%">2</span>
+        <span class="anno-pin" data-n="3" style="left:35%; top:70%">3</span>
+        <span class="anno-pin" data-n="4" style="left:50%; top:73.8%">4</span>
+        <span class="anno-pin" data-n="5" style="left:7.5%; top:77.8%">5</span>
+        <span class="anno-pin" data-n="6" style="left:48%; top:77.8%">6</span>
+        <span class="anno-pin" data-n="7" style="left:15%; top:92%">7</span>
+      </figure>
+      <p class="shot-cap">The real thing — every numbered spot is a button that runs a command for you.</p>
+      <div class="anno-legend">
+        <div class="anno-item" data-n="1"><span class="num">1</span><div><h5>Run next</h5><p>After a reply, the next sensible move shows up as a button. <em>Code · DRAFT</em> means it'll write the command into the box for you to look over first.</p></div></div>
+        <div class="anno-item" data-n="2"><span class="num">2</span><div><h5>Preview</h5><p>Opens the full previewer for this file — the desk from the last section.</p></div></div>
+        <div class="anno-item" data-n="3"><span class="num">3</span><div><h5>The four steps</h5><p>Spec · Design · Tasks · Work. Click to move between them; the buttons below change to match wherever you are.</p></div></div>
+        <div class="anno-item" data-n="4"><span class="num">4</span><div><h5>What you're doing now</h5><p>A one-line reminder of the current step — no guessing where you are.</p></div></div>
+        <div class="anno-item" data-n="5"><span class="num">5</span><div><h5>Refine</h5><p>The same as typing <code>/afx-spec refine</code> — it drops the command in the box so you can add your take, then send.</p></div></div>
+        <div class="anno-item" data-n="6"><span class="num">6</span><div><h5>Approve</h5><p>The same as <code>/afx-spec approve</code> — runs straight away, locks this step, and opens the next.</p></div></div>
+        <div class="anno-item" data-n="7"><span class="num">7</span><div><h5>Model</h5><p>Switch models mid-conversation, right from the bar.</p></div></div>
+      </div>
+
+      <h3>Surgical commands from the previewer</h3>
+      <p>The previewer doesn't just render documents — it dispatches <em>targeted</em> commands. Three levels of precision:</p>
+      <ul class="pl">
+        <li><b>Whole document:</b> the header actions — Refine, Validate, Review, Approve for the doc that's open.</li>
+        <li><b>One section:</b> every Quality Pulse signal and Coach suggestion carries its own fix command, aimed at that section. "Success metrics missing → Add metrics" sends a command about <em>that gap</em>, not the whole file.</li>
+        <li><b>One task:</b> task rows execute individually — Code or Verify exactly <code>2.1</code>, straight from the rendered checklist. Work Sessions has its own host action to approve the section.</li>
+      </ul>
+      <p>Each dispatch chooses draft-or-send the same way the strip does — surgical <em>and</em> polite about your context.</p>
+
+      <h3>Every command has a button</h3>
+      <p>You never have to memorise the command line. Here's the whole map — type the left column, or click the middle one; they run the identical skill.</p>
+      <div class="tscroll"><table class="cmd-table">
+        <thead><tr><th>You could type</th><th>You can click</th><th>Where it lives</th></tr></thead>
+        <tbody>
+          <tr><td><code>/afx-next</code></td><td>What do I do next? · Run next</td><td>Welcome screen · above any reply</td></tr>
+          <tr><td><code>/afx-spec refine</code></td><td>Refine</td><td>Action strip, Spec step</td></tr>
+          <tr><td><code>/afx-design author</code></td><td>Author</td><td>Action strip — starts the next document</td></tr>
+          <tr><td><code>/afx-spec validate</code> · <code>review</code></td><td>Validate · Review</td><td>Action strip</td></tr>
+          <tr><td><code>/afx-spec approve</code></td><td>Approve</td><td>Action strip · or the stepper per step</td></tr>
+          <tr><td>(human sign-off)</td><td>Sign Off</td><td>The Work step</td></tr>
+          <tr><td><code>/afx-task pick</code></td><td>Pick</td><td>Action strip, Tasks step</td></tr>
+          <tr><td><code>/afx-task code 1.1</code></td><td>Code · a task tile</td><td>Action strip · one tile per task</td></tr>
+          <tr><td><code>/afx-task verify</code> · <code>status</code></td><td>Verify · Status</td><td>Action strip / task tile</td></tr>
+          <tr><td><code>/afx-session note</code> · <code>promote</code></td><td>Note · Promote</td><td>Action strip, journal open</td></tr>
+          <tr><td><code>/afx-adr review</code> · <code>supersede</code> · <code>list</code></td><td>Review · Supersede · List</td><td>Action strip, ADR open</td></tr>
+          <tr><td><code>/model</code></td><td>the model picker</td><td>Composer bar</td></tr>
+          <tr><td>switch mode</td><td>Spec · Code · Explore</td><td>Status bar · <code>Ctrl+Shift+M</code></td></tr>
+        </tbody>
+      </table></div>
+
+      
+      <div class="callout"><b>Same engine, two doors:</b> a click on <em>Approve</em> and typing <code>/afx-sprint spec room-export --approve</code> run the identical skill. Learn one, you've learned both — the buttons are just the commands wearing context.</div>
+    </section>
+
+    <!-- PREVIEWER -->
+    <section id="previewer">
+      <h2><span class="n">06</span>The previewer — where a document comes alive</h2>
+      <p class="sec-lede">This is the surface most people fall for. It takes a plain markdown file in your repo and turns it into a working desk: it grades the document while you write, names exactly what's weak, and hands you a one-click fix — all without you typing a command. Hover the numbered spots; here's what each one is.</p>
+
+      <h3 style="margin-top:26px">The same file, twice</h3>
+      <p>Here's what "living document" actually means: on the left is the plain <code>spec.md</code> sitting in your repo — text you could write in any editor. On the right is that exact file opened in the previewer. Same bytes; one is a file, the other is a working desk.</p>
+      <div class="bare-render">
+        <div class="br-side">
+          <p class="br-label">The raw file · spec.md</p>
+          <div class="codeblock"><code>---
+afx: true
+type: SPEC
+status: Living
+owner: "@rix"
+version: "1.0"
+---
+
+# App Workbench Canvas — Product Specification
+
+&gt; <span class="cm">**As-built.**</span> Canonical canvas spec; FR/NFR/DES
+&gt; anchors are stable so code @see links resolve here.
+
+## References
+
+- <span class="cm">**Parent spec**</span>: App Workbench; host: Workbench Shell.
+- <span class="cm">**Scope boundary**</span>: a freeform ideation surface,
+  not a knowledge graph (see [DES-ROLLOUT]).
+- <span class="cm">**Settings owner**</span>: 214-app-chat-settings hosts
+  the Experimental toggle ([FR-22]).
+
+## Problem Statement
+
+Spec-driven development has a cold-start problem: the
+blank spec.md front-loads&hellip;</code></div>
+        </div>
+        <div class="br-arrow">&rarr;<span>opened in the previewer</span></div>
+        <div class="br-side">
+          <p class="br-label">The previewer</p>
+          <div class="frame on-dark"><img src="assets/screenshots/previewer-spec.png" alt="The same spec, rendered in the AFX previewer" loading="lazy" decoding="async" /></div>
+        </div>
+      </div>
+      <p class="shot-cap">Nothing proprietary on the left — delete the extension and it's still a clean markdown file. The extension just does more <em>with</em> it.</p>
+
+      <h3 style="margin-top:34px">Now, every live part of that right-hand side</h3>
+      <figure class="anno" style="margin: 26px 0 0">
+        <img src="assets/screenshots/previewer-spec.png" alt="A real spec open in the AFX previewer, annotated" />
+        <span class="anno-pin" data-n="1" style="left:9.5%; top:2.3%">1</span>
+        <span class="anno-pin" data-n="2" style="left:71%; top:2.3%">2</span>
+        <span class="anno-pin" data-n="3" style="left:27%; top:20.8%">3</span>
+        <span class="anno-pin" data-n="4" style="left:27%; top:33%">4</span>
+        <span class="anno-pin" data-n="5" style="left:40.5%; top:74.2%">5</span>
+        <span class="anno-pin" data-n="6" style="left:87.5%; top:5.6%">6</span>
+        <span class="anno-pin" data-n="7" style="left:88%; top:35.4%">7</span>
+        <span class="anno-pin" data-n="8" style="left:90.5%; top:56.5%">8</span>
+        <span class="anno-pin" data-n="9" style="left:87.5%; top:62.7%">9</span>
+        <span class="anno-pin" data-n="10" style="left:87.5%; top:73.5%">10</span>
+      </figure>
+      <p class="shot-cap">A real <code>spec.md</code> from the AFX repo, open in the previewer — every number is a live part of the UI.</p>
+
+      <div class="anno-legend" id="anno-legend">
+        <div class="anno-item" data-n="1"><span class="num">1</span><div><h5>The real file</h5><p>That path up top is an actual file in your repo — not an export or a copy. Edit it in your editor and this updates.</p></div></div>
+        <div class="anno-item" data-n="2"><span class="num">2</span><div><h5>Its current state</h5><p>Type, Living/Draft/Approved, version, owner, last change — read straight from the top of the file.<span class="do">the state decides which actions are open</span></p></div></div>
+        <div class="anno-item" data-n="3"><span class="num">3</span><div><h5>Actions, on the page</h5><p>The whole document's toolkit sits right here.<span class="do">click Refine to improve it in chat · Approve to lock it</span></p></div></div>
+        <div class="anno-item" data-n="4"><span class="num">4</span><div><h5>It says what <em>is</em></h5><p>The document reads in the present tense — what's true now. History goes to the journal, so this never rots into a changelog.</p></div></div>
+        <div class="anno-item" data-n="5"><span class="num">5</span><div><h5>A requirement you can hold onto</h5><p><code>[FR-22]</code> is a stable ID. Code that builds it carries <code>@see … [FR-22]</code>.<span class="do">hover it in your code to preview this line · click to jump here</span></p></div></div>
+        <div class="anno-item" data-n="6"><span class="num">6</span><div><h5>It grades itself</h5><p>Quality Pulse scores the doc as you write — Strategy, Structure, Clarity, Completeness. "Needs pass · 18 sections · 1 to review."<span class="do">live — there's no command to run</span></p></div></div>
+        <div class="anno-item" data-n="7"><span class="num">7</span><div><h5>It names what's weak</h5><p>Not "could be better" — a specific miss, in amber: <em>Success metrics missing</em>. You always know exactly what to fix.</p></div></div>
+        <div class="anno-item" data-n="8"><span class="num">8</span><div><h5>And offers the fix</h5><p>The coach explains why it matters, then gives you the button — <em>Add metrics</em> sends the exact command for <em>that</em> gap.<span class="do">one click, targeted — not a rewrite of the whole file</span></p></div></div>
+        <div class="anno-item" data-n="9"><span class="num">9</span><div><h5>It catches decisions</h5><p>Spotted a decision or a resolved question in your chat? It nudges you to save it before it evaporates.<span class="do">keeps the "why" from getting lost</span></p></div></div>
+        <div class="anno-item" data-n="10"><span class="num">10</span><div><h5>Everything's one click away</h5><p>The outline keeps big documents navigable — jump to any section without scrolling.</p></div></div>
+      </div>
+
+      <h3 style="margin-top:34px">It reads the room</h3>
+      <p>The same surface adapts to whatever document you open — a design gets its <code>[DES-…]</code> anchors and design actions; a task list turns its rows into things you can actually run.</p>
+      <div class="duo">
+        <figure>
+          <div class="frame on-dark"><img src="assets/screenshots/previewer-design.png" alt="A design document in the previewer" loading="lazy" decoding="async" /></div>
+          <figcaption><b>A design</b> — architecture with anchors code links back to.</figcaption>
+        </figure>
+        <figure>
+          <div class="frame on-dark"><img src="assets/screenshots/previewer-tasks.png" alt="A task list in the previewer with runnable rows" loading="lazy" decoding="async" /></div>
+          <figcaption><b>A task list</b> — every row is a Code or Verify button.</figcaption>
+        </figure>
+      </div>
+      <div class="callout"><b>Why it matters:</b> the blank page is where spec-driven work usually dies. The previewer makes the document push back — it won't let a vague spec feel finished. That's the difference between a template you dread and a desk you want to sit at.</div>
+    </section>
+
+    <!-- TEMPLATES -->
+    <section id="templates">
+      <h2><span class="n">07</span>The documents, annotated</h2>
+      <p class="sec-lede">Each template is plain markdown you could write by hand — and every part of it powers something in the extension. Here's the map.</p>
+
+      <h3>spec.md — anchors the extension can hold on to</h3>
+      <div class="shot">
+        <div class="frame on-dark"><img src="assets/illustrations/spec-annotated.svg" alt="The spec.md template annotated: frontmatter becomes the previewer's status header, the FR table becomes living anchors with hover and CodeLens, sections feed Quality Pulse, open questions surface as nudges, and the whole doc drives the action strip" loading="lazy" decoding="async" /></div>
+        <p class="shot-cap">spec.md — every template part, mapped to what the extension does with it. <span class="gen">illustration</span></p>
+      </div>
+
+      <h3>journal.md — the part everyone underestimates</h3>
+      <div class="shot">
+        <div class="frame on-dark"><img src="assets/illustrations/journal-annotated.svg" alt="The journal.md template annotated: session log, discussions with IDs and tags, captured verbatim prompts — powering the Journal tab, the session action strip, and /afx-next" loading="lazy" decoding="async" /></div>
+        <p class="shot-cap">journal.md — why the living docs can stay clean: history lives here, and three surfaces feed on it. <span class="gen">illustration</span></p>
+      </div>
+
+      <h3>The rest of the family</h3>
+      <ul class="pl">
+        <li><b>design.md</b> — the <code>[DES-*]</code> anatomy is annotated in the <a class="tx" href="#sprint">Sprint document</a> illustration; standard mode is the same sections promoted one heading level. Every anchor is hover-able and CodeLens-linked from code.</li>
+        <li><b>tasks.md</b> — the <code>### N.N</code> / checkbox / file-scope anatomy is annotated in the <a class="tx" href="#dash">Dash document</a> illustration — identical bones, which is what makes graduation lossless. In the previewer, each task row is executable.</li>
+        <li><b>Sprint &amp; Dash</b> — single-file anatomies with their approval and escalation rails, in their own sections below.</li>
+      </ul>
+      <div class="callout"><b>The point of the map:</b> nothing here is proprietary format. Delete the extension and every document still reads, diffs, and reviews like markdown — because it is. The extension earns its place by doing more <em>with</em> the format, not by owning it. Want every section, anchor, and rule in full? See <a class="tx" href="document-anatomy.html">Document anatomy</a>.</div>
+    </section>
+
+    <!-- DASH -->
+    <section id="dash">
+      <h2><span class="n">08</span>Dash — structure for surgical work</h2>
+      <p class="sec-lede">A bug fix deserves better than an unrecorded chat, but not a spec. Dash is Purpose + Tasks in one file — no approvals, no status, no version. Progress <em>is</em> the task state.</p>
+
+      <h3>The document</h3>
+      <p>Lives at <code>docs/specs/&lt;name&gt;/&lt;name&gt;.md</code> with <code>type: DASH</code>. Two sections you write, one the workflow appends:</p>
+      <div class="shot">
+        <div class="frame on-dark"><img src="assets/illustrations/dash-doc.svg" alt="A 1:1 Dash document: DASH frontmatter without status or version, a Purpose section with Observed/Expected/Scope, Tasks with N.N groups, checkbox criteria and file scopes, and the append-only Work Sessions table" loading="lazy" decoding="async" /></div>
+        <p class="shot-cap">A Dash, 1:1 — Purpose says why, Tasks say what done means, Work Sessions says what happened. <span class="gen">illustration</span></p>
+      </div>
+
+      <h3>The commands</h3>
+      <div class="tscroll"><table class="cmd-table">
+        <thead><tr><th>Command</th><th>What it does</th></tr></thead>
+        <tbody>
+          <tr><td><code>/afx-dash new &lt;name&gt;</code></td><td>Create the Dash from its template — Purpose first, then task groups with checkbox criteria and <code>&lt;!-- files: --&gt;</code> scopes.</td></tr>
+          <tr><td><code>/afx-dash refine</code></td><td>Adjust Purpose or Tasks as understanding sharpens.</td></tr>
+          <tr><td><code>/afx-dash code [task-id]</code></td><td>Implement a task — delegates to the shared <code>/afx-task code</code> engine, so @see traceability and the drift guardrail apply here too.</td></tr>
+          <tr><td><code>/afx-dash verify</code></td><td>Evidence check per task: files exist, @see backlinks present, session logged → <code>[OK]</code> / <code>[PARTIAL]</code> / <code>[MISSING]</code>.</td></tr>
+          <tr><td><code>/afx-dash graduate --to sprint|full</code></td><td>Expand losslessly. Purpose seeds the Sprint's problem statement; tasks, checkboxes, and Work Sessions move unchanged. Missing spec/design content becomes explicit Draft material — approval is never invented retroactively.</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="callout"><b>Use Dash when</b> nearly all of these are true: the purpose fits one concise section · you understand the expected outcome · it's one coherent result · no unresolved product decision · no new architecture · impact and rollback are bounded · verification can be written as task criteria. Unknown root cause? Investigate in <b>Explore mode</b> first, then Dash the fix.</div>
+    </section>
+
+    <!-- SPRINT -->
+    <section id="sprint">
+      <h2><span class="n">09</span>Sprint — the whole discipline, one file</h2>
+      <p class="sec-lede">Spec, Design, and Tasks as numbered sections of a single document, each behind its own approval. This is where most features should live — and the recommended starting point.</p>
+
+      <h3>The document</h3>
+      <p><code>docs/specs/&lt;feature&gt;/&lt;feature&gt;.md</code> with <code>type: SPRINT</code>, plus a companion <code>journal.md</code>. The frontmatter carries the approval state per section:</p>
+      <div class="shot">
+        <div class="frame on-dark"><img src="assets/illustrations/sprint-doc.svg" alt="A 1:1 Sprint document: SPRINT frontmatter with status, version and a per-section approval block, numbered sections 1. Spec, 2. Design with DES anchors, 3. Tasks, 4. Work Sessions — with the approval rail showing spec approved, design unlocked, tasks gated" loading="lazy" decoding="async" /></div>
+        <p class="shot-cap">A Sprint, 1:1 — the approval block in frontmatter is the state machine; sections unlock in order. <span class="gen">illustration</span></p>
+      </div>
+
+      <h3>The gates — how approval actually works</h3>
+      <div class="tscroll"><table class="cmd-table">
+        <thead><tr><th>Command</th><th>Prerequisite</th><th><code>--approve</code> effect</th></tr></thead>
+        <tbody>
+          <tr><td><code>/afx-sprint spec</code></td><td>none</td><td><code>approval.spec → Approved</code></td></tr>
+          <tr><td><code>/afx-sprint design</code></td><td>spec Approved</td><td><code>approval.design → Approved</code></td></tr>
+          <tr><td><code>/afx-sprint task</code></td><td>spec <em>and</em> design Approved</td><td><code>approval.tasks → Approved</code> — all three approved flips the document to <code>status: Approved</code></td></tr>
+          <tr><td><code>/afx-sprint code</code></td><td>all three Approved</td><td>—</td></tr>
+          <tr><td><code>/afx-sprint graduate</code></td><td>all approved <em>and</em> <code>verify</code> passes</td><td>—</td></tr>
+        </tbody>
+      </table></div>
+      <div class="callout warn"><b>Re-approval discipline:</b> edit an Approved section and it demotes back to Draft — <em>along with everything downstream</em>. Change an approved Spec and Design + Tasks demote too; re-approve in order. This is the feature, not a bug: nothing ships against a spec nobody re-read.</div>
+
+      <h3>Working it</h3>
+      <p>The rhythm is <em>refine → approve → next section</em>. In chat, the Spec-mode stepper shows exactly which section is live; in the previewer, <code>Sprint</code> documents render with the same doc actions as full specs. When all three sections are approved, <code>code</code> walks the tasks with the shared implementation engine, and <code>verify</code> demands evidence per task.</p>
+      <div class="shot">
+        <div class="frame on-dark"><img src="assets/screenshots/previewer-sprint.png" alt="A real Sprint document rendered in the AFX previewer" loading="lazy" decoding="async" /></div>
+        <p class="shot-cap">A real Sprint in the previewer — this one you can click through in the extension today.</p>
+      </div>
+
+      <h3>Graduating</h3>
+      <p><code>/afx-sprint graduate</code> splits the one file into <code>spec.md</code> / <code>design.md</code> / <code>tasks.md</code> (your <code>journal.md</code> already exists), promotes headings one level, and retargets every <code>@see</code> path. FR numbers, DES anchors, and task IDs survive verbatim — code that pointed at the sprint keeps resolving.</p>
+    </section>
+
+    <!-- FULL -->
+    <section id="full">
+      <h2><span class="n">10</span>The full spec — four files, formal gates</h2>
+      <p class="sec-lede">For work that outlives a sitting: cross-cutting features, multi-team coordination, security boundaries, migrations. Every document gets its own file, its own lifecycle, and its own approval.</p>
+
+      <div class="shot">
+        <div class="frame on-dark"><img src="assets/illustrations/fourfile-lifecycle.svg" alt="The full lifecycle: spec.md create/refine/validate/approve unlocks design.md author/validate/approve, which unlocks tasks.md plan and the pick/code/verify/complete loop, with journal.md as the append-only rail underneath" loading="lazy" decoding="async" /></div>
+        <p class="shot-cap">The whole machine — approval at each boundary unlocks the next artifact. <span class="gen">illustration</span></p>
+      </div>
+
+      <h3>spec.md — the WHAT · <span class="mono" style="font-size:0.75em">/afx-spec</span></h3>
+      <p>Requirements with stable <code>[FR-N]</code> / <code>[NFR-N]</code> anchors (sequential, no gaps) that code links back to forever. The template's sections: References · Problem Statement · User Stories · Requirements (Functional / Non-Functional) · Acceptance Criteria · Non-Goals · Open Questions · Dependencies · Appendix.</p>
+      <div class="tscroll"><table class="cmd-table">
+        <thead><tr><th>Command</th><th>What it does</th></tr></thead>
+        <tbody>
+          <tr><td><code>create</code></td><td>Scaffold the spec directory with all four artifacts.</td></tr>
+          <tr><td><code>refine</code></td><td>Requirements via interactive gap analysis, captured to the journal. Loop until it says what "done" means.</td></tr>
+          <tr><td><code>validate</code></td><td>Deterministic structure check — required sections, frontmatter, sequential FR/NFR IDs. Blocking for approval.</td></tr>
+          <tr><td><code>review</code></td><td>Quality scoring: completeness, consistency, gaps, risk.</td></tr>
+          <tr><td><code>approve [--reviewer "@handle"]</code></td><td>Runs validate + review, <b>blocked while Critical issues remain</b>. Then Draft → Approved, spec freezes, design unlocks. <code>--reviewer</code> adds human sign-off on an already-approved spec.</td></tr>
+        </tbody>
+      </table></div>
+      <p style="margin-top:10px">Statuses: <code>Draft → Approved → Superseded</code>. Editing an approved spec in a way that changes scope bumps the version and reverts to Draft — downstream demotes with it.</p>
+
+      <h3>design.md — the HOW · <span class="mono" style="font-size:0.75em">/afx-design</span></h3>
+      <p>Architecture with a <code>[DES-ID]</code> on every <code>##</code> heading — <code>[DES-OVR]</code>, <code>[DES-ARCH]</code>, <code>[DES-API]</code>, <code>[DES-SEC]</code>, and the rest — plus at least one <code>@see spec.md [FR-X]</code> so the design provably serves the spec.</p>
+      <div class="tscroll"><table class="cmd-table">
+        <thead><tr><th>Command</th><th>Gate</th></tr></thead>
+        <tbody>
+          <tr><td><code>author</code> / <code>refine</code></td><td><b>Blocked until the spec is Approved.</b> Try early and you get a BLOCKED message pointing you to <code>/afx-spec review</code> → <code>approve</code>.</td></tr>
+          <tr><td><code>validate</code> / <code>review</code></td><td>Structure blocks approval; quality review is advisory.</td></tr>
+          <tr><td><code>approve</code></td><td>Draft → Approved, and the output tells you plainly: <code>/afx-task plan UNLOCKED</code>.</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>tasks.md — the WHEN · <span class="mono" style="font-size:0.75em">/afx-task</span></h3>
+      <p>The working loop. <code>plan</code> (gated on approved design) generates phases of <code>### N.N</code> tasks; then it's <b>pick → code → verify → complete</b>, task after task, phase after phase.</p>
+      <div class="tscroll"><table class="cmd-table">
+        <thead><tr><th>Command</th><th>What it does</th></tr></thead>
+        <tbody>
+          <tr><td><code>plan</code> / <code>refine</code></td><td>Generate or refine tasks.md from the approved design.</td></tr>
+          <tr><td><code>pick {id}</code></td><td>Check out a task as active.</td></tr>
+          <tr><td><code>code {id}</code> · <code>code all</code></td><td>Implement with <code>@see</code> traceability — the drift guardrail keeps changes inside the task's file scope.</td></tr>
+          <tr><td><code>verify &lt;spec&gt;#&lt;id&gt;</code> · <code>verify all</code></td><td>Evidence check: files exist · @see backlinks · no stray TODO/FIXME · session logged. Routes you: <code>[OK]</code> → complete? · <code>[PARTIAL]</code> → continue? · <code>[MISSING]</code> → start?</td></tr>
+          <tr><td><code>complete {id}</code></td><td>Mark done, move to the next task or phase.</td></tr>
+          <tr><td><code>status</code> · <code>summary {id}</code> · <code>sync</code></td><td>Phase overview · what-was-built brief · bidirectional GitHub sync.</td></tr>
+        </tbody>
+      </table></div>
+      <div class="shot">
+        <div class="frame on-dark"><img src="assets/screenshots/previewer-tasks.png" alt="A real tasks document in the AFX previewer with runnable tasks" loading="lazy" decoding="async" /></div>
+        <p class="shot-cap">tasks.md in the previewer — Pick, Code, and Verify are buttons here, not commands you memorise.</p>
+      </div>
+      <div class="callout"><b>Two signatures per task:</b> the Work Sessions log has an Agent column and a Human column. <code>verify</code> earns the agent's <code>[x]</code>; the human one is yours to give. Nothing is "done" because a model said so.</div>
+    </section>
+
+    <!-- ADR + RESEARCH -->
+    <section id="adr-research">
+      <h2><span class="n">11</span>Two more you'll create along the way</h2>
+      <p class="sec-lede">Specs, designs, and tasks are the spine. Two supporting documents show up as real work happens — a decision worth remembering, or a question worth investigating first.</p>
+
+      <div class="doctype">
+        <div class="dt-top"><h3>ADR — a decision, on the record</h3><span class="dt-type">type: ADR</span><span class="dt-where">docs/adr/ADR-NNNN-&lt;slug&gt;.md</span></div>
+        <p class="dt-use"><b>Use it when</b> you make a call that someone will later ask "why?" about — a library choice, an API shape, a trade-off. It captures the decision <em>and</em> the roads not taken, so the reasoning outlives the moment.</p>
+        <div class="dt-meta"><span><b>Create</b><code>/afx-adr create "stream csv exports"</code></span><span><b>Then</b>review · list · supersede</span><span><b>Buttons</b>Review · Supersede · List</span></div>
+        <div class="codeblock"><code>---
+afx: true
+type: ADR
+status: Accepted        <span class="cm"># Proposed | Accepted | Rejected | Deprecated | Superseded</span>
+version: "1.0"
+---
+# ADR 0007: Stream CSV exports instead of buffering
+
+## Context
+Rooms hold 100k+ ledger entries; buffering the whole file blows memory.
+
+## Decision
+Stream rows straight to the response with a bounded writer.
+
+## Rationale
+Constant memory, first byte &lt; 200ms. Buffering failed NFR-1.
+
+## Consequences
++ Handles any room size.   − No total row-count until the stream ends.
+
+## Alternatives Considered
+- <span class="cm">**Buffer then send**</span>: simplest, fails at scale. Rejected.
+- <span class="cm">**Paginate + stitch client-side**</span>: pushes work to callers. Rejected.</code></div>
+        <p style="margin-top:12px; font-size:13.5px; color:var(--text-secondary)">Global ADRs live in <code>docs/adr/</code>; a decision scoped to one feature can live in that feature's <code>research/</code> folder. Superseding one keeps the old record and links forward — history is never deleted.</p>
+      </div>
+
+      <div class="doctype">
+        <div class="dt-top"><h3>Research — think before you commit</h3><span class="dt-type">type: RES</span><span class="dt-where">docs/specs/&lt;feature&gt;/research/&lt;topic&gt;.md</span></div>
+        <p class="dt-use"><b>Use it when</b> the answer isn't obvious yet — comparing options, checking a constraint, exploring an unknown. Do the digging in a research note, land on a recommendation, then promote it into an ADR or straight into the spec.</p>
+        <div class="dt-meta"><span><b>Create</b><code>/afx-research</code></span><span><b>Flow</b>discover · compare · summarize · promote</span></div>
+        <div class="codeblock"><code>---
+afx: true
+type: RES
+tags: ["research", "csv-export"]
+---
+# CSV writer options for large exports
+
+## Context
+Which approach meets NFR-1 (100k rows &lt; 5s) without wrecking memory?
+
+## Findings
+### Native streaming
+Constant memory; ~200ms first byte at 100k rows.
+### Buffered library
+Cleaner API, but 1.2&nbsp;GB peak at 100k rows.
+
+## Analysis
+Streaming is the only option that meets the NFR at scale.
+
+## Recommendations
+- Use native streaming; revisit a library only for RFC&nbsp;4180 edge cases.
+
+## References
+- <span class="cm">jsoncanvas.org/spec, internal benchmark run 2026-07-18</span>
+
+## Next Steps
+- Promote the streaming decision to an ADR.</code></div>
+        <p style="margin-top:12px; font-size:13.5px; color:var(--text-secondary)">Research sits next to the feature it informs. When a finding hardens into a decision, <code>/afx-research promote</code> (or <code>/afx-session promote</code> for a chat discussion) turns it into an ADR — the note stays as the trail of how you got there.</p>
+      </div>
+
+      <div class="callout"><b>Where each document is born:</b> everything lives under <code>docs/specs/&lt;feature&gt;/</code> — spec, design, tasks, journal, sprint or dash files, and a <code>research/</code> subfolder — except global ADRs, which sit in <code>docs/adr/</code>. All plain markdown, all in your repo, all diffable.</div>
+    </section>
+
+    <!-- CONTROLS -->
+    <section id="controls">
+      <h2><span class="n">12</span>The assisted loop — the extension does the typing</h2>
+      <p class="sec-lede">This is why the extension exists: the ceremony is real, the typing isn't. After every action, the next sensible steps appear as clickable suggestions — you steer, AFX writes the commands.</p>
+      <div class="shot">
+        <div class="frame flat"><img src="assets/illustrations/assisted-loop.svg" alt="The assisted loop: a suggestion appears, you click, the agent works, every surface refreshes and the next suggestion is ready — fed by the start-here card, SDD guide timeline, dynamic strip, /afx-next, task tiles and previewer buttons" loading="lazy" decoding="async" /></div>
+        <p class="shot-cap">The loop. Six places feed it suggestions — all pre-targeted at your active document. <span class="gen">illustration</span></p>
+      </div>
+
+      <h3>The guide that walks with you</h3>
+      <p>Generated documents come with a phase-aware timeline in chat: where the feature stands, what's next, and one-click jumps to the previewer or the Studio.</p>
+      <div class="shot">
+        <div class="frame on-dark"><img src="assets/screenshots/chat-sdd-guide.png" alt="The SDD guide timeline in chat with next actions" loading="lazy" decoding="async" /></div>
+        <p class="shot-cap">The SDD guide in chat — next actions as buttons, not homework.</p>
+      </div>
+
+      <h3>Next actions, ranked and clickable</h3>
+      <p><code>/afx-next</code> output renders as buttons in the extension — the ranked list you saw earlier becomes one-click continuations.</p>
+      <div class="shot">
+        <div class="frame on-dark"><img src="assets/screenshots/next-actions.png" alt="Ranked next-action suggestions rendered as clickable chips" loading="lazy" decoding="async" /></div>
+        <p class="shot-cap">Real capture — the golden thread, clickable.</p>
+      </div>
+
+      <h3>The cockpit view</h3>
+      <p>SDD Studio shows every feature's documents in columns, with inline actions that hand off to chat with context attached — <em>Refine spec</em> and <em>Code all</em> are clicks here too.</p>
+      <div class="shot">
+        <div class="frame on-dark"><img src="assets/screenshots/sdd-studio.png" alt="SDD Studio overview with per-feature document columns and inline actions" loading="lazy" decoding="async" /></div>
+        <p class="shot-cap">SDD Studio — Overview, Focus, and Compare modes over the same four columns.</p>
+      </div>
+
+      <h3>Tasks as tiles</h3>
+      <p>When implementation starts, tasks surface as tiles — one click runs the coding engine for exactly that task.</p>
+      <div class="shot">
+        <div class="frame on-dark"><img src="assets/screenshots/code-action-tiles.png" alt="Code action tiles in chat, one per task" loading="lazy" decoding="async" /></div>
+        <p class="shot-cap">One tile, one task, one click.</p>
+      </div>
+    </section>
+
+    <!-- ORIENTED -->
+    <section id="oriented">
+      <h2><span class="n">13</span>Staying oriented</h2>
+      <p class="sec-lede">SDD's superpower isn't the documents — it's that <em>any</em> session, any agent, any day can pick up exactly where the last one stopped.</p>
+      <ul class="pl">
+        <li><b><code>/afx-next</code> — the golden thread.</b> Reads git state, active tasks, and session history; answers "what do I do now?" with a ranked list.</li>
+        <li><b><code>/afx-session note</code> / <code>capture</code></b> — capture decisions as they happen; <code>capture</code> stores the verbatim prompt that changed a spec, so future sessions know <em>why</em>.</li>
+        <li><b><code>/afx-context save</code> / <code>load</code></b> — bundle spec state, task progress, and open questions for a clean handoff to the next agent (or the next you).</li>
+      </ul>
+      <div class="shot">
+        <div class="frame on-dark"><img src="assets/illustrations/afx-next.svg" alt="The /afx-next output format: detected context state and a ranked list of next commands with reasons" loading="lazy" decoding="async" /></div>
+        <p class="shot-cap">/afx-next, 1:1 — the same ranked output in every agent; UI hosts make the list clickable. <span class="gen">illustration</span></p>
+      </div>
+    </section>
+
+    <!-- USE CASES -->
+    <section id="cases">
+      <h2><span class="n">14</span>Use cases — pick your situation</h2>
+      <p class="sec-lede">Real situations, start to finish. Copy the sequence, change the names.</p>
+
+      <div class="case">
+        <div class="case-head"><h3>The hotfix</h3><span class="rung dash">Dash</span><span class="time">~20 min</span></div>
+        <p class="scene">"Sessions expire after 5 minutes even with 'keep me signed in'. Fix it, prove it, move on."</p>
+        <div class="codeblock"><code>/afx-dash new fix-login-timeout "sessions expire at 5min despite rememberMe"
+/afx-dash code 1.1        <span class="cm"># reproduce with a failing test</span>
+/afx-dash code 1.2        <span class="cm"># fix the refresh window</span>
+/afx-dash verify          <span class="cm"># [OK]? both tasks evidence-checked</span></code></div>
+        <p style="margin-top:10px">No approvals, no ceremony — but the fix has a Purpose, criteria, <code>@see</code> links, and a session log. Future-you knows why this change exists.</p>
+      </div>
+
+      <div class="case">
+        <div class="case-head"><h3>The solo feature</h3><span class="rung sprint">Sprint</span><span class="time">~half a day</span></div>
+        <p class="scene">"CSV export for room ledgers. I know roughly what I want; I want the discipline without four files."</p>
+        <div class="codeblock"><code>/afx-sprint new room-export
+/afx-sprint spec room-export --approve     <span class="cm"># refine until criteria read like tests</span>
+/afx-sprint design room-export --approve   <span class="cm"># streaming vs batch — decided, anchored</span>
+/afx-sprint task room-export --approve     <span class="cm"># status flips to Approved</span>
+/afx-sprint code room-export
+/afx-sprint verify room-export</code></div>
+        <p style="margin-top:10px">This is the journey above — the recommended default for most features.</p>
+      </div>
+
+      <div class="case">
+        <div class="case-head"><h3>The team feature</h3><span class="rung full">Full spec</span><span class="time">days–weeks</span></div>
+        <p class="scene">"New billing pipeline. Security review required, three people involved, work spans sprints."</p>
+        <div class="codeblock"><code>/afx-spec create billing-pipeline
+/afx-spec refine billing-pipeline          <span class="cm"># loop with the team's input</span>
+/afx-spec approve billing-pipeline
+/afx-spec approve billing-pipeline --reviewer "@lead"   <span class="cm"># human sign-off on record</span>
+/afx-design author billing-pipeline && /afx-design approve billing-pipeline
+/afx-task plan billing-pipeline
+/afx-task sync billing-pipeline            <span class="cm"># tasks ↔ GitHub issues, bidirectional</span>
+<span class="cm"># then the loop, per engineer: pick → code → verify → complete</span></code></div>
+        <p style="margin-top:10px">Formal gates at every artifact, a named reviewer in frontmatter, and GitHub issues as the living execution log.</p>
+      </div>
+
+      <div class="case">
+        <div class="case-head"><h3>The investigation</h3><span class="rung dash">Explore → Sprint</span><span class="time">~1 hr</span></div>
+        <p class="scene">"Something's wrong in the sync engine, root cause unknown — and maybe there's a product gap behind it."</p>
+        <div class="codeblock"><code><span class="cm"># Ctrl+Shift+M → Explore (read-only, guardrails on)</span>
+"Trace how sync conflicts are resolved. Where can data be lost?"
+<span class="cm"># PRD intent: turn findings into requirements</span>
+<span class="cm"># then: Ctrl+Shift+M → Spec</span>
+/afx-sprint new sync-conflict-handling     <span class="cm"># findings become the Problem Statement</span></code></div>
+        <p style="margin-top:10px">Explore guarantees the investigation touches nothing; the PRD intent turns what you learn into the seed of a real spec.</p>
+      </div>
+
+      <div class="case">
+        <div class="case-head"><h3>The cold Monday</h3><span class="rung sprint">Any rung</span><span class="time">~2 min</span></div>
+        <p class="scene">"It's been a week. What was I even doing?"</p>
+        <div class="codeblock"><code>/afx-next
+<span class="cm">## Context: room-export — mid-implementation</span>
+<span class="cm">Detected: Active Task 2.1 · uncommitted changes in src/export/</span>
+<span class="cm">1. /afx-task verify room-export#2.1   # code written, evidence not yet checked</span></code></div>
+        <p style="margin-top:10px">The journal remembers, the tasks remember, <code>/afx-next</code> reads it all back. Nothing lives only in your head.</p>
+      </div>
+    </section>
+
+    <!-- HEADLESS TYPED -->
+    <section id="headless-typed">
+      <h2><span class="n">15</span>No extension? The typed path</h2>
+      <p class="sec-lede">Running AFX as skills only — in Claude Code, Codex, or Copilot? Everything in this guide works by typing. Same skills, same gates, same files; you supply the keystrokes the extension would have saved you.</p>
+
+      <h3>Sprint, typed</h3>
+      <div class="codeblock"><code>/afx-sprint new room-export
+/afx-sprint spec room-export --approve     <span class="cm"># refine until criteria read like tests</span>
+/afx-sprint design room-export --approve   <span class="cm"># unlocked by spec</span>
+/afx-sprint task room-export --approve     <span class="cm"># unlocked by design</span>
+/afx-sprint code room-export
+/afx-sprint verify room-export</code></div>
+
+      <h3>The full four files, typed</h3>
+      <div class="codeblock"><code>/afx-spec create my-feature
+/afx-spec refine my-feature                <span class="cm"># loop until it says what "done" means</span>
+/afx-spec approve my-feature
+/afx-design author my-feature && /afx-design approve my-feature
+/afx-task plan my-feature
+/afx-task pick && /afx-task code 1.1
+/afx-task verify my-feature#1.1 && /afx-task complete 1.1</code></div>
+
+      <div class="callout"><b>Same engine, honestly:</b> a click on Approve and typing <code>--approve</code> run the identical skill. The extension's advantage is the suggestions and the context targeting — never extra capability. Nothing here is a second-class path.</div>
+    </section>
+
+    <!-- CHEATSHEET -->
+    <section id="cheatsheet">
+      <h2><span class="n">—</span>Cheat sheet</h2>
+      <p class="sec-lede">Everything above, one screen. For the terminal-first among us.</p>
+
+      <h4>Dash</h4>
+      <div class="codeblock"><code>/afx-dash new &lt;name&gt;  ·  refine  ·  code [task-id]  ·  verify  ·  graduate --to sprint|full</code></div>
+
+      <h4>Sprint</h4>
+      <div class="codeblock"><code>/afx-sprint new &lt;feature&gt;  ·  spec|design|task &lt;feature&gt; [--approve]  ·  code  ·  verify  ·  graduate
+<span class="cm"># gates: spec → design → task · all approved → status: Approved · edit = demote downstream</span></code></div>
+
+      <h4>Full spec</h4>
+      <div class="codeblock"><code>/afx-spec   create · refine · discuss · validate · review · approve [--reviewer "@handle"]
+/afx-design author · refine · validate · review · approve      <span class="cm"># blocked until spec Approved</span>
+/afx-task   plan · pick {id} · code {id}|all · verify &lt;spec&gt;#&lt;id&gt;|all · complete · status · summary · sync</code></div>
+
+      <h4>States</h4>
+      <div class="codeblock"><code>document status   Draft → Approved → Superseded
+sprint approval   approval.spec / .design / .tasks : Draft | Approved
+verify results    [OK] implemented · [PARTIAL] continue coding · [MISSING] start coding
+task sign-off     Agent [x] + Human [x]  — two-stage, always</code></div>
+
+      <h4>Always available</h4>
+      <div class="codeblock"><code>/afx-next  ·  /afx-session note|log|recap|capture  ·  /afx-context save|load  ·  /afx-check trace|path|all</code></div>
+    </section>
+
+    <div class="doc-next">
+      <a href="help.html"><span class="lbl">← Back</span><span class="ttl">Help &amp; setup</span></a>
+      <a href="index.html" style="text-align:right"><span class="lbl">See it all →</span><span class="ttl">The product tour</span></a>
+    </div>
+  </article>
+</div>
+
+<footer>
+  <div class="wrap-wide foot-in">
+    <div>Apache 2.0 · AgenticFlowX</div>
+    <div class="foot-links">
+      <a href="index.html">Tour</a>
+      <a href="help.html">Help</a>
+      <a href="document-anatomy.html">Doc anatomy</a>
+      <a href="https://github.com/AgenticFlowX/afx" target="_blank" rel="noopener noreferrer">afx-workflow</a>
+      <a href="https://github.com/AgenticFlowX/agenticflowx" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="https://pi.dev" target="_blank" rel="noopener noreferrer">pi.dev</a>
+    </div>
+  </div>
+</footer>
+
+<div class="lightbox" id="afx-lightbox" aria-hidden="true">
+  <button class="lb-close" aria-label="Close (Esc)">&#10005;</button>
+  <img id="afx-lightbox-img" alt="" />
+</div>
+
+<script>
+
+  // Previewer annotation — hovering a legend row lights its pin, and vice versa
+  (function () {
+    var items = document.querySelectorAll('.anno-item[data-n]');
+    var pins = document.querySelectorAll('.anno-pin[data-n]');
+    function lit(nn, on) {
+      pins.forEach(function (p) { if (p.getAttribute('data-n') === nn) p.classList.toggle('lit', on); });
+      items.forEach(function (i) { if (i.getAttribute('data-n') === nn) i.style.background = on ? 'var(--bg-element)' : ''; });
+    }
+    function wire(el) {
+      var nn = el.getAttribute('data-n');
+      el.addEventListener('mouseenter', function () { lit(nn, true); });
+      el.addEventListener('mouseleave', function () { lit(nn, false); });
+    }
+    items.forEach(wire); pins.forEach(wire);
+  })();
+
+  // Mobile hamburger
+  (function () {
+    var burger = document.querySelector('.nav-burger');
+    var menu = document.getElementById('doc-nav');
+    if (!burger || !menu) return;
+    function set(o) { menu.classList.toggle('open', o); burger.setAttribute('aria-expanded', String(o)); }
+    burger.addEventListener('click', function (e) { e.stopPropagation(); set(!menu.classList.contains('open')); });
+    menu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { set(false); }); });
+    document.addEventListener('click', function (e) { if (menu.classList.contains('open') && !menu.contains(e.target) && e.target !== burger) set(false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') set(false); });
+  })();
+
+  // Sidebar scroll-spy
+  (function () {
+    var links = Array.prototype.slice.call(document.querySelectorAll('.sidebar a[href^="#"]'));
+    var map = {};
+    links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          var a = map[en.target.id];
+          if (!a) return;
+          links.forEach(function (l) { l.classList.remove('active'); });
+          a.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-15% 0px -75% 0px' });
+    Object.keys(map).forEach(function (id) { var el = document.getElementById(id); if (el) obs.observe(el); });
+  })();
+
+  // Lightbox
+  (function () {
+    var lb = document.getElementById('afx-lightbox');
+    var img = document.getElementById('afx-lightbox-img');
+    function open(src, alt) { img.src = src; img.alt = alt || ''; lb.classList.add('open'); lb.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden'; }
+    function close() { lb.classList.remove('open'); lb.setAttribute('aria-hidden', 'true'); document.body.style.overflow = ''; img.removeAttribute('src'); }
+    document.querySelectorAll('.frame > img').forEach(function (el) { el.addEventListener('click', function () { open(el.currentSrc || el.src, el.alt); }); });
+    lb.addEventListener('click', function (e) { if (e.target !== img) close(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+  })();
+</script>
+<script>
+  (function () {
+    var nav = document.querySelector('nav.site') || document.querySelector('nav');
+    if (!nav) return;
+    function onScroll() { nav.classList.toggle('scrolled', window.scrollY > 8); }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+</script>
+</body>
+</html>

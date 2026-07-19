@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 620" font-family="ui-monospace, 'JetBrains Mono', monospace">
+  <!-- generated illustration: Xiaomi MiMo provider variants -->
+  <rect width="1280" height="620" fill="#0d0f16"/>
+  <text x="48" y="52" fill="#8a92a8" font-size="13" letter-spacing="2">SETTINGS · PROVIDER · XIAOMI MIMO</text>
+  <text x="48" y="94" fill="#ece7d8" font-size="24" font-family="Georgia, serif">Xiaomi MiMo</text>
+  <text x="48" y="122" fill="#6c7488" font-size="13">One model family, four catalog entries — pick the one that matches your plan &amp; region.</text>
+
+  <!-- standard entry (selected) -->
+  <rect x="48" y="160" width="1184" height="86" rx="10" fill="#12141d" stroke="#d4a656"/>
+  <circle cx="84" cy="203" r="5" fill="#d4a656"/>
+  <text x="106" y="196" fill="#ece7d8" font-size="15">Xiaomi MiMo</text>
+  <text x="106" y="222" fill="#6c7488" font-size="12">Standard API · XIAOMI_API_KEY</text>
+  <rect x="1010" y="186" width="194" height="34" rx="17" fill="none" stroke="#4a6e5a"/>
+  <text x="1107" y="208" fill="#6fa989" font-size="12" text-anchor="middle">default: mimo-v2.5-pro</text>
+
+  <!-- token plan variants -->
+  <rect x="48" y="262" width="1184" height="74" rx="10" fill="#12141d" stroke="#2a2f3e"/>
+  <circle cx="84" cy="299" r="5" fill="#3a3f4e"/>
+  <text x="106" y="293" fill="#ece7d8" font-size="15">MiMo Token Plan · CN</text>
+  <text x="106" y="318" fill="#6c7488" font-size="12">XIAOMI_TOKEN_PLAN_CN_API_KEY · billing routes to mainland China</text>
+
+  <rect x="48" y="352" width="1184" height="74" rx="10" fill="#12141d" stroke="#2a2f3e"/>
+  <circle cx="84" cy="389" r="5" fill="#3a3f4e"/>
+  <text x="106" y="383" fill="#ece7d8" font-size="15">MiMo Token Plan · AMS</text>
+  <text x="106" y="408" fill="#6c7488" font-size="12">XIAOMI_TOKEN_PLAN_AMS_API_KEY · Amsterdam region</text>
+
+  <rect x="48" y="442" width="1184" height="74" rx="10" fill="#12141d" stroke="#2a2f3e"/>
+  <circle cx="84" cy="479" r="5" fill="#3a3f4e"/>
+  <text x="106" y="473" fill="#ece7d8" font-size="15">MiMo Token Plan · SGP</text>
+  <text x="106" y="498" fill="#6c7488" font-size="12">XIAOMI_TOKEN_PLAN_SGP_API_KEY · Singapore region</text>
+
+  <text x="48" y="566" fill="#9aa1b4" font-size="13">All four resolve to the same model family — <tspan fill="#d4a656">mimo-v2.5-pro</tspan> — with region-correct billing.</text>
+</svg>

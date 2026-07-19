@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 500" font-family="ui-monospace, 'JetBrains Mono', monospace">
+  <!-- generated illustration: /afx-next golden-thread output (1:1 format) -->
+  <rect width="1280" height="500" fill="#0a0c11"/>
+  <rect width="1280" height="44" fill="#10131c"/>
+  <circle cx="26" cy="22" r="6" fill="#3a3f4e"/><circle cx="48" cy="22" r="6" fill="#3a3f4e"/><circle cx="70" cy="22" r="6" fill="#3a3f4e"/>
+  <text x="640" y="27" fill="#7c86a0" font-size="12" text-anchor="middle">any agent — /afx-next</text>
+
+  <g font-size="13.5">
+    <text x="40" y="86" fill="#6c7488">&gt;</text><text x="62" y="86" fill="#7fb8e0">/afx-next</text>
+
+    <text x="40" y="130" fill="#ece7d8" font-size="15">## Context: Room Export — mid-implementation</text>
+    <text x="40" y="160" fill="#9aa1b4"><tspan fill="#ece7d8" font-weight="600">Detected</tspan>: Active Task 2.1 · uncommitted changes in src/export/</text>
+
+    <text x="40" y="200" fill="#ece7d8">Next (ranked):</text>
+    <text x="40" y="230" fill="#8fc9a3">1. /afx-task verify room-export#2.1</text>
+    <text x="480" y="230" fill="#6c7488"># Context-driven: code written, evidence not yet checked</text>
+    <text x="40" y="258" fill="#9aa1b4">2. /afx-session note "csv delimiter decision"</text>
+    <text x="480" y="258" fill="#6c7488"># Capture the decision before it fades</text>
+    <text x="40" y="286" fill="#9aa1b4">3. /afx-task code room-export#2.2</text>
+    <text x="480" y="286" fill="#6c7488"># Next unchecked task in phase 2</text>
+    <text x="60" y="314" fill="#3a3f4e">──</text>
+    <text x="40" y="342" fill="#6c7488">4. /afx-next</text>
+    <text x="480" y="342" fill="#6c7488"># Re-orient</text>
+    <text x="40" y="370" fill="#6c7488">5. /afx-session note "&lt;note&gt;"</text>
+    <text x="480" y="370" fill="#6c7488"># Capture context</text>
+
+    <text x="40" y="424" fill="#5b7fa6" font-size="12"># works identically in Claude Code, Codex, Copilot, and the AFX chat panel —</text>
+    <text x="40" y="446" fill="#5b7fa6" font-size="12"># UI hosts turn the ranked list into clickable actions</text>
+    <text x="40" y="480" fill="#6c7488">&gt;</text><rect x="62" y="466" width="9" height="17" fill="#e0b872"/>
+  </g>
+</svg>

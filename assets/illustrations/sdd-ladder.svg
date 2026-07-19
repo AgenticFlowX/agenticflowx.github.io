@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 460" font-family="Geist, -apple-system, sans-serif">
+  <!-- generated illustration: the SDD ceremony ladder, light theme -->
+  <defs>
+    <marker id="lad-arr" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#a07e39"/></marker>
+  </defs>
+
+  <!-- rung 1: Dash -->
+  <rect x="40" y="200" width="360" height="200" rx="14" fill="#fbf6e7" stroke="rgba(20,27,53,0.2)"/>
+  <text x="68" y="240" fill="#141b35" font-size="20" font-family="Georgia, serif">Dash</text>
+  <text x="180" y="240" fill="#a84c30" font-size="11" font-family="ui-monospace, monospace">/afx-dash</text>
+  <text x="68" y="266" fill="#8a8069" font-size="11.5" font-family="ui-monospace, monospace">purpose + tasks · one file</text>
+  <g font-size="12.5" fill="#3d4256">
+    <text x="68" y="298">Surgical fixes, known scope</text>
+    <text x="68" y="322">No approval gates, no status/version —</text>
+    <text x="68" y="342">progress derived from the tasks themselves</text>
+    <text x="68" y="374" fill="#6b6450" font-family="ui-monospace, monospace" font-size="11">## Purpose · ## Tasks · ## Work Sessions</text>
+  </g>
+
+  <!-- rung 2: Sprint -->
+  <rect x="460" y="120" width="360" height="280" rx="14" fill="#fbf6e7" stroke="#a07e39" stroke-width="1.4"/>
+  <text x="488" y="160" fill="#141b35" font-size="20" font-family="Georgia, serif">Sprint</text>
+  <text x="608" y="160" fill="#a84c30" font-size="11" font-family="ui-monospace, monospace">/afx-sprint</text>
+  <rect x="488" y="174" width="132" height="24" rx="12" fill="rgba(160,126,57,0.12)"/>
+  <text x="554" y="190" fill="#6e5724" font-size="10.5" font-family="ui-monospace, monospace" text-anchor="middle">recommended start</text>
+  <text x="488" y="224" fill="#8a8069" font-size="11.5" font-family="ui-monospace, monospace">spec + design + tasks · one file</text>
+  <g font-size="12.5" fill="#3d4256">
+    <text x="488" y="256">The whole discipline in a single document</text>
+    <text x="488" y="280">Per-section approval: Spec → Design → Tasks,</text>
+    <text x="488" y="300">each gated on the one before</text>
+    <text x="488" y="332" fill="#6b6450" font-family="ui-monospace, monospace" font-size="11">## 1. Spec · ## 2. Design · ## 3. Tasks</text>
+    <text x="488" y="352" fill="#6b6450" font-family="ui-monospace, monospace" font-size="11">## 4. Work Sessions · + journal.md</text>
+  </g>
+
+  <!-- rung 3: Full -->
+  <rect x="880" y="40" width="360" height="360" rx="14" fill="#fbf6e7" stroke="rgba(20,27,53,0.2)"/>
+  <text x="908" y="80" fill="#141b35" font-size="20" font-family="Georgia, serif">Full spec</text>
+  <text x="1032" y="80" fill="#a84c30" font-size="11" font-family="ui-monospace, monospace">/afx-spec · design · task</text>
+  <text x="908" y="106" fill="#8a8069" font-size="11.5" font-family="ui-monospace, monospace">four files · formal gates</text>
+  <g font-size="12.5" fill="#3d4256">
+    <text x="908" y="138">Cross-cutting, multi-team, high-risk work</text>
+    <text x="908" y="162">Approval gates at every artifact boundary;</text>
+    <text x="908" y="182">two-stage Agent + Human verification</text>
+    <text x="908" y="214" fill="#6b6450" font-family="ui-monospace, monospace" font-size="11">spec.md — the WHAT  [FR-1] [NFR-1]</text>
+    <text x="908" y="236" fill="#6b6450" font-family="ui-monospace, monospace" font-size="11">design.md — the HOW  [DES-ARCH] …</text>
+    <text x="908" y="258" fill="#6b6450" font-family="ui-monospace, monospace" font-size="11">tasks.md — the WHEN  ### 1.1 …</text>
+    <text x="908" y="280" fill="#4a6e5a" font-family="ui-monospace, monospace" font-size="11">journal.md — append-only memory</text>
+    <text x="908" y="318">Use for auth/security changes, migrations,</text>
+    <text x="908" y="338">public API breaks, staged approvals</text>
+  </g>
+
+  <!-- graduation arrows -->
+  <path d="M400 290 C 425 285, 435 275, 458 262" stroke="#a07e39" stroke-width="1.8" fill="none" marker-end="url(#lad-arr)"/>
+  <path d="M820 250 C 845 240, 855 225, 878 210" stroke="#a07e39" stroke-width="1.8" fill="none" marker-end="url(#lad-arr)"/>
+  <text x="428" y="248" fill="#6e5724" font-size="11" font-family="ui-monospace, monospace">graduate</text>
+  <text x="846" y="196" fill="#6e5724" font-size="11" font-family="ui-monospace, monospace">graduate</text>
+
+  <text x="640" y="438" fill="#6b6450" font-size="12" font-family="ui-monospace, monospace" text-anchor="middle">graduation is lossless — task IDs, checkboxes, file scopes, and Work Sessions move byte-for-byte</text>
+</svg>

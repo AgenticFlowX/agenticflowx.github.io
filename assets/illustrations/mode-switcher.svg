@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 560" font-family="ui-monospace, 'JetBrains Mono', monospace">
+  <!-- generated illustration: workspace mode quick-pick -->
+  <rect width="1280" height="560" fill="#0d0f16"/>
+  <!-- faint editor backdrop lines -->
+  <g fill="#12141d">
+    <rect x="0" y="60" width="1280" height="16"/><rect x="0" y="96" width="900" height="16"/><rect x="0" y="132" width="1100" height="16"/>
+    <rect x="0" y="440" width="1000" height="16"/><rect x="0" y="476" width="1180" height="16"/><rect x="0" y="512" width="760" height="16"/>
+  </g>
+  <!-- quick pick -->
+  <rect x="290" y="120" width="700" height="330" rx="10" fill="#151926" stroke="#2a2f3e"/>
+  <rect x="310" y="140" width="660" height="46" rx="8" fill="#0d0f16" stroke="#d4a656"/>
+  <text x="328" y="169" fill="#6c7488" font-size="14">Switch Workspace Mode — Ctrl+Shift+M</text>
+
+  <!-- Code (selected) -->
+  <rect x="310" y="200" width="660" height="72" rx="8" fill="#1a1f2e"/>
+  <text x="336" y="230" fill="#ece7d8" font-size="15">Code</text>
+  <rect x="398" y="214" width="76" height="24" rx="12" fill="none" stroke="#4a6e5a"/><text x="436" y="231" fill="#6fa989" font-size="10.5" text-anchor="middle">active</text>
+  <text x="336" y="256" fill="#6c7488" font-size="12.5">Full-access coding — edit files, run commands. Intents: Default · Ask · Architect · Code</text>
+
+  <!-- Explore -->
+  <rect x="310" y="280" width="660" height="72" rx="8" fill="none"/>
+  <text x="336" y="310" fill="#ece7d8" font-size="15">Explore</text>
+  <rect x="428" y="294" width="98" height="24" rx="12" fill="none" stroke="#a84c30"/><text x="477" y="311" fill="#d4693f" font-size="10.5" text-anchor="middle">read-only</text>
+  <text x="336" y="336" fill="#6c7488" font-size="12.5">Guardrailed at runtime — write, patch &amp; mutating shell blocked. Adds the PRD intent</text>
+
+  <!-- Spec -->
+  <rect x="310" y="360" width="660" height="72" rx="8" fill="none"/>
+  <text x="336" y="390" fill="#ece7d8" font-size="15">Spec</text>
+  <rect x="398" y="374" width="128" height="24" rx="12" fill="none" stroke="#a07e39"/><text x="462" y="391" fill="#d4a656" font-size="10.5" text-anchor="middle">planning-first</text>
+  <text x="336" y="416" fill="#6c7488" font-size="12.5">Walks spec → design → tasks → journal with the stepper tracking progress</text>
+</svg>

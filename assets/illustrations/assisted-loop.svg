@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 660" font-family="Geist, -apple-system, sans-serif">
+  <!-- generated illustration: the assisted loop — how the extension does the typing -->
+  <defs>
+    <marker id="al-arr" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#a07e39"/></marker>
+  </defs>
+
+  <text x="640" y="46" fill="#141b35" font-size="19" font-family="Georgia, serif" text-anchor="middle">The assisted loop — you click, AFX types</text>
+
+  <!-- circular loop: 4 stations -->
+  <!-- top: suggestion -->
+  <rect x="465" y="80" width="350" height="96" rx="14" fill="#fffbed" stroke="#a84c30" stroke-width="1.6"/>
+  <text x="640" y="116" fill="#a84c30" font-size="11" font-family="ui-monospace, monospace" text-anchor="middle" letter-spacing="1">1 · A SUGGESTION APPEARS</text>
+  <text x="640" y="142" fill="#141b35" font-size="14" text-anchor="middle" font-weight="600">Clickable, context-aware, already targeted</text>
+  <text x="640" y="162" fill="#6b6450" font-size="11.5" font-family="ui-monospace, monospace" text-anchor="middle">"Verify 2.1 — code written, evidence unchecked"</text>
+
+  <!-- right: click -->
+  <rect x="900" y="270" width="330" height="96" rx="14" fill="#fbf6e7" stroke="rgba(20,27,53,0.22)"/>
+  <text x="1065" y="306" fill="#6e5724" font-size="11" font-family="ui-monospace, monospace" text-anchor="middle" letter-spacing="1">2 · YOU CLICK</text>
+  <text x="1065" y="332" fill="#141b35" font-size="14" text-anchor="middle" font-weight="600">The command types itself</text>
+  <text x="1065" y="352" fill="#6b6450" font-size="11.5" font-family="ui-monospace, monospace" text-anchor="middle">draft-first buttons pause for your context</text>
+
+  <!-- bottom: agent works -->
+  <rect x="465" y="470" width="350" height="96" rx="14" fill="#fbf6e7" stroke="rgba(20,27,53,0.22)"/>
+  <text x="640" y="506" fill="#6e5724" font-size="11" font-family="ui-monospace, monospace" text-anchor="middle" letter-spacing="1">3 · THE AGENT WORKS</text>
+  <text x="640" y="532" fill="#141b35" font-size="14" text-anchor="middle" font-weight="600">Skill runs · document or code updates</text>
+  <text x="640" y="552" fill="#6b6450" font-size="11.5" font-family="ui-monospace, monospace" text-anchor="middle">gates, guardrails, and @see links apply as always</text>
+
+  <!-- left: surfaces refresh -->
+  <rect x="50" y="270" width="330" height="96" rx="14" fill="#fbf6e7" stroke="rgba(20,27,53,0.22)"/>
+  <text x="215" y="306" fill="#6e5724" font-size="11" font-family="ui-monospace, monospace" text-anchor="middle" letter-spacing="1">4 · EVERY SURFACE REFRESHES</text>
+  <text x="215" y="332" fill="#141b35" font-size="14" text-anchor="middle" font-weight="600">Pills, strip, Pulse, tiles update —</text>
+  <text x="215" y="352" fill="#141b35" font-size="14" text-anchor="middle" font-weight="600">and the next suggestion is ready</text>
+
+  <!-- loop arrows -->
+  <path d="M818 140 C 1000 160, 1065 200, 1065 266" stroke="#a07e39" stroke-width="2" fill="none" marker-end="url(#al-arr)"/>
+  <path d="M1065 368 C 1065 440, 940 500, 820 512" stroke="#a07e39" stroke-width="2" fill="none" marker-end="url(#al-arr)"/>
+  <path d="M462 512 C 340 500, 215 440, 215 370" stroke="#a07e39" stroke-width="2" fill="none" marker-end="url(#al-arr)"/>
+  <path d="M215 266 C 215 200, 280 160, 460 140" stroke="#a07e39" stroke-width="2" fill="none" marker-end="url(#al-arr)"/>
+
+  <!-- center: where suggestions come from -->
+  <text x="640" y="272" fill="#8a8069" font-size="10.5" font-family="ui-monospace, monospace" text-anchor="middle" letter-spacing="1.5">WHERE SUGGESTIONS LIVE</text>
+  <g font-size="12" font-family="ui-monospace, monospace">
+    <rect x="472" y="288" width="158" height="30" rx="15" fill="none" stroke="rgba(160,126,57,0.5)"/><text x="551" y="308" fill="#6e5724" text-anchor="middle">Start-here card</text>
+    <rect x="644" y="288" width="170" height="30" rx="15" fill="none" stroke="rgba(160,126,57,0.5)"/><text x="729" y="308" fill="#6e5724" text-anchor="middle">SDD guide timeline</text>
+    <rect x="472" y="330" width="158" height="30" rx="15" fill="none" stroke="rgba(160,126,57,0.5)"/><text x="551" y="350" fill="#6e5724" text-anchor="middle">dynamic strip</text>
+    <rect x="644" y="330" width="170" height="30" rx="15" fill="none" stroke="rgba(160,126,57,0.5)"/><text x="729" y="350" fill="#6e5724" text-anchor="middle">/afx-next ranked</text>
+    <rect x="472" y="372" width="158" height="30" rx="15" fill="none" stroke="rgba(160,126,57,0.5)"/><text x="551" y="392" fill="#6e5724" text-anchor="middle">task tiles</text>
+    <rect x="644" y="372" width="170" height="30" rx="15" fill="none" stroke="rgba(160,126,57,0.5)"/><text x="729" y="392" fill="#6e5724" text-anchor="middle">previewer buttons</text>
+  </g>
+
+  <text x="640" y="628" fill="#8a8069" font-size="12" font-family="ui-monospace, monospace" text-anchor="middle">the ceremony is real — the typing isn't. That's why the extension exists.</text>
+</svg>

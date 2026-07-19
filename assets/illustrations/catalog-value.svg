@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 560" font-family="ui-monospace, 'JetBrains Mono', monospace">
+  <!-- generated illustration: value-provider roundup in the catalog -->
+  <rect width="1280" height="560" fill="#0d0f16"/>
+  <text x="48" y="52" fill="#8a92a8" font-size="13" letter-spacing="2">SETTINGS · PROVIDER · CATALOG</text>
+  <text x="48" y="94" fill="#ece7d8" font-size="24" font-family="Georgia, serif">More in the catalog</text>
+  <text x="48" y="122" fill="#6c7488" font-size="13">Each entry ships its own key field and default model — no custom config needed.</text>
+
+  <!-- 2x2 cards -->
+  <g>
+    <rect x="48" y="156" width="576" height="160" rx="12" fill="#12141d" stroke="#2a2f3e"/>
+    <text x="80" y="200" fill="#ece7d8" font-size="16">Moonshot Kimi</text>
+    <rect x="230" y="184" width="132" height="24" rx="12" fill="none" stroke="#a07e39"/><text x="296" y="201" fill="#d4a656" font-size="10.5" text-anchor="middle">+ coding plan</text>
+    <text x="80" y="230" fill="#6c7488" font-size="12">MOONSHOT_API_KEY · also "Kimi For Coding" plan provider</text>
+    <text x="80" y="284" fill="#9aa1b4" font-size="13">default → <tspan fill="#6fa989">kimi-k2.6</tspan></text>
+  </g>
+  <g>
+    <rect x="656" y="156" width="576" height="160" rx="12" fill="#12141d" stroke="#2a2f3e"/>
+    <text x="688" y="200" fill="#ece7d8" font-size="16">MiniMax</text>
+    <rect x="794" y="184" width="120" height="24" rx="12" fill="none" stroke="#2a2f3e"/><text x="854" y="201" fill="#9aa1b4" font-size="10.5" text-anchor="middle">global + CN</text>
+    <text x="688" y="230" fill="#6c7488" font-size="12">MINIMAX_API_KEY · MINIMAX_CN_API_KEY</text>
+    <text x="688" y="284" fill="#9aa1b4" font-size="13">default → <tspan fill="#6fa989">MiniMax-M2.7</tspan></text>
+  </g>
+  <g>
+    <rect x="48" y="340" width="576" height="160" rx="12" fill="#12141d" stroke="#2a2f3e"/>
+    <text x="80" y="384" fill="#ece7d8" font-size="16">Z.ai (GLM)</text>
+    <text x="80" y="414" fill="#6c7488" font-size="12">ZAI_API_KEY</text>
+    <text x="80" y="468" fill="#9aa1b4" font-size="13">default → <tspan fill="#6fa989">glm-5.1</tspan></text>
+  </g>
+  <g>
+    <rect x="656" y="340" width="576" height="160" rx="12" fill="#12141d" stroke="#2a2f3e"/>
+    <text x="688" y="384" fill="#ece7d8" font-size="16">Groq</text>
+    <rect x="756" y="368" width="150" height="24" rx="12" fill="none" stroke="#2a2f3e"/><text x="831" y="385" fill="#9aa1b4" font-size="10.5" text-anchor="middle">fast inference</text>
+    <text x="688" y="414" fill="#6c7488" font-size="12">GROQ_API_KEY · open-weight models, very low latency</text>
+    <text x="688" y="468" fill="#9aa1b4" font-size="13">default → <tspan fill="#6fa989">openai/gpt-oss-120b</tspan></text>
+  </g>
+</svg>

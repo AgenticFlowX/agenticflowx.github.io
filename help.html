@@ -1,0 +1,712 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "w6nnwbv1pd");
+  </script>
+  
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Help &amp; setup — AgenticFlowX</title>
+<meta name="description" content="Install AgenticFlowX, connect any model — Anthropic, OpenAI, DeepSeek, Xiaomi MiMo, Ollama, llama.cpp and more — configure skills, and run the workflow headless." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&family=Geist:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #f5efdf;
+    --bg-subtle: #efe7d0;
+    --bg-element: #fbf6e7;
+    --bg-raised: #fffbed;
+    --border: rgba(20, 27, 53, 0.10);
+    --border-strong: rgba(20, 27, 53, 0.16);
+    --text: #141b35;
+    --text-secondary: #3d4256;
+    --text-tertiary: #6b6450;
+    --text-muted: #8a8069;
+    --accent: #a07e39;
+    --accent-bright: #d4a656;
+    --accent-deep: #6e5724;
+    --moss: #4a6e5a;
+    --ember: #a84c30;
+    --mono: 'JetBrains Mono', 'SF Mono', monospace;
+    --sans: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --serif: 'Fraunces', 'Iowan Old Style', Palatino, Georgia, serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background-color: var(--bg); overflow-x: clip;
+    background-image:
+      radial-gradient(1300px 700px at 88% -18%, rgba(160,126,57,0.06), transparent 60%),
+      radial-gradient(1100px 780px at -8% 4%, rgba(74,110,90,0.045), transparent 58%);
+    background-attachment: fixed;
+    background-repeat: no-repeat; color: var(--text); font-family: var(--sans); font-size: 16px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  .wrap-wide { width: min(1400px, 94vw); margin: 0 auto; }
+  .mono { font-family: var(--mono); }
+
+  /* ── nav (same header as the tour) ── */
+  nav.site { position: sticky; top: 0; z-index: 60; background: rgba(245,239,223,0.88); backdrop-filter: blur(8px); border-bottom: 1px solid transparent; transition: background .25s ease, backdrop-filter .25s ease, border-color .25s ease, box-shadow .25s ease; }
+  nav.site.scrolled { background: rgba(245,239,223,0.66); backdrop-filter: blur(18px) saturate(1.15); border-bottom-color: var(--border); box-shadow: 0 8px 30px -22px rgba(20,27,53,0.5); }
+  .nav-in { display: flex; align-items: center; height: 58px; gap: 18px; }
+  .nav-name { font-family: var(--serif); font-weight: 600; font-size: 17px; }
+  .nav-name a { display: inline-flex; align-items: center; gap: 10px; }
+  .nav-glyph { width: 34px; height: auto; display: block; }
+  .nav-name a:hover { color: var(--ember); }
+  .nav-crumb { font-family: var(--mono); font-size: 12px; color: var(--text-muted); }
+  .nav-crumb b { color: var(--accent-deep); font-weight: 500; }
+  .nav-right { display: flex; align-items: center; gap: 16px; margin-left: auto; }
+  .nav-right a.ghost { font-size: 13.5px; color: var(--text-secondary); }
+  .nav-right a.ghost:hover { color: var(--ember); }
+  @media (max-width: 640px) { .nav-right a.ghost { display: none; } .nav-crumb { display: none; } }
+  .btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0.95rem; background: var(--text); color: var(--bg-raised); font-weight: 500; font-size: 0.87rem; border-radius: 6px; border: 1px solid var(--text); transition: background .15s; }
+  .btn-primary:hover { background: var(--ember); border-color: var(--ember); }
+  /* mobile hamburger — toggles the doc sidebar */
+  .nav-burger { display: none; align-items: center; justify-content: center; width: 38px; height: 38px; margin-left: 4px; border: 1px solid var(--border-strong); border-radius: 8px; background: transparent; color: var(--text); cursor: pointer; }
+  .nav-burger svg { width: 19px; height: 19px; }
+
+
+  /* ── docs shell: sidebar + article ── */
+  .docs { display: grid; grid-template-columns: 252px minmax(0, 1fr); gap: clamp(32px, 4vw, 60px); padding: clamp(32px, 4vw, 48px) 0 72px; }
+  @media (max-width: 920px) {
+    .docs { grid-template-columns: 1fr; }
+    .nav-burger { display: inline-flex; }
+    .sidebar { position: fixed; top: 58px; left: 0; right: 0; z-index: 55; display: none; max-height: calc(100vh - 58px); overflow-y: auto; padding: 10px 22px 22px; border-right: none; background: rgba(245,239,223,0.98); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border-strong); box-shadow: 0 22px 44px -26px rgba(20,27,53,0.45); }
+    .sidebar.open { display: block; }
+  }
+
+  .sidebar { position: sticky; top: 82px; align-self: start; max-height: calc(100vh - 100px); overflow-y: auto; padding-right: 18px; border-right: 1px solid var(--border); font-size: 13.5px; }
+  .sb-group { margin-bottom: 22px; }
+  .sb-label { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin: 0 0 6px; }
+  .sidebar a { display: block; padding: 5px 0 5px 12px; border-left: 2px solid transparent; color: var(--text-secondary); transition: color .15s, border-color .15s; }
+  .sidebar a:hover { color: var(--ember); }
+  .sidebar a.active { color: var(--ember); border-left-color: var(--ember); }
+  .sidebar a.sub { padding-left: 26px; font-size: 12.5px; color: var(--text-tertiary); }
+  .sidebar a.sub:hover { color: var(--ember); }
+  .sb-cta { margin-top: 26px; padding: 14px 16px; border: 1px solid var(--border); border-radius: 10px; background: var(--bg-element); font-size: 12.5px; color: var(--text-secondary); }
+  .sb-cta a { display: inline; padding: 0; border: none; color: var(--accent-deep); }
+  .sb-cta a:hover { color: var(--ember); }
+
+  /* ── article ── */
+  article { min-width: 0; max-width: 1000px; }
+  .doc-head { padding-bottom: 26px; border-bottom: 1px solid var(--border-strong); }
+  .doc-head .kicker { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ember); margin: 0 0 12px; }
+  h1 { font-family: var(--serif); font-weight: 500; font-size: clamp(1.9rem, 3.4vw, 2.6rem); line-height: 1.1; margin: 0; letter-spacing: -0.01em; }
+  .doc-head p { margin: 12px 0 0; color: var(--text-secondary); font-size: 1.02rem; max-width: 640px; }
+
+  article section { padding-top: clamp(40px, 5vw, 56px); }
+  h2 { font-family: var(--serif); font-weight: 500; font-size: 1.65rem; margin: 0 0 4px; letter-spacing: -0.005em; scroll-margin-top: 90px; }
+  h2 .n { font-family: var(--mono); font-size: 0.72em; color: var(--ember); margin-right: 10px; }
+  .sec-lede { color: var(--text-secondary); font-size: 15px; margin: 8px 0 0; max-width: 660px; }
+  h3 { font-family: var(--serif); font-weight: 600; font-size: 1.2rem; margin: 0; scroll-margin-top: 90px; }
+  article p { color: var(--text-secondary); font-size: 14.5px; }
+  article a.tx { color: var(--accent-deep); } article a.tx:hover { color: var(--ember); }
+  code { font-family: var(--mono); font-size: 0.85em; background: var(--bg-subtle); border: 1px solid var(--border); border-radius: 4px; padding: 1px 6px; color: var(--accent-deep); }
+
+  /* screenshots — full article width, framed */
+  .frame { border: 1px solid var(--border-strong); border-radius: 10px; overflow: hidden; background: var(--bg-raised); box-shadow: 0 28px 64px -44px rgba(20,27,53,0.5); }
+  .frame > img { display: block; width: 100%; height: auto; cursor: zoom-in; }
+  .frame.on-dark { background: #0c1017; }
+  .shot { margin: 22px 0 0; }
+  .shot-cap { margin-top: 10px; font-size: 12.5px; color: var(--text-tertiary); }
+  .gen { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); border: 1px solid var(--border-strong); border-radius: 4px; padding: 1px 6px; margin-left: 8px; vertical-align: 1px; }
+  .duo { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 22px; }
+  @media (max-width: 760px) { .duo { grid-template-columns: 1fr; } }
+  .duo figure { margin: 0; }
+  .duo figcaption { margin-top: 9px; font-size: 12.5px; color: var(--text-tertiary); }
+  .duo figcaption b { color: var(--text-secondary); font-weight: 500; }
+
+  /* recipe cost-model group banners */
+  .group-banner { display: flex; align-items: baseline; gap: 12px; margin-top: clamp(34px, 4.5vw, 48px); padding: 14px 18px; border: 1px solid var(--border-strong); border-left: 3px solid var(--accent); border-radius: 10px; background: var(--bg-element); }
+  .group-banner.gb-local { border-left-color: var(--ember); }
+  .group-banner.gb-oauth { border-left-color: var(--moss); }
+  .group-banner h3 { font-size: 1.15rem; }
+  .group-banner .gb-cost { margin-left: auto; font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-muted); text-align: right; }
+
+  /* recipes */
+  .recipe { margin-top: clamp(30px, 4vw, 44px); padding-top: 26px; border-top: 1px solid var(--border); }
+  .recipe:first-of-type { border-top: none; padding-top: 0; }
+  .recipe-head { display: flex; align-items: baseline; flex-wrap: wrap; gap: 10px; }
+  .recipe-head .tag { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.06em; text-transform: uppercase; border-radius: 999px; padding: 3px 9px; }
+  .tag.oauth { color: var(--moss); border: 1px solid rgba(74,110,90,0.4); background: rgba(74,110,90,0.06); }
+  .tag.key { color: var(--accent-deep); border: 1px solid rgba(160,126,57,0.4); background: rgba(160,126,57,0.07); }
+  .tag.local { color: var(--ember); border: 1px solid rgba(168,76,48,0.4); background: rgba(168,76,48,0.06); }
+  .recipe p.lead { margin: 8px 0 0; color: var(--text-secondary); font-size: 14.5px; max-width: 660px; }
+  .steps { counter-reset: step; list-style: none; padding: 0; margin: 16px 0 0; max-width: 660px; }
+  .steps li { position: relative; padding: 0 0 14px 40px; color: var(--text-secondary); font-size: 14.5px; }
+  .steps li::before { counter-increment: step; content: counter(step); position: absolute; left: 0; top: 0; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; font-family: var(--mono); font-size: 12px; background: var(--bg-raised); border: 1.5px solid var(--accent); color: var(--accent-deep); }
+  .steps li b { color: var(--text); font-weight: 500; }
+  .models-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+  .models-row span { font-family: var(--mono); font-size: 11px; color: var(--text-secondary); border: 1px solid var(--border); border-radius: 999px; padding: 4px 11px; background: var(--bg-element); }
+  .models-row span b { color: var(--accent-deep); font-weight: 500; }
+
+  .callout { border: 1px solid rgba(160,126,57,0.35); background: rgba(160,126,57,0.06); border-radius: 10px; padding: 14px 17px; font-size: 14px; color: var(--text-secondary); margin: 20px 0 0; max-width: 660px; }
+  .callout b { color: var(--accent-deep); }
+  .codeblock { margin: 14px 0 0; background: #10131c; border-radius: 8px; padding: 15px 18px; overflow-x: auto; max-width: 700px; }
+  .codeblock code { font-family: var(--mono); font-size: 12.5px; color: #e0b872; white-space: pre; background: none; border: none; padding: 0; }
+  .cmd-table { width: 100%; border-collapse: collapse; margin-top: 18px; font-size: 13px; }
+  .cmd-table th { text-align: left; font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text-muted); font-weight: 500; padding: 8px 14px 8px 0; border-bottom: 1.5px solid var(--border-strong); }
+  .cmd-table td { padding: 11px 14px 11px 0; border-bottom: 1px solid var(--border); vertical-align: top; color: var(--text-secondary); }
+  .cmd-table td:first-child { white-space: nowrap; font-weight: 500; color: var(--text); }
+  .cmd-table .cnt { font-family: var(--mono); font-size: 11px; color: var(--text-muted); }
+  .cmd-table code { white-space: nowrap; }
+
+  /* provider path cards */
+  .prov-groups { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 20px; }
+  @media (max-width: 820px) { .prov-groups { grid-template-columns: 1fr; } }
+  .prov-group { border: 1px solid var(--border); border-radius: 10px; background: var(--bg-element); padding: 16px 18px; }
+  .prov-group h4 { font-family: var(--serif); font-weight: 600; font-size: 1rem; margin: 0 0 3px; }
+  .prov-group .how { font-family: var(--mono); font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  .prov-group p { font-size: 12.5px; color: var(--text-secondary); margin: 8px 0 0; }
+
+  .cancan { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px; }
+  @media (max-width: 700px) { .cancan { grid-template-columns: 1fr; } }
+  .cc { border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; }
+  .cc.can { background: rgba(74,110,90,0.05); border-color: rgba(74,110,90,0.3); }
+  .cc.cant { background: rgba(168,76,48,0.04); border-color: rgba(168,76,48,0.3); }
+  .cc h4 { font-family: var(--serif); font-weight: 600; font-size: 1.08rem; margin: 0 0 10px; }
+  .cc.can h4 { color: var(--moss); } .cc.cant h4 { color: var(--ember); }
+  .cc ul { list-style: none; padding: 0; margin: 0; }
+  .cc li { position: relative; padding: 6px 0 6px 24px; font-size: 13.5px; color: var(--text-secondary); border-top: 1px solid var(--border); }
+  .cc li:first-child { border-top: none; }
+  .cc li::before { position: absolute; left: 0; top: 6px; font-family: var(--mono); font-size: 13px; }
+  .cc.can li::before { content: "✓"; color: var(--moss); }
+  .cc.cant li::before { content: "✕"; color: var(--ember); }
+  .cc li code { white-space: nowrap; }
+
+  .mode-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 20px; }
+  @media (max-width: 820px) { .mode-cards { grid-template-columns: 1fr; } }
+  .mode-card { border: 1px solid var(--border); border-radius: 10px; background: var(--bg-element); padding: 17px 19px; }
+  .mode-card .mk { font-family: var(--mono); font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ember); }
+  .mode-card h4 { font-family: var(--serif); font-weight: 600; font-size: 1.1rem; margin: 6px 0 5px; }
+  .mode-card p { font-size: 13px; color: var(--text-secondary); margin: 0; }
+
+  .faq-item { padding: 16px 0; border-top: 1px solid var(--border); max-width: 720px; }
+  .faq-item:last-child { border-bottom: 1px solid var(--border); }
+  .faq-item h3 { font-size: 1.05rem; margin-bottom: 6px; }
+  .faq-item p { margin: 0; font-size: 14px; }
+
+  /* prev/next footer */
+  .doc-next { display: flex; justify-content: space-between; gap: 14px; margin-top: clamp(48px, 6vw, 64px); padding-top: 22px; border-top: 1px solid var(--border-strong); }
+  .doc-next a { display: block; padding: 14px 18px; border: 1px solid var(--border); border-radius: 10px; background: var(--bg-element); transition: border-color .15s; max-width: 46%; }
+  .doc-next a:hover { border-color: var(--ember); }
+  .doc-next .lbl { font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); }
+  .doc-next .ttl { font-family: var(--serif); font-weight: 600; font-size: 1rem; color: var(--text); margin-top: 3px; }
+
+  .tscroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  footer { border-top: 1px solid var(--border); padding: 30px 0; color: var(--text-tertiary); font-size: 13px; }
+  .foot-in { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; align-items: center; }
+  .foot-links { display: flex; flex-wrap: wrap; gap: 20px; } .foot-links a:hover { color: var(--ember); }
+
+  .lightbox { position: fixed; inset: 0; z-index: 200; display: none; align-items: center; justify-content: center; background: rgba(20,27,53,.85); backdrop-filter: blur(8px); padding: 3vw; }
+  .lightbox.open { display: flex; }
+  .lightbox img { max-width: 96vw; max-height: 92vh; object-fit: contain; border-radius: 8px; box-shadow: 0 40px 100px -30px rgba(0,0,0,.7); background: #0c1017; }
+  .lb-close { position: absolute; top: 18px; right: 22px; width: 42px; height: 42px; border-radius: 50%; border: 1px solid rgba(255,251,237,.25); background: rgba(20,27,53,.6); color: #fbf6e7; font-size: 18px; cursor: pointer; }
+
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<nav class="site" aria-label="Site">
+  <div class="wrap-wide nav-in">
+    <span class="nav-name"><a href="index.html"><img class="nav-glyph" src="assets/afx-glyph.svg" alt="" /> AgenticFlowX</a></span>
+    <span class="nav-crumb">/ <b>Help &amp; setup</b></span>
+    <div class="nav-right">
+      <a class="ghost" href="index.html">← Tour</a>
+      <a class="ghost" href="https://github.com/AgenticFlowX/agenticflowx" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a class="btn-primary" href="https://marketplace.visualstudio.com/items?itemName=AgenticFlowX.agenticflowx" target="_blank" rel="noopener noreferrer">Install</a>
+      <button class="nav-burger" aria-label="Menu" aria-expanded="false" aria-controls="doc-nav">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap-wide docs">
+  <!-- ══ SIDEBAR ══ -->
+  <aside class="sidebar" id="doc-nav" aria-label="Help navigation">
+    <div class="sb-group">
+      <p class="sb-label">Getting started</p>
+      <a href="#install">Install</a>
+      <a href="#connect">Connect a model</a>
+    </div>
+    <div class="sb-group">
+      <p class="sb-label">Model recipes</p>
+      <a href="#recipes">Overview</a>
+      <a class="sub" href="#r-oauth">Anthropic · Copilot · ChatGPT</a>
+      <a class="sub" href="#r-keys">OpenAI · Gemini · xAI · Mistral</a>
+      <a class="sub" href="#r-deepseek">DeepSeek</a>
+      <a class="sub" href="#r-xiaomi">Xiaomi MiMo</a>
+      <a class="sub" href="#r-more">Kimi · MiniMax · Z.ai · Groq</a>
+      <a class="sub" href="#r-routers">Routers &amp; enterprise</a>
+      <a class="sub" href="#r-ollama">Ollama</a>
+      <a class="sub" href="#r-llamacpp">llama.cpp</a>
+    </div>
+    <div class="sb-group">
+      <p class="sb-label">Already on Pi?</p>
+      <a href="#pi-users">Existing Pi users</a>
+    </div>
+    <div class="sb-group">
+      <p class="sb-label">Using AFX</p>
+      <a href="#modes">Workspace modes</a>
+      <a href="#skills">Skills &amp; trust</a>
+      <a href="#settings">Settings &amp; history</a>
+    </div>
+    <div class="sb-group">
+      <p class="sb-label">Headless</p>
+      <a href="#cli">The AFX CLI</a>
+      <a href="#packs">Skill packs</a>
+    </div>
+    <div class="sb-group">
+      <p class="sb-label">Guides</p>
+      <a href="sdd-guide.html">The SDD guide →</a>
+    </div>
+    <div class="sb-group">
+      <p class="sb-label">Support</p>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="sb-cta">Stuck? Open an issue on <a href="https://github.com/AgenticFlowX/agenticflowx" target="_blank" rel="noopener noreferrer">GitHub</a> or ask in <a href="https://www.reddit.com/r/agenticflowx/" target="_blank" rel="noopener noreferrer">r/agenticflowx</a>.</div>
+  </aside>
+
+  <!-- ══ ARTICLE ══ -->
+  <article>
+    <div class="doc-head">
+      <p class="kicker">Help &amp; setup</p>
+      <h1>From install to your first traceable feature.</h1>
+      <p>Five minutes, one model connection. Every recipe uses the extension's real presets — base URLs, env vars, and default models straight from the source.</p>
+    </div>
+
+    <!-- INSTALL -->
+    <section id="install">
+      <h2><span class="n">01</span>Install</h2>
+      <p class="sec-lede">One extension — no account, no companion app.</p>
+      <p>Grab it from the <a class="tx" href="https://marketplace.visualstudio.com/items?itemName=AgenticFlowX.agenticflowx" target="_blank" rel="noopener noreferrer">VS Code Marketplace</a> (VS Code &amp; Insiders) or <a class="tx" href="https://open-vsx.org/extension/agenticflowx/agenticflowx" target="_blank" rel="noopener noreferrer">Open VSX</a> (VSCodium, Windsurf, Gitpod). After install, the AFX icon appears in the activity bar and <code>AFX: Open Workbench</code> opens the bottom panel. Works in VS Code, VS Code Insiders, VSCodium &amp; Antigravity (pre-2.0).</p>
+      <div class="shot">
+        <div class="frame on-dark"><img src="assets/illustrations/install.svg" alt="Installing AgenticFlowX from the VS Code extensions panel" loading="lazy" decoding="async" /></div>
+        <p class="shot-cap">Search "agenticflowx" in the Extensions panel and hit Install. <span class="gen">illustration</span></p>
+      </div>
+    </section>
+
+    <!-- CONNECT -->
+    <section id="connect">
+      <h2><span class="n">02</span>Connect a model</h2>
+      <p class="sec-lede">No vendor billing — you bring the access you already have. All three paths live in <b>Settings → Provider</b>; keys are stored in VS Code SecretStorage, or read from an env var or shell command.</p>
+      <div class="prov-groups">
+        <div class="prov-group"><span class="how">Subscription sign-in</span><h4>Use your existing plan</h4><p>Anthropic, GitHub Copilot, ChatGPT (Codex) — proper OAuth, no key handling.</p></div>
+        <div class="prov-group"><span class="how">API key</span><h4>30+ catalog providers</h4><p>OpenAI, Gemini, DeepSeek, Xiaomi, Groq, Mistral, OpenRouter, Bedrock, Azure, xAI…</p></div>
+        <div class="prov-group"><span class="how">Local runtime</span><h4>Your own hardware</h4><p>Ollama, LM Studio, vLLM presets — or any OpenAI-compatible endpoint.</p></div>
+      </div>
+      <div class="shot">
+        <div class="frame on-dark"><img src="assets/screenshots/chat-providers.png" alt="The AFX provider settings surface with subscription, API key, and local runtime sections" loading="lazy" decoding="async" /></div>
+        <p class="shot-cap">Settings → Provider — subscriptions, keys, and runtimes on one surface. Configure several; switch mid-conversation.</p>
+      </div>
+    </section>
+
+    <!-- RECIPES -->
+    <section id="recipes">
+      <h2><span class="n">03</span>Model recipes</h2>
+      <p class="sec-lede">Frontier plans, value APIs, or fully local — concrete steps for each.</p>
+
+      <div class="group-banner gb-oauth"><h3>Subscription</h3><span class="gb-cost">flat monthly · no per-token bills</span></div>
+
+
+      <div class="recipe" id="r-oauth">
+        <div class="recipe-head"><h3>Anthropic · Copilot · ChatGPT</h3><span class="tag oauth">subscription · OAuth</span></div>
+        <p class="lead">Sign in with the plan you already pay for — a browser OAuth flow, no key to paste.</p>
+        <ol class="steps">
+          <li><b>Settings → Provider →</b> pick Anthropic, GitHub Copilot, or ChatGPT (Codex) and hit <b>Sign in</b>.</li>
+          <li><b>Approve in the browser</b> — Anthropic and Codex use a loopback flow, Copilot shows a device code.</li>
+          <li><b>Done.</b> Models appear in the picker immediately.</li>
+        </ol>
+        <div class="models-row"><span>anthropic → <b>claude-opus-4-7</b></span><span>github-copilot → <b>gpt-5.4</b></span><span>openai-codex → <b>gpt-5.5</b></span></div>
+        <div class="shot">
+          <div class="frame on-dark"><img src="assets/screenshots/providers-oauth.png" alt="Provider settings showing OAuth subscription sign-ins" loading="lazy" decoding="async" /></div>
+          <p class="shot-cap">Subscription sign-ins — connected accounts show their models right in the same list.</p>
+        </div>
+      </div>
+
+      <div class="group-banner"><h3>API keys</h3><span class="gb-cost">usage-based · pay per token</span></div>
+
+
+      <div class="recipe" id="r-keys">
+        <div class="recipe-head"><h3>OpenAI · Gemini · xAI · Mistral</h3><span class="tag key">API key</span></div>
+        <p class="lead">Pick the provider, paste the key — SecretStorage keeps it local. Matching env vars work too.</p>
+        <div class="models-row"><span>OPENAI_API_KEY → <b>gpt-5.4</b></span><span>GEMINI_API_KEY → <b>gemini-3.1-pro-preview</b></span><span>XAI_API_KEY → <b>grok-4.20-reasoning</b></span><span>MISTRAL_API_KEY → <b>devstral-medium</b></span></div>
+        <div class="shot">
+          <div class="frame on-dark"><img src="assets/screenshots/settings-key.png" alt="Entering an API key in provider settings, stored in VS Code SecretStorage" loading="lazy" decoding="async" /></div>
+          <p class="shot-cap">Key entry — stored in VS Code SecretStorage, masked from telemetry, never written to disk in plain text.</p>
+        </div>
+      </div>
+
+      <div class="recipe" id="r-deepseek">
+        <div class="recipe-head"><h3>DeepSeek</h3><span class="tag key">API key · value pick</span></div>
+        <p class="lead">Strong coding performance at a fraction of frontier pricing — a favorite for mechanical edits and long sessions.</p>
+        <ol class="steps">
+          <li><b>Get a key</b> at platform.deepseek.com.</li>
+          <li><b>Settings → Provider → DeepSeek</b>, paste it (or set <code>DEEPSEEK_API_KEY</code>).</li>
+        </ol>
+        <div class="models-row"><span>default → <b>deepseek-v4-pro</b></span></div>
+        <div class="shot">
+          <div class="frame on-dark"><img src="assets/illustrations/deepseek.svg" alt="DeepSeek provider configuration: API key field and model list with deepseek-v4-pro as default" loading="lazy" decoding="async" /></div>
+          <p class="shot-cap">DeepSeek in provider settings — key in SecretStorage, models ready in the picker. <span class="gen">illustration</span></p>
+        </div>
+      </div>
+
+      <div class="recipe" id="r-xiaomi">
+        <div class="recipe-head"><h3>Xiaomi MiMo</h3><span class="tag key">API key · regional plans</span></div>
+        <p class="lead">Four catalog entries: the standard API plus dedicated Token Plan variants so billing routes to your region.</p>
+        <ol class="steps">
+          <li><b>Settings → Provider → Xiaomi MiMo</b> and paste your key (<code>XIAOMI_API_KEY</code>).</li>
+          <li><b>On a token plan?</b> Choose the CN, AMS, or SGP variant instead — each has its own key field.</li>
+        </ol>
+        <div class="models-row"><span>default → <b>mimo-v2.5-pro</b></span><span>Token Plan → <b>CN · AMS · SGP</b></span></div>
+        <div class="shot">
+          <div class="frame on-dark"><img src="assets/illustrations/xiaomi.svg" alt="Xiaomi MiMo catalog entries: standard API plus Token Plan CN, AMS and SGP variants" loading="lazy" decoding="async" /></div>
+          <p class="shot-cap">Four MiMo entries — standard API plus region-billed Token Plan variants. <span class="gen">illustration</span></p>
+        </div>
+      </div>
+
+      <div class="recipe" id="r-more">
+        <div class="recipe-head"><h3>Kimi · MiniMax · Z.ai · Groq</h3><span class="tag key">API key</span></div>
+        <p class="lead">All in the built-in catalog with their own key fields — Kimi also ships as the "Kimi For Coding" plan provider, MiniMax has global and CN endpoints, Groq serves very fast open-weight inference.</p>
+        <div class="models-row"><span>moonshotai → <b>kimi-k2.6</b></span><span>minimax → <b>MiniMax-M2.7</b></span><span>zai → <b>glm-5.1</b></span><span>groq → <b>gpt-oss-120b</b></span></div>
+        <div class="shot">
+          <div class="frame on-dark"><img src="assets/illustrations/catalog-value.svg" alt="Catalog cards for Moonshot Kimi, MiniMax, Z.ai and Groq with their key env vars and default models" loading="lazy" decoding="async" /></div>
+          <p class="shot-cap">Each catalog entry ships its own key field and default model — no custom config needed. <span class="gen">illustration</span></p>
+        </div>
+      </div>
+
+
+
+      <div class="recipe" id="r-routers">
+        <div class="recipe-head"><h3>Routers &amp; enterprise</h3><span class="tag key">gateways</span></div>
+        <p class="lead"><b>OpenRouter</b> (<code>openrouter.ai/api/v1</code>) — one key, hundreds of models, preset included. <b>Vercel AI Gateway</b> and <b>Cloudflare AI Gateway / Workers AI</b> are presets too. Enterprise: <b>Amazon Bedrock</b>, <b>Azure OpenAI</b>, and <b>Google Vertex</b> live in the catalog with their own auth fields.</p>
+        <div class="callout"><b>The good habit:</b> configure two or three. A frontier model for design and review, DeepSeek or a local model for mechanical edits — switch mid-conversation from the composer without losing the thread.</div>
+        <div class="duo">
+          <figure>
+            <div class="frame on-dark"><img src="assets/screenshots/model-selector.png" alt="The segmented model selector grouped by provider" loading="lazy" decoding="async" /></div>
+            <figcaption><b>The picker</b> — every configured provider's models, segmented.</figcaption>
+          </figure>
+          <figure>
+            <div class="frame on-dark"><img src="assets/screenshots/model-search.png" alt="Model search submenu with live filtering" loading="lazy" decoding="async" /></div>
+            <figcaption><b>Search</b> — type to filter across all providers at once.</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="callout"><b>Not in the catalog?</b> Any endpoint that speaks one of the four standard wire formats works as a custom provider: <b>OpenAI completions</b>, <b>OpenAI responses</b>, <b>Anthropic messages</b>, or <b>Google Generative AI</b>. If your provider follows the standard, AFX can talk to it.</div>
+
+      <div class="group-banner gb-local"><h3>Local</h3><span class="gb-cost">free after hardware · private</span></div>
+
+
+      <div class="recipe" id="r-ollama">
+        <div class="recipe-head"><h3>Ollama</h3><span class="tag local">local · no key</span></div>
+        <ol class="steps">
+          <li><b>Pull a model:</b> <code>ollama pull qwen3-coder</code> — anything in the Ollama library.</li>
+          <li><b>Settings → Provider → Add custom → Ollama.</b> Base URL prefilled: <code>http://localhost:11434/v1</code>, key source <em>none</em>.</li>
+          <li><b>Your local models</b> join the same picker as everything else.</li>
+        </ol>
+        <div class="shot">
+          <div class="frame on-dark"><img src="assets/screenshots/providers-runtimes.png" alt="Local runtime settings with Ollama and Pi CLI login" loading="lazy" decoding="async" /></div>
+          <p class="shot-cap">Local runtimes — point AFX at Ollama, or connect your installed Pi CLI and reuse its config.</p>
+        </div>
+      </div>
+
+      <div class="recipe" id="r-llamacpp">
+        <div class="recipe-head"><h3>llama.cpp</h3><span class="tag local">local · Custom preset</span></div>
+        <p class="lead">llama.cpp's server speaks the OpenAI API — the blank Custom preset points AFX at it in under a minute. LM Studio (<code>localhost:1234/v1</code>) and vLLM (<code>localhost:8000/v1</code>) have dedicated presets with the same no-key flow.</p>
+        <ol class="steps">
+          <li><b>Start the server:</b> <code>llama-server -m your-model.gguf</code> — it listens on port 8080.</li>
+          <li><b>Settings → Provider → Add custom → Custom.</b> Base URL <code>http://localhost:8080/v1</code>, API type <em>OpenAI completions</em>, key <em>none</em>.</li>
+        </ol>
+        <div class="duo">
+          <figure>
+            <div class="frame on-dark"><img src="assets/illustrations/llamacpp-terminal.svg" alt="Terminal: llama-server loading a GGUF model and listening on port 8080" loading="lazy" decoding="async" /></div>
+            <figcaption><b>Start the server</b> — llama-server loads your GGUF and listens on 8080. <span class="gen">illustration</span></figcaption>
+          </figure>
+          <figure>
+            <div class="frame on-dark"><img src="assets/illustrations/custom-llamacpp.svg" alt="The Custom provider form filled with llama.cpp values: base URL localhost:8080/v1, OpenAI completions, no key" loading="lazy" decoding="async" /></div>
+            <figcaption><b>Fill the Custom preset</b> — base URL, API kind, key source none. <span class="gen">illustration</span></figcaption>
+          </figure>
+        </div>
+        <div class="shot">
+          <div class="frame on-dark"><img src="assets/screenshots/custom-provider.png" alt="The custom provider picker with nine presets" loading="lazy" decoding="async" /></div>
+          <p class="shot-cap">The Add-custom picker — nine presets, or fill in any OpenAI-compatible endpoint.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PI USERS -->
+    <section id="pi-users">
+      <h2><span class="n">04</span>Already on Pi? You're done.</h2>
+      <p class="sec-lede">If you drive Pi from the terminal today, AFX plugs straight into your installed Pi CLI — nothing changes on Pi's side. Same config, same sign-ins, same sessions.</p>
+      <ol class="steps">
+        <li><b>Settings → Provider → Runtimes → Detect Pi CLI.</b> AFX finds <code>pi</code> on your PATH.</li>
+        <li><b>That's it — the rest is automatic.</b> AFX points <code>afx.agentBinaryPath</code> at your binary and switches the runtime to Pi RPC (the bundled SDK steps aside).</li>
+        <li><b>Pi stays yours.</b> Your <code>~/.pi/agent</code> config (or <code>$PI_CODING_AGENT_DIR</code>), provider auth, and skills are Pi's own — AFX shares Pi's session directory, so terminal and VS Code history live in one place.</li>
+      </ol>
+      <div class="callout"><b>Trust, not surprise:</b> project-local Pi settings, skills, and extensions load behind an AFX trust prompt (<code>afx.pi.projectTrust</code>: ask · trust · ignore), and you can fence off individual Pi tools with <code>afx.pi.excludedTools</code>.</div>
+      <div class="shot">
+        <div class="frame on-dark"><img src="assets/illustrations/pi-detect.svg" alt="The Detect Pi CLI flow: one click finds pi on PATH, sets the binary path and enables the RPC runtime, while Pi's own config, auth and sessions stay untouched" loading="lazy" decoding="async" /></div>
+        <p class="shot-cap">One click: detect, and AFX drives your Pi over RPC — config, auth, and sessions untouched. <span class="gen">illustration</span></p>
+      </div>
+      <div class="shot">
+        <div class="frame on-dark"><img src="assets/screenshots/providers-runtimes.png" alt="The Runtimes settings surface with Pi CLI login and local runtime options" loading="lazy" decoding="async" /></div>
+        <p class="shot-cap">The Runtimes surface — Pi CLI connection alongside local runtime presets.</p>
+      </div>
+    </section>
+
+    <!-- MODES -->
+    <section id="modes">
+      <h2><span class="n">05</span>Using the three modes</h2>
+      <p class="sec-lede">A mode answers one question: <em>how much may the agent touch?</em> Switch any time with <code>Ctrl+Shift+M</code> or the status bar — mid-conversation is fine. The composer's intent strip follows the mode (<code>Ctrl+Alt+M</code> cycles intents).</p>
+
+      <div class="shot">
+        <div class="frame on-dark"><img src="assets/illustrations/mode-switcher.svg" alt="The Switch Workspace Mode quick-pick showing Code (active), Explore (read-only) and Spec (planning-first)" loading="lazy" decoding="async" /></div>
+        <p class="shot-cap">Ctrl+Shift+M — the mode switcher. <span class="gen">illustration</span></p>
+      </div>
+
+      <h3 style="margin-top:30px">Code — the default</h3>
+      <p><b>Use it for</b> everyday work: ask, edit, run, follow up while context is fresh.</p>
+      <ul style="color:var(--text-secondary); font-size:14.5px; padding-left:20px; max-width:660px">
+        <li><b>Intents:</b> Default · Ask · Architect · Code — <em>Default sends exactly what you type; zero injection, zero extra tokens.</em> Ask answers without editing; Architect thinks structure-first; Code implements.</li>
+        <li><b>Full access:</b> file edits, commands, the works — with the persistence checkpoint guarding large multi-file writes.</li>
+      </ul>
+
+      <h3 style="margin-top:26px">Explore — read-only, enforced</h3>
+      <p><b>Use it for</b> unfamiliar repos, reviews, and "what does this actually do?" sessions — when you want answers with a hard guarantee nothing changes.</p>
+      <ul style="color:var(--text-secondary); font-size:14.5px; padding-left:20px; max-width:660px">
+        <li><b>Real guardrails:</b> write, patch, and mutating shell/git/npm tools are blocked host-side — not a polite prompt. Read-only git (<code>status</code>, <code>diff</code>) stays available.</li>
+        <li><b>PRD intent:</b> Explore swaps the fourth intent slot for PRD — investigate a repo, come out with product requirements.</li>
+      </ul>
+      <div class="shot">
+        <div class="frame"><img src="assets/screenshots/chat-explore.png" alt="Explore mode: read-only repo investigation with guardrails" loading="lazy" decoding="async" /></div>
+        <p class="shot-cap">Explore mode — investigate without touching a line.</p>
+      </div>
+
+      <h4 style="margin-top:22px">What Explore can — and can't — do</h4>
+      <p>The read-only promise is enforced by the extension itself, not just asked of the model. Mutating tools are blocked at the host before they ever run.</p>
+      <div class="cancan">
+        <div class="cc can">
+          <h4>It can</h4>
+          <ul>
+            <li>Read any file, follow references, summarize what it finds</li>
+            <li>Search and grep across the whole repo</li>
+            <li>Trace <code>@see</code> links and jump to <code>[FR-1]</code> / <code>[DES-…]</code> anchors</li>
+            <li>Run read-only git — <code>status</code>, <code>diff</code></li>
+            <li>Answer "how does this actually work?" grounded in your code</li>
+            <li>Turn what it learns into a PRD (the PRD intent)</li>
+          </ul>
+        </div>
+        <div class="cc cant">
+          <h4>It can't</h4>
+          <ul>
+            <li>Edit or create files</li>
+            <li>Apply patches or structural edits</li>
+            <li>Run mutating shell commands</li>
+            <li>Commit, push, or any write-git</li>
+            <li>Install packages</li>
+            <li>&mdash; all blocked host-side, so a stray prompt can't slip through</li>
+          </ul>
+        </div>
+      </div>
+      <p style="margin-top:16px"><b>Reach for Explore when</b> you're landing in an unfamiliar codebase, reviewing a change with zero risk of touching it, planning before you build, or investigating a bug whose cause you don't know yet. When you're ready to act, switch to Code or Spec — <code>Ctrl+Shift+M</code>.</p>
+      <div class="shot">
+        <div class="frame on-dark"><img src="assets/screenshots/chat-explore.png" alt="Explore mode in the chat — read-only repo investigation with guardrails on" loading="lazy" decoding="async" /></div>
+        <p class="shot-cap">Explore mode — ask anything, change nothing.</p>
+      </div>
+
+      <h3 style="margin-top:26px">Spec — planning-first</h3>
+      <p><b>Use it when</b> a piece of work needs to survive the session: requirements, design decisions, tasks a teammate (or tomorrow's you) can pick up.</p>
+      <ul style="color:var(--text-secondary); font-size:14.5px; padding-left:20px; max-width:660px">
+        <li><b>Doc-aware composer:</b> a Spec → Design → Tasks stepper sits above the input, tracking where the feature stands; a Sign-off button gates each step.</li>
+        <li><b>Still ships code:</b> Spec mode is markdown-centric, but the task <em>Code</em> action implements straight from the document.</li>
+      </ul>
+      <div class="shot">
+        <div class="frame"><img src="assets/screenshots/chat-spec-stepper.png" alt="Spec mode: the Spec/Design/Tasks stepper above the composer" loading="lazy" decoding="async" /></div>
+        <p class="shot-cap">Spec mode — the stepper keeps the document chain honest while you chat.</p>
+      </div>
+
+      <div class="callout" style="margin-top:26px"><b>Going deeper:</b> Spec mode is the front door to AFX's structured workflows — Dash, Sprint, and the full four-file spec. The <a class="tx" href="sdd-guide.html">SDD guide</a> walks all three end-to-end, controls and outputs included.</div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <h2><span class="n">06</span>Skills &amp; trust</h2>
+      <p class="sec-lede">The extension bundles the AFX core — 17 skills in the current build (its pinned skills snapshot predates the new <code>/afx-dash</code>; the CLI and marketplace packs carry all 18). It also discovers any <b>standard skills</b> Pi supports: your team's, your personal ones, other packs.</p>
+      <p>Settings → Skills shows everything loaded with source paths, scope, and trust controls. By default AFX <em>asks</em> before using a project's own skills (<code>afx.pi.projectTrust</code>) — trust a repo once and it remembers.</p>
+
+      <h3 style="margin-top:26px">How skills load</h3>
+      <p>Skill loading is Pi's mechanism, and it follows the <a class="tx" href="https://agentskills.io/specification" target="_blank" rel="noopener noreferrer">Agent Skills standard</a>. Pi scans global (<code>~/.pi/agent/skills/</code>, <code>~/.agents/skills/</code>) and project (<code>.pi/skills/</code>, <code>.agents/skills/</code> up to the git root) locations, plus package <code>skills/</code> dirs, a <code>skills</code> settings array, and explicit <code>--skill</code> paths. Any directory containing a <code>SKILL.md</code> is discovered recursively.</p>
+      <p>Loading is <b>progressive disclosure</b>: at startup only each skill's name and description enter the system prompt; the full <code>SKILL.md</code> — instructions, scripts, references — is read on-demand when a task matches, or forced with <code>/skill:name</code>. That's why the 18-skill core pack costs only ~1k always-on tokens.</p>
+      <div class="callout"><b>Using skills from other harnesses:</b> point Pi's settings at them — <code>"skills": ["~/.claude/skills", "~/.codex/skills"]</code> — and they load like any other. Whatever Pi supports, AFX supports.</div>
+      <div class="shot">
+        <div class="frame on-dark"><img src="assets/illustrations/skill-loading.svg" alt="Diagram: the five skill locations Pi scans (global, project, packages, settings, CLI) and the three-step progressive disclosure loading flow" loading="lazy" decoding="async" /></div>
+        <p class="shot-cap">Where Pi looks, and how loading stays cheap — descriptions always in context, full skills on demand. <span class="gen">illustration</span></p>
+      </div>
+      <div class="shot">
+        <div class="frame on-dark"><img src="assets/screenshots/settings-skills.png" alt="Skills settings: bundled AFX core plus externally discovered skills with trust controls" loading="lazy" decoding="async" /></div>
+        <p class="shot-cap">Settings → Skills — bundled core shown separately from discovered skills, with per-project trust.</p>
+      </div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section id="settings">
+      <h2><span class="n">07</span>Settings &amp; history</h2>
+      <p class="sec-lede">Providers, models, context behaviour, and runtime options live in the extension's own Settings tab — also under <code>afx.*</code> in VS Code settings.</p>
+      <p>Appearance is configurable too: Meridian ships seven style variants — lyra, luma, maia, nova, vega, mira, sera. Anonymous telemetry has a clear opt-out, and key fields are masked from capture.</p>
+      <div class="duo">
+        <figure>
+          <div class="frame"><img src="assets/screenshots/settings-light.png" alt="The AFX settings tab" loading="lazy" decoding="async" /></div>
+          <figcaption><b>Settings</b> — providers, models, context, runtime, appearance.</figcaption>
+        </figure>
+        <figure>
+          <div class="frame"><img src="assets/screenshots/history-light.png" alt="Chat history with search and reopenable sessions" loading="lazy" decoding="async" /></div>
+          <figcaption><b>History</b> — search past sessions, reopen a transcript, continue where you stopped.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- CLI -->
+    <section id="cli">
+      <h2><span class="n">08</span>The AFX CLI</h2>
+      <p class="sec-lede">AFX skills follow the open <a class="tx" href="https://agentskills.io" target="_blank" rel="noopener noreferrer">agentskills.io</a> standard, so Claude Code, Codex, and GitHub Copilot run the workflow natively — no VS Code, no separate runtime. The CLI is the installer:</p>
+      <div class="codeblock"><code>curl -sL https://raw.githubusercontent.com/AgenticFlowX/afx/main/afx-cli | bash -s -- .</code></div>
+      <ol class="steps" style="margin-top:20px">
+        <li><b>Run the installer</b> from your project directory — it prompts for which agents you use.</li>
+        <li><b>It sets up</b> <code>.claude/skills/</code> and/or <code>.agents/skills/</code>, <code>.afx.yaml</code>, <code>docs/specs/</code>, <code>docs/adr/</code>, and your agent context files.</li>
+        <li><b>Start working</b> — <code>/afx-next</code> tells any agent where the project stands and what to do next.</li>
+      </ol>
+      <div class="shot">
+        <div class="frame on-dark"><img src="assets/illustrations/afx-cli.svg" alt="afx-cli install run: agent selection prompts, skill sync, CLAUDE.md and AGENTS.md creation, next steps" loading="lazy" decoding="async" /></div>
+        <p class="shot-cap">A real install run — the CLI prompts for your agents, syncs the 18 skills, and writes the context files. <span class="gen">illustration</span></p>
+      </div>
+      <div class="callout"><b>Try it on something safe first:</b> <code>afx-cli example</code> scaffolds a complete sample app — <code>starter</code>, <code>basic</code>, or <code>full</code> — with approved specs, traceable code, ADRs, and journals already in place. <a class="tx" href="https://github.com/AgenticFlowX/afx" target="_blank" rel="noopener noreferrer">CLI source &amp; docs →</a></div>
+    </section>
+
+    <!-- PACKS -->
+    <section id="packs">
+      <h2><span class="n">09</span>Skill packs</h2>
+      <p class="sec-lede">The AFX workflow ships as packs of standard skills. Every skill's <code>SKILL.md</code> name maps 1:1 to the slash command you type — install a pack, get its commands.</p>
+
+      <h3 style="margin-top:24px">Install from the Claude Code marketplace</h3>
+      <div class="codeblock"><code>claude plugin marketplace add AgenticFlowX/afx
+claude plugin install afx-agenticflowx     # the 18-skill core
+claude plugin install afx-dev              # role packs, same pattern</code></div>
+      <p style="margin-top:12px">Each pack is a Claude Code plugin. Skills register immediately — the core pack costs ~1k always-on tokens; full instructions load only when a command runs (progressive disclosure).</p>
+
+      <h3 style="margin-top:26px">Or with afx-cli (any agent)</h3>
+      <div class="codeblock"><code>./afx-cli --pack qa --pack security .   # add role packs
+./afx-cli --pack-list .                 # list installed packs and skills
+./afx-cli --update --packs .            # update all installed packs
+./afx-cli --add-skill AgenticFlowX/afx:skills/dev/afx-tdd .   # one skill, no pack</code></div>
+
+      <h3 style="margin-top:26px">Pack → command reference</h3>
+      <div class="tscroll"><table class="cmd-table">
+        <thead><tr><th>Pack</th><th>Skills</th><th>Slash commands</th></tr></thead>
+        <tbody>
+          <tr><td>agenticflowx <span class="cnt">core · 18</span></td><td>The full SDD workflow</td><td><code>/afx-next</code> <code>/afx-task</code> <code>/afx-spec</code> <code>/afx-design</code> <code>/afx-sprint</code> <code>/afx-dash</code> <code>/afx-check</code> <code>/afx-session</code> <code>/afx-context</code> <code>/afx-adr</code> <code>/afx-research</code> <code>/afx-scaffold</code> <code>/afx-report</code> <code>/afx-dev</code> <code>/afx-discover</code> <code>/afx-release</code> <code>/afx-hello</code> <code>/afx-help</code></td></tr>
+          <tr><td>dev <span class="cnt">5</span></td><td>Engineering craft</td><td><code>/afx-tdd</code> <code>/afx-clean-code</code> <code>/afx-architecture-patterns</code> <code>/afx-git-workflow</code> <code>/afx-systematic-debugging</code></td></tr>
+          <tr><td>qa <span class="cnt">2</span></td><td>Test strategy</td><td><code>/afx-qa-methodology</code> <code>/afx-spec-test-planning</code></td></tr>
+          <tr><td>security <span class="cnt">2</span></td><td>Reviews &amp; audits</td><td><code>/afx-owasp-top-10</code> <code>/afx-security-audit</code></td></tr>
+          <tr><td>architect <span class="cnt">1</span></td><td>Evidence-based research</td><td><code>/afx-deep-research</code></td></tr>
+          <tr><td>product-owner <span class="cnt">1</span></td><td>Product decisions</td><td><code>/afx-product-owner</code></td></tr>
+          <tr><td>starter <span class="cnt">1</span></td><td>Install verification</td><td><code>/afx-hello</code></td></tr>
+        </tbody>
+      </table></div>
+      <p style="margin-top:14px">Arguments ride along as text: <code>/afx-task pick</code>, <code>/afx-sprint code</code>, <code>/afx-session note "decision…"</code> — the skill reads everything after its name.</p>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+      <h2><span class="n">—</span>FAQ</h2>
+      <div class="faq-item"><h3>Do I have to use the spec-driven workflow?</h3><p>No. Most coding stays in chat. Reach for the workflow when a piece of work needs traceability between intent, design, tasks, and code.</p></div>
+      <div class="faq-item"><h3>Where does my data live?</h3><p>In your repo. Specs, tasks, notes, journals, and boards are plain markdown in the workspace — no external database, nothing hosted.</p></div>
+      <div class="faq-item"><h3>Already using pi.dev?</h3><p>AFX detects your installed Pi CLI and reuses its config and sign-ins — nothing to reconfigure. Otherwise the bundled Pi SDK runs out of the box.</p></div>
+      <div class="faq-item"><h3>Something else?</h3><p>Open an issue on <a class="tx" href="https://github.com/AgenticFlowX/agenticflowx" target="_blank" rel="noopener noreferrer">GitHub</a> or ask in <a class="tx" href="https://www.reddit.com/r/agenticflowx/" target="_blank" rel="noopener noreferrer">r/agenticflowx</a>.</p></div>
+    </section>
+
+    <div class="doc-next">
+      <a href="index.html"><span class="lbl">← Back</span><span class="ttl" style="display:block">The product tour</span></a>
+      <a href="https://marketplace.visualstudio.com/items?itemName=AgenticFlowX.agenticflowx" target="_blank" rel="noopener noreferrer" style="text-align:right"><span class="lbl">Ready →</span><span class="ttl" style="display:block">Install the extension</span></a>
+    </div>
+  </article>
+</div>
+
+<footer>
+  <div class="wrap-wide foot-in">
+    <div>Apache 2.0 · AgenticFlowX</div>
+    <div class="foot-links">
+      <a href="index.html">Tour</a>
+      <a href="sdd-guide.html">SDD guide</a>
+      <a href="document-anatomy.html">Doc anatomy</a>
+      <a href="https://github.com/AgenticFlowX/agenticflowx" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="https://marketplace.visualstudio.com/items?itemName=AgenticFlowX.agenticflowx" target="_blank" rel="noopener noreferrer">Marketplace</a>
+      <a href="https://open-vsx.org/extension/agenticflowx/agenticflowx" target="_blank" rel="noopener noreferrer">Open VSX</a>
+      <a href="https://pi.dev" target="_blank" rel="noopener noreferrer">pi.dev</a>
+    </div>
+  </div>
+</footer>
+
+<div class="lightbox" id="afx-lightbox" aria-hidden="true">
+  <button class="lb-close" aria-label="Close (Esc)">&#10005;</button>
+  <img id="afx-lightbox-img" alt="" />
+</div>
+
+<script>
+  // Mobile hamburger
+  (function () {
+    var burger = document.querySelector('.nav-burger');
+    var menu = document.getElementById('doc-nav');
+    if (!burger || !menu) return;
+    function set(o) { menu.classList.toggle('open', o); burger.setAttribute('aria-expanded', String(o)); }
+    burger.addEventListener('click', function (e) { e.stopPropagation(); set(!menu.classList.contains('open')); });
+    menu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { set(false); }); });
+    document.addEventListener('click', function (e) { if (menu.classList.contains('open') && !menu.contains(e.target) && e.target !== burger) set(false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') set(false); });
+  })();
+
+  // Sidebar scroll-spy — highlights section links and recipe sub-links
+  (function () {
+    var links = Array.prototype.slice.call(document.querySelectorAll('.sidebar a[href^="#"]'));
+    var map = {};
+    links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          var a = map[en.target.id];
+          if (!a) return;
+          links.forEach(function (l) { l.classList.remove('active'); });
+          a.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-15% 0px -75% 0px' });
+    Object.keys(map).forEach(function (id) { var el = document.getElementById(id); if (el) obs.observe(el); });
+  })();
+
+  // Lightbox
+  (function () {
+    var lb = document.getElementById('afx-lightbox');
+    var img = document.getElementById('afx-lightbox-img');
+    function open(src, alt) { img.src = src; img.alt = alt || ''; lb.classList.add('open'); lb.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden'; }
+    function close() { lb.classList.remove('open'); lb.setAttribute('aria-hidden', 'true'); document.body.style.overflow = ''; img.removeAttribute('src'); }
+    document.querySelectorAll('.frame > img').forEach(function (el) { el.addEventListener('click', function () { open(el.currentSrc || el.src, el.alt); }); });
+    lb.addEventListener('click', function (e) { if (e.target !== img) close(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+  })();
+</script>
+<script>
+  (function () {
+    var nav = document.querySelector('nav.site') || document.querySelector('nav');
+    if (!nav) return;
+    function onScroll() { nav.classList.toggle('scrolled', window.scrollY > 8); }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+</script>
+</body>
+</html>

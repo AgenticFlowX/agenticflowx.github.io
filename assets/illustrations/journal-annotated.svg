@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" font-family="ui-monospace, 'JetBrains Mono', monospace">
+  <!-- generated illustration: journal.md annotated with extension behaviors -->
+  <rect width="1280" height="640" fill="#0d0f16"/>
+  <text x="48" y="46" fill="#8a92a8" font-size="12" letter-spacing="2">JOURNAL.MD — THE MEMORY, AND WHAT THE EXTENSION DOES WITH IT</text>
+
+  <!-- document -->
+  <rect x="48" y="70" width="740" height="540" rx="10" fill="#12141d" stroke="#2a2f3e"/>
+  <g font-size="12.5">
+    <text x="76" y="104" fill="#6c7488">---</text>
+    <text x="76" y="124" fill="#7fb8e0">type: <tspan fill="#e0b872">JOURNAL</tspan>  <tspan fill="#6c7488">— append-only, never rewritten</tspan></text>
+    <text x="76" y="144" fill="#6c7488">---</text>
+
+    <text x="76" y="180" fill="#d4a656" font-size="13.5">## Session Log</text>
+    <text x="96" y="206" fill="#9aa1b4">### 2026-07-19T09:12:00.000Z — Claude Code</text>
+    <text x="96" y="228" fill="#9aa1b4">Implemented 2.1 CSV writer; streaming chosen over batch.</text>
+    <text x="96" y="250" fill="#9aa1b4">Files: src/export/csv-writer.ts</text>
+
+    <text x="76" y="290" fill="#d4a656" font-size="13.5">## Discussions</text>
+    <text x="96" y="316" fill="#8fc9a3">[RE-D001] <tspan fill="#9aa1b4">Timezone semantics for date filters</tspan> <tspan fill="#6c7488">#decision</tspan></text>
+    <text x="96" y="338" fill="#9aa1b4">Decided: room-local TZ, stored as UTC. Rationale: …</text>
+    <text x="96" y="360" fill="#8fc9a3">[RE-D002] <tspan fill="#9aa1b4">Soft-deleted entries in exports</tspan> <tspan fill="#e0b872">#open</tspan></text>
+
+    <text x="76" y="400" fill="#d4a656" font-size="13.5">## Captured Prompts</text>
+    <text x="96" y="426" fill="#9aa1b4">2026-07-19 · trigger: spec-change · anchors: [FR-2]</text>
+    <text x="96" y="448" fill="#e0b872">"actually, filters should respect the room's timezone,</text>
+    <text x="96" y="470" fill="#e0b872"> not the viewer's — members travel"</text>
+    <text x="96" y="492" fill="#6c7488">— verbatim, with agent identity. The why, preserved.</text>
+
+    <text x="76" y="536" fill="#5b7fa6" font-size="11.5"># history lives here so spec.md can stay clean present-tense</text>
+    <text x="76" y="556" fill="#5b7fa6" font-size="11.5"># — the living doc says what IS, the journal says what HAPPENED</text>
+  </g>
+
+  <!-- extension powers rail -->
+  <g font-size="12">
+    <rect x="824" y="70" width="408" height="118" rx="10" fill="#12141d" stroke="#2a2f3e"/>
+    <text x="846" y="98" fill="#d4693f" font-size="11" letter-spacing="1">ACTIVE JOURNAL → ACTION STRIP</text>
+    <text x="846" y="122" fill="#e0b872">Note · Log · Recap · Promote · Capture</text>
+    <text x="846" y="146" fill="#9aa1b4">Recap reads it back ranked; Promote turns a</text>
+    <text x="846" y="166" fill="#9aa1b4">discussion [ID] into a formal ADR.</text>
+
+    <rect x="824" y="204" width="408" height="118" rx="10" fill="#12141d" stroke="#2a2f3e"/>
+    <text x="846" y="232" fill="#d4693f" font-size="11" letter-spacing="1">WORKBENCH → JOURNAL TAB</text>
+    <text x="846" y="256" fill="#9aa1b4">The session timeline rendered — decisions</text>
+    <text x="846" y="276" fill="#9aa1b4">previewable per entry, newest first. Nudges in</text>
+    <text x="846" y="296" fill="#9aa1b4">the previewer feed this file as you chat.</text>
+
+    <rect x="824" y="338" width="408" height="118" rx="10" fill="#12141d" stroke="#2a2f3e"/>
+    <text x="846" y="366" fill="#d4693f" font-size="11" letter-spacing="1">RESUME → /AFX-NEXT FUEL</text>
+    <text x="846" y="390" fill="#9aa1b4">The golden thread reads this + git + tasks to</text>
+    <text x="846" y="410" fill="#9aa1b4">rank your next action. The cold Monday costs</text>
+    <text x="846" y="430" fill="#9aa1b4">two minutes because this file exists.</text>
+
+    <rect x="824" y="472" width="408" height="118" rx="10" fill="#12141d" stroke="#4a6e5a"/>
+    <text x="846" y="500" fill="#6fa989" font-size="11" letter-spacing="1">PROMPT FIDELITY</text>
+    <text x="846" y="524" fill="#9aa1b4">Capture stores the verbatim prompt that changed</text>
+    <text x="846" y="544" fill="#9aa1b4">a spec — future sessions (and teammates) get the</text>
+    <text x="846" y="564" fill="#9aa1b4">why, not a paraphrase of it.</text>
+  </g>
+</svg>

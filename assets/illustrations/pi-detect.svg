@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" font-family="ui-monospace, 'JetBrains Mono', monospace">
+  <!-- generated illustration: Detect Pi CLI flow for existing Pi users -->
+  <rect width="1280" height="640" fill="#0d0f16"/>
+  <text x="48" y="52" fill="#8a92a8" font-size="13" letter-spacing="2">SETTINGS · PROVIDER · RUNTIMES</text>
+  <text x="48" y="94" fill="#ece7d8" font-size="24" font-family="Georgia, serif">Pi CLI runtime</text>
+  <text x="48" y="122" fill="#6c7488" font-size="13">Already drive Pi from the terminal? Plug AFX into your installed Pi — nothing changes on Pi's side.</text>
+
+  <!-- detect card -->
+  <rect x="48" y="156" width="620" height="150" rx="12" fill="#12141d" stroke="#d4a656"/>
+  <text x="76" y="192" fill="#8a92a8" font-size="11" letter-spacing="1.5">STEP 1</text>
+  <text x="76" y="220" fill="#ece7d8" font-size="15">Detect your Pi CLI</text>
+  <rect x="76" y="240" width="150" height="40" rx="8" fill="#d4a656"/>
+  <text x="151" y="265" fill="#14161e" font-size="13.5" font-weight="600" text-anchor="middle">Detect Pi CLI</text>
+  <text x="248" y="265" fill="#8fc9a3" font-size="13">✓ Pi CLI detected at ~/.local/bin/pi</text>
+
+  <!-- auto-config card -->
+  <rect x="48" y="326" width="620" height="170" rx="12" fill="#12141d" stroke="#2a2f3e"/>
+  <text x="76" y="362" fill="#8a92a8" font-size="11" letter-spacing="1.5">STEP 2 · AUTOMATIC</text>
+  <text x="76" y="392" fill="#9aa1b4" font-size="13">afx.agentBinaryPath</text>
+  <text x="420" y="392" fill="#ece7d8" font-size="13">~/.local/bin/pi</text>
+  <text x="76" y="424" fill="#9aa1b4" font-size="13">afx.rpc.enabled</text>
+  <rect x="420" y="408" width="58" height="24" rx="12" fill="#4a6e5a"/>
+  <circle cx="462" cy="420" r="9" fill="#ece7d8"/>
+  <text x="490" y="424" fill="#6fa989" font-size="12">on</text>
+  <text x="76" y="462" fill="#6c7488" font-size="12">AFX now drives your Pi over RPC — the bundled SDK steps aside.</text>
+
+  <!-- untouched panel -->
+  <rect x="700" y="156" width="532" height="340" rx="12" fill="#12141d" stroke="#4a6e5a"/>
+  <text x="728" y="192" fill="#6fa989" font-size="11" letter-spacing="1.5">UNTOUCHED — PI STAYS YOURS</text>
+  <g font-size="13">
+    <text x="728" y="232" fill="#8fc9a3">✓</text><text x="752" y="232" fill="#9aa1b4">~/.pi/agent config ($PI_CODING_AGENT_DIR)</text>
+    <text x="728" y="266" fill="#8fc9a3">✓</text><text x="752" y="266" fill="#9aa1b4">Provider sign-ins &amp; API keys — Pi's own auth</text>
+    <text x="728" y="300" fill="#8fc9a3">✓</text><text x="752" y="300" fill="#9aa1b4">Session directory — shared with the terminal,</text>
+    <text x="752" y="322" fill="#9aa1b4">so history lives in one place</text>
+    <text x="728" y="356" fill="#8fc9a3">✓</text><text x="752" y="356" fill="#9aa1b4">Skills, extensions, project settings — loaded</text>
+    <text x="752" y="378" fill="#9aa1b4">behind an AFX trust prompt (ask · trust · ignore)</text>
+  </g>
+  <rect x="728" y="410" width="476" height="58" rx="8" fill="#0a0c12" stroke="#2a2f3e"/>
+  <text x="746" y="434" fill="#6c7488" font-size="11.5"># fine-tune which Pi tools AFX may use</text>
+  <text x="746" y="454" fill="#e0b872" font-size="12">afx.pi.excludedTools: ["browser", "tts"]</text>
+
+  <text x="48" y="560" fill="#6c7488" font-size="12">Default runtime is the bundled Pi SDK (no install needed) — detecting your Pi CLI is the one-click opt-in to RPC.</text>
+</svg>

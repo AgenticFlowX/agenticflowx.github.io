@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 190" font-family="Geist, -apple-system, sans-serif">
+  <!-- generated illustration: the six-stop journey thread -->
+  <path d="M60 110 C 200 70, 260 150, 380 110 C 500 70, 560 150, 680 110 C 800 70, 860 150, 980 110 C 1060 84, 1140 122, 1220 100" stroke="#a07e39" stroke-width="2" fill="none" stroke-dasharray="1 0"/>
+  <g>
+    <circle cx="80" cy="105" r="9" fill="#fffbed" stroke="#a07e39" stroke-width="2"/>
+    <circle cx="300" cy="122" r="9" fill="#fffbed" stroke="#a07e39" stroke-width="2"/>
+    <circle cx="520" cy="93" r="9" fill="#fffbed" stroke="#a07e39" stroke-width="2"/>
+    <circle cx="740" cy="122" r="9" fill="#fffbed" stroke="#a07e39" stroke-width="2"/>
+    <circle cx="960" cy="98" r="9" fill="#fffbed" stroke="#a07e39" stroke-width="2"/>
+    <circle cx="1180" cy="104" r="9" fill="#a84c30" stroke="#a84c30"/>
+  </g>
+  <g font-family="Georgia, serif" font-size="16" fill="#141b35">
+    <text x="80" y="70" text-anchor="middle">Spec it</text>
+    <text x="300" y="160" text-anchor="middle">Refine it</text>
+    <text x="520" y="58" text-anchor="middle">Design it</text>
+    <text x="740" y="160" text-anchor="middle">Task it</text>
+    <text x="960" y="63" text-anchor="middle">Code it</text>
+    <text x="1180" y="69" text-anchor="middle" fill="#a84c30">Verify &amp; ship</text>
+  </g>
+  <g font-family="ui-monospace, monospace" font-size="10.5" fill="#8a8069">
+    <text x="80" y="140" text-anchor="middle">what "done" means</text>
+    <text x="300" y="92" text-anchor="middle">push back, approve</text>
+    <text x="520" y="128" text-anchor="middle">how, anchored</text>
+    <text x="740" y="92" text-anchor="middle">atomic, scoped</text>
+    <text x="960" y="132" text-anchor="middle">@see everywhere</text>
+    <text x="1180" y="136" text-anchor="middle">evidence, two signatures</text>
+  </g>
+</svg>

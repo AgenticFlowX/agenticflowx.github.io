@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 760" font-family="ui-monospace, 'JetBrains Mono', monospace">
+  <!-- generated illustration: spec.md template annotated with what the extension does with each part -->
+  <rect width="1280" height="760" fill="#0d0f16"/>
+  <text x="48" y="46" fill="#8a92a8" font-size="12" letter-spacing="2">SPEC.MD — THE TEMPLATE, AND WHAT THE EXTENSION DOES WITH IT</text>
+
+  <!-- document -->
+  <rect x="48" y="70" width="740" height="660" rx="10" fill="#12141d" stroke="#2a2f3e"/>
+  <g font-size="12.5">
+    <text x="76" y="104" fill="#6c7488">---</text>
+    <text x="76" y="126" fill="#7fb8e0">type: <tspan fill="#e0b872">SPEC</tspan>  status: <tspan fill="#e0b872">Draft</tspan>  version: <tspan fill="#9aa1b4">"1.0"</tspan>  owner: <tspan fill="#9aa1b4">"@rix"</tspan></text>
+    <text x="76" y="146" fill="#6c7488">---</text>
+
+    <text x="76" y="180" fill="#ece7d8" font-size="15"># Room Export — Product Specification</text>
+
+    <text x="76" y="216" fill="#d4a656" font-size="13.5">## References · ## Problem Statement · ## User Stories</text>
+
+    <text x="76" y="252" fill="#d4a656" font-size="13.5">## Requirements</text>
+    <text x="96" y="278" fill="#9aa1b4">| ID   | Requirement                        | Priority  |</text>
+    <text x="96" y="298" fill="#9aa1b4">| <tspan fill="#8fc9a3">FR-1</tspan> | Export ledger as CSV               | Must Have |</text>
+    <text x="96" y="318" fill="#9aa1b4">| <tspan fill="#8fc9a3">FR-2</tspan> | Filter by date range (room TZ)     | Must Have |</text>
+    <text x="96" y="338" fill="#9aa1b4">| <tspan fill="#8fc9a3">NFR-1</tspan>| 100k rows stream &lt; 5s              | Should    |</text>
+
+    <text x="76" y="376" fill="#d4a656" font-size="13.5">## Acceptance Criteria</text>
+    <text x="96" y="400" fill="#9aa1b4">- [ ] CSV opens in Excel/Sheets with correct encoding</text>
+
+    <text x="76" y="436" fill="#d4a656" font-size="13.5">## Non-Goals (Out of Scope)</text>
+    <text x="96" y="460" fill="#9aa1b4">- PDF export · scheduled exports</text>
+
+    <text x="76" y="496" fill="#d4a656" font-size="13.5">## Open Questions</text>
+    <text x="96" y="520" fill="#9aa1b4">- [ ] Include soft-deleted entries?</text>
+
+    <text x="76" y="556" fill="#d4a656" font-size="13.5">## Dependencies · ## Appendix</text>
+
+    <text x="76" y="600" fill="#5b7fa6" font-size="11.5"># IDs are stable anchors — sequential, no gaps. Code will point</text>
+    <text x="76" y="620" fill="#5b7fa6" font-size="11.5"># at them forever:  @see spec.md [FR-1] [NFR-1]</text>
+    <text x="76" y="656" fill="#5b7fa6" font-size="11.5"># status Draft → Approved freezes the spec &amp; unlocks design;</text>
+    <text x="76" y="676" fill="#5b7fa6" font-size="11.5"># scope edits bump version and demote downstream</text>
+  </g>
+
+  <!-- extension powers rail -->
+  <g font-size="12">
+    <rect x="824" y="70" width="408" height="112" rx="10" fill="#12141d" stroke="#2a2f3e"/>
+    <text x="846" y="98" fill="#d4693f" font-size="11" letter-spacing="1">FRONTMATTER → STATUS PILLS</text>
+    <text x="846" y="122" fill="#9aa1b4">Status, version, owner become pills in the</text>
+    <text x="846" y="142" fill="#9aa1b4">previewer title bar; Draft/Approved drives the</text>
+    <text x="846" y="162" fill="#9aa1b4">stepper state and which actions unlock.</text>
+
+    <rect x="824" y="198" width="408" height="112" rx="10" fill="#12141d" stroke="#2a2f3e"/>
+    <text x="846" y="226" fill="#d4693f" font-size="11" letter-spacing="1">FR TABLE → LIVING ANCHORS</text>
+    <text x="846" y="250" fill="#9aa1b4">Hover [FR-1] anywhere in code → the row previews</text>
+    <text x="846" y="270" fill="#9aa1b4">inline. CodeLens opens the spec. Analytics counts</text>
+    <text x="846" y="290" fill="#9aa1b4">which FRs still have no code behind them.</text>
+
+    <rect x="824" y="326" width="408" height="112" rx="10" fill="#12141d" stroke="#2a2f3e"/>
+    <text x="846" y="354" fill="#d4693f" font-size="11" letter-spacing="1">SECTIONS → QUALITY PULSE</text>
+    <text x="846" y="378" fill="#9aa1b4">Every section is graded live — Strategy, Structure,</text>
+    <text x="846" y="398" fill="#9aa1b4">Clarity, Completeness. Weak spots get a Coach</text>
+    <text x="846" y="418" fill="#9aa1b4">suggestion with its own targeted fix command.</text>
+
+    <rect x="824" y="454" width="408" height="112" rx="10" fill="#12141d" stroke="#2a2f3e"/>
+    <text x="846" y="482" fill="#d4693f" font-size="11" letter-spacing="1">OPEN QUESTIONS → NUDGES</text>
+    <text x="846" y="506" fill="#9aa1b4">Unresolved questions surface as blockers in the</text>
+    <text x="846" y="526" fill="#9aa1b4">previewer and journal nudges prompt you to</text>
+    <text x="846" y="546" fill="#9aa1b4">capture the answer when it lands in chat.</text>
+
+    <rect x="824" y="582" width="408" height="112" rx="10" fill="#12141d" stroke="#4a6e5a"/>
+    <text x="846" y="610" fill="#6fa989" font-size="11" letter-spacing="1">WHOLE DOC → ACTION STRIP</text>
+    <text x="846" y="634" fill="#9aa1b4">With this file active, chat's strip reads:</text>
+    <text x="846" y="656" fill="#e0b872">Refine · Author · Validate · Review · Approve</text>
+    <text x="846" y="678" fill="#9aa1b4">— Approve blocked while Critical issues remain.</text>
+  </g>
+</svg>

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="44 6 232 108" fill="none" role="img" aria-label="AgenticFlowX">
+  <defs>
+    <linearGradient id="afx-glyph-flow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2563eb" />
+      <stop offset="50%" stop-color="#7c3aed" />
+      <stop offset="100%" stop-color="#c026d3" />
+    </linearGradient>
+    <linearGradient id="afx-glyph-thread" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#d97706" />
+    </linearGradient>
+    <style>
+      .gf { fill: none; stroke: url(#afx-glyph-flow); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; opacity: .82; }
+      .gt { fill: none; stroke: url(#afx-glyph-thread); stroke-width: 2.5; stroke-linecap: round; stroke-dasharray: 30 220; opacity: .95; animation: gthread 5.2s cubic-bezier(.4,0,.2,1) infinite; }
+      .gn { fill: url(#afx-glyph-thread); transform-box: fill-box; transform-origin: center; animation: gnode 5.2s ease-in-out infinite; }
+      .gn2 { animation-delay: .9s; } .gn3 { animation-delay: 1.8s; }
+      @keyframes gthread { 0% { stroke-dashoffset: 0; opacity: .1; } 10%, 78% { opacity: .95; } 100% { stroke-dashoffset: -250; opacity: .1; } }
+      @keyframes gnode { 0%, 100% { transform: scale(1); opacity: .68; } 12%, 20% { transform: scale(1.45); opacity: 1; } 34% { transform: scale(1); opacity: .72; } }
+      @media (prefers-reduced-motion: reduce) { .gt, .gn { animation: none !important; } }
+    </style>
+  </defs>
+  <g transform="translate(160 60)">
+    <path class="gf" d="M -100 0 C -100 -50, -50 -50, -50 0 C -50 50, 0 50, 0 0 C 0 -50, 50 -50, 50 0 C 50 50, 100 50, 100 0" />
+    <path class="gt" d="M -100 0 Q -75 -28, -50 0 Q -25 28, 0 0 Q 25 -28, 50 0 Q 75 28, 100 0" />
+    <circle cx="-100" cy="0" r="11" fill="none" stroke="url(#afx-glyph-flow)" stroke-width="3" opacity="0.85" />
+    <circle class="gn" cx="-100" cy="0" r="4" />
+    <circle cx="0" cy="0" r="14" fill="none" stroke="url(#afx-glyph-flow)" stroke-width="3.5" opacity="0.85" />
+    <circle class="gn gn2" cx="0" cy="0" r="6" />
+    <circle cx="100" cy="0" r="11" fill="none" stroke="url(#afx-glyph-flow)" stroke-width="3" opacity="0.85" />
+    <circle class="gn gn3" cx="100" cy="0" r="4" />
+  </g>
+</svg>

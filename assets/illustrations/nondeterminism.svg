@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" font-family="Geist, -apple-system, sans-serif">
+  <!-- generated illustration: why a spec — non-determinism converged -->
+  <defs>
+    <marker id="nd-a" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#a84c30"/></marker>
+    <marker id="nd-b" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#4a6e5a"/></marker>
+  </defs>
+
+  <!-- ROW 1 — without a spec -->
+  <text x="40" y="44" fill="#a84c30" font-family="ui-monospace, monospace" font-size="12" letter-spacing="1.5">WITHOUT A SPEC — THE MODEL IMPROVISES</text>
+  <rect x="40" y="66" width="200" height="70" rx="10" fill="#fffbed" stroke="rgba(20,27,53,0.2)"/>
+  <text x="60" y="98" fill="#6b6450" font-family="ui-monospace, monospace" font-size="11">the prompt</text>
+  <text x="60" y="120" fill="#141b35" font-size="15">"Build the export."</text>
+
+  <path d="M244 88 C 340 88, 380 78, 470 78" fill="none" stroke="#a84c30" stroke-width="1.6" marker-end="url(#nd-a)"/>
+  <path d="M244 101 C 340 101, 380 118, 470 118" fill="none" stroke="#a84c30" stroke-width="1.6" opacity="0.8" marker-end="url(#nd-a)"/>
+  <path d="M244 114 C 340 114, 380 160, 470 160" fill="none" stroke="#a84c30" stroke-width="1.6" opacity="0.6" marker-end="url(#nd-a)"/>
+
+  <rect x="478" y="58" width="196" height="42" rx="9" fill="none" stroke="#c98a6a"/><text x="498" y="84" fill="#3d4256" font-size="13.5">streaming writer</text>
+  <rect x="478" y="106" width="196" height="42" rx="9" fill="none" stroke="#c98a6a"/><text x="498" y="132" fill="#3d4256" font-size="13.5">buffered + a library</text>
+  <rect x="478" y="154" width="196" height="42" rx="9" fill="none" stroke="#c98a6a"/><text x="498" y="180" fill="#3d4256" font-size="13.5">paginated API</text>
+
+  <text x="720" y="118" fill="#a84c30" font-family="Georgia, serif" font-size="46" font-style="italic">?</text>
+  <text x="770" y="104" fill="#6b6450" font-size="13.5">Same ask, three runs —</text>
+  <text x="770" y="126" fill="#6b6450" font-size="13.5">three different designs.</text>
+
+  <!-- divider -->
+  <line x1="40" y1="250" x2="1160" y2="250" stroke="rgba(20,27,53,0.12)" stroke-dasharray="4 6"/>
+
+  <!-- ROW 2 — with a spec -->
+  <text x="40" y="300" fill="#4a6e5a" font-family="ui-monospace, monospace" font-size="12" letter-spacing="1.5">WITH A SPEC — THE TARGET IS FIXED</text>
+  <rect x="40" y="322" width="200" height="70" rx="10" fill="#fffbed" stroke="rgba(20,27,53,0.2)"/>
+  <text x="60" y="354" fill="#6b6450" font-family="ui-monospace, monospace" font-size="11">the prompt</text>
+  <text x="60" y="376" fill="#141b35" font-size="15">"Build the export."</text>
+  <rect x="40" y="404" width="200" height="40" rx="9" fill="rgba(74,110,90,0.08)" stroke="#4a6e5a"/>
+  <text x="60" y="430" fill="#4a6e5a" font-family="ui-monospace, monospace" font-size="12.5">+ spec.md · [FR-1] [NFR-1]</text>
+
+  <path d="M244 350 C 380 350, 470 378, 640 388" fill="none" stroke="#4a6e5a" stroke-width="1.6" opacity="0.7" marker-end="url(#nd-b)"/>
+  <path d="M244 424 C 380 424, 470 398, 640 388" fill="none" stroke="#4a6e5a" stroke-width="1.6" opacity="0.7" marker-end="url(#nd-b)"/>
+  <path d="M244 387 H 636" fill="none" stroke="#4a6e5a" stroke-width="1.8" marker-end="url(#nd-b)"/>
+
+  <rect x="648" y="360" width="240" height="56" rx="10" fill="rgba(74,110,90,0.08)" stroke="#4a6e5a" stroke-width="1.4"/>
+  <text x="668" y="384" fill="#141b35" font-size="14.5">the design you approved</text>
+  <text x="668" y="404" fill="#4a6e5a" font-family="ui-monospace, monospace" font-size="11">every run lands here</text>
+
+  <text x="930" y="380" fill="#3d4256" font-size="13.5">The spec doesn't slow</text>
+  <text x="930" y="402" fill="#3d4256" font-size="13.5">the model down —</text>
+  <text x="930" y="424" fill="#141b35" font-size="13.5" font-weight="600">it decides what "right" is.</text>
+</svg>

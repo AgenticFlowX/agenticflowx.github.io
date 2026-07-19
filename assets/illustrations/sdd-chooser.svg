@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 520" font-family="Geist, -apple-system, sans-serif">
+  <!-- generated illustration: which ceremony do I need? decision flow -->
+  <defs>
+    <marker id="ch-arr" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#8a8069"/></marker>
+  </defs>
+
+  <!-- Q1 -->
+  <rect x="60" y="60" width="420" height="96" rx="12" fill="#fffbed" stroke="rgba(20,27,53,0.22)"/>
+  <text x="88" y="98" fill="#141b35" font-size="15" font-weight="600">One purpose, known scope,</text>
+  <text x="88" y="122" fill="#141b35" font-size="15" font-weight="600">no product or architecture decisions?</text>
+  <text x="88" y="144" fill="#8a8069" font-size="11.5" font-family="ui-monospace, monospace">bounded impact · rollback clear · criteria = verification</text>
+
+  <path d="M480 108 H 560" stroke="#8a8069" stroke-width="1.6" marker-end="url(#ch-arr)"/>
+  <text x="505" y="98" fill="#4a6e5a" font-size="12" font-family="ui-monospace, monospace">yes</text>
+  <rect x="564" y="76" width="200" height="64" rx="12" fill="rgba(74,110,90,0.08)" stroke="#4a6e5a"/>
+  <text x="664" y="104" fill="#141b35" font-size="17" font-family="Georgia, serif" text-anchor="middle">Dash</text>
+  <text x="664" y="126" fill="#4a6e5a" font-size="11" font-family="ui-monospace, monospace" text-anchor="middle">/afx-dash new</text>
+
+  <path d="M270 156 V 216" stroke="#8a8069" stroke-width="1.6" marker-end="url(#ch-arr)"/>
+  <text x="282" y="192" fill="#a84c30" font-size="12" font-family="ui-monospace, monospace">no</text>
+
+  <!-- Q2 -->
+  <rect x="60" y="220" width="420" height="96" rx="12" fill="#fffbed" stroke="rgba(20,27,53,0.22)"/>
+  <text x="88" y="258" fill="#141b35" font-size="15" font-weight="600">Needs requirements + design discipline,</text>
+  <text x="88" y="282" fill="#141b35" font-size="15" font-weight="600">but solo and tightly scoped?</text>
+  <text x="88" y="304" fill="#8a8069" font-size="11.5" font-family="ui-monospace, monospace">staged approvals wanted · one coherent feature</text>
+
+  <path d="M480 268 H 560" stroke="#8a8069" stroke-width="1.6" marker-end="url(#ch-arr)"/>
+  <text x="505" y="258" fill="#4a6e5a" font-size="12" font-family="ui-monospace, monospace">yes</text>
+  <rect x="564" y="236" width="200" height="64" rx="12" fill="rgba(160,126,57,0.1)" stroke="#a07e39" stroke-width="1.4"/>
+  <text x="664" y="264" fill="#141b35" font-size="17" font-family="Georgia, serif" text-anchor="middle">Sprint</text>
+  <text x="664" y="286" fill="#6e5724" font-size="11" font-family="ui-monospace, monospace" text-anchor="middle">/afx-sprint new</text>
+
+  <path d="M270 316 V 376" stroke="#8a8069" stroke-width="1.6" marker-end="url(#ch-arr)"/>
+  <text x="282" y="352" fill="#a84c30" font-size="12" font-family="ui-monospace, monospace">no</text>
+
+  <!-- Q3 result -->
+  <rect x="60" y="380" width="420" height="96" rx="12" fill="#fffbed" stroke="rgba(20,27,53,0.22)"/>
+  <text x="88" y="418" fill="#141b35" font-size="15" font-weight="600">Cross-cutting, multi-team, high-risk,</text>
+  <text x="88" y="442" fill="#141b35" font-size="15" font-weight="600">or independently reviewed?</text>
+  <text x="88" y="464" fill="#8a8069" font-size="11.5" font-family="ui-monospace, monospace">auth/security · migrations · public API/schema changes</text>
+
+  <path d="M480 428 H 560" stroke="#8a8069" stroke-width="1.6" marker-end="url(#ch-arr)"/>
+  <text x="500" y="418" fill="#4a6e5a" font-size="12" font-family="ui-monospace, monospace">yes</text>
+  <rect x="564" y="396" width="200" height="64" rx="12" fill="rgba(168,76,48,0.07)" stroke="#a84c30"/>
+  <text x="664" y="424" fill="#141b35" font-size="17" font-family="Georgia, serif" text-anchor="middle">Full spec</text>
+  <text x="664" y="446" fill="#a84c30" font-size="11" font-family="ui-monospace, monospace" text-anchor="middle">/afx-spec create</text>
+
+  <!-- side panel -->
+  <rect x="850" y="76" width="380" height="180" rx="12" fill="#fbf6e7" stroke="rgba(160,126,57,0.45)"/>
+  <text x="878" y="112" fill="#6e5724" font-size="11" font-family="ui-monospace, monospace" letter-spacing="1">NOT SURE?</text>
+  <text x="878" y="142" fill="#141b35" font-size="15" font-weight="600">Start with Sprint.</text>
+  <g font-size="12.5" fill="#3d4256">
+    <text x="878" y="170">One file, full discipline. Graduate to the</text>
+    <text x="878" y="190">four-file spec when scope grows — task IDs,</text>
+    <text x="878" y="210">approvals, and history carry over losslessly.</text>
+  </g>
+  <text x="878" y="238" fill="#8a8069" font-size="11" font-family="ui-monospace, monospace">— docs/agenticflowx/is-afx-for-me.md</text>
+
+  <rect x="850" y="286" width="380" height="190" rx="12" fill="#fbf6e7" stroke="rgba(168,76,48,0.4)"/>
+  <text x="878" y="322" fill="#a84c30" font-size="11" font-family="ui-monospace, monospace" letter-spacing="1">ESCALATION — NEVER SILENT</text>
+  <g font-size="12.5" fill="#3d4256">
+    <text x="878" y="352">After every Dash action, AFX re-checks fit and</text>
+    <text x="878" y="372">may recommend graduating — you choose.</text>
+    <text x="878" y="402">Only three signals hard-block Dash coding:</text>
+    <text x="878" y="426" fill="#a84c30">auth/security boundaries · new architecture ·</text>
+    <text x="878" y="446" fill="#a84c30">destructive migrations</text>
+  </g>
+</svg>

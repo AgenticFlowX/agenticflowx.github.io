@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 760" font-family="ui-monospace, 'JetBrains Mono', monospace">
+  <!-- generated illustration: where each document type lands on disk, and what it's named -->
+  <rect width="1280" height="760" fill="#0d0f16"/>
+  <text x="48" y="46" fill="#8a92a8" font-size="12" letter-spacing="2">WHERE THE FILES LAND — AND WHAT THEY'RE CALLED</text>
+
+  <!-- tree -->
+  <g font-size="14.5">
+    <text x="64" y="98"  fill="#d4a656">docs/</text>
+    <text x="64" y="130" fill="#6c7488">├── <tspan fill="#d4a656">specs/</tspan></text>
+
+    <!-- dash -->
+    <text x="64" y="168" fill="#6c7488">│   ├── <tspan fill="#d4a656">fix-login-timeout/</tspan></text>
+    <text x="64" y="196" fill="#6c7488">│   │   └── <tspan fill="#e0b872">fix-login-timeout.md</tspan></text>
+
+    <!-- sprint -->
+    <text x="64" y="244" fill="#6c7488">│   ├── <tspan fill="#d4a656">room-export/</tspan></text>
+    <text x="64" y="272" fill="#6c7488">│   │   ├── <tspan fill="#e0b872">room-export.md</tspan></text>
+    <text x="64" y="300" fill="#6c7488">│   │   └── <tspan fill="#9aa1b4">journal.md</tspan></text>
+
+    <!-- full -->
+    <text x="64" y="348" fill="#6c7488">│   └── <tspan fill="#d4a656">billing-pipeline/</tspan></text>
+    <text x="64" y="376" fill="#6c7488">│       ├── <tspan fill="#7fb8e0">spec.md</tspan></text>
+    <text x="64" y="404" fill="#6c7488">│       ├── <tspan fill="#7fb8e0">design.md</tspan></text>
+    <text x="64" y="432" fill="#6c7488">│       ├── <tspan fill="#7fb8e0">tasks.md</tspan></text>
+    <text x="64" y="460" fill="#6c7488">│       ├── <tspan fill="#7fb8e0">journal.md</tspan></text>
+    <text x="64" y="488" fill="#6c7488">│       └── <tspan fill="#d4a656">research/</tspan></text>
+    <text x="64" y="516" fill="#6c7488">│           └── <tspan fill="#9aa1b4">csv-writers.md</tspan></text>
+
+    <!-- adr -->
+    <text x="64" y="564" fill="#6c7488">└── <tspan fill="#d4a656">adr/</tspan></text>
+    <text x="64" y="592" fill="#6c7488">    └── <tspan fill="#9aa1b4">ADR-0007-stream-csv.md</tspan></text>
+  </g>
+
+  <!-- right-side tags with connectors -->
+  <g font-size="12.5">
+    <line x1="620" y1="190" x2="712" y2="190" stroke="#3a3f4e" stroke-width="1"/>
+    <rect x="716" y="176" width="150" height="28" rx="14" fill="rgba(74,110,90,0.12)" stroke="#4a6e5a"/><text x="791" y="195" fill="#8fc9a3" text-anchor="middle">Dash</text>
+
+    <line x1="620" y1="286" x2="712" y2="286" stroke="#3a3f4e" stroke-width="1"/>
+    <rect x="716" y="258" width="164" height="56" rx="12" fill="rgba(160,126,57,0.1)" stroke="#d4a656"/><text x="798" y="282" fill="#e0b872" text-anchor="middle">Sprint</text><text x="798" y="302" fill="#9aa1b4" text-anchor="middle" font-size="10.5">file + journal</text>
+
+    <line x1="620" y1="432" x2="712" y2="432" stroke="#3a3f4e" stroke-width="1"/>
+    <rect x="716" y="404" width="164" height="56" rx="12" fill="rgba(127,184,224,0.08)" stroke="#5b7fa6"/><text x="798" y="428" fill="#7fb8e0" text-anchor="middle">Full spec</text><text x="798" y="448" fill="#9aa1b4" text-anchor="middle" font-size="10.5">four fixed files</text>
+
+    <line x1="620" y1="516" x2="712" y2="516" stroke="#3a3f4e" stroke-width="1"/>
+    <rect x="716" y="502" width="150" height="28" rx="14" fill="none" stroke="#2a2f3e"/><text x="791" y="521" fill="#9aa1b4" text-anchor="middle">Research</text>
+
+    <line x1="620" y1="592" x2="712" y2="592" stroke="#3a3f4e" stroke-width="1"/>
+    <rect x="716" y="578" width="150" height="28" rx="14" fill="none" stroke="#2a2f3e"/><text x="791" y="597" fill="#9aa1b4" text-anchor="middle">ADR (global)</text>
+  </g>
+
+  <!-- the key difference callout -->
+  <rect x="920" y="176" width="312" height="200" rx="12" fill="#12141d" stroke="#2a2f3e"/>
+  <text x="944" y="208" fill="#d4693f" font-size="11" letter-spacing="1">THE DIFFERENCE THAT TRIPS PEOPLE</text>
+  <text x="944" y="240" fill="#e0b872" font-size="13">Dash &amp; Sprint</text>
+  <text x="944" y="262" fill="#9aa1b4" font-size="12.5">one file, named after</text>
+  <text x="944" y="282" fill="#9aa1b4" font-size="12.5">your feature.</text>
+  <text x="944" y="284" fill="#9aa1b4" font-size="12.5"></text>
+  <text x="944" y="316" fill="#7fb8e0" font-size="13">Full spec</text>
+  <text x="944" y="338" fill="#9aa1b4" font-size="12.5">four fixed names —</text>
+  <text x="944" y="358" fill="#9aa1b4" font-size="12.5">spec · design · tasks · journal.</text>
+
+  <rect x="920" y="392" width="312" height="128" rx="12" fill="#12141d" stroke="#4a6e5a"/>
+  <text x="944" y="424" fill="#6fa989" font-size="11" letter-spacing="1">SAME HOME</text>
+  <text x="944" y="452" fill="#9aa1b4" font-size="12.5">All three live under</text>
+  <text x="944" y="474" fill="#e0b872" font-size="12.5">docs/specs/&lt;feature&gt;/</text>
+  <text x="944" y="500" fill="#9aa1b4" font-size="12.5">Only global ADRs sit apart, in docs/adr/.</text>
+
+  <text x="64" y="656" fill="#6c7488" font-size="12">Graduate a Dash or Sprint and the single file splits into the four fixed names — same folder, nothing lost.</text>
+</svg>

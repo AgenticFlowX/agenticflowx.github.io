@@ -1,0 +1,1020 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "w6nnwbv1pd");
+  </script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Document anatomy — AgenticFlowX</title>
+<meta name="description" content="What's inside a spec, design, and tasks file — every section, every anchor, and the notation that keeps it deterministic. Flexible sections, fixed node IDs." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&family=Geist:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #f5efdf; --bg-subtle: #efe7d0; --bg-element: #fbf6e7; --bg-raised: #fffbed;
+    --border: rgba(20, 27, 53, 0.10); --border-strong: rgba(20, 27, 53, 0.16);
+    --text: #141b35; --text-secondary: #3d4256; --text-tertiary: #6b6450; --text-muted: #8a8069;
+    --accent: #a07e39; --accent-bright: #d4a656; --accent-deep: #6e5724; --moss: #4a6e5a; --ember: #a84c30;
+    --mono: 'JetBrains Mono', 'SF Mono', monospace;
+    --sans: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --serif: 'Fraunces', 'Iowan Old Style', Palatino, Georgia, serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background-color: var(--bg); overflow-x: clip;
+    background-image: radial-gradient(1300px 700px at 88% -18%, rgba(212,166,86,0.06), transparent 60%), radial-gradient(1100px 780px at -8% 4%, rgba(74,110,90,0.045), transparent 58%);
+    background-attachment: fixed; background-repeat: no-repeat;
+    color: var(--text); font-family: var(--sans); font-size: 16px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  .wrap-wide { width: min(1400px, 94vw); margin: 0 auto; }
+  .mono { font-family: var(--mono); }
+
+  nav.site { position: sticky; top: 0; z-index: 60; background: rgba(245,239,223,0.88); backdrop-filter: blur(8px); border-bottom: 1px solid transparent; transition: background .25s ease, backdrop-filter .25s ease, border-color .25s ease, box-shadow .25s ease; }
+  nav.site.scrolled { background: rgba(245,239,223,0.66); backdrop-filter: blur(18px) saturate(1.15); border-bottom-color: var(--border); box-shadow: 0 8px 30px -22px rgba(20,27,53,0.5); }
+  .nav-in { display: flex; align-items: center; height: 58px; gap: 18px; }
+  .nav-name { font-family: var(--serif); font-weight: 600; font-size: 17px; }
+  .nav-name a { display: inline-flex; align-items: center; gap: 10px; }
+  .nav-glyph { width: 34px; height: auto; display: block; }
+  .nav-name a:hover { color: var(--ember); }
+  .nav-crumb { font-family: var(--mono); font-size: 12px; color: var(--text-muted); }
+  .nav-crumb a:hover { color: var(--ember); } .nav-crumb b { color: var(--accent-deep); font-weight: 500; }
+  .nav-right { display: flex; align-items: center; gap: 16px; margin-left: auto; }
+  .nav-right a.ghost { font-size: 13.5px; color: var(--text-secondary); }
+  .nav-right a.ghost:hover { color: var(--ember); }
+  @media (max-width: 640px) { .nav-right a.ghost { display: none; } .nav-crumb { display: none; } }
+  .btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0.95rem; background: var(--text); color: var(--bg-raised); font-weight: 500; font-size: 0.87rem; border-radius: 6px; border: 1px solid var(--text); transition: background .15s; }
+  .btn-primary:hover { background: var(--ember); border-color: var(--ember); }
+
+  .nav-burger { display: none; align-items: center; justify-content: center; width: 38px; height: 38px; margin-left: 4px; border: 1px solid var(--border-strong); border-radius: 8px; background: transparent; color: var(--text); cursor: pointer; }
+  .nav-burger svg { width: 19px; height: 19px; }
+
+  .docs { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: clamp(32px, 4vw, 60px); padding: clamp(32px, 4vw, 48px) 0 72px; }
+  @media (max-width: 920px) {
+    .docs { grid-template-columns: 1fr; }
+    .nav-burger { display: inline-flex; }
+    .sidebar { position: fixed; top: 58px; left: 0; right: 0; z-index: 55; display: none; max-height: calc(100vh - 58px); overflow-y: auto; padding: 10px 22px 22px; border-right: none; background: rgba(245,239,223,0.98); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border-strong); box-shadow: 0 22px 44px -26px rgba(20,27,53,0.45); }
+    .sidebar.open { display: block; }
+  }
+  .sidebar { position: sticky; top: 82px; align-self: start; max-height: calc(100vh - 100px); overflow-y: auto; padding-right: 18px; border-right: 1px solid var(--border); font-size: 13.5px; }
+  .sb-group { margin-bottom: 22px; }
+  .sb-label { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin: 0 0 6px; }
+  .sidebar a { display: block; padding: 5px 0 5px 12px; border-left: 2px solid transparent; color: var(--text-secondary); transition: color .15s, border-color .15s; }
+  .sidebar a:hover { color: var(--ember); }
+  .sidebar a.active { color: var(--ember); border-left-color: var(--ember); }
+  .sb-cta { margin-top: 26px; padding: 14px 16px; border: 1px solid var(--border); border-radius: 10px; background: var(--bg-element); font-size: 12.5px; color: var(--text-secondary); }
+  .sb-cta a { display: inline; padding: 0; border: none; color: var(--accent-deep); } .sb-cta a:hover { color: var(--ember); }
+
+  article { min-width: 0; max-width: 1040px; }
+  .doc-head { padding-bottom: 26px; border-bottom: 1px solid var(--border-strong); }
+  .doc-head .kicker { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ember); margin: 0 0 12px; }
+  h1 { font-family: var(--serif); font-weight: 500; font-size: clamp(1.9rem, 3.4vw, 2.6rem); line-height: 1.1; margin: 0; letter-spacing: -0.01em; }
+  h1 em { color: var(--ember); font-style: italic; }
+  .doc-head p { margin: 12px 0 0; color: var(--text-secondary); font-size: 1.02rem; max-width: 680px; }
+
+  article section { padding-top: clamp(44px, 5.5vw, 60px); }
+  h2 { font-family: var(--serif); font-weight: 500; font-size: 1.7rem; margin: 0 0 4px; letter-spacing: -0.005em; scroll-margin-top: 90px; }
+  h2 .n { font-family: var(--mono); font-size: 0.72em; color: var(--ember); margin-right: 10px; }
+  h2 .file { font-family: var(--mono); font-size: 0.62em; color: var(--accent-deep); background: var(--bg-subtle); border: 1px solid var(--border); border-radius: 5px; padding: 2px 8px; margin-left: 10px; vertical-align: 3px; }
+  .sec-lede { color: var(--text-secondary); font-size: 15px; margin: 8px 0 0; max-width: 700px; }
+  h3 { font-family: var(--serif); font-weight: 600; font-size: 1.2rem; margin: 30px 0 8px; scroll-margin-top: 90px; }
+  article p { color: var(--text-secondary); font-size: 14.5px; max-width: 700px; }
+  article a.tx { color: var(--accent-deep); } article a.tx:hover { color: var(--ember); }
+  #credits .cmd-table a, #credits .callout a { text-decoration: underline; text-decoration-color: rgba(160,126,57,0.5); text-underline-offset: 3px; text-decoration-thickness: 1px; transition: text-decoration-color .15s, color .15s; }
+  #credits .cmd-table a:hover, #credits .callout a:hover { text-decoration-color: var(--ember); }
+  code { font-family: var(--mono); font-size: 0.85em; background: var(--bg-subtle); border: 1px solid var(--border); border-radius: 4px; padding: 1px 6px; color: var(--accent-deep); }
+
+  .diagram { margin: clamp(24px,3.5vw,36px) 0 0; border: 1px solid var(--border); border-radius: 12px; background: var(--bg-raised); padding: 10px 14px; }
+  .diagram img { display: block; width: 100%; height: auto; }
+  .shot-cap { margin-top: 10px; font-size: 12.5px; color: var(--text-tertiary); }
+  .gen { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); border: 1px solid var(--border-strong); border-radius: 4px; padding: 1px 6px; margin-left: 8px; vertical-align: 1px; }
+
+  /* anatomy rows — markup left, explanation right */
+  .anatomy { display: grid; grid-template-columns: minmax(0,1.04fr) minmax(0,0.96fr); gap: 26px; align-items: start; margin-top: 22px; padding-top: 22px; border-top: 1px solid var(--border); }
+  .anatomy.first { border-top: none; padding-top: 0; }
+  @media (max-width: 900px) { .anatomy { grid-template-columns: 1fr; gap: 14px; } }
+  .an-code { background: #0d0f16; border: 1px solid var(--border-strong); border-radius: 10px; padding: 15px 17px; overflow-x: auto; font-family: var(--mono); font-size: 12.5px; line-height: 1.75; color: #c7cdda; white-space: pre; box-shadow: 0 20px 44px -34px rgba(20,27,53,0.5); }
+  .an-code .a { color: #e0b872; } .an-code .c { color: #6c7488; } .an-code .h { color: #ece7d8; font-weight: 600; } .an-code .g { color: #8fc9a3; } .an-code .b { color: #7fb8e0; }
+  .an-explain h4 { font-family: var(--serif); font-weight: 600; font-size: 1.14rem; margin: 0 0 8px; color: var(--text); }
+  .an-explain p { font-size: 14px; color: var(--text-secondary); margin: 0 0 8px; max-width: none; }
+  .an-explain ul { font-size: 13.5px; color: var(--text-secondary); padding-left: 18px; margin: 8px 0 0; }
+  .an-explain ul li { margin: 4px 0; }
+  .an-explain ul b { color: var(--text); font-weight: 500; }
+  .an-tag { display: inline-block; font-family: var(--mono); font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase; border-radius: 999px; padding: 3px 10px; margin-bottom: 10px; }
+  .an-tag.req { color: var(--ember); border: 1px solid rgba(168,76,48,0.4); background: rgba(168,76,48,0.06); }
+  .an-tag.opt { color: var(--moss); border: 1px solid rgba(74,110,90,0.4); background: rgba(74,110,90,0.06); }
+
+  .rulebox { border: 1px solid var(--border-strong); border-left: 3px solid var(--accent); border-radius: 10px; background: var(--bg-element); padding: 18px 22px; margin-top: 22px; max-width: 760px; }
+  .rulebox h4 { font-family: var(--serif); font-weight: 600; font-size: 1.1rem; margin: 0 0 10px; }
+  .rulebox .r { font-size: 14px; color: var(--text-secondary); margin: 6px 0; }
+  .rulebox .r b { color: var(--text); font-weight: 500; }
+  .rulebox .ok, .rulebox .no { font-family: var(--mono); font-size: 12.5px; padding: 4px 0; }
+  .rulebox .ok { color: var(--moss); } .rulebox .no { color: var(--ember); }
+
+  .tscroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .cmd-table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 13px; }
+  .cmd-table th { text-align: left; font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text-muted); font-weight: 500; padding: 8px 14px 8px 0; border-bottom: 1.5px solid var(--border-strong); }
+  .cmd-table td { padding: 10px 14px 10px 0; border-bottom: 1px solid var(--border); vertical-align: top; color: var(--text-secondary); }
+  .cmd-table td:first-child { white-space: nowrap; }
+  .cmd-table code { white-space: nowrap; }
+  .cmd-table td.opt { color: var(--moss); font-family: var(--mono); font-size: 11px; }
+
+  .callout { border: 1px solid rgba(160,126,57,0.35); background: rgba(160,126,57,0.06); border-radius: 10px; padding: 14px 17px; font-size: 14px; color: var(--text-secondary); margin: 22px 0 0; max-width: 720px; }
+  .callout b { color: var(--accent-deep); }
+
+  .doc-next { display: flex; justify-content: space-between; gap: 14px; margin-top: clamp(48px, 6vw, 64px); padding-top: 22px; border-top: 1px solid var(--border-strong); }
+  .doc-next a { display: block; padding: 14px 18px; border: 1px solid var(--border); border-radius: 10px; background: var(--bg-element); transition: border-color .15s; max-width: 46%; }
+  .doc-next a:hover { border-color: var(--ember); }
+  .doc-next .lbl { font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); }
+  .doc-next .ttl { display: block; font-family: var(--serif); font-weight: 600; font-size: 1rem; color: var(--text); margin-top: 3px; }
+
+  footer { border-top: 1px solid var(--border); padding: 30px 0; color: var(--text-tertiary); font-size: 13px; }
+  .foot-in { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; }
+  .foot-links { display: flex; flex-wrap: wrap; gap: 20px; } .foot-links a:hover { color: var(--ember); }
+
+  /* pin annotation — real screenshot + numbered pins ↔ legend */
+  .anno { position: relative; border-radius: 10px; overflow: hidden; border: 1px solid var(--border-strong); background: #0c1017; box-shadow: 0 28px 64px -44px rgba(20,27,53,0.5); margin-top: clamp(24px,3.5vw,36px); }
+  .anno > img { display: block; width: 100%; height: auto; }
+  .anno-pin { position: absolute; transform: translate(-50%, -50%); width: 28px; height: 28px; border-radius: 50%; background: var(--accent-bright); color: #14161e; font-family: var(--mono); font-weight: 600; font-size: 12.5px; display: grid; place-items: center; border: 2px solid #fffbed; box-shadow: 0 2px 10px rgba(0,0,0,.55); z-index: 3; transition: transform .15s, background .15s; }
+  .anno-pin::before { content: ""; position: absolute; inset: -5px; border-radius: 50%; border: 1.5px solid var(--accent-bright); opacity: .55; animation: anno-ping 2.6s ease-out infinite; }
+  .anno-pin:nth-of-type(2)::before { animation-delay: .3s; } .anno-pin:nth-of-type(3)::before { animation-delay: .6s; }
+  .anno-pin:nth-of-type(4)::before { animation-delay: .9s; } .anno-pin:nth-of-type(5)::before { animation-delay: 1.2s; }
+  .anno-pin:nth-of-type(6)::before { animation-delay: 1.5s; } .anno-pin:nth-of-type(7)::before { animation-delay: 1.8s; }
+  .anno-pin:nth-of-type(8)::before { animation-delay: 2.1s; }
+  .anno-pin.lit { transform: translate(-50%, -50%) scale(1.35); background: var(--ember); z-index: 4; }
+  @keyframes anno-ping { 0% { transform: scale(1); opacity: .55; } 70%, 100% { transform: scale(2); opacity: 0; } }
+  .anno-legend { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 30px; margin-top: 24px; }
+  @media (max-width: 720px) { .anno-legend { grid-template-columns: 1fr; } }
+  .anno-item { display: grid; grid-template-columns: 28px 1fr; gap: 12px; padding: 12px 10px; border-radius: 10px; transition: background .15s; cursor: default; }
+  .anno-item:hover { background: var(--bg-element); }
+  .anno-item .num { width: 28px; height: 28px; border-radius: 50%; background: var(--bg-raised); border: 1.5px solid var(--accent); color: var(--accent-deep); font-family: var(--mono); font-weight: 600; font-size: 12.5px; display: grid; place-items: center; }
+  .anno-item h5 { font-family: var(--serif); font-weight: 600; font-size: 1rem; margin: 2px 0 3px; color: var(--text); }
+  .anno-item p { font-size: 13px; color: var(--text-secondary); margin: 0; max-width: none; }
+  .anno-item .do { display: block; margin-top: 5px; font-family: var(--mono); font-size: 11px; color: var(--ember); }
+
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } .anno-pin::before { animation: none; } }
+</style>
+</head>
+<body>
+
+<nav class="site" aria-label="Site">
+  <div class="wrap-wide nav-in">
+    <span class="nav-name"><a href="index.html"><img class="nav-glyph" src="assets/afx-glyph.svg" alt="" /> AgenticFlowX</a></span>
+    <span class="nav-crumb">/ <a href="sdd-guide.html">SDD guide</a> / <b>Document anatomy</b></span>
+    <div class="nav-right">
+      <a class="ghost" href="sdd-guide.html">← SDD guide</a>
+      <a class="ghost" href="https://github.com/AgenticFlowX/agenticflowx" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a class="btn-primary" href="https://marketplace.visualstudio.com/items?itemName=AgenticFlowX.agenticflowx" target="_blank" rel="noopener noreferrer">Install</a>
+      <button class="nav-burger" aria-label="Menu" aria-expanded="false" aria-controls="doc-nav">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap-wide docs">
+  <aside class="sidebar" id="doc-nav" aria-label="On this page">
+    <div class="sb-group">
+      <p class="sb-label">The idea</p>
+      <a href="#idea">Flexible sections, fixed anchors</a>
+    </div>
+    <div class="sb-group">
+      <p class="sb-label">spec.md · the WHAT</p>
+      <a href="#spec">Anatomy</a>
+      <a href="#spec-ids">Requirement IDs</a>
+    </div>
+    <div class="sb-group">
+      <p class="sb-label">design.md · the HOW</p>
+      <a href="#design-rules">The node-ID rules</a>
+      <a href="#design-sections">The sections</a>
+    </div>
+    <div class="sb-group">
+      <p class="sb-label">tasks.md · the WHEN</p>
+      <a href="#tasks">Task anatomy</a>
+      <a href="#tasks-sessions">Work Sessions</a>
+    </div>
+    <div class="sb-group">
+      <p class="sb-label">The thread</p>
+      <a href="#see">The @see contract</a>
+    </div>
+    <div class="sb-group">
+      <p class="sb-label">Dash · sprint · full</p>
+      <a href="#shapes">The three shapes</a>
+      <a href="#ex-dash">A worked Dash</a>
+      <a href="#ex-sprint">A worked Sprint</a>
+      <a href="#ex-full">A worked Full spec</a>
+    </div>
+    <div class="sb-group">
+      <p class="sb-label">In the extension</p>
+      <a href="#stepper">How the stepper reads it</a>
+      <a href="#previewer">How the previewer renders it</a>
+    </div>
+    <div class="sb-group">
+      <p class="sb-label">Reference</p>
+      <a href="#credits">Where the notation comes from</a>
+      <a href="#cheat">Notation cheat sheet</a>
+    </div>
+    <div class="sb-cta">Prefer the walk-through? The <a href="sdd-guide.html">SDD guide</a> shows these in the extension, click by click.</div>
+  </aside>
+
+  <article>
+    <div class="doc-head">
+      <p class="kicker">Document anatomy</p>
+      <h1>What's inside — and how the <em>notation</em> keeps it honest.</h1>
+      <p>A spec, design, and tasks file are plain markdown. But they're markdown with a system: stable node IDs that let sections flex while code, tools, and reviews still resolve against them. This is the meat — every section, every anchor, every rule, with real examples.</p>
+    </div>
+
+    <!-- THE IDEA -->
+    <section id="idea">
+      <h2><span class="n">01</span>Flexible sections, fixed anchors</h2>
+      <p class="sec-lede">AI output is fuzzy; a parser can't be. AFX threads the needle by making the <em>headings</em> free and the <em>IDs</em> fixed. You can rename, reorder, or add a section — as long as its node ID is present and unique, every reference to it still resolves.</p>
+      <div class="diagram"><img src="assets/illustrations/notation-contract.svg" alt="One requirement ID FR-1 flows from spec to design to tasks to a @see comment in code; sections can move but the ID stays the anchor every tool parses against" loading="lazy" decoding="async" /></div>
+      <p class="shot-cap">The same <code>[FR-1]</code> resolves from spec → design → tasks → code. That's the contract. <span class="gen">illustration</span></p>
+      <div class="callout"><b>Why this matters:</b> the format is <em>strict by design</em>. The AFX CLI, the VS Code extension, and CodeLens all <em>parse</em> these files to pull out sections and IDs. A missing or duplicated anchor doesn't error loudly — it fails silently in the tool that renders it. The rules below are what keep the whole system deterministic.</div>
+
+      <div class="rulebox" style="border-left-color:var(--moss)">
+        <h4>Written in the present tense</h4>
+        <p class="r">A spec isn't a plan for what the code <em>will</em> do. It's a <b>living document</b> — a 1:1 reflection of what the code <em>does, now</em>. So it's written in the present tense.</p>
+        <div class="ok">✓ "Export streams rows without buffering." · design sections carry <b>as-built</b> truth · <code>spec.md</code> and <code>design.md</code> represent current product and technical truth</div>
+        <div class="no">✕ "The system shall export…" · "We will add…" · past-tense changelog prose — that history lives in <code>journal.md</code>, not the spec</div>
+        <p class="r" style="margin-top:10px">When the code changes, you <em>refine</em> the doc so the two never drift. That's why the AFX status lifecycle is <code>Draft → Approved → Superseded</code> — a doc is either current truth or explicitly retired. ("Living" is the principle, not a status value.)</p>
+      </div>
+    </section>
+
+    <!-- SPEC -->
+    <section id="spec">
+      <h2><span class="n">02</span>spec.md<span class="file">the WHAT</span></h2>
+      <p class="sec-lede">Requirements only — no implementation. Eight <code>##</code> sections, in order. Custom sections are allowed; the required eight must not be dropped. Code links back to the IDs defined here, forever.</p>
+
+      <div class="anatomy first">
+        <div class="an-code"><span class="c">---</span>
+<span class="b">afx</span>: <span class="g">true</span>
+<span class="b">type</span>: <span class="a">SPEC</span>
+<span class="b">status</span>: <span class="a">Draft</span>      <span class="c"># Draft → Approved → Superseded</span>
+<span class="b">owner</span>: <span class="g">"@rix"</span>
+<span class="b">version</span>: <span class="g">"1.0"</span>
+<span class="c">---</span>
+
+<span class="h"># Room Export — Product Specification</span></div>
+        <div class="an-explain">
+          <span class="an-tag req">Frontmatter · required</span>
+          <h4>The header the tools read first</h4>
+          <p>YAML frontmatter is the single source of truth for state — never repeated as bold lines in the body. <code>afx: true</code> marks it AFX-owned; <code>type</code> tells the parser which template this is.</p>
+          <ul>
+            <li><b>status</b> drives the workflow: <code>Draft → Approved → Superseded</code>. Approving freezes the spec and unlocks design.</li>
+            <li><b>version</b> bumps when scope changes — which reverts status to Draft.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="anatomy">
+        <div class="an-code"><span class="h">## References</span>
+- <span class="a">**Proposal**</span>: [RFC-001](../../proposals/…)
+- <span class="a">**Research**</span>: [RES-market](../research/…)
+
+<span class="h">## Problem Statement</span>
+Members can't get their ledger out of the room…
+
+<span class="h">## User Stories</span>
+<span class="h">### Primary Users</span>
+<span class="h">### Stories</span>
+**As a** member **I want** … **So that** …</div>
+        <div class="an-explain">
+          <span class="an-tag req">Sections 1–3 · required</span>
+          <h4>Context, then the problem, then who</h4>
+          <p><b>References</b> link upstream — proposals, research, ADRs — so the spec isn't a floating artifact. <b>Problem Statement</b> is the "why now." <b>User Stories</b> keeps two fixed sub-headings, <code>### Primary Users</code> and <code>### Stories</code>, so the parser can find them.</p>
+        </div>
+      </div>
+
+      <div class="anatomy">
+        <div class="an-code"><span class="h">## Requirements</span>
+
+<span class="h">### Functional Requirements</span>
+| ID   | Requirement        | Priority     |
+| ---- | ------------------ | ------------ |
+| <span class="g">FR-1</span> | Export as CSV      | Must Have    |
+| <span class="g">FR-2</span> | Filter by date     | Must Have    |
+| <span class="g">FR-3</span> | Include totals row | Should Have  |
+
+<span class="h">### Non-Functional Requirements</span>
+| ID    | Requirement | Target          |
+| ----- | ----------- | --------------- |
+| <span class="g">NFR-1</span> | Performance | 100k rows &lt; 5s  |</div>
+        <div class="an-explain">
+          <span class="an-tag req">The star section · required</span>
+          <h4>Requirements — where the IDs are born</h4>
+          <p>Every requirement gets a stable ID. This is the anchor that code, design, and tasks all point back to.</p>
+          <ul>
+            <li><b>Format:</b> <code>FR-N</code> (functional) and <code>NFR-N</code> (non-functional).</li>
+            <li><b>Sequential, no gaps</b> — <code>FR-1, FR-2, FR-3</code>, never skipping. The validator enforces this.</li>
+            <li><b>Priority</b> is a fixed vocabulary: <code>Must Have · Should Have · Nice to Have</code>.</li>
+            <li>Delete a requirement? Retire the ID, don't renumber — old <code>@see</code> links must not silently repoint.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="anatomy">
+        <div class="an-code"><span class="h">## Acceptance Criteria</span>
+<span class="h">### CSV export</span>
+- [ ] Opens in Excel with correct encoding
+- [ ] Totals row matches the ledger sum
+
+<span class="h">## Non-Goals (Out of Scope)</span>
+- PDF export · scheduled exports
+
+<span class="h">## Open Questions</span>
+| # | Question              | Status   |
+| - | --------------------- | -------- |
+| 1 | Include soft-deleted? | <span class="a">Open</span>     |
+
+<span class="h">## Dependencies</span>
+- Requires the ledger read model</div>
+        <div class="an-explain">
+          <span class="an-tag req">Sections 5–8 · required</span>
+          <h4>What "done" means, and what it isn't</h4>
+          <ul>
+            <li><b>Acceptance Criteria</b> — checkboxes grouped per capability. These become the verifier's checklist.</li>
+            <li><b>Non-Goals</b> — the scope fence, written down so nobody "helpfully" builds it.</li>
+            <li><b>Open Questions</b> — a tracked table with a <code>Status</code> column; the previewer nudges you to resolve them.</li>
+            <li><b>Dependencies</b> — what must exist first.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="anatomy">
+        <div class="an-code"><span class="h">## Appendix</span>
+<span class="h">### Wireframes / Mockups</span>
+<span class="h">### Data Examples</span>
+<span class="h">### Glossary</span>
+| Term | Definition |
+| ---- | ---------- |</div>
+        <div class="an-explain">
+          <span class="an-tag opt">Optional</span>
+          <h4>Appendix — and your own sections</h4>
+          <p>The <b>Appendix</b> is optional. So is any custom <code>##</code> you add — a "Metrics" section, a "Rollout" note, whatever the feature needs. The one rule: the required eight stay present and in order. Everything else is yours.</p>
+        </div>
+      </div>
+
+      <div class="rulebox" id="spec-ids">
+        <h4>Requirement ID notation</h4>
+        <p class="r"><b>Functional:</b> <code>FR-1</code>, <code>FR-2</code> … &nbsp;·&nbsp; <b>Non-functional:</b> <code>NFR-1</code>, <code>NFR-2</code> …</p>
+        <div class="ok">✓ Sequential, no gaps · unique · referenced by @see everywhere</div>
+        <div class="no">✕ Don't renumber on delete · don't reuse a retired ID · don't skip numbers</div>
+      </div>
+    </section>
+
+    <!-- DESIGN -->
+    <section id="design-rules">
+      <h2><span class="n">03</span>design.md<span class="file">the HOW</span></h2>
+      <p class="sec-lede">Architecture, with a <code>[DES-ID]</code> on every section. This is the most "notation-heavy" file — because it's the one the extension parses hardest to render. Get the anchors right and the tools light up; get them wrong and sections vanish silently.</p>
+
+      <div class="rulebox">
+        <h4>The node-ID rules — memorise these five</h4>
+        <div class="ok">✓ Every <code>##</code> heading starts with a bracketed ID: <code>## [DES-API] API Contracts</code></div>
+        <div class="ok">✓ Uppercase kebab-case, inside square brackets: <code>[DES-API]</code>, <code>[DES-ROLLOUT]</code></div>
+        <div class="ok">✓ Unique within the file — no duplicate IDs</div>
+        <div class="ok">✓ <code>##</code> and <code>###</code> are captured by parsers; <code>####</code> and deeper are <b>not</b></div>
+        <div class="ok">✓ Custom <code>##</code> allowed — same anchored form, a fresh unique ID</div>
+        <div class="no">✕ <code>## API Contracts</code> (no ID) · <code>## API Contracts [DES-API]</code> (ID at end) · <code>## [des-api]</code> (lowercase)</div>
+      </div>
+
+      <div class="anatomy" style="margin-top:26px">
+        <div class="an-code"><span class="c">---</span>
+<span class="b">type</span>: <span class="a">DESIGN</span>
+<span class="b">spec</span>: <span class="g">spec.md</span>       <span class="c"># mandatory backlink</span>
+<span class="c">---</span>
+
+<span class="h">## <span class="a">[DES-OVR]</span> Overview</span>
+<span class="h">## <span class="a">[DES-ARCH]</span> Architecture</span>
+<span class="h">### System Context</span>
+<span class="h">### Component Diagram</span></div>
+        <div class="an-explain">
+          <h4>An ID leads every section</h4>
+          <p>The heading text is free — call it "Architecture" or "How it hangs together" — but the ID at the front is the handle. <code>### System Context</code> and other sub-sections don't need an ID; they're captured as children of their parent <code>##</code>.</p>
+          <p>The <code>spec: spec.md</code> backlink is mandatory — it's how the design knows which requirements it serves.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="design-sections" style="padding-top:34px">
+      <h3 style="margin-top:0">The 12 required sections (+ 2 optional)</h3>
+      <p>Every <code>design.md</code> carries these anchors. Add your own between them freely.</p>
+      <div class="tscroll">
+        <table class="cmd-table" style="min-width:640px">
+          <thead><tr><th>Node ID</th><th>Section</th><th>What lives here</th></tr></thead>
+          <tbody>
+            <tr><td><code>[DES-OVR]</code></td><td>Overview</td><td>2–3 sentence summary of the approach</td></tr>
+            <tr><td><code>[DES-ARCH]</code></td><td>Architecture</td><td>System context, component diagram</td></tr>
+            <tr><td><code>[DES-UI]</code></td><td>User Interface &amp; UX</td><td>This feature's component composition</td></tr>
+            <tr><td><code>[DES-DEC]</code></td><td>Key Decisions</td><td>Decision · options · choice · rationale table</td></tr>
+            <tr><td><code>[DES-DATA]</code></td><td>Data Model</td><td>Schema, TypeScript interfaces, enums</td></tr>
+            <tr><td><code>[DES-API]</code></td><td>API Contracts</td><td>Server actions, input/output types</td></tr>
+            <tr><td><code>[DES-FILES]</code></td><td>File Structure</td><td>New files to create, files to modify</td></tr>
+            <tr><td><code>[DES-DEPS]</code></td><td>Dependencies</td><td>External &amp; internal packages</td></tr>
+            <tr><td><code>[DES-SEC]</code></td><td>Security Considerations</td><td>Auth, boundaries, data handling</td></tr>
+            <tr><td><code>[DES-ERR]</code></td><td>Error Handling</td><td>Failure modes and responses</td></tr>
+            <tr><td><code>[DES-TEST]</code></td><td>Testing Strategy</td><td>Unit &amp; integration approach</td></tr>
+            <tr><td><code>[DES-ROLLOUT]</code></td><td>Migration / Rollout</td><td>Phased plan and rollback</td></tr>
+            <tr><td class="opt">[DES-REFS]</td><td class="opt">File Reference Map</td><td class="opt">optional</td></tr>
+            <tr><td class="opt">[DES-QUESTIONS]</td><td class="opt">Open Technical Questions</td><td class="opt">optional</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="anatomy" style="margin-top:26px">
+        <div class="an-code"><span class="h">## <span class="a">[DES-DEC]</span> Key Decisions</span>
+| Decision   | Options | Choice | Rationale     |
+| ---------- | ------- | ------ | ------------- |
+| CSV writer | buffer, <span class="g">stream</span> | stream | Const memory  |
+
+<span class="h">## <span class="a">[DES-API]</span> API Contracts</span>
+```typescript
+export async function exportRoomCsv(
+  roomId: string, range: DateRange
+): Promise&lt;Stream&gt;
+```</div>
+        <div class="an-explain">
+          <h4>The sections that carry weight</h4>
+          <p><b>[DES-DEC]</b> is where the "why" is pinned — a table of what you chose <em>and what you rejected</em>. It's the antidote to "we lost the argument": the reasoning is on the record, anchored.</p>
+          <p><b>[DES-API]</b>, <b>[DES-DATA]</b>, and <b>[DES-FILES]</b> hold the concrete contracts — signatures, schemas, exact file paths — so the implementation has a target, not a vibe.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TASKS -->
+    <section id="tasks">
+      <h2><span class="n">04</span>tasks.md<span class="file">the WHEN</span></h2>
+      <p class="sec-lede">The execution plan. Hierarchical task IDs, each group scoped to files and linked back to the spec and design it implements. This is where the anchors get <em>used</em>.</p>
+
+      <div class="anatomy first">
+        <div class="an-code"><span class="h">## Phase 1: CSV export</span>
+<span class="c">> GitHub Issue #42 | Ref: [DES-API], [FR-1]</span>
+
+<span class="h">### <span class="a">1.1</span> Streaming CSV writer</span>
+<span class="c">&lt;!-- files: src/export/csv-writer.ts --&gt;</span>
+<span class="c">&lt;!-- @see design.md <span class="a">[DES-ARCH]</span> | spec.md <span class="a">[FR-1]</span> --&gt;</span>
+
+- [ ] Writes rows without buffering
+- [ ] Regression test at 100k rows
+
+<span class="h">### <span class="a">1.2</span> Date-range filter</span>
+<span class="c">&lt;!-- files: src/export/filter.ts --&gt;</span>
+- [ ] Honours room timezone <span class="c">// [FR-2]</span></div>
+        <div class="an-explain">
+          <span class="an-tag req">Task group anatomy</span>
+          <h4>Every group is a provable slice</h4>
+          <ul>
+            <li><b>Task ID</b> <code>### N.N</code> — phase-dot-task. <code>1.1</code>, <code>1.2</code>, then <code>2.1</code>…</li>
+            <li><b>File scope</b> — <code>&lt;!-- files: … --&gt;</code> names exactly what this task may touch. The drift guardrail holds the agent to it.</li>
+            <li><b>The <code>@see</code> line</b> — links the task to its design section and requirement. This is the anchor made actionable.</li>
+            <li><b>Checkboxes</b> — completion criteria the verifier checks against.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="rulebox">
+        <h4>Task numbering &amp; reference notation</h4>
+        <p class="r"><b>Numbering:</b> <code>0.x</code> pre-cleanup · <code>1.x</code>, <code>2.x</code>, <code>n.x</code> phases. Task groups are <code>### N.N</code>.</p>
+        <p class="r"><b>References use node IDs:</b> <code>[FR-1]</code> spec · <code>[NFR-2]</code> spec · <code>[DES-API]</code> design · <code>[1.1]</code> another task.</p>
+      </div>
+    </section>
+
+    <section id="tasks-sessions" style="padding-top:34px">
+      <h3 style="margin-top:0">Work Sessions — the two-signature ledger</h3>
+      <div class="anatomy first">
+        <div class="an-code"><span class="h">## Work Sessions</span>
+| Date       | Task | Action      | Files Modified      | Agent | Human |
+| ---------- | ---- | ----------- | ------------------- | ----- | ----- |
+| 2026-07-19 | 1.1  | Implemented | src/export/csv-writer.ts | <span class="g">[x]</span>   | [ ]   |
+| 2026-07-19 | 1.1  | Verified    | -                   | <span class="g">[x]</span>   | <span class="g">[x]</span>   |</div>
+        <div class="an-explain">
+          <span class="an-tag req">Always the last section · append-only</span>
+          <h4>Nothing ships on the model's word</h4>
+          <p>A fixed six-column schema — <code>Date · Task · Action · Files Modified · Agent · Human</code> — appended to, never rewritten. Every row carries two checkboxes.</p>
+          <ul>
+            <li><b>Agent <code>[x]</code></b> lands when <code>verify</code> passes its evidence checks.</li>
+            <li><b>Human <code>[x]</code></b> is yours to give. A task is done only when both are ticked.</li>
+          </ul>
+          <p>The same schema appears in Dash and Sprint files — which is why graduating up the ladder is lossless.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- THE @see CONTRACT -->
+    <section id="see">
+      <h2><span class="n">05</span>The <span class="mono" style="font-size:0.8em">@see</span> contract</h2>
+      <p class="sec-lede">All that notation exists for one payoff: code that points back at the requirement that justified it — and stays pointed even as the docs evolve.</p>
+      <div class="anatomy first">
+        <div class="an-code"><span class="c">/**</span>
+<span class="c"> * Streams a room's ledger as CSV.</span>
+<span class="c"> *</span>
+<span class="c"> * @see</span> docs/specs/room-export/spec.md <span class="a">[FR-1]</span>
+<span class="c"> * @see</span> docs/specs/room-export/design.md <span class="a">[DES-ARCH]</span>
+<span class="c"> */</span>
+export function exportRoomCsv(…) { … }</div>
+        <div class="an-explain">
+          <h4>The editor reads every ID on the line</h4>
+          <p>The extension parses the <code>@see</code> path <em>and</em> each bracketed ID separately — and a single line can carry several, like <code>spec.md [FR-2] [FR-3]</code>. Each one becomes live:</p>
+          <ul>
+            <li><b>Hover</b> a <code>[FR-3]</code> → a preview of that exact section pops up inline — you read the requirement without leaving the file.</li>
+            <li><b>Click</b> it → the cursor jumps straight to that table row or heading in the spec. Not just the file — the exact line.</li>
+            <li><b>Rename-proof:</b> it resolves the ID against the row or heading, so renaming the section title changes nothing. The hover and the jump still land as long as the ID is intact.</li>
+            <li><b>A broken link</b> (retired ID, moved file) surfaces as a diagnostic, not silent rot — and <code>/afx-check trace</code> audits every <code>@see</code> in CI, headless.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="callout"><b>The whole loop, closed:</b> requirement <code>[FR-1]</code> in the spec → a decision <code>[DES-ARCH]</code> in the design → a task <code>1.1</code> that implements it → a function that <code>@see</code>s both. Change a heading, and it all still resolves — because you anchored to the ID, not the words.</div>
+    </section>
+
+    <!-- THE THREE SHAPES -->
+    <section id="shapes">
+      <h2><span class="n">06</span>The three shapes — <em style="font-style:normal;color:var(--ember)">dash · sprint · full</em></h2>
+      <p class="sec-lede">The same notation scales down. A one-line bug fix doesn't need four files, and a quarter-long feature shouldn't live in one. AFX gives the exact same anchors — <code>FR-N</code>, <code>[DES-*]</code>, <code>### N.N</code>, <code>@see</code>, the two-signature Work Sessions ledger — in three sizes. Pick the smallest that fits; graduate up when scope grows, and nothing is lost.</p>
+
+      <div class="tscroll">
+        <table class="cmd-table" style="min-width:820px">
+          <thead><tr><th>&nbsp;</th><th>Dash</th><th>Sprint</th><th>Full</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><b>Frontmatter <code>type</code></b></td>
+              <td><code>DASH</code></td>
+              <td><code>SPRINT</code></td>
+              <td><code>SPEC</code> · <code>DESIGN</code> · <code>TASKS</code></td>
+            </tr>
+            <tr>
+              <td><b>Files on disk</b></td>
+              <td>one — <code>&lt;feature&gt;.md</code></td>
+              <td>one — <code>&lt;feature&gt;.md</code> + <code>journal.md</code></td>
+              <td>four — <code>spec.md</code> · <code>design.md</code> · <code>tasks.md</code> · <code>journal.md</code></td>
+            </tr>
+            <tr>
+              <td><b>Sections</b></td>
+              <td>Purpose · Tasks · Work Sessions</td>
+              <td>References · Spec · Design · Tasks · Work Sessions (one doc)</td>
+              <td>The full 8 / 12+2 / task set, split across files</td>
+            </tr>
+            <tr>
+              <td><b>Approval gating</b></td>
+              <td class="opt">none — just do the work</td>
+              <td>frontmatter <code>approval:</code> block — spec → design → tasks, in order</td>
+              <td>per-file <code>status:</code> — <code>Draft → Approved → Superseded</code></td>
+            </tr>
+            <tr>
+              <td><b>Best for</b></td>
+              <td>surgical fix, known-scope bug, focused refactor, small config/test work</td>
+              <td>a real feature that's still small — needs spec + design + tasks, fast</td>
+              <td>larger, multi-phase, strategic work worth splitting</td>
+            </tr>
+            <tr>
+              <td><b>Same anchors?</b></td>
+              <td colspan="3" style="color:var(--moss)">Yes — identical <code>FR-N</code> / <code>[DES-*]</code> / <code>### N.N</code> / <code>@see</code> notation and the same six-column Work Sessions ledger in all three.</td>
+            </tr>
+            <tr>
+              <td><b>Graduates to</b></td>
+              <td>Sprint or Full</td>
+              <td>Full (<code>/afx-sprint graduate</code>)</td>
+              <td class="opt">— (the ceiling)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="shot-cap">All three live under <code>docs/specs/&lt;feature&gt;/</code>. Graduation is a lossless promote: IDs and Work Sessions carry over verbatim, only <code>@see</code> paths retarget.</p>
+
+      <!-- where the files land -->
+      <h3 id="shapes-tree">Where the files land</h3>
+      <p>Everything sits in one feature folder. The shape decides how many files — never where they go.</p>
+      <div class="anatomy first">
+        <div class="an-code"><span class="c"># Dash — one file</span>
+docs/specs/room-export/
+└─ <span class="a">room-export.md</span>        <span class="c"># type: DASH</span>
+
+<span class="c"># Sprint — one file + journal</span>
+docs/specs/room-export/
+├─ <span class="a">room-export.md</span>        <span class="c"># type: SPRINT</span>
+└─ <span class="b">journal.md</span>            <span class="c"># session continuity</span>
+
+<span class="c"># Full — the four-file set</span>
+docs/specs/room-export/
+├─ <span class="a">spec.md</span>              <span class="c"># type: SPEC</span>
+├─ <span class="a">design.md</span>            <span class="c"># type: DESIGN</span>
+├─ <span class="a">tasks.md</span>             <span class="c"># type: TASKS</span>
+└─ <span class="b">journal.md</span></div>
+        <div class="an-explain">
+          <h4>One folder, one feature</h4>
+          <p>The folder name is the feature slug. A <b>Dash</b> and a <b>Sprint</b> both use <code>&lt;feature&gt;.md</code> as the single doc — the <code>type:</code> in frontmatter is what tells them apart. Graduating a Sprint to Full keeps the folder and adds the split files beside it.</p>
+          <ul>
+            <li><b>journal.md</b> appears from Sprint up — it's the append-only session log that keeps continuity across agent runs.</li>
+            <li>ADRs and research live one level deeper, under <code>research/</code> — covered in <a class="tx" href="#credits">the sources below</a>.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- DASH EXAMPLE -->
+      <h3 id="ex-dash">A worked Dash</h3>
+      <p>The lightest shape: a purpose, a task group, and the ledger. No status, no gates — for when the scope is already clear.</p>
+      <div class="anatomy first">
+        <div class="an-code"><span class="c">---</span>
+<span class="b">afx</span>: <span class="g">true</span>
+<span class="b">type</span>: <span class="a">DASH</span>
+<span class="b">owner</span>: <span class="g">"@rix"</span>
+<span class="b">tags</span>: [<span class="g">"room-export"</span>]
+<span class="c">---</span>
+
+<span class="h"># Room Export — CSV button</span>
+
+<span class="h">## Purpose</span>
+Members can't get their ledger out. Add a
+CSV export button to the room menu.
+
+- <span class="a">**Observed**</span>: no way to export the ledger
+- <span class="a">**Expected**</span>: one click → CSV download
+- <span class="a">**Scope**</span>: CSV only; no PDF, no schedule
+
+<span class="h">## Tasks</span>
+
+<span class="h">### <span class="a">1.1</span> CSV export button</span>
+<span class="c">&lt;!-- files: src/room/export.ts --&gt;</span>
+
+- [ ] Streams rows without buffering
+- [ ] Totals row matches the ledger sum
+
+<span class="h">## Work Sessions</span>
+| Date | Task | Action | Files Modified | Agent | Human |
+| ---- | ---- | ------ | -------------- | ----- | ----- |</div>
+        <div class="an-explain">
+          <span class="an-tag opt">Two authored sections + one generated</span>
+          <h4>Structure without ceremony</h4>
+          <p><b>Purpose</b> replaces the whole spec — the "why", with optional <code>Observed / Expected / Scope</code> labels that suit a bug. <b>Tasks</b> uses the exact same <code>### N.N</code> groups and <code>&lt;!-- files: --&gt;</code> scope as a full tasks file.</p>
+          <ul>
+            <li>No <code>status</code>, no <code>approval</code> block — a Dash is trusted to just move.</li>
+            <li><b>Work Sessions</b> is still the same six-column ledger, appended by <code>/afx-dash code</code> and <code>verify</code>.</li>
+            <li>Outgrows itself? <code>type: DASH → SPRINT</code> in place, or graduate to the four-file set — task IDs and ledger untouched.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- SPRINT EXAMPLE -->
+      <h3 id="ex-sprint">A worked Sprint</h3>
+      <p>Spec, design, and tasks in one document — separated by HTML-comment markers the tools parse against, gated by an <code>approval:</code> block in the frontmatter.</p>
+      <div class="anatomy first">
+        <div class="an-code"><span class="c">---</span>
+<span class="b">afx</span>: <span class="g">true</span>
+<span class="b">type</span>: <span class="a">SPRINT</span>
+<span class="b">status</span>: <span class="a">Draft</span>
+<span class="b">approval</span>:
+  <span class="b">spec</span>: <span class="a">Approved</span>   <span class="c"># Draft | Approved</span>
+  <span class="b">design</span>: <span class="a">Draft</span>    <span class="c"># gated on spec: Approved</span>
+  <span class="b">tasks</span>: <span class="a">Draft</span>     <span class="c"># gated on design: Approved</span>
+<span class="c">---</span>
+
+<span class="h"># Room Export — Sprint Brief</span>
+
+<span class="c">&lt;!-- SPRINT-SECTION-START: SPEC --&gt;</span>
+<span class="h">## 1. Spec</span>
+<span class="h">### Requirements</span>
+| ID   | Requirement   | Priority  |
+| <span class="g">FR-1</span> | Export as CSV | Must Have |
+<span class="c">&lt;!-- SPRINT-SECTION-END: SPEC --&gt;</span>
+
+<span class="c">&lt;!-- SPRINT-SECTION-START: DESIGN --&gt;</span>
+<span class="h">## 2. Design</span>
+<span class="h">### <span class="a">[DES-ARCH]</span> Architecture</span>
+<span class="c">&lt;!-- SPRINT-SECTION-END: DESIGN --&gt;</span>
+
+<span class="c">&lt;!-- SPRINT-SECTION-START: TASKS --&gt;</span>
+<span class="h">## 3. Tasks</span>
+<span class="h">#### <span class="a">1.1</span> CSV writer</span>
+<span class="c">&lt;!-- @see room-export.md [FR-1] [DES-ARCH] --&gt;</span>
+<span class="c">&lt;!-- SPRINT-SECTION-END: TASKS --&gt;</span>
+
+<span class="h">## 4. Work Sessions</span></div>
+        <div class="an-explain">
+          <span class="an-tag req">One doc · four numbered sections</span>
+          <h4>The whole loop in a single file</h4>
+          <ul>
+            <li><b>Section markers</b> — <code>&lt;!-- SPRINT-SECTION-START: SPEC --&gt;</code> … <code>END</code> wrap each stage. They're what the graduate command extracts against, and what the extension reads to fill the stepper.</li>
+            <li><b>Headings promote one level</b> — <code>### Requirements</code> here becomes <code>## Requirements</code> when it graduates to <code>spec.md</code>. The IDs don't move.</li>
+            <li><b>The <code>approval:</code> block</b> gates in order: design can't be approved until <code>spec: Approved</code>, tasks until <code>design: Approved</code>.</li>
+            <li>The <code>@see</code> line points at <code>room-export.md</code> while it's a sprint; <code>graduate</code> retargets it to <code>design.md</code> / <code>spec.md</code>.</li>
+          </ul>
+          <p style="margin-top:10px">Sections 1–4 mirror the parent templates exactly — which is what makes <code>/afx-sprint graduate</code> a clean extract-and-promote rather than a rewrite.</p>
+        </div>
+      </div>
+
+      <!-- FULL EXAMPLE -->
+      <h3 id="ex-full">A worked Full spec</h3>
+      <p>Nothing new to learn — the full shape is simply the three files you've already met on this page, split out and gated independently. Sections <a class="tx" href="#spec">02</a>, <a class="tx" href="#design-rules">03</a>, and <a class="tx" href="#tasks">04</a> above <em>are</em> the worked full example, dissected row by row.</p>
+      <div class="rulebox">
+        <h4>What "graduating to full" actually does</h4>
+        <p class="r"><b>1.</b> Splits the one doc into <code>spec.md</code> · <code>design.md</code> · <code>tasks.md</code>, promoting each section's heading level back up.</p>
+        <p class="r"><b>2.</b> Keeps every <code>FR-N</code>, <code>[DES-*]</code>, <code>### N.N</code> ID and the entire Work Sessions ledger <b>verbatim</b>.</p>
+        <p class="r"><b>3.</b> Retargets <code>@see</code> paths from <code>&lt;feature&gt;.md</code> to the new <code>spec.md</code> / <code>design.md</code>, preserving the node IDs.</p>
+        <p class="r"><b>4.</b> Archives the original as <code>&lt;feature&gt;.md.archived</code> — never deletes it, never leaves two competing sources of truth.</p>
+        <div class="ok">✓ Because the notation is identical at every size, moving up the ladder never touches your code's <code>@see</code> IDs — only the paths beside them.</div>
+      </div>
+      <div class="callout"><b>The rule of thumb:</b> start at the smallest shape you're sure covers the work. A Dash that grows a design discussion wants to be a Sprint; a Sprint sprouting phases and multiple approvers wants to be Full. You never pay the four-file tax until the work earns it.</div>
+
+      <div class="callout" style="border-color:rgba(168,76,48,0.35);background:rgba(168,76,48,0.05)"><b>The honest trade-off:</b> structure buys determinism, and determinism costs tokens. Every refinement — spec → design → tasks, plus each review pass — is another model round-trip. That's the real dial these three shapes give you: a Dash is cheap and loose; a full spec is more deliberate, more reproducible, and more expensive to produce. Spend the ceremony where you genuinely need the same output twice — a payments flow, a migration, a public API — and stay light everywhere else. SDD isn't "always do the most"; it's "match the rigour to the risk."</div>
+    </section>
+
+    <!-- STEPPER -->
+    <section id="stepper">
+      <h2><span class="n">07</span>How the stepper reads it</h2>
+      <p class="sec-lede">The notation isn't just for humans and CI — the VS Code extension parses these same files live. Open an SDD doc and a four-pill stepper appears in the chat composer: <b>Spec · Design · Tasks · Work</b>. It's not decoration; every pill's colour is read straight from the frontmatter, and clicking one navigates the workflow.</p>
+
+      <div class="anno">
+        <img src="assets/screenshots/chat-spec-stepper.png" alt="The AFX chat composer showing the four-pill SDD stepper — Spec active in brass, Design in soft brass, Tasks and Work dotted — with an intent label and a row of stage commands below" loading="lazy" decoding="async" />
+        <span class="anno-pin" data-n="1" style="left:4%;top:72%">1</span>
+        <span class="anno-pin" data-n="2" style="left:3%;top:75.8%">2</span>
+        <span class="anno-pin" data-n="3" style="left:34.3%;top:75.8%">3</span>
+        <span class="anno-pin" data-n="4" style="left:72%;top:75.8%">4</span>
+        <span class="anno-pin" data-n="5" style="left:50%;top:79.1%">5</span>
+        <span class="anno-pin" data-n="6" style="left:16%;top:82.3%">6</span>
+      </div>
+      <div class="anno-legend">
+        <div class="anno-item" data-n="1"><span class="num">1</span><div><h5>The active doc</h5><p><code>SPEC.MD · DRAFT</code>, with a Preview toggle. The stepper always reflects whichever SDD file is open in the editor.</p></div></div>
+        <div class="anno-item" data-n="2"><span class="num">2</span><div><h5>Spec — active</h5><p>The open file: it carries the brass ring. Its fill tone is read from this file's <code>status</code> — soft for <code>Draft</code>, solid once approved.</p></div></div>
+        <div class="anno-item" data-n="3"><span class="num">3</span><div><h5>Design — reached</h5><p>Filled, and the connector into it is solid, because the host read the sibling <code>design.md</code>'s frontmatter — it's on the ladder, not pending.</p></div></div>
+        <div class="anno-item" data-n="4"><span class="num">4</span><div><h5>Tasks &amp; Work — pending</h5><p>Dotted and muted: no status read yet. Once tasks exist, this pill shows a live <code>done/total</code> count and the line to it fills in.</p></div></div>
+        <div class="anno-item" data-n="5"><span class="num">5</span><div><h5>The intent label</h5><p>Names the current stage's job — <em>"Spec — clarify requirements, acceptance, and scope."</em> It changes with the active pill.</p></div></div>
+        <div class="anno-item" data-n="6"><span class="num">6</span><div><h5>The stage commands</h5><p>The <code>/afx-*</code> commands for this stage as buttons. <span class="mono" style="color:var(--accent-deep)">✎ Draft</span> ones edit in the composer first; <span class="mono" style="color:var(--ember)">⚡ Auto</span> ones run immediately.</p></div></div>
+      </div>
+      <p class="shot-cap">Real capture — the chat composer with a spec open. <span class="gen">annotated screenshot</span></p>
+
+      <h3 id="stepper-parse">Where each pill's colour comes from</h3>
+      <p>The host reads the frontmatter and turns it into a pill status. There's no hidden state — the file <em>is</em> the state.</p>
+      <div class="tscroll">
+        <table class="cmd-table" style="min-width:680px">
+          <thead><tr><th>Frontmatter says</th><th>Pill becomes</th><th>Looks like</th></tr></thead>
+          <tbody>
+            <tr><td><code>status: Approved</code></td><td><b>approved</b></td><td>solid brass, filled connector</td></tr>
+            <tr><td><code>status: Draft</code></td><td><b>draft</b></td><td>soft brass</td></tr>
+            <tr><td>gated on an unapproved upstream</td><td><b>blocked</b></td><td>amber</td></tr>
+            <tr><td>tasks with open checkboxes</td><td><b>progress</b></td><td>brass with a <code>3/8</code> count · gradient line</td></tr>
+            <tr><td>no file / no status read</td><td><b>pending</b></td><td>dotted, muted</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="anatomy first" style="margin-top:26px">
+        <div class="an-code"><span class="c"># Standard 4-file — reads each sibling's status</span>
+spec.md      <span class="b">status</span>: <span class="a">Approved</span>   <span class="c">→ pill 1 solid</span>
+design.md    <span class="b">status</span>: <span class="a">Draft</span>      <span class="c">→ pill 2 soft</span>
+tasks.md     <span class="a">3/8</span> boxes ticked  <span class="c">→ pill 3 progress</span>
+
+<span class="c"># Sprint single-file — reads the approval block</span>
+<span class="b">approval</span>:
+  <span class="b">spec</span>: <span class="a">Approved</span>    <span class="c">→ pill 1 solid</span>
+  <span class="b">design</span>: <span class="a">Draft</span>      <span class="c">→ pill 2 soft</span>
+  <span class="b">tasks</span>: <span class="a">Draft</span>       <span class="c">→ pill 3 draft</span></div>
+        <div class="an-explain">
+          <h4>Two files, one stepper</h4>
+          <p>In the <b>standard 4-file</b> layout each pill reads its own file's <code>status</code>. In <b>sprint</b> mode the four pills read the single <code>approval:</code> block instead — same four stages, one document.</p>
+          <ul>
+            <li><b>Clicking a pill</b> navigates: in 4-file mode it opens the sibling <code>spec.md</code> / <code>design.md</code> / <code>tasks.md</code>; in sprint mode it jumps to that <code>SPRINT-SECTION</code> heading in the one file.</li>
+            <li><b>The connector line</b> fills solid up to the last reached stage, and shows a gradient across Tasks as the checkboxes complete.</li>
+            <li>This is the same node-ID discipline paying off: the stepper is just a parser reading anchors and frontmatter you can see in plain text.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- PREVIEWER -->
+    <section id="previewer">
+      <h2><span class="n">08</span>How the previewer renders it</h2>
+      <p class="sec-lede">Open an AFX doc in the workbench previewer and it's more than pretty markdown. The frontmatter becomes status chips; the checkboxes become live toggles; and — because the parser knows what each section <em>is</em> — the right <code>/afx-*</code> commands hang off the right parts of the document as small toolbars. The notation is what makes that possible.</p>
+
+      <div class="anno">
+        <img src="assets/screenshots/previewer-sprint.png" alt="The AFX workbench previewer rendering a sprint document: metadata chips in the header, inline task-row commands, live checkboxes, node-ID links, a Work Sessions sign-off toolbar, the sessions table, and a Quality pulse rail with a Refinement coach" loading="lazy" decoding="async" />
+        <span class="anno-pin" data-n="1" style="left:61%;top:2.3%">1</span>
+        <span class="anno-pin" data-n="2" style="left:22%;top:12%">2</span>
+        <span class="anno-pin" data-n="3" style="left:18.5%;top:32.6%">3</span>
+        <span class="anno-pin" data-n="4" style="left:41%;top:54%">4</span>
+        <span class="anno-pin" data-n="5" style="left:44%;top:66.8%">5</span>
+        <span class="anno-pin" data-n="6" style="left:54%;top:84.4%">6</span>
+        <span class="anno-pin" data-n="7" style="left:91.5%;top:27%">7</span>
+        <span class="anno-pin" data-n="8" style="left:88%;top:85.5%">8</span>
+      </div>
+      <div class="anno-legend">
+        <div class="anno-item" data-n="1"><span class="num">1</span><div><h5>Frontmatter → status chips</h5><p>The YAML header is stripped from the body and re-shown as chips: <code>type · status · version · owner · updated</code>. Never duplicated as bold lines.</p></div></div>
+        <div class="anno-item" data-n="2"><span class="num">2</span><div><h5>Inline task commands</h5><p>Each phase and task group gets a <code>Code Phase 2</code> / <code>Code 2.1</code> button, built from its <code>### N.N</code> ID — draft a coding command for exactly that task.</p></div></div>
+        <div class="anno-item" data-n="3"><span class="num">3</span><div><h5>Live checkboxes</h5><p>Acceptance and task boxes are real inputs. Ticking one writes straight back to the markdown — not a read-only render.</p></div></div>
+        <div class="anno-item" data-n="4"><span class="num">4</span><div><h5>Node-ID links</h5><p><code>[FR-1]</code>, <code>[DES-UI]</code> in the Cross-Reference Index resolve as links — the same anchors code <code>@see</code>s.</p></div></div>
+        <div class="anno-item" data-n="5"><span class="num">5</span><div><h5>The sign-off toolbar</h5><p><b>Sessions:</b> Approve, Agent all, Human all. The two-signature ledger, made clickable. <span class="do">Approve ticks Human on every Agent-verified row</span></p></div></div>
+        <div class="anno-item" data-n="6"><span class="num">6</span><div><h5>Work Sessions table</h5><p>The append-only ledger itself, with its Agent and Human columns — the source of truth the toolbar above acts on.</p></div></div>
+        <div class="anno-item" data-n="7"><span class="num">7</span><div><h5>Quality pulse</h5><p>A scorecard — Strategy · Structure · Clarity · Completeness — plus a plain-English list of what's still to review. Read from the doc, live.</p></div></div>
+        <div class="anno-item" data-n="8"><span class="num">8</span><div><h5>Refinement coach</h5><p>Turns a gap into an action: here it spots open tasks and offers a <code>Verify tasks</code> button that runs the command for you.</p></div></div>
+      </div>
+      <p class="shot-cap">Real capture — a sprint doc in the workbench previewer. <span class="gen">annotated screenshot</span></p>
+
+      <h3 id="previewer-render">What it does under the hood</h3>
+      <p>The body is rendered with a standard markdown engine (react-markdown + GFM), so tables, checklists, and code fences all render correctly. On top of that, three things make it an <em>AFX</em> previewer:</p>
+      <ul style="color:var(--text-secondary);font-size:14.5px;max-width:720px;padding-left:20px">
+        <li style="margin:6px 0"><b>Frontmatter is lifted out</b> and shown as status chips, never left as raw YAML in the body.</li>
+        <li style="margin:6px 0"><b>Checkboxes are wired</b> — task and Work Sessions ticks write back to the file.</li>
+        <li style="margin:6px 0"><b>Sections are recognised</b> and given command toolbars. This is where the node IDs earn their keep.</li>
+      </ul>
+
+      <h3 id="previewer-toolbars">The toolbars, and where they attach</h3>
+      <p>A toolbar is a row of the stage's <code>/afx-*</code> commands. Each button is either <span class="mono" style="color:var(--accent-deep)">✎ Draft</span> (drops the command into the chat composer to edit) or <span class="mono" style="color:var(--ember)">⚡ Auto</span> (runs it immediately). They attach at three levels:</p>
+      <div class="tscroll">
+        <table class="cmd-table" style="min-width:720px">
+          <thead><tr><th>Scope</th><th>Attaches to</th><th>How it's matched</th></tr></thead>
+          <tbody>
+            <tr><td><b>Document</b></td><td>the whole file, in the header</td><td>the frontmatter <code>type</code> (SPEC / DESIGN / TASKS / SPRINT / …)</td></tr>
+            <tr><td><b>Section</b></td><td>the top of each major section</td><td>the <code>SPRINT-SECTION</code> kind, or the heading's text</td></tr>
+            <tr><td><b>Inline</b></td><td>after a heading, phase, or task group</td><td>the <code>### N.N</code> task ID or the heading slug</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 id="previewer-mapping">What each section offers</h3>
+      <p>Because the parser knows a Tasks section from a Spec section, it can offer the commands that actually apply there. In a <b>sprint</b> doc the section toolbars map by kind:</p>
+      <div class="tscroll">
+        <table class="cmd-table" style="min-width:760px">
+          <thead><tr><th>Sprint section</th><th>Draft ✎</th><th>Auto ⚡</th></tr></thead>
+          <tbody>
+            <tr><td><code>## 1. Spec</code></td><td>Refine spec · Author design</td><td>Verify spec · Approve spec</td></tr>
+            <tr><td><code>## 2. Design</code></td><td>Refine design · Author tasks</td><td>Verify design · Approve design</td></tr>
+            <tr><td><code>## 3. Tasks</code></td><td>Refine tasks · Code tasks · Graduate</td><td>Verify tasks · Approve tasks</td></tr>
+            <tr><td><code>## 4. Work Sessions</code></td><td colspan="2">the sign-off toolbar (Approve · Agent all · Human all)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top:18px">The whole-document toolbar in the header is keyed to the file <code>type</code> instead:</p>
+      <div class="tscroll">
+        <table class="cmd-table" style="min-width:760px">
+          <thead><tr><th>Document type</th><th>Its header commands</th></tr></thead>
+          <tbody>
+            <tr><td><code>SPEC</code></td><td>Refine · Author · <b>Validate ⚡ · Review ⚡ · Approve ⚡</b></td></tr>
+            <tr><td><code>DESIGN</code></td><td>Refine · Author · <b>Validate ⚡ · Review ⚡ · Approve ⚡</b></td></tr>
+            <tr><td><code>TASKS</code></td><td>Code · <b>Verify ⚡ · Pick ⚡ · Review ⚡ · Status ⚡</b></td></tr>
+            <tr><td><code>JOURNAL</code></td><td>Note · Log · <b>Recap ⚡</b> · Promote · Capture</td></tr>
+            <tr><td><code>ADR</code></td><td>Review · Supersede · <b>List ⚡</b></td></tr>
+            <tr><td><code>SPRINT</code></td><td>Verify ⚡ · Graduate</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="shot-cap">In a standard (non-sprint) doc, sections without a fixed kind are matched by heading text instead — an <em>Open Questions</em> heading offers Answer / Resolve / Journal; a <em>Requirements</em> heading offers Refine / Review.</p>
+
+      <div class="callout"><b>Sign Off ≠ Approve.</b> The sessions toolbar lets you tick the Human column any time — but the document's status only advances once <em>every</em> task box and <em>every</em> Agent row is checked. You can sign your rows early; the doc won't call itself done until the evidence is actually clean. Same rule as <a class="tx" href="#tasks-sessions">the two-signature ledger</a> in §04, enforced in the UI.</div>
+    </section>
+
+    <!-- SOURCES / CREDITS -->
+    <section id="credits">
+      <h2><span class="n">09</span>Where the notation comes from</h2>
+      <p class="sec-lede">None of this was invented from scratch. AFX's template system is a pragmatic hybrid of established standards — requirements engineering, agile practice, architecture documentation, project management. Each borrowed idea is mapped to exactly where it shows up in the templates. Credit where it's due.</p>
+
+      <div class="tscroll">
+        <table class="cmd-table" style="min-width:860px">
+          <thead><tr><th>Standard</th><th>Origin</th><th>Where in AFX</th><th>What we took from it</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><a class="tx" href="https://en.wikipedia.org/wiki/Software_requirements_specification" target="_blank" rel="noopener noreferrer"><b>IEEE 830 / ISO&nbsp;29148</b></a></td>
+              <td>IEEE, 1998</td>
+              <td><code>spec.md</code></td>
+              <td>The SRS structure — problem, requirements, acceptance — adapted to feature-level specs instead of whole systems.</td>
+            </tr>
+            <tr>
+              <td><a class="tx" href="https://en.wikipedia.org/wiki/MoSCoW_method" target="_blank" rel="noopener noreferrer"><b>MoSCoW</b></a></td>
+              <td>Dai Clegg, 1994 (DSDM)</td>
+              <td><code>spec.md</code> · FR table</td>
+              <td>The <code>Must / Should / Nice to Have</code> priority vocabulary in every requirement row.</td>
+            </tr>
+            <tr>
+              <td><a class="tx" href="https://www.mountaingoatsoftware.com/agile/user-stories" target="_blank" rel="noopener noreferrer"><b>User Stories</b></a></td>
+              <td>Connextra / Mike Cohn (XP)</td>
+              <td><code>spec.md</code> · User Stories</td>
+              <td>The <b>As a</b> … <b>I want</b> … <b>So that</b> … framing under <code>### Stories</code>.</td>
+            </tr>
+            <tr>
+              <td><a class="tx" href="https://c4model.com/" target="_blank" rel="noopener noreferrer"><b>C4 Model</b></a></td>
+              <td>Simon Brown</td>
+              <td><code>design.md</code> · <code>[DES-ARCH]</code></td>
+              <td>System Context and Component views — the two sub-headings under Architecture.</td>
+            </tr>
+            <tr>
+              <td><a class="tx" href="https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions" target="_blank" rel="noopener noreferrer"><b>ADR</b></a></td>
+              <td>Michael Nygard, 2011</td>
+              <td><code>research/*.md</code> · <code>[DES-DEC]</code></td>
+              <td>The <em>Context → Decision → Consequences</em> shape — for standalone ADRs and the Key Decisions table.</td>
+            </tr>
+            <tr>
+              <td><a class="tx" href="https://en.wikipedia.org/wiki/Work_breakdown_structure" target="_blank" rel="noopener noreferrer"><b>WBS</b></a></td>
+              <td>PMI PMBOK Guide</td>
+              <td><code>tasks.md</code></td>
+              <td>Hierarchical decimal numbering — <code>1.1</code>, <code>2.3</code> — for decomposing work into task groups.</td>
+            </tr>
+            <tr>
+              <td><a class="tx" href="https://en.wikipedia.org/wiki/Requirements_traceability" target="_blank" rel="noopener noreferrer"><b>Traceability Matrix</b></a></td>
+              <td>IEEE 830 / DO-178C</td>
+              <td><code>tasks.md</code> · Cross-Reference Index</td>
+              <td>The Requirements → Design → Code mapping that <code>/afx-check trace</code> audits.</td>
+            </tr>
+            <tr>
+              <td><a class="tx" href="https://jsdoc.app/tags-see" target="_blank" rel="noopener noreferrer"><b>JSDoc <code>@see</code></b></a></td>
+              <td>JSDoc / Javadoc</td>
+              <td>source code</td>
+              <td>The <code>@see</code> tag itself — repurposed to point a function at the requirement and design section it implements.</td>
+            </tr>
+            <tr>
+              <td><a class="tx" href="https://help.obsidian.md/properties" target="_blank" rel="noopener noreferrer"><b>Obsidian / Dataview</b></a></td>
+              <td>Obsidian community</td>
+              <td>every file · frontmatter</td>
+              <td>YAML frontmatter as queryable properties, and <code>#hash-tags</code> — so an AFX repo doubles as an Obsidian vault.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="shot-cap">The first seven rows mirror the canonical <em>Standards Lineage</em> in the workflow repo at <code>docs/agenticflowx/prd-reference.md</code>; the <code>@see</code> and frontmatter rows we credit here too.</p>
+
+      <div class="callout"><b>What's genuinely ours:</b> the borrowed parts are the <em>vocabulary</em>. The one original idea is the <b>node-ID contract</b> — putting <code>FR-1</code> / <code>[DES-*]</code> anchors on the sections so headings stay free while every tool parses against a stable ID. That's the glue that turns a pile of good conventions into something a CLI, an extension, and CI can all read the same way. <a class="tx" href="#idea">Back to §01 →</a></div>
+    </section>
+
+    <!-- CHEAT SHEET -->
+    <section id="cheat">
+      <h2><span class="n">—</span>Notation cheat sheet</h2>
+      <div class="tscroll">
+        <table class="cmd-table" style="min-width:640px">
+          <thead><tr><th>Notation</th><th>Where</th><th>Means</th></tr></thead>
+          <tbody>
+            <tr><td><code>type: SPEC|DESIGN|TASKS</code></td><td>frontmatter</td><td>Which template a parser should apply</td></tr>
+            <tr><td><code>FR-N</code> · <code>NFR-N</code></td><td>spec.md</td><td>Functional / non-functional requirement ID — sequential, unique</td></tr>
+            <tr><td><code>Must / Should / Nice to Have</code></td><td>spec.md</td><td>The only valid requirement priorities</td></tr>
+            <tr><td><code>## [DES-*]</code></td><td>design.md</td><td>Section anchor — uppercase, bracketed, at the start, unique</td></tr>
+            <tr><td><code>### N.N</code></td><td>tasks.md</td><td>Task group ID — phase.task</td></tr>
+            <tr><td><code>&lt;!-- files: … --&gt;</code></td><td>tasks.md</td><td>The file scope the task may touch</td></tr>
+            <tr><td><code>@see path [ID]</code></td><td>code &amp; tasks</td><td>Backlink to a requirement or design section</td></tr>
+            <tr><td><code>[x]</code> Agent · <code>[x]</code> Human</td><td>Work Sessions</td><td>Two-stage sign-off — both required to be "done"</td></tr>
+            <tr><td><code>status: Draft→Approved→Superseded</code></td><td>frontmatter</td><td>Living-doc lifecycle; approval gates the next stage</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout"><b>One rule under all of it:</b> headings are for humans, IDs are for machines. Keep the IDs present, unique, and unchanged, and every AFX surface — CLI, extension, CodeLens, CI — stays in sync with your prose automatically.</div>
+    </section>
+
+    <div class="doc-next">
+      <a href="sdd-guide.html"><span class="lbl">← Back</span><span class="ttl">The SDD guide</span></a>
+      <a href="index.html" style="text-align:right"><span class="lbl">Home →</span><span class="ttl">The product tour</span></a>
+    </div>
+  </article>
+</div>
+
+<footer>
+  <div class="wrap-wide foot-in">
+    <div>Apache 2.0 · AgenticFlowX</div>
+    <div class="foot-links">
+      <a href="index.html">Home</a>
+      <a href="help.html">Help</a>
+      <a href="sdd-guide.html">SDD guide</a>
+      <a href="https://github.com/AgenticFlowX/afx" target="_blank" rel="noopener noreferrer">afx-workflow</a>
+      <a href="https://pi.dev" target="_blank" rel="noopener noreferrer">pi.dev</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var nav = document.querySelector('nav.site');
+    if (nav) { var f = function () { nav.classList.toggle('scrolled', window.scrollY > 8); }; window.addEventListener('scroll', f, { passive: true }); f(); }
+  })();
+  (function () {
+    var burger = document.querySelector('.nav-burger');
+    var menu = document.getElementById('doc-nav');
+    if (!burger || !menu) return;
+    function set(o) { menu.classList.toggle('open', o); burger.setAttribute('aria-expanded', String(o)); }
+    burger.addEventListener('click', function (e) { e.stopPropagation(); set(!menu.classList.contains('open')); });
+    menu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { set(false); }); });
+    document.addEventListener('click', function (e) { if (menu.classList.contains('open') && !menu.contains(e.target) && e.target !== burger) set(false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') set(false); });
+  })();
+  // Pin annotation — hovering a legend row lights its pin, and vice versa
+  (function () {
+    var items = document.querySelectorAll('.anno-item[data-n]');
+    var pins = document.querySelectorAll('.anno-pin[data-n]');
+    function lit(nn, on) {
+      pins.forEach(function (p) { if (p.getAttribute('data-n') === nn) p.classList.toggle('lit', on); });
+      items.forEach(function (i) { if (i.getAttribute('data-n') === nn) i.style.background = on ? 'var(--bg-element)' : ''; });
+    }
+    function wire(el) {
+      var nn = el.getAttribute('data-n');
+      el.addEventListener('mouseenter', function () { lit(nn, true); });
+      el.addEventListener('mouseleave', function () { lit(nn, false); });
+    }
+    items.forEach(wire); pins.forEach(wire);
+  })();
+  (function () {
+    var links = Array.prototype.slice.call(document.querySelectorAll('.sidebar a[href^="#"]'));
+    var map = {}; links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+    var obs = new IntersectionObserver(function (es) { es.forEach(function (en) { if (en.isIntersecting) { var a = map[en.target.id]; if (!a) return; links.forEach(function (l) { l.classList.remove('active'); }); a.classList.add('active'); } }); }, { rootMargin: '-15% 0px -75% 0px' });
+    Object.keys(map).forEach(function (id) { var el = document.getElementById(id); if (el) obs.observe(el); });
+  })();
+</script>
+</body>
+</html>

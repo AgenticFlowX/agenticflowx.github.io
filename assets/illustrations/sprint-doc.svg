@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" font-family="ui-monospace, 'JetBrains Mono', monospace">
+  <!-- generated illustration: 1:1 Sprint document anatomy with per-section approval -->
+  <rect width="1280" height="720" fill="#0d0f16"/>
+  <text x="48" y="46" fill="#8a92a8" font-size="12" letter-spacing="2">DOCS/SPECS/ROOM-EXPORT/ROOM-EXPORT.MD  ·  + JOURNAL.MD</text>
+  <rect x="1046" y="26" width="186" height="28" rx="14" fill="none" stroke="#a07e39"/>
+  <text x="1139" y="45" fill="#d4a656" font-size="11" text-anchor="middle">type: SPRINT · one file</text>
+
+  <!-- document -->
+  <rect x="48" y="70" width="760" height="620" rx="10" fill="#12141d" stroke="#2a2f3e"/>
+  <g font-size="13">
+    <text x="76" y="104" fill="#6c7488">---</text>
+    <text x="76" y="126" fill="#7fb8e0">type: <tspan fill="#e0b872">SPRINT</tspan>   status: <tspan fill="#e0b872">Draft</tspan>   version: <tspan fill="#9aa1b4">"1.0"</tspan></text>
+    <text x="76" y="150" fill="#7fb8e0">approval:</text>
+    <text x="96" y="172" fill="#7fb8e0">spec: <tspan fill="#8fc9a3">Approved</tspan></text>
+    <text x="96" y="194" fill="#7fb8e0">design: <tspan fill="#e0b872">Draft</tspan></text>
+    <text x="96" y="216" fill="#7fb8e0">tasks: <tspan fill="#e0b872">Draft</tspan></text>
+    <text x="76" y="238" fill="#6c7488">---</text>
+
+    <text x="76" y="274" fill="#ece7d8" font-size="15"># Room Export — Sprint Brief</text>
+    <text x="76" y="306" fill="#d4a656" font-size="14">## References</text>
+
+    <text x="76" y="344" fill="#d4a656" font-size="14">## 1. Spec</text>
+    <text x="96" y="370" fill="#9aa1b4">Problem Statement · User Stories · Requirements (FR/NFR)</text>
+    <text x="96" y="392" fill="#9aa1b4">Acceptance Criteria · Non-Goals · Open Questions · Dependencies</text>
+
+    <text x="76" y="430" fill="#d4a656" font-size="14">## 2. Design</text>
+    <text x="96" y="456" fill="#9aa1b4">[DES-OVR] [DES-ARCH] [DES-UI] [DES-DEC] [DES-DATA] [DES-API]</text>
+    <text x="96" y="478" fill="#9aa1b4">[DES-FILES] [DES-SEC] [DES-ERR] [DES-TEST] [DES-ROLLOUT] …</text>
+
+    <text x="76" y="516" fill="#d4a656" font-size="14">## 3. Tasks</text>
+    <text x="96" y="542" fill="#9aa1b4">Phase 1 → ### 1.1, ### 1.2 … · Cross-Reference Index</text>
+
+    <text x="76" y="580" fill="#d4a656" font-size="14">## 4. Work Sessions</text>
+    <text x="96" y="606" fill="#6c7488" font-size="11.5">| Date | Task | Action | Files Modified | Agent | Human |</text>
+
+    <text x="76" y="650" fill="#5b7fa6" font-size="11.5"># same sections as the four files, demoted one heading level —</text>
+    <text x="76" y="670" fill="#5b7fa6" font-size="11.5"># graduation is a clean extract + promote + @see retarget</text>
+  </g>
+
+  <!-- approval rail -->
+  <g font-size="12.5">
+    <rect x="844" y="90" width="388" height="150" rx="10" fill="#12141d" stroke="#4a6e5a"/>
+    <text x="868" y="120" fill="#6fa989" font-size="11" letter-spacing="1">1 · SPEC — APPROVED ✓</text>
+    <text x="868" y="146" fill="#9aa1b4">/afx-sprint spec room-export --approve</text>
+    <text x="868" y="172" fill="#9aa1b4">Refine in a loop, approve when it says</text>
+    <text x="868" y="192" fill="#9aa1b4">what "done" means. Unlocks Design.</text>
+    <text x="868" y="218" fill="#6c7488" font-size="11">edit later? it demotes — and Design + Tasks with it</text>
+
+    <rect x="844" y="260" width="388" height="118" rx="10" fill="#12141d" stroke="#d4a656"/>
+    <text x="868" y="290" fill="#e0b872" font-size="11" letter-spacing="1">2 · DESIGN — DRAFT · UNLOCKED</text>
+    <text x="868" y="316" fill="#9aa1b4">/afx-sprint design room-export --approve</text>
+    <text x="868" y="342" fill="#9aa1b4">Gated on spec: Approved. Approving</text>
+    <text x="868" y="362" fill="#9aa1b4">unlocks Tasks.</text>
+
+    <rect x="844" y="398" width="388" height="118" rx="10" fill="#12141d" stroke="#2a2f3e"/>
+    <text x="868" y="428" fill="#8a92a8" font-size="11" letter-spacing="1">3 · TASKS — GATED</text>
+    <text x="868" y="454" fill="#9aa1b4">/afx-sprint task room-export --approve</text>
+    <text x="868" y="480" fill="#9aa1b4">Needs spec AND design Approved.</text>
+    <text x="868" y="500" fill="#9aa1b4">All three approved → status: Approved.</text>
+
+    <rect x="844" y="536" width="388" height="118" rx="10" fill="#12141d" stroke="#2a2f3e"/>
+    <text x="868" y="566" fill="#8a92a8" font-size="11" letter-spacing="1">THEN</text>
+    <text x="868" y="592" fill="#8fc9a3">/afx-sprint code   <tspan fill="#9aa1b4">— implement task by task</tspan></text>
+    <text x="868" y="616" fill="#8fc9a3">/afx-sprint verify <tspan fill="#9aa1b4">— evidence per task</tspan></text>
+    <text x="868" y="640" fill="#e0b872">/afx-sprint graduate <tspan fill="#9aa1b4">— split to 4 files</tspan></text>
+  </g>
+</svg>

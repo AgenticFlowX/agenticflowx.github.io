@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 700" font-family="ui-monospace, 'JetBrains Mono', monospace">
+  <!-- generated illustration: real afx-cli install output (reproduced from an actual run) -->
+  <rect width="1280" height="700" fill="#0a0c11"/>
+  <rect width="1280" height="44" fill="#10131c"/>
+  <circle cx="26" cy="22" r="6" fill="#3a3f4e"/><circle cx="48" cy="22" r="6" fill="#3a3f4e"/><circle cx="70" cy="22" r="6" fill="#3a3f4e"/>
+  <text x="640" y="27" fill="#7c86a0" font-size="12" text-anchor="middle">~/my-project — afx-cli</text>
+
+  <g font-size="13.5">
+    <text x="40" y="88" fill="#6c7488">$</text><text x="62" y="88" fill="#e0b872">curl -sL https://raw.githubusercontent.com/AgenticFlowX/afx/main/afx-cli | bash -s -- .</text>
+
+    <text x="40" y="132" fill="#ece7d8" font-weight="600">Which AI coding agents do you use?</text>
+    <text x="62" y="162" fill="#9aa1b4">Claude Code → .claude/skills/ + CLAUDE.md [Y/n] <tspan fill="#8fc9a3">y</tspan></text>
+    <text x="62" y="190" fill="#9aa1b4">Codex / Copilot / Antigravity → .agents/skills/ + AGENTS.md [Y/n] <tspan fill="#8fc9a3">y</tspan></text>
+
+    <text x="40" y="234" fill="#7c86a0">[1/5] Configuration (.afx.yaml)</text>
+    <text x="40" y="262" fill="#7c86a0">[2/5] Skills → .agents/skills/ (+ .claude/skills/)</text>
+    <text x="62" y="292" fill="#8fc9a3">+ → .claude/skills/afx-next      + → .claude/skills/afx-task</text>
+    <text x="62" y="320" fill="#8fc9a3">+ → .claude/skills/afx-spec      + → .claude/skills/afx-session</text>
+    <text x="62" y="348" fill="#8fc9a3">+ → .claude/skills/afx-sprint    + → .claude/skills/afx-dash      … 18 synced</text>
+    <text x="40" y="380" fill="#7c86a0">[3/5] CLAUDE.md</text>
+    <text x="62" y="408" fill="#8fc9a3">+ CLAUDE.md (created)</text>
+    <text x="40" y="436" fill="#7c86a0">[4/5] AGENTS.md</text>
+    <text x="62" y="464" fill="#8fc9a3">+ AGENTS.md (created)</text>
+    <text x="40" y="492" fill="#7c86a0">[5/5] Directory structure — docs/specs/ · docs/adr/</text>
+
+    <text x="40" y="540" fill="#8fc9a3" font-weight="600">✓ AFX installed.</text>
+    <text x="40" y="576" fill="#5b7fa6">Next steps:</text>
+    <text x="62" y="604" fill="#9aa1b4">1. Run /afx-scaffold spec &lt;name&gt; (Claude) or ask Codex to run afx-scaffold</text>
+    <text x="62" y="632" fill="#9aa1b4">2. Get started with an example:  <tspan fill="#e0b872">afx-cli example basic .</tspan></text>
+    <text x="40" y="672" fill="#6c7488">$</text><rect x="62" y="658" width="9" height="17" fill="#e0b872"/>
+  </g>
+</svg>

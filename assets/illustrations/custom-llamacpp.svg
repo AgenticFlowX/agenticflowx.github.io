@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 760" font-family="ui-monospace, 'JetBrains Mono', monospace">
+  <!-- generated illustration: custom provider form filled with llama.cpp values -->
+  <rect width="1280" height="760" fill="#0d0f16"/>
+  <!-- header -->
+  <text x="48" y="52" fill="#8a92a8" font-size="13" letter-spacing="2">SETTINGS · PROVIDER · ADD CUSTOM</text>
+  <text x="48" y="92" fill="#ece7d8" font-size="24" font-family="Georgia, serif">Custom provider</text>
+  <text x="48" y="118" fill="#6c7488" font-size="13">Any OpenAI-compatible endpoint. Values below configure a local llama.cpp server.</text>
+
+  <!-- preset row -->
+  <text x="48" y="168" fill="#8a92a8" font-size="11" letter-spacing="1.5">PRESET</text>
+  <g font-size="12.5">
+    <rect x="48" y="182" width="92" height="34" rx="17" fill="none" stroke="#2a2f3e"/><text x="94" y="204" fill="#9aa1b4" text-anchor="middle">Ollama</text>
+    <rect x="150" y="182" width="106" height="34" rx="17" fill="none" stroke="#2a2f3e"/><text x="203" y="204" fill="#9aa1b4" text-anchor="middle">LM Studio</text>
+    <rect x="266" y="182" width="80" height="34" rx="17" fill="none" stroke="#2a2f3e"/><text x="306" y="204" fill="#9aa1b4" text-anchor="middle">vLLM</text>
+    <rect x="356" y="182" width="98" height="34" rx="17" fill="#d4a656"/><text x="405" y="204" fill="#14161e" text-anchor="middle" font-weight="600">Custom</text>
+  </g>
+
+  <!-- provider id -->
+  <text x="48" y="266" fill="#8a92a8" font-size="11" letter-spacing="1.5">PROVIDER ID</text>
+  <rect x="48" y="280" width="560" height="46" rx="8" fill="#12141d" stroke="#2a2f3e"/>
+  <text x="66" y="309" fill="#ece7d8" font-size="14">llama-cpp</text>
+
+  <!-- base url -->
+  <text x="48" y="366" fill="#8a92a8" font-size="11" letter-spacing="1.5">BASE URL</text>
+  <rect x="48" y="380" width="560" height="46" rx="8" fill="#12141d" stroke="#d4a656"/>
+  <text x="66" y="409" fill="#ece7d8" font-size="14">http://localhost:8080/v1</text>
+  <rect x="586" y="392" width="2" height="22" fill="#d4a656"/>
+
+  <!-- api kind -->
+  <text x="48" y="466" fill="#8a92a8" font-size="11" letter-spacing="1.5">API</text>
+  <rect x="48" y="480" width="270" height="46" rx="8" fill="#12141d" stroke="#2a2f3e"/>
+  <text x="66" y="509" fill="#ece7d8" font-size="14">OpenAI completions</text>
+  <path d="M296 498 l8 10 8 -10" stroke="#6c7488" stroke-width="2" fill="none"/>
+
+  <!-- key source -->
+  <text x="338" y="466" fill="#8a92a8" font-size="11" letter-spacing="1.5">API KEY</text>
+  <rect x="338" y="480" width="270" height="46" rx="8" fill="#12141d" stroke="#2a2f3e"/>
+  <text x="356" y="509" fill="#ece7d8" font-size="14">None — local server</text>
+  <path d="M586 498 l8 10 8 -10" stroke="#6c7488" stroke-width="2" fill="none"/>
+
+  <!-- model id -->
+  <text x="48" y="566" fill="#8a92a8" font-size="11" letter-spacing="1.5">MODEL ID</text>
+  <rect x="48" y="580" width="560" height="46" rx="8" fill="#12141d" stroke="#2a2f3e"/>
+  <text x="66" y="609" fill="#ece7d8" font-size="14">qwen3-coder-32b-q4_k_m</text>
+
+  <!-- actions -->
+  <rect x="48" y="668" width="132" height="42" rx="8" fill="#d4a656"/>
+  <text x="114" y="694" fill="#14161e" font-size="14" font-weight="600" text-anchor="middle">Save</text>
+  <rect x="192" y="668" width="180" height="42" rx="8" fill="none" stroke="#2a2f3e"/>
+  <text x="282" y="694" fill="#9aa1b4" font-size="14" text-anchor="middle">Test connection</text>
+
+  <!-- right hint panel -->
+  <rect x="680" y="160" width="552" height="360" rx="12" fill="#12141d" stroke="#2a2f3e"/>
+  <text x="708" y="200" fill="#8a92a8" font-size="11" letter-spacing="1.5">HINT</text>
+  <text x="708" y="234" fill="#ece7d8" font-size="14.5">llama.cpp speaks the OpenAI API.</text>
+  <text x="708" y="262" fill="#9aa1b4" font-size="13">Start the bundled server with your GGUF:</text>
+  <rect x="708" y="282" width="496" height="46" rx="8" fill="#0a0c12" stroke="#2a2f3e"/>
+  <text x="726" y="311" fill="#e0b872" font-size="13">$ llama-server -m qwen3-coder-32b-q4_k_m.gguf</text>
+  <text x="708" y="360" fill="#9aa1b4" font-size="13">Default port is 8080 · endpoint /v1</text>
+  <text x="708" y="386" fill="#9aa1b4" font-size="13">No key needed — key source stays “None”.</text>
+  <text x="708" y="430" fill="#6fa989" font-size="13">✓ Models on this server join the composer picker</text>
+  <text x="708" y="456" fill="#6fa989" font-size="13">✓ Switchable mid-conversation like any provider</text>
+</svg>

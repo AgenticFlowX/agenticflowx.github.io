@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 760" font-family="ui-monospace, 'JetBrains Mono', monospace">
+  <!-- generated illustration: llama-server startup terminal -->
+  <rect width="1280" height="760" fill="#0a0c11"/>
+  <!-- titlebar -->
+  <rect width="1280" height="44" fill="#10131c"/>
+  <circle cx="26" cy="22" r="6" fill="#3a3f4e"/><circle cx="48" cy="22" r="6" fill="#3a3f4e"/><circle cx="70" cy="22" r="6" fill="#3a3f4e"/>
+  <text x="640" y="27" fill="#7c86a0" font-size="12" text-anchor="middle">~ — llama-server</text>
+
+  <g font-size="14">
+    <text x="40" y="92" fill="#6c7488">$</text><text x="62" y="92" fill="#e0b872">llama-server -m qwen3-coder-32b-q4_k_m.gguf --port 8080</text>
+    <text x="40" y="130" fill="#9aa1b4">llama_model_loader: loaded meta data with 34 key-value pairs</text>
+    <text x="40" y="158" fill="#9aa1b4">llama_model_loader: - kv  0:  general.architecture = qwen3</text>
+    <text x="40" y="186" fill="#9aa1b4">print_info: model type       = 32B</text>
+    <text x="40" y="214" fill="#9aa1b4">print_info: quantization     = Q4_K_M</text>
+    <text x="40" y="242" fill="#9aa1b4">load_tensors: offloading 64 layers to GPU</text>
+    <text x="40" y="270" fill="#9aa1b4">llama_context: KV cache size = 4096.00 MiB</text>
+    <text x="40" y="312" fill="#8fc9a3">main: server is listening on http://127.0.0.1:8080 - starting the main loop</text>
+    <text x="40" y="340" fill="#9aa1b4">srv  update_slots: all slots are idle</text>
+
+    <text x="40" y="396" fill="#6c7488">$</text><text x="62" y="396" fill="#e0b872">curl -s http://localhost:8080/v1/models</text>
+    <text x="40" y="424" fill="#9aa1b4">{"object":"list","data":[{"id":"qwen3-coder-32b-q4_k_m","object":"model"}]}</text>
+
+    <text x="40" y="480" fill="#7c86a0"># That's it — point the AFX Custom preset at http://localhost:8080/v1</text>
+    <text x="40" y="520" fill="#6c7488">$</text>
+    <rect x="62" y="506" width="9" height="18" fill="#e0b872"/>
+  </g>
+</svg>

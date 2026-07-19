@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" font-family="ui-monospace, 'JetBrains Mono', monospace">
+  <!-- generated illustration: 1:1 Dash document anatomy -->
+  <rect width="1280" height="720" fill="#0d0f16"/>
+  <text x="48" y="46" fill="#8a92a8" font-size="12" letter-spacing="2">DOCS/SPECS/FIX-LOGIN-TIMEOUT/FIX-LOGIN-TIMEOUT.MD</text>
+  <rect x="1030" y="26" width="202" height="28" rx="14" fill="none" stroke="#4a6e5a"/>
+  <text x="1131" y="45" fill="#6fa989" font-size="11" text-anchor="middle">type: DASH · no gates</text>
+
+  <!-- document body -->
+  <rect x="48" y="70" width="800" height="620" rx="10" fill="#12141d" stroke="#2a2f3e"/>
+  <g font-size="13">
+    <text x="76" y="104" fill="#6c7488">---</text>
+    <text x="76" y="126" fill="#7fb8e0">afx: <tspan fill="#8fc9a3">true</tspan></text>
+    <text x="76" y="148" fill="#7fb8e0">type: <tspan fill="#e0b872">DASH</tspan></text>
+    <text x="76" y="170" fill="#7fb8e0">owner: <tspan fill="#9aa1b4">"@rix"</tspan>  <tspan fill="#6c7488">created_at · updated_at · tags</tspan></text>
+    <text x="76" y="192" fill="#6c7488">---   <tspan fill="#5b7fa6"># no status, no version — progress is derived from tasks</tspan></text>
+
+    <text x="76" y="232" fill="#ece7d8" font-size="15"># fix-login-timeout — Dash</text>
+
+    <text x="76" y="272" fill="#d4a656" font-size="14">## Purpose</text>
+    <text x="76" y="298" fill="#9aa1b4"><tspan fill="#ece7d8">Observed:</tspan> sessions expire after 5 min despite "keep me signed in".</text>
+    <text x="76" y="320" fill="#9aa1b4"><tspan fill="#ece7d8">Expected:</tspan> 30-day refresh per session policy.</text>
+    <text x="76" y="342" fill="#9aa1b4"><tspan fill="#ece7d8">Scope:</tspan> token refresh only — no auth flow changes.</text>
+
+    <text x="76" y="384" fill="#d4a656" font-size="14">## Tasks</text>
+    <text x="76" y="412" fill="#ece7d8">### 1.1 Reproduce and isolate</text>
+    <text x="96" y="436" fill="#8fc9a3">- [x] Failing test captures the 5-min expiry</text>
+    <text x="96" y="458" fill="#8fc9a3">- [x] Root cause noted in task</text>
+    <text x="96" y="480" fill="#5b7fa6">&lt;!-- files: src/auth/session.ts --&gt;</text>
+    <text x="76" y="510" fill="#ece7d8">### 1.2 Fix refresh window + regression test</text>
+    <text x="96" y="534" fill="#9aa1b4">- [ ] Refresh honours rememberMe=true</text>
+    <text x="96" y="556" fill="#9aa1b4">- [ ] Regression test green</text>
+
+    <text x="76" y="598" fill="#d4a656" font-size="14">## Work Sessions   <tspan fill="#6c7488" font-size="11">append-only · always last</tspan></text>
+    <text x="76" y="624" fill="#6c7488" font-size="11.5">| Date       | Task | Action      | Files Modified      | Agent | Human |</text>
+    <text x="76" y="644" fill="#6c7488" font-size="11.5">|------------|------|-------------|---------------------|-------|-------|</text>
+    <text x="76" y="664" fill="#9aa1b4" font-size="11.5">| 2026-07-19 | 1.1  | Implemented | src/auth/session.ts | [x]   | [ ]   |</text>
+  </g>
+
+  <!-- annotations -->
+  <g font-size="12.5">
+    <rect x="884" y="90" width="348" height="112" rx="10" fill="#12141d" stroke="#2a2f3e"/>
+    <text x="908" y="120" fill="#d4a656" font-size="11" letter-spacing="1">THE WHOLE CEREMONY</text>
+    <text x="908" y="146" fill="#9aa1b4">Two authored sections — Purpose and</text>
+    <text x="908" y="166" fill="#9aa1b4">Tasks. Work Sessions is generated.</text>
+    <text x="908" y="188" fill="#9aa1b4">Nothing to approve, nothing to version.</text>
+
+    <rect x="884" y="222" width="348" height="128" rx="10" fill="#12141d" stroke="#2a2f3e"/>
+    <text x="908" y="252" fill="#d4a656" font-size="11" letter-spacing="1">SAME BONES AS FULL SDD</text>
+    <text x="908" y="278" fill="#9aa1b4">### N.N task IDs, [ ] criteria, and</text>
+    <text x="908" y="298" fill="#9aa1b4">&lt;!-- files: --&gt; scopes are identical up</text>
+    <text x="908" y="318" fill="#9aa1b4">the ladder — graduation keeps them</text>
+    <text x="908" y="338" fill="#9aa1b4">byte-for-byte.</text>
+
+    <rect x="884" y="370" width="348" height="128" rx="10" fill="#12141d" stroke="#4a6e5a"/>
+    <text x="908" y="400" fill="#6fa989" font-size="11" letter-spacing="1">TWO-STAGE VERIFICATION</text>
+    <text x="908" y="426" fill="#9aa1b4">Agent [x] when /afx-dash verify passes;</text>
+    <text x="908" y="446" fill="#9aa1b4">Human [x] is yours. Verify outputs</text>
+    <text x="908" y="468" fill="#8fc9a3">[OK] <tspan fill="#e0b872">[PARTIAL]</tspan> <tspan fill="#d4693f">[MISSING]</tspan> <tspan fill="#9aa1b4">with an</tspan></text>
+    <text x="908" y="488" fill="#9aa1b4">evidence table per task.</text>
+  </g>
+</svg>

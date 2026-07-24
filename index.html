@@ -668,10 +668,13 @@
             <h3>Bring your own skills</h3>
             <p class="desc">Not just AFX anymore — the extension discovers any standard skills Pi supports and loads them alongside the bundled core. Your team's skills, your personal ones, other packs.</p>
             <ul>
-              <li><b>Discovery:</b> whatever Pi loads, AFX loads — <span class="mono">.agents/skills/</span>, <span class="mono">.pi/skills/</span>, global dirs, even <span class="mono">~/.claude/skills</span> via settings</li>
+              <li><b>Bundled:</b> the AFX core ships inside the extension at <span class="mono">resources/skills/agenticflowx</span></li>
+              <li><b>Global:</b> Pi scans <span class="mono">~/.pi/agent/skills</span> (or <span class="mono">$PI_CODING_AGENT_DIR/skills</span>) and <span class="mono">~/.agents/skills</span></li>
+              <li><b>Workspace:</b> project skills load from <span class="mono">.pi/skills/</span> and <span class="mono">.agents/skills/</span> after project trust</li>
+              <li><b>Custom:</b> add more folders with <span class="mono">afx.skills.extraPaths</span> — including <span class="mono">~/.claude/skills</span> or <span class="mono">~/.codex/skills</span></li>
               <li><b>Cheap by design:</b> progressive disclosure — only names + descriptions sit in context; the full skill loads on demand</li>
               <li><b>Where from:</b> every skill shows its source path and scope in Settings</li>
-              <li><b>Trust:</b> external skill directories are opt-in per project</li>
+              <li><b>Trust:</b> workspace skills and Pi project resources are opt-in per project</li>
             </ul>
           </div>
         </div>

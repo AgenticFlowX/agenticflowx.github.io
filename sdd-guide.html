@@ -69,6 +69,15 @@
   .nav-burger { display: none; align-items: center; justify-content: center; width: 38px; height: 38px; margin-left: 4px; border: 1px solid var(--border-strong); border-radius: 8px; background: transparent; color: var(--text); cursor: pointer; }
   .nav-burger svg { width: 19px; height: 19px; }
 
+  /* mobile section rail — horizontal chip nav; gives phones a visible depth signal the hamburger can't */
+  .rail { display: none; }
+  @media (max-width: 920px) {
+    .rail { display: block; position: sticky; top: 58px; z-index: 54; background: rgba(245,239,223,0.94); backdrop-filter: blur(12px) saturate(1.1); border-bottom: 1px solid var(--border); }
+    .rail-in { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding: 9px 16px; -webkit-overflow-scrolling: touch; }
+    .rail-in::-webkit-scrollbar { display: none; }
+    .rail a { flex: 0 0 auto; font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.01em; color: var(--text-secondary); padding: 5px 11px; border: 1px solid var(--border-strong); border-radius: 999px; background: var(--bg-element); white-space: nowrap; transition: color .15s, background .15s, border-color .15s; }
+    .rail a.active { color: var(--bg-raised); background: var(--text); border-color: var(--text); }
+  }
 
   .docs { display: grid; grid-template-columns: 252px minmax(0, 1fr); gap: clamp(32px, 4vw, 60px); padding: clamp(32px, 4vw, 48px) 0 72px; }
   @media (max-width: 920px) {
@@ -93,6 +102,19 @@
   h1 { font-family: var(--serif); font-weight: 500; font-size: clamp(1.9rem, 3.4vw, 2.6rem); line-height: 1.1; margin: 0; letter-spacing: -0.01em; }
   h1 em { color: var(--ember); font-style: italic; }
   .doc-head p { margin: 12px 0 0; color: var(--text-secondary); font-size: 1.02rem; max-width: 680px; }
+  @media (max-width: 640px) {
+    .wrap-wide { width: min(100% - 24px, 1400px); }
+    .docs { padding-top: 24px; padding-bottom: 48px; }
+    article section { padding-top: 38px; }
+    .doc-head { padding-bottom: 20px; }
+    h1 { font-size: clamp(2rem, 10vw, 2.6rem); }
+    .doc-head p, .sec-lede, article p { font-size: 14px; }
+    .quickstart { padding: 20px 18px; margin-top: 20px; }
+    .quickstart .qs-h { font-size: 1.3rem; }
+    .quickstart .qs-steps li { padding-left: 36px; font-size: 14px; }
+    .track, .stage-card, .case, .doctype { padding: 18px; }
+    .codeblock { padding: 13px 14px; }
+  }
 
   article section { padding-top: clamp(40px, 5vw, 56px); }
   h2 { font-family: var(--serif); font-weight: 500; font-size: 1.65rem; margin: 0 0 4px; letter-spacing: -0.005em; scroll-margin-top: 90px; }
@@ -275,6 +297,21 @@
   </div>
 </nav>
 
+<nav class="rail" aria-label="Jump to section">
+  <div class="rail-in">
+    <a href="#ladder">Three sizes</a>
+    <a href="#chooser">Which one?</a>
+    <a href="#first">First feature</a>
+    <a href="#journey">The journey</a>
+    <a href="#previewer">Previewer</a>
+    <a href="#dash">Dash</a>
+    <a href="#sprint">Sprint</a>
+    <a href="#full">Full spec</a>
+    <a href="#cases">Use cases</a>
+    <a href="#cheatsheet">Cheat sheet</a>
+  </div>
+</nav>
+
 <div class="wrap-wide docs">
   <aside class="sidebar" id="doc-nav" aria-label="Guide navigation">
     <div class="sb-group">
@@ -314,8 +351,8 @@
   <article>
     <div class="doc-head">
       <p class="kicker">The SDD guide</p>
-      <h1>From a thought to a shipped, <em>traceable</em> feature.</h1>
-      <p>AFX gives you three ways to work — Dash, Sprint, and the full four-file spec — all speaking the same language. This guide covers which to pick, every command and gate, what each document looks like, and the controls that drive it all. No prior SDD experience assumed.</p>
+      <h1>Spec-driven development, in <em>three sizes</em>.</h1>
+      <p>Three ways to work: <b>Dash</b> for a quick fix, <b>Sprint</b> for a solo feature, the full <b>four-file spec</b> for anything cross-cutting. All three share the same task IDs, anchors, and history — so you start small and grow without a rewrite. Below: which to pick, every command and gate, and the controls that drive them. No prior SDD experience assumed.</p>
     </div>
 
     <div class="quickstart">
@@ -1137,18 +1174,20 @@ task sign-off     Agent [x] + Human [x]  — two-stage, always</code></div>
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') set(false); });
   })();
 
-  // Sidebar scroll-spy
+  // Sidebar + mobile-rail scroll-spy (an id may have a link in each)
   (function () {
-    var links = Array.prototype.slice.call(document.querySelectorAll('.sidebar a[href^="#"]'));
+    var links = Array.prototype.slice.call(document.querySelectorAll('.sidebar a[href^="#"], .rail a[href^="#"]'));
     var map = {};
-    links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+    links.forEach(function (a) { var id = a.getAttribute('href').slice(1); (map[id] = map[id] || []).push(a); });
     var obs = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
         if (en.isIntersecting) {
-          var a = map[en.target.id];
-          if (!a) return;
+          var group = map[en.target.id];
+          if (!group) return;
           links.forEach(function (l) { l.classList.remove('active'); });
-          a.classList.add('active');
+          group.forEach(function (l) { l.classList.add('active'); });
+          var chip = group.filter(function (l) { return l.closest('.rail'); })[0];
+          if (chip) chip.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
         }
       });
     }, { rootMargin: '-15% 0px -75% 0px' });

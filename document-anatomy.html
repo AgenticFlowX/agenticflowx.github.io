@@ -55,6 +55,16 @@
   .nav-burger { display: none; align-items: center; justify-content: center; width: 38px; height: 38px; margin-left: 4px; border: 1px solid var(--border-strong); border-radius: 8px; background: transparent; color: var(--text); cursor: pointer; }
   .nav-burger svg { width: 19px; height: 19px; }
 
+  /* mobile section rail — horizontal chip nav; gives phones a visible depth signal the hamburger can't */
+  .rail { display: none; }
+  @media (max-width: 920px) {
+    .rail { display: block; position: sticky; top: 58px; z-index: 54; background: rgba(245,239,223,0.94); backdrop-filter: blur(12px) saturate(1.1); border-bottom: 1px solid var(--border); }
+    .rail-in { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding: 9px 16px; -webkit-overflow-scrolling: touch; }
+    .rail-in::-webkit-scrollbar { display: none; }
+    .rail a { flex: 0 0 auto; font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.01em; color: var(--text-secondary); padding: 5px 11px; border: 1px solid var(--border-strong); border-radius: 999px; background: var(--bg-element); white-space: nowrap; transition: color .15s, background .15s, border-color .15s; }
+    .rail a.active { color: var(--bg-raised); background: var(--text); border-color: var(--text); }
+  }
+
   .docs { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: clamp(32px, 4vw, 60px); padding: clamp(32px, 4vw, 48px) 0 72px; }
   @media (max-width: 920px) {
     .docs { grid-template-columns: 1fr; }
@@ -77,6 +87,29 @@
   h1 { font-family: var(--serif); font-weight: 500; font-size: clamp(1.9rem, 3.4vw, 2.6rem); line-height: 1.1; margin: 0; letter-spacing: -0.01em; }
   h1 em { color: var(--ember); font-style: italic; }
   .doc-head p { margin: 12px 0 0; color: var(--text-secondary); font-size: 1.02rem; max-width: 680px; }
+  .doc-primer { margin-top: 24px; border: 1px solid var(--accent); border-radius: 14px; background: linear-gradient(180deg, rgba(160,126,57,0.08), rgba(160,126,57,0.025)); padding: 22px 24px; }
+  .doc-primer .dp-label { margin: 0; font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--ember); }
+  .doc-primer h2 { margin-top: 7px; font-size: 1.45rem; }
+  .doc-primer p { margin: 7px 0 0; max-width: none; }
+  .doc-primer ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px 24px; padding: 0; margin: 16px 0 0; list-style: none; }
+  .doc-primer li { position: relative; padding-left: 18px; color: var(--text-secondary); font-size: 13.5px; }
+  .doc-primer li::before { content: "→"; position: absolute; left: 0; color: var(--ember); font-family: var(--mono); }
+  @media (max-width: 640px) {
+    .wrap-wide { width: min(100% - 24px, 1400px); }
+    .docs { padding-top: 24px; padding-bottom: 48px; }
+    article section { padding-top: 38px; }
+    .doc-head { padding-bottom: 20px; }
+    h1 { font-size: clamp(2rem, 10vw, 2.6rem); }
+    .doc-head p, .sec-lede, article p { font-size: 14px; }
+    .doc-primer { margin-top: 20px; padding: 18px; }
+    .doc-primer h2 { font-size: 1.3rem; }
+    .doc-primer ul { grid-template-columns: 1fr; gap: 6px; }
+    .anatomy { gap: 12px; }
+    .an-code { font-size: 11px; padding: 13px 14px; }
+    .rulebox { padding: 16px 17px; }
+    .doc-next { flex-direction: column; }
+    .doc-next a { max-width: none; }
+  }
 
   article section { padding-top: clamp(44px, 5.5vw, 60px); }
   h2 { font-family: var(--serif); font-weight: 500; font-size: 1.7rem; margin: 0 0 4px; letter-spacing: -0.005em; scroll-margin-top: 90px; }
@@ -109,6 +142,38 @@
   .an-tag { display: inline-block; font-family: var(--mono); font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase; border-radius: 999px; padding: 3px 10px; margin-bottom: 10px; }
   .an-tag.req { color: var(--ember); border: 1px solid rgba(168,76,48,0.4); background: rgba(168,76,48,0.06); }
   .an-tag.opt { color: var(--moss); border: 1px solid rgba(74,110,90,0.4); background: rgba(74,110,90,0.06); }
+
+  /* specimen — one spec shown raw and rendered, before the dissection */
+  .specimen { margin-top: 30px; }
+  .specimen .sp-head { margin-bottom: 16px; }
+  .specimen .sp-kick { font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--ember); margin: 0 0 6px; }
+  .specimen .sp-sub { font-size: 14px; color: var(--text-secondary); margin: 0; max-width: 720px; }
+  .sp-grid { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 20px; align-items: stretch; }
+  @media (max-width: 900px) { .sp-grid { grid-template-columns: 1fr; gap: 16px; } }
+  .sp-pane { display: flex; flex-direction: column; min-width: 0; }
+  .sp-tag { font-family: var(--mono); font-size: 10.5px; letter-spacing: .05em; text-transform: uppercase; color: var(--text-muted); margin: 0 0 8px; }
+  .sp-tag b { color: var(--text-secondary); font-weight: 600; }
+  .sp-raw { flex: 1; margin: 0; background: #0d0f16; border: 1px solid var(--border-strong); border-radius: 10px; padding: 15px 17px; overflow-x: auto; font-family: var(--mono); font-size: 12px; line-height: 1.7; color: #c7cdda; white-space: pre; box-shadow: 0 20px 44px -34px rgba(20,27,53,0.5); }
+  .sp-raw .a { color: #e0b872; } .sp-raw .c { color: #6c7488; } .sp-raw .h { color: #ece7d8; font-weight: 600; } .sp-raw .g { color: #8fc9a3; } .sp-raw .b { color: #7fb8e0; }
+  .sp-doc { flex: 1; background: var(--bg-raised); border: 1px solid var(--border-strong); border-radius: 10px; padding: 17px 19px; box-shadow: 0 20px 44px -34px rgba(20,27,53,0.35); }
+  .sp-doc .sp-path { font-family: var(--mono); font-size: 10px; color: var(--text-muted); border-bottom: 1px solid var(--border); padding-bottom: 9px; margin-bottom: 12px; overflow-x: auto; white-space: nowrap; }
+  .sp-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 13px; }
+  .sp-chips span { font-family: var(--mono); font-size: 10px; letter-spacing: .04em; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--border-strong); background: var(--bg-element); color: var(--text-secondary); }
+  .sp-chips span.on { background: var(--moss); border-color: var(--moss); color: #fff; }
+  .sp-doc h5 { font-family: var(--serif); font-weight: 600; font-size: 1.06rem; margin: 0; color: var(--text); line-height: 1.25; }
+  .sp-doc h6 { font-family: var(--mono); font-weight: 500; font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; margin: 15px 0 5px; color: var(--ember); }
+  .sp-doc p { font-size: 12.5px; color: var(--text-secondary); margin: 0; max-width: none; line-height: 1.55; }
+  .sp-table { width: 100%; border-collapse: collapse; margin-top: 4px; font-size: 11.5px; }
+  .sp-table th, .sp-table td { text-align: left; padding: 5px 8px; border: 1px solid var(--border); }
+  .sp-table th { background: var(--bg-element); font-family: var(--mono); font-size: 9.5px; text-transform: uppercase; letter-spacing: .05em; color: var(--text-tertiary); font-weight: 500; }
+  .sp-table td code { font-size: 11px; color: var(--accent-deep); }
+  .sp-ac { list-style: none; padding: 0; margin: 5px 0 0; font-size: 12.5px; color: var(--text-secondary); }
+  .sp-ac li { position: relative; padding-left: 23px; margin: 5px 0; }
+  .sp-ac li::before { content: ""; position: absolute; left: 0; top: 1px; width: 14px; height: 14px; border-radius: 4px; border: 1.5px solid var(--border-strong); box-sizing: border-box; }
+  .sp-ac li.done { color: var(--text-tertiary); }
+  .sp-ac li.done::before { content: "✓"; background: var(--moss); border-color: var(--moss); color: #fff; font-size: 10px; line-height: 13px; text-align: center; }
+  .sp-cap { margin: 14px 0 0; font-size: 13.5px; color: var(--text-tertiary); max-width: 760px; }
+  .sp-cap b { color: var(--text); font-weight: 500; }
 
   .rulebox { border: 1px solid var(--border-strong); border-left: 3px solid var(--accent); border-radius: 10px; background: var(--bg-element); padding: 18px 22px; margin-top: 22px; max-width: 760px; }
   .rulebox h4 { font-family: var(--serif); font-weight: 600; font-size: 1.1rem; margin: 0 0 10px; }
@@ -178,6 +243,20 @@
   </div>
 </nav>
 
+<nav class="rail" aria-label="Jump to section">
+  <div class="rail-in">
+    <a href="#idea">The idea</a>
+    <a href="#spec">spec.md</a>
+    <a href="#design-rules">design.md</a>
+    <a href="#tasks">tasks.md</a>
+    <a href="#see">@see</a>
+    <a href="#shapes">Three shapes</a>
+    <a href="#stepper">Stepper</a>
+    <a href="#previewer">Previewer</a>
+    <a href="#cheat">Cheat sheet</a>
+  </div>
+</nav>
+
 <div class="wrap-wide docs">
   <aside class="sidebar" id="doc-nav" aria-label="On this page">
     <div class="sb-group">
@@ -226,8 +305,83 @@
   <article>
     <div class="doc-head">
       <p class="kicker">Document anatomy</p>
-      <h1>What's inside — and how the <em>notation</em> keeps it honest.</h1>
-      <p>A spec, design, and tasks file are plain markdown. But they're markdown with a system: stable node IDs that let sections flex while code, tools, and reviews still resolve against them. This is the meat — every section, every anchor, every rule, with real examples.</p>
+      <h1>Every section, every anchor, <em>explained</em>.</h1>
+      <p>A spec, design, and tasks file are plain markdown — but markdown with stable node IDs, so sections can flex while your code, tools, and reviews keep resolving against them. This page maps the required sections and the anchors that hold them together — <code>[FR-1]</code>, <code>[DES-ARCH]</code>, <code>### 2.1</code>, <code>@see</code> — with real examples for each.</p>
+    </div>
+
+    <div class="doc-primer">
+      <p class="dp-label">Read this first · the 30-second version</p>
+      <h2>Plain markdown, durable anchors.</h2>
+      <p>AFX keeps the writing human and the references machine-stable. You can change the prose; the IDs keep the workflow, review, and code links attached.</p>
+      <ul>
+        <li><b>Spec</b> says what must be true: <code>[FR-1]</code></li>
+        <li><b>Design</b> says how it works: <code>[DES-ARCH]</code></li>
+        <li><b>Tasks</b> turns both into checkable work: <code>### 2.1</code></li>
+        <li><b>Code</b> points back with <code>@see</code>; the journal keeps why</li>
+      </ul>
+    </div>
+
+    <!-- SPECIMEN: one spec, both ways -->
+    <div class="specimen">
+      <div class="sp-head">
+        <p class="sp-kick">See one whole, first</p>
+        <p class="sp-sub">The same <code>spec.md</code>, two ways. Left is the plain markdown that lives in your repo. Right is what the previewer, the extension, and your reviewers see — parsed straight from the anchors, no database, no export step. Everything below this is <em>how</em> that mapping works.</p>
+      </div>
+      <div class="sp-grid">
+        <div class="sp-pane">
+          <p class="sp-tag"><b>spec.md</b> — what you (and the agent) write</p>
+          <div class="sp-raw"><span class="c">---</span>
+<span class="b">afx</span>: <span class="g">true</span>
+<span class="b">type</span>: <span class="a">SPEC</span>
+<span class="b">status</span>: <span class="a">Approved</span>
+<span class="b">owner</span>: <span class="g">"@rix"</span>
+<span class="b">version</span>: <span class="g">"1.0"</span>
+<span class="c">---</span>
+
+<span class="h"># Room Export — Product Specification</span>
+
+<span class="h">## Problem Statement</span>
+Treasurers need a room's ledger outside
+the app — for taxes, disputes, receipts.
+
+<span class="h">## Requirements</span>
+
+| ID    | Requirement            | Priority |
+| ----- | ---------------------- | -------- |
+| <span class="a">FR-1</span>  | Export ledger as CSV   | Must     |
+| <span class="a">FR-2</span>  | Stream rows, no buffer | Must     |
+| <span class="a">NFR-1</span> | 10k rows under 2s      | Should   |
+
+<span class="h">## Acceptance Criteria</span>
+- [<span class="g">x</span>] Opens cleanly in Excel &amp; Sheets
+- [ ] Streaming verified at 10k rows</div>
+        </div>
+        <div class="sp-pane">
+          <p class="sp-tag"><b>Rendered</b> — chips, tables, live checkboxes</p>
+          <div class="sp-doc" aria-label="Rendered spec.md">
+            <div class="sp-path">docs/specs/room-export/spec.md</div>
+            <div class="sp-chips"><span>SPEC</span><span class="on">Approved</span><span>v1.0</span><span>@rix</span></div>
+            <h5>Room Export — Product Specification</h5>
+            <h6>Problem Statement</h6>
+            <p>Treasurers need a room's ledger outside the app — for taxes, disputes, receipts.</p>
+            <h6>Requirements</h6>
+            <table class="sp-table">
+              <thead><tr><th>ID</th><th>Requirement</th><th>Priority</th></tr></thead>
+              <tbody>
+                <tr><td><code>FR-1</code></td><td>Export ledger as CSV</td><td>Must</td></tr>
+                <tr><td><code>FR-2</code></td><td>Stream rows, no buffer</td><td>Must</td></tr>
+                <tr><td><code>NFR-1</code></td><td>10k rows under 2s</td><td>Should</td></tr>
+              </tbody>
+            </table>
+            <h6>Acceptance Criteria</h6>
+            <ul class="sp-ac">
+              <li class="done">Opens cleanly in Excel &amp; Sheets</li>
+              <li>Streaming verified at 10k rows</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <p class="sp-cap"><b>Same bytes on disk.</b> The frontmatter becomes status chips, <code>##</code> headings become sections, the pipe table stays a table, and <code>- [x]</code> becomes a checkbox you can actually toggle. The rest of this page is the notation that keeps that mapping deterministic.</p>
     </div>
 
     <!-- THE IDEA -->
@@ -1010,9 +1164,9 @@ tasks.md     <span class="a">3/8</span> boxes ticked  <span class="c">→ pill 3
     items.forEach(wire); pins.forEach(wire);
   })();
   (function () {
-    var links = Array.prototype.slice.call(document.querySelectorAll('.sidebar a[href^="#"]'));
-    var map = {}; links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
-    var obs = new IntersectionObserver(function (es) { es.forEach(function (en) { if (en.isIntersecting) { var a = map[en.target.id]; if (!a) return; links.forEach(function (l) { l.classList.remove('active'); }); a.classList.add('active'); } }); }, { rootMargin: '-15% 0px -75% 0px' });
+    var links = Array.prototype.slice.call(document.querySelectorAll('.sidebar a[href^="#"], .rail a[href^="#"]'));
+    var map = {}; links.forEach(function (a) { var id = a.getAttribute('href').slice(1); (map[id] = map[id] || []).push(a); });
+    var obs = new IntersectionObserver(function (es) { es.forEach(function (en) { if (en.isIntersecting) { var group = map[en.target.id]; if (!group) return; links.forEach(function (l) { l.classList.remove('active'); }); group.forEach(function (l) { l.classList.add('active'); }); var chip = group.filter(function (l) { return l.closest('.rail'); })[0]; if (chip) chip.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' }); } }); }, { rootMargin: '-15% 0px -75% 0px' });
     Object.keys(map).forEach(function (id) { var el = document.getElementById(id); if (el) obs.observe(el); });
   })();
 </script>

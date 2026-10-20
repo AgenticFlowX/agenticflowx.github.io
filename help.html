@@ -537,7 +537,7 @@
     <!-- SKILLS -->
     <section id="skills">
       <h2><span class="n">06</span>Skills &amp; trust</h2>
-      <p class="sec-lede">The extension bundles the AFX core — 17 skills in the current build (its pinned skills snapshot predates the new <code>/afx-dash</code>; the CLI and marketplace packs carry all 18). It also discovers any <b>standard skills</b> Pi supports: your team's, your personal ones, other packs.</p>
+      <p class="sec-lede">The extension bundles 18 AFX core skills, including <code>/afx-dash</code>. It also discovers any <b>standard skills</b> Pi supports: your team's, your personal ones, other packs.</p>
       <p>Settings → Skills shows everything loaded with source paths, scope, and trust controls. By default AFX <em>asks</em> before using a project's own skills (<code>afx.pi.projectTrust</code>) — trust a repo once and it remembers.</p>
 
       <h3 style="margin-top:26px">How skills load</h3>
@@ -591,13 +591,23 @@
     <!-- PACKS -->
     <section id="packs">
       <h2><span class="n">09</span>Skill packs</h2>
-      <p class="sec-lede">The AFX workflow ships as packs of standard skills. Every skill's <code>SKILL.md</code> name maps 1:1 to the slash command you type — install a pack, get its commands.</p>
+      <p class="sec-lede">The AFX workflow ships as packs of standard skills. Claude plugins use namespaced commands such as <code>/afx:spec</code>; afx-cli installs use <code>/afx-spec</code>.</p>
 
       <h3 style="margin-top:24px">Install from the Claude Code marketplace</h3>
       <div class="codeblock"><code>claude plugin marketplace add AgenticFlowX/afx
-claude plugin install afx-agenticflowx     # the 18-skill core
-claude plugin install afx-dev              # role packs, same pattern</code></div>
-      <p style="margin-top:12px">Each pack is a Claude Code plugin. Skills register immediately — the core pack costs ~1k always-on tokens; full instructions load only when a command runs (progressive disclosure).</p>
+claude plugin install afx@afx --scope user       # the 18-skill core
+claude plugin install afx-dev@afx --scope user   # optional developer role pack</code></div>
+      <p style="margin-top:12px">Restart Claude Code or run <code>/reload-plugins</code>, then verify with <code>/afx:hello</code>. Use <code>/afx:scaffold init</code> to set up a new project's AFX configuration and document directories. Core commands include <code>/afx:spec</code> and <code>/afx:task</code>; the developer role pack adds <code>/afx-dev:tdd</code> and its other skills.</p>
+      <p>User scope makes the plugin available across projects; project scope enables it only in the selected project. To refresh an existing install, run <code>claude plugin marketplace update afx</code> and <code>claude plugin update afx@afx</code>, then reload plugins.</p>
+
+      <h3 id="claude-desktop" style="margin-top:26px">Install in Claude Desktop or Cowork</h3>
+      <ol class="steps">
+        <li>Open <b>Customize → Plugins → Add plugin → Add marketplace → Add from a repository</b>.</li>
+        <li>Enter <code>AgenticFlowX/afx</code> or <code>https://github.com/AgenticFlowX/afx</code> and select <b>Sync</b>.</li>
+        <li>Once the seven plugins appear, open <b>Afx</b> and select <b>Add</b>. The enabled switch confirms installation; the core contains 18 skills.</li>
+      </ol>
+      <div class="callout"><b>Auto-sync notice:</b> “Auto-sync requires the Claude GitHub App to have access to this repository” concerns automatic updates. The initial import and plugin installation can still succeed. Automatic sync needs separate GitHub App access to the repository.</div>
+      <p style="margin-top:12px">Keep using afx-cli for Codex, Copilot, and compatible coding agents alongside the Claude plugin in the same project. Avoid loading duplicate copies of the same skills into one agent. This is the AgenticFlowX-hosted marketplace; a listing in Anthropic's public directory requires a separate submission and review. <a class="tx" href="https://github.com/AgenticFlowX/afx#readme" target="_blank" rel="noopener noreferrer">Workflow installation and publishing reference →</a></p>
 
       <h3 style="margin-top:26px">Or with afx-cli (any agent)</h3>
       <div class="codeblock"><code>./afx-cli --pack qa --pack security .   # add role packs
@@ -605,7 +615,7 @@ claude plugin install afx-dev              # role packs, same pattern</code></di
 ./afx-cli --update --packs .            # update all installed packs
 ./afx-cli --add-skill AgenticFlowX/afx:skills/dev/afx-tdd .   # one skill, no pack</code></div>
 
-      <h3 style="margin-top:26px">Pack → command reference</h3>
+      <h3 style="margin-top:26px">afx-cli pack → command reference</h3>
       <div class="tscroll"><table class="cmd-table">
         <thead><tr><th>Pack</th><th>Skills</th><th>Slash commands</th></tr></thead>
         <tbody>
@@ -613,7 +623,7 @@ claude plugin install afx-dev              # role packs, same pattern</code></di
           <tr><td>dev <span class="cnt">5</span></td><td>Engineering craft</td><td><code>/afx-tdd</code> <code>/afx-clean-code</code> <code>/afx-architecture-patterns</code> <code>/afx-git-workflow</code> <code>/afx-systematic-debugging</code></td></tr>
           <tr><td>qa <span class="cnt">2</span></td><td>Test strategy</td><td><code>/afx-qa-methodology</code> <code>/afx-spec-test-planning</code></td></tr>
           <tr><td>security <span class="cnt">2</span></td><td>Reviews &amp; audits</td><td><code>/afx-owasp-top-10</code> <code>/afx-security-audit</code></td></tr>
-          <tr><td>architect <span class="cnt">1</span></td><td>Evidence-based research</td><td><code>/afx-deep-research</code></td></tr>
+          <tr><td>architect <span class="cnt">2</span></td><td>Research and architecture patterns</td><td><code>/afx-deep-research</code> <code>/afx-architecture-patterns</code></td></tr>
           <tr><td>product-owner <span class="cnt">1</span></td><td>Product decisions</td><td><code>/afx-product-owner</code></td></tr>
           <tr><td>starter <span class="cnt">1</span></td><td>Install verification</td><td><code>/afx-hello</code></td></tr>
         </tbody>

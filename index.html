@@ -504,7 +504,7 @@
       <a class="foundation" href="https://github.com/AgenticFlowX/afx" target="_blank" rel="noopener noreferrer">
         <span class="fk">Powered by · open source</span>
         <h3>afx-workflow — the SDD engine</h3>
-        <p>The spec-driven workflow itself: <b>afx-workflow</b>, 18 core skills, role packs, document templates, and traceability rules — written as <b>standard skills</b> (agentskills.io format), so Claude Code, Codex, and Copilot run the same workflow natively. A separate Apache-2.0 project.</p>
+        <p>The spec-driven workflow itself: <b>afx-workflow</b>, 18 core skills, role packs, document templates, and traceability rules — written as <b>standard skills</b> (agentskills.io format), so Claude Code, Codex, and Copilot run the same workflow natively. A separate MIT-licensed project.</p>
         <span class="go">github.com/AgenticFlowX/afx →</span>
       </a>
       <a class="foundation" href="https://pi.dev" target="_blank" rel="noopener noreferrer">
@@ -979,15 +979,15 @@
 <section class="chapter" id="get-skills">
   <div class="wrap">
     <div class="ch-head"><span class="n">—</span><h2>Get the <em>skills.</em></h2></div>
-    <p class="ch-sub">Every skill is a slash command — the SKILL.md name maps 1:1 to the command you type. Two ways to install:</p>
+    <p class="ch-sub">Use afx-cli for Codex, Copilot, and compatible coding agents, and add Claude plugins alongside them. Plugin commands include their namespace: <code>/afx:spec</code>; afx-cli installs use <code>/afx-spec</code>.</p>
 
     <div class="prov-groups" style="grid-template-columns: 1fr 1fr; margin-top: clamp(26px,3.5vw,38px);">
       <div class="prov-group" style="border-color: var(--accent);">
         <span class="how" style="color:var(--ember)">Claude Code · marketplace</span>
         <h4>Two commands, done</h4>
         <pre class="headless-code" style="margin-top:12px"><code>claude plugin marketplace add AgenticFlowX/afx
-claude plugin install afx-agenticflowx</code></pre>
-        <p style="margin-top:12px">The 18 core skills register as <span class="mono">/afx-*</span> commands — ~1k tokens always-on for the whole pack. Role packs install the same way: <span class="mono">afx-dev</span>, <span class="mono">afx-qa</span>, <span class="mono">afx-security</span>, <span class="mono">afx-architect</span>, <span class="mono">afx-product-owner</span>.</p>
+claude plugin install afx@afx --scope user</code></pre>
+        <p style="margin-top:12px">Restart Claude Code or run <span class="mono">/reload-plugins</span>, then verify with <span class="mono">/afx:hello</span>. The core provides 18 skills, including <span class="mono">/afx:spec</span> and <span class="mono">/afx:task</span>. Role plugins install the same way, for example <span class="mono">afx-dev@afx</span> for <span class="mono">/afx-dev:tdd</span>.</p>
       </div>
       <div class="prov-group">
         <span class="how">Any agent · afx-cli</span>
@@ -998,13 +998,16 @@ claude plugin install afx-agenticflowx</code></pre>
       </div>
     </div>
 
-    <p class="ch-sub" style="margin-top:30px"><b>What each pack installs:</b></p>
+    <div class="callout" style="margin-top:24px"><b>Claude Desktop or Cowork:</b> open Customize → Plugins → Add plugin → Add marketplace → Add from a repository. Enter <code>AgenticFlowX/afx</code>, select Sync, then open Afx and select Add. A GitHub App access notice concerns automatic updates; the initial import and installation can still succeed. <a href="help.html#claude-desktop">Claude setup details →</a></div>
+    <p class="stage-cap" style="text-align:left; margin-top:16px">The CLI and Claude plugin can coexist in one project; avoid loading the same skills twice into one agent. The AgenticFlowX-hosted marketplace is available now; a listing in Anthropic's public directory has a separate submission process.</p>
+
+    <p class="ch-sub" style="margin-top:30px"><b>What each afx-cli pack installs:</b></p>
     <div class="agents-row" style="margin-top:14px">
       <span>agenticflowx — 18 workflow skills → /afx-next · /afx-task · /afx-spec …</span>
       <span>dev — /afx-tdd · /afx-clean-code · /afx-git-workflow +2</span>
       <span>qa — /afx-qa-methodology · /afx-spec-test-planning</span>
       <span>security — /afx-owasp-top-10 · /afx-security-audit</span>
-      <span>architect — /afx-deep-research</span>
+      <span>architect — /afx-deep-research · /afx-architecture-patterns</span>
       <span>product-owner — /afx-product-owner</span>
       <span>starter — /afx-hello (vibe check)</span>
     </div>

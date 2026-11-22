@@ -1,0 +1,398 @@
+<section class="h-hero w-hero">
+  <div class="h-wrap">
+    <div class="h-hero-top">
+      <div class="h-hero-copy">
+        <p class="h-kicker"><span class="h-dot" aria-hidden="true"></span>AFX workflow &amp; skills · MIT</p>
+        <h1>Spec-driven development, as skills your agent already reads.</h1>
+        <p class="h-lead">
+          AgenticFlowX is a set of open agent skills for Claude Code, Codex, and Copilot. They plan,
+          build, check, and record the work in plain Markdown inside your repository. No server, no
+          AFX account, no VS Code required.
+        </p>
+        <div class="h-install-buttons">
+          <a class="button" href="#install">Install the skills</a
+          ><a class="button button-outline" href="#formats">Pick the right amount of structure</a>
+        </div>
+      </div>
+      <div class="w-hero-right">
+      <figure class="w-terminal">
+        <img src="assets/illustrations/afx-cli.svg" alt="Terminal: afx-cli asks which agents you use and installs the skills" />
+        <figcaption>Reproduced from a real afx-cli run.</figcaption>
+      </figure>
+      <nav class="w-shapes" aria-label="Complete example documents">
+        <span class="h-label">Read a complete document</span>
+        <a href="examples.html#example-dash"
+          ><span class="h-chip">DASH</span><strong>A bounded change</strong
+          ><small>Purpose and tasks in one file</small></a
+        >
+        <a href="examples.html#example-sprint"
+          ><span class="h-chip">SPRINT</span><strong>A focused feature</strong
+          ><small>Spec, design, and tasks in one file</small></a
+        >
+        <a href="examples.html#example-full"
+          ><span class="h-chip">FULL</span><strong>A feature with room to grow</strong
+          ><small>spec, design, tasks, and journal</small></a
+        >
+      </nav>
+      </div>
+    </div>
+    <ul class="h-works-with" aria-label="Works with">
+      <li class="h-label">Works with</li>
+      <li>Claude Code</li>
+      <li>Claude Desktop &amp; Cowork</li>
+      <li>Codex</li>
+      <li>GitHub Copilot</li>
+      <li>Antigravity</li>
+      <li>The AFX VS Code extension</li>
+    </ul>
+  </div>
+</section>
+
+<section class="x-section" id="formats">
+  <span id="examples" class="x-anchor" aria-hidden="true"></span>
+  <div class="h-wrap">
+    <div class="x-head">
+      <div>
+        <p class="h-kicker">Right-sized structure</p>
+        <h2>Start with the least structure the work can survive.</h2>
+      </div>
+      <p>Chat for questions and one-line fixes. A Dash, a Sprint, or a full spec when the work needs a record. The same IDs and <code>@see</code> links work at every size, so moving up loses nothing. <a class="h-link" href="examples.html">All six documents in full →</a></p>
+    </div>
+    {{paper-docs}}
+  </div>
+</section>
+
+<section class="h-section" id="install">
+  <div class="h-wrap">
+    <div class="x-head">
+      <div>
+        <p class="h-kicker">Install</p>
+        <h2>Add AFX to the agent you already use.</h2>
+      </div>
+      <p>Every route installs the same skills and produces the same Markdown. Pick one route per
+        agent.</p>
+    </div>
+    <div class="w-routes">
+      <article>
+        <span class="h-label">Claude Code · plugin</span>
+        <h3>Inside Claude Code</h3>
+        <div class="command-block">
+          <pre><code>/plugin marketplace add AgenticFlowX/afx
+/plugin install afx@afx</code></pre>
+          <button class="copy-button" data-copy aria-label="Copy Claude Code plugin commands">Copy</button>
+        </div>
+        <p>Or from a terminal:</p>
+        <div class="command-block">
+          <pre><code>claude plugin marketplace add AgenticFlowX/afx
+claude plugin install afx@afx --scope user</code></pre>
+          <button class="copy-button" data-copy aria-label="Copy Claude plugin terminal commands">Copy</button>
+        </div>
+        <p class="h-small">
+          Reload plugins, then run <code>/afx:hello</code>. Plugin commands are namespaced:
+          <code>/afx:spec</code>, <code>/afx-dev:tdd</code>.
+        </p>
+      </article>
+      <article>
+        <span class="h-label">Claude Desktop &amp; Cowork</span>
+        <h3>In the Claude app</h3>
+        <p>
+          Add the AgenticFlowX marketplace from its GitHub repository, then add the Afx plugin.
+          No terminal needed.
+        </p>
+        <a class="h-link" href="#claude-desktop">Step-by-step setup →</a>
+      </article>
+      <article>
+        <span class="h-label">Codex · Copilot · Antigravity · Claude Code</span>
+        <h3>With the CLI installer</h3>
+        <div class="command-block">
+          <pre><code>curl -sL https://raw.githubusercontent.com/AgenticFlowX/afx/main/afx-cli | bash -s -- .</code></pre>
+          <button class="copy-button" data-copy aria-label="Copy CLI install command">Copy</button>
+        </div>
+        <p class="h-small">
+          Run from your project directory. Commands are unnamespaced: <code>/afx-spec</code>.
+          <a class="h-link" href="https://github.com/AgenticFlowX/afx/blob/main/afx-cli">Read the installer source ↗</a>
+        </p>
+      </article>
+    </div>
+
+    <div class="h-split w-cli">
+      <div>
+        <h3>What the installer asks, and where things go</h3>
+        <p>
+          <code>afx-cli</code> asks which agents you use and remembers the answer in
+          <code>.afx.yaml</code>, so <code>--update</code> reuses it.
+        </p>
+        <div class="table-scroll">
+          <table class="guide-table">
+            <thead>
+              <tr><th>You use</th><th>Skills go to</th><th>Instructions added to</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Claude Code</td><td><code>.claude/skills/</code></td><td><code>CLAUDE.md</code></td></tr>
+              <tr><td>Codex · Copilot · Antigravity</td><td><code>.agents/skills/</code></td><td><code>AGENTS.md</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="h-small">
+          It also creates <code>docs/specs/</code> and <code>docs/adr/</code>. Instruction files
+          are updated between markers, so your own content is left alone.
+        </p>
+      </div>
+      <dl class="h-commands">
+        <div><dt><code>--update</code></dt><dd>Refresh the skills and keep your documents and settings.</dd></div>
+        <div><dt><code>--dry-run</code></dt><dd>Show what would change without writing anything.</dd></div>
+        <div><dt><code>--pack qa</code> <code>--pack-list</code></dt><dd>Add a role pack, or list what’s installed.</dd></div>
+        <div><dt><code>--skill-disable</code> <code>--skill-enable</code></dt><dd>Turn individual skills off and on.</dd></div>
+        <div><dt><code>afx-cli example starter|basic|full</code></dt><dd>Copy the RoomLedger example into a folder at three stages of completion.</dd></div>
+      </dl>
+    </div>
+
+    <div class="h-grid-3 w-notes">
+      <div>
+        <h3>One route per agent</h3>
+        <p>
+          You can use the CLI for Codex and the plugin for Claude in the same project. Don’t load the
+          same skills twice into a single agent.
+        </p>
+      </div>
+      <div>
+        <h3>Where it’s been tested</h3>
+        <p>
+          Claude Code: heavily tested. Codex and GitHub Copilot: tested. Cline, AugmentCode,
+          KiloCode, and OpenCode follow the same skills format but haven’t been verified.
+        </p>
+      </div>
+      <div>
+        <h3>Operating systems</h3>
+        <p>
+          The installer is tested on macOS and Linux/WSL. On Windows, use Git Bash. Node.js 18+ is
+          optional and speeds up structured document reads.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="h-section" id="claude-desktop">
+  <div class="h-wrap h-split">
+    <div>
+      <p class="h-kicker">Claude Desktop &amp; Cowork</p>
+      <h2>The same skills in the Claude app.</h2>
+      <p class="h-lead">Add the AgenticFlowX marketplace from its GitHub repository.</p>
+    </div>
+    <div>
+      <ol class="w-steps">
+        <li>
+          Open <strong>Customize → Plugins → Add plugin → Add marketplace → Add from a repository</strong>.
+        </li>
+        <li>Enter <code>AgenticFlowX/afx</code> and select <strong>Sync</strong>.</li>
+        <li>Open <strong>Afx</strong>, select <strong>Add</strong>, and check that it’s enabled.</li>
+      </ol>
+      <p class="h-footnote">
+        An auto-sync notice may appear. It’s about automatic updates, which need Claude’s GitHub
+        App to have access to the repository; the first import still works without it. This is the
+        AgenticFlowX-hosted marketplace, separate from Anthropic’s reviewed directory. Available
+        controls depend on your Claude app and account.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="x-section" id="lifecycle">
+  <span id="gates" class="x-anchor" aria-hidden="true"></span>
+  <div class="h-wrap">
+    <div class="x-head">
+      <div>
+        <p class="h-kicker">Approval and checks</p>
+        <h2>Approved means checked. Done means verified.</h2>
+      </div>
+      <p>Documents start as Draft and move forward only on purpose. Tasks need two sign-offs, and the checks say plainly what they can’t prove.</p>
+    </div>
+    <ol class="x-chain" aria-label="From draft to done">
+      <li>Draft</li><li>Validate</li><li>Review</li><li>Approved</li><li>Code</li><li>Verify</li><li>Agent ✓</li><li>Human ✓</li>
+    </ol>
+    <dl class="kv kv-wide">
+      <div><dt>Approve</dt><dd>Runs structural validation and a review, and is blocked while critical issues remain. The approved spec becomes the reference for design, tasks, and code.</dd></div>
+      <div><dt>Change it</dt><dd>Edit an approved section and it, and everything after it, returns to Draft with a version bump. Living documents describe the present; the history goes in the journal.</dd></div>
+      <div><dt>Two sign-offs</dt><dd>Work Sessions carry the agent’s tick and a human’s. The human box is never ticked before the agent’s.</dd></div>
+      <div><dt>/afx-task verify</dt><dd>Checks one task against its spec: the files exist, the <code>@see</code> links resolve, no TODOs remain, and the session was logged.</dd></div>
+      <div><dt>/afx-check</dt><dd><code>path</code> traces a feature from UI to database and flags mocks and placeholders. <code>trace</code> and <code>links</code> audit annotations and cross-references. Also <code>schema</code>, <code>deps</code>, and <code>coverage</code>.</dd></div>
+      <div><dt>/afx-report</dt><dd>Read-only metrics: code with no <code>@see</code> link, which requirements have code, and specs that have gone stale.</dd></div>
+      <div><dt>Limits</dt><dd>These are text checks run by your agent. They don’t run builds or tests, and they don’t prove the code is correct. Your tests and your review are the final word.</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="h-section" id="skills">
+  <div class="h-wrap">
+    <div class="x-head">
+      <div>
+        <p class="h-kicker">The core pack · 19 skills</p>
+        <h2>Every step of the work has a skill.</h2>
+      </div>
+      <p>Installed by the <code>afx</code> plugin or by <code>afx-cli</code>. Each one is a plain
+        Agent Skills folder with its own templates.
+        <a class="h-link" href="https://github.com/AgenticFlowX/afx/tree/main/skills">Read them on GitHub ↗</a></p>
+    </div>
+    <div class="w-catalog">
+      <div>
+        <h3>Plan and build</h3>
+        <dl>
+          <div><dt><code>afx-spec</code></dt><dd>Write, validate, review, and approve spec.md.</dd></div>
+          <div><dt><code>afx-design</code></dt><dd>The technical design, with a stable ID on every section.</dd></div>
+          <div><dt><code>afx-task</code></dt><dd>Plan, pick, code, verify, and complete tasks; sync with GitHub issues.</dd></div>
+          <div><dt><code>afx-sprint</code></dt><dd>Spec, design, and tasks in one document.</dd></div>
+          <div><dt><code>afx-dash</code></dt><dd>Purpose and tasks for small, known-scope work.</dd></div>
+          <div><dt><code>afx-dev</code></dt><dd>Debug, refactor, review against the spec, test, and optimise.</dd></div>
+        </dl>
+      </div>
+      <div>
+        <h3>Check and report</h3>
+        <dl>
+          <div><dt><code>afx-check</code></dt><dd>Quality gates: execution path, trace, links, schema, dependencies, coverage.</dd></div>
+          <div><dt><code>afx-report</code></dt><dd>Orphaned code, spec-to-code coverage, stale specs.</dd></div>
+        </dl>
+        <h3>Keep the context</h3>
+        <dl>
+          <div><dt><code>afx-session</code></dt><dd>Notes, logs, recaps, and prompt capture in the journal.</dd></div>
+          <div><dt><code>afx-context</code></dt><dd>Save and load hand-off bundles between agents.</dd></div>
+          <div><dt><code>afx-next</code></dt><dd>Reads the project state and suggests one next command.</dd></div>
+        </dl>
+      </div>
+      <div>
+        <h3>Decide, discover, and set up</h3>
+        <dl>
+          <div><dt><code>afx-research</code></dt><dd>Explore and compare options, then promote findings to an ADR or spec.</dd></div>
+          <div><dt><code>afx-adr</code></dt><dd>Create, review, and supersede architecture decisions.</dd></div>
+          <div><dt><code>afx-blueprint</code></dt><dd>An optional, saved understanding of the project that can hand off to a Sprint.</dd></div>
+          <div><dt><code>afx-discover</code></dt><dd>Find the project’s scripts, tooling, and deployment workflows.</dd></div>
+          <div><dt><code>afx-scaffold</code></dt><dd>Create spec folders, research docs, and ADRs from templates.</dd></div>
+          <div><dt><code>afx-release</code></dt><dd>Version bump, changelog, tag, and GitHub release.</dd></div>
+          <div><dt><code>afx-hello</code> <code>afx-help</code></dt><dd>Check the install, and get the command reference.</dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="x-section" id="packs">
+  <span id="pack-commands" class="x-anchor" aria-hidden="true"></span>
+  <div class="h-wrap">
+    <div class="x-head">
+      <div>
+        <p class="h-kicker">Role packs</p>
+        <h2>Add expertise when the work calls for it.</h2>
+      </div>
+      <p>Optional packs for particular roles, installed as Claude plugins or with <code>afx-cli --pack</code>. Some include curated skills from Anthropic and OpenAI alongside AFX’s own.</p>
+    </div>
+    <dl class="kv kv-wide">
+      <div><dt>afx-dev</dt><dd>Systematic debugging, clean code, TDD, git workflows, architecture patterns. <code>/afx-dev:tdd</code></dd></div>
+      <div><dt>afx-qa</dt><dd>QA methodology and test plans built from the spec, plus web app and Playwright testing skills. <code>/afx-qa:qa-methodology</code></dd></div>
+      <div><dt>afx-security</dt><dd>OWASP Top 10 review and structured security audits. Read-only. <code>/afx-security:security-audit</code></dd></div>
+      <div><dt>afx-architect</dt><dd>Evidence-based deep research and architecture pattern trade-offs. <code>/afx-architect:deep-research</code></dd></div>
+      <div><dt>afx-product-owner</dt><dd>RICE prioritisation, PRDs, customer discovery, and success metrics. <code>/afx-product-owner:product-owner</code></dd></div>
+      <div><dt>afx-starter</dt><dd>Install verification only. <code>/afx-starter:hello</code></dd></div>
+    </dl>
+    <div class="h-split w-ref">
+      <div>
+        <h3>Claude Code · terminal</h3>
+        <div class="command-block">
+          <pre><code>claude plugin install afx-dev@afx --scope user
+claude plugin marketplace update afx
+claude plugin update afx@afx</code></pre>
+          <button class="copy-button" data-copy aria-label="Copy plugin management commands">Copy</button>
+        </div>
+        <p class="h-small">
+          Reload plugins after installing or updating. User scope makes a plugin available across
+          projects. Run <code>/afx:scaffold init</code> to set up a project’s configuration and
+          document folders.
+        </p>
+      </div>
+      <div id="cli-tools">
+        <h3>With a local copy of afx-cli</h3>
+        <div class="command-block">
+          <pre><code>./afx-cli --pack qa --pack security .
+./afx-cli --pack-list .
+./afx-cli --update --packs .</code></pre>
+          <button class="copy-button" data-copy aria-label="Copy CLI pack commands">Copy</button>
+        </div>
+        <p class="h-small">
+          Add a single skill from another repository with <code>--add-skill</code>.
+          <a class="h-link" href="https://github.com/AgenticFlowX/afx#readme">Full CLI reference ↗</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="h-section" id="continuity">
+  <div class="h-wrap h-split">
+    <div>
+      <p class="h-kicker">Session continuity</p>
+      <h2>The next session starts where this one stopped.</h2>
+      <p class="h-lead">
+        Chat history disappears. The journal and context bundles don’t. Any agent can pick up the
+        work from the files.
+      </p>
+    </div>
+    <dl class="h-commands">
+      <div><dt><code>journal.md</code></dt><dd>An append-only record of decisions and discussions, each with its own ID.</dd></div>
+      <div><dt><code>/afx-session capture</code></dt><dd>Records the exact prompt behind a decision, with the agent, model, and affected IDs.</dd></div>
+      <div><dt><code>/afx-session promote</code></dt><dd>Turns a discussion into an ADR or a spec change.</dd></div>
+      <div><dt><code>/afx-context save</code> · <code>load</code></dt><dd>Hands spec state, task progress, and open questions to another agent.</dd></div>
+      <div><dt><code>/afx-next</code></dt><dd>Reads git state, tasks, and sessions, and suggests the single next command.</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="h-section" id="faq">
+  <div class="h-wrap h-split">
+    <div>
+      <p class="h-kicker">Questions</p>
+      <h2>Before you install.</h2>
+    </div>
+    <div class="faq">
+      <details>
+        <summary>Do I need the VS Code extension?</summary>
+        <p>
+          No. The skills run in any compatible agent. The extension adds a coding chat, document
+          actions in the Previewer, and project panels on top of the same files.
+        </p>
+      </details>
+      <details>
+        <summary>Is there an AFX account, server, or API key?</summary>
+        <p>
+          No. The skills are files in your repository and the output is Markdown. Your agent and
+          your model provider are the only services involved.
+        </p>
+      </details>
+      <details>
+        <summary>Does a spec stop an agent from drifting?</summary>
+        <p>
+          It makes the intended work explicit and easier to review. Agents can still misread it or
+          miss a requirement, which is why AFX has verification steps and a human sign-off.
+        </p>
+      </details>
+      <details>
+        <summary>Can I keep my own skills?</summary>
+        <p>
+          Yes. AFX uses the open Agent Skills format, so your agent loads it alongside your other
+          project and personal skills.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="h-closing">
+  <div class="h-wrap">
+    <h2>Prefer to see the plan while you work?</h2>
+    <p class="h-small">
+      The VS Code extension renders these documents with actions, progress, and the code they point to.
+    </p>
+    <div class="h-closing-actions">
+      <a class="button" href="vscode.html">Explore AgenticFlowX for VS Code</a
+      ><a class="button button-outline button-on-dark" href="examples.html">Read the full examples</a>
+    </div>
+  </div>
+</section>

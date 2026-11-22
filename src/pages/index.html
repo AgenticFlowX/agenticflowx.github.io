@@ -1,0 +1,536 @@
+<section class="x-hero">
+  <div class="h-wrap x-hero-grid">
+    <div class="x-hero-copy">
+      <p class="h-kicker"><span class="h-dot" aria-hidden="true"></span>Pause. Think. Plan. Ship.</p>
+      <h1>Write the spec.<br />Ship the code.<br /><span class="x-hand">Keep them linked.<svg class="x-hand-line" viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true"><path d="M4 13 C 60 6, 120 16, 180 9 S 270 7, 296 11" /></svg></span></h1>
+      <p class="h-lead">
+        AgenticFlowX is spec-driven development for AI coding agents. Agree on requirements,
+        design, and tasks in plain Markdown, then every change links back to the requirement
+        behind it. Chat first; add structure when the work earns it.
+      </p>
+      <div class="x-cta">
+        <a class="button" href="#install">Install for VS Code</a
+        ><a class="button button-outline" href="workflow.html#install">Add the skills to your agent</a>
+      </div>
+      <p class="x-works"><span class="h-label">Works with</span> VS Code · Claude Code &amp; Cowork · Codex · GitHub Copilot</p>
+      <p class="x-pi">
+        <a href="https://pi.dev" class="x-pi-badge"><span class="x-pi-mark" aria-hidden="true">π</span><span><span class="h-label">Powered by</span><strong>Pi</strong></span></a>
+        <span>The open coding harness behind the extension: sessions, tools, skills, and every model provider.</span>
+      </p>
+    </div>
+
+    <figure class="x-object" aria-label="A spec, and the code that links back to it">
+      <div class="x-sheet">
+        <div class="paper-meta"><span class="paper-type">SPEC</span><span>v1.2</span><span>@agenticflowx</span><span class="paper-stamp">Approved</span><span class="x-mark" aria-hidden="true">1</span></div>
+        <p class="x-sheet-file">docs/specs/01-room-dashboard/spec.md</p>
+        <p class="x-sheet-title">RoomLedger — Room Dashboard</p>
+        <p class="x-sheet-h">Functional Requirements</p>
+        <table>
+          <tbody>
+            <tr class="x-hit"><td class="paper-id">FR-1<span class="x-mark" aria-hidden="true">2</span></td><td>Hero section</td><td>Room identity, status chip, and a workflow timeline.</td></tr>
+            <tr><td class="paper-id">FR-2</td><td>KPI row</td><td>Four metric cards.</td></tr>
+            <tr><td class="paper-id">FR-3</td><td>Room card</td><td>Summary card and actions.</td></tr>
+            <tr><td class="paper-id">FR-4</td><td>Approval summary</td><td>Owner and renter boxes.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="x-code">
+        <p class="x-code-file">src/index.html</p>
+        <span class="x-mark x-mark-code" aria-hidden="true">3</span><pre><code><span class="c">&lt;!-- @see docs/specs/01-room-dashboard/spec.md [FR-1] --&gt;</span>
+<span class="c">&lt;!-- @see docs/specs/01-room-dashboard/design.md [DES-HERO] --&gt;</span>
+&lt;<span class="k">section</span> class="hero"&gt;
+  &lt;<span class="k">span</span> class="room-status"&gt;Occupied&lt;/<span class="k">span</span>&gt;
+  …</code></pre>
+      </div>
+      <ol class="x-legend">
+        <li><b>Approved</b> Validated and reviewed before design starts.</li>
+        <li><b>FR-1</b> A stable ID. Rename the heading; the ID stays.</li>
+        <li><b>@see</b> The code points back. Hover it in VS Code to read FR-1.</li>
+      </ol>
+      <figcaption>Illustration based on the RoomLedger example in the AFX repository.</figcaption>
+    </figure>
+  </div>
+
+  <div class="h-wrap">
+    <a class="x-logos" href="#models" aria-label="31 model providers through Pi, plus local runtimes. See them all.">
+      <span class="x-logos-label"><b>31 providers</b> via <span class="x-logos-pi">Pi</span></span>
+      <ul>
+        <li title="Claude"><img src="assets/logos/claude.svg" alt="Claude" width="22" height="22" /></li>
+        <li title="OpenAI"><img src="assets/logos/openai.svg" alt="OpenAI" width="22" height="22" /></li>
+        <li title="GitHub Copilot"><img src="assets/logos/githubcopilot.svg" alt="GitHub Copilot" width="22" height="22" /></li>
+        <li title="Google Gemini"><img src="assets/logos/googlegemini.svg" alt="Google Gemini" width="22" height="22" /></li>
+        <li title="DeepSeek"><img src="assets/logos/deepseek.svg" alt="DeepSeek" width="22" height="22" /></li>
+        <li title="Mistral"><img src="assets/logos/mistralai.svg" alt="Mistral" width="22" height="22" /></li>
+        <li title="Kimi"><img src="assets/logos/kimi.svg" alt="Kimi" width="22" height="22" /></li>
+        <li title="Qwen"><img src="assets/logos/qwen.svg" alt="Qwen" width="22" height="22" /></li>
+        <li title="OpenRouter"><img src="assets/logos/openrouter.svg" alt="OpenRouter" width="22" height="22" /></li>
+        <li title="Amazon Bedrock"><img src="assets/logos/amazonaws.svg" alt="Amazon Bedrock" width="22" height="22" /></li>
+        <li title="Azure OpenAI"><img src="assets/logos/microsoftazure.svg" alt="Azure OpenAI" width="22" height="22" /></li>
+        <li title="Google Vertex AI"><img src="assets/logos/googlecloud.svg" alt="Google Vertex AI" width="22" height="22" /></li>
+        <li title="NVIDIA"><img src="assets/logos/nvidia.svg" alt="NVIDIA" width="22" height="22" /></li>
+        <li title="Hugging Face"><img src="assets/logos/huggingface.svg" alt="Hugging Face" width="22" height="22" /></li>
+        <li title="MiniMax"><img src="assets/logos/minimax.svg" alt="MiniMax" width="22" height="22" /></li>
+        <li title="Xiaomi MiMo"><img src="assets/logos/xiaomi.svg" alt="Xiaomi MiMo" width="22" height="22" /></li>
+        <li title="Moonshot"><img src="assets/logos/moonshotai.svg" alt="Moonshot" width="22" height="22" /></li>
+        <li title="Vercel AI Gateway"><img src="assets/logos/vercel.svg" alt="Vercel AI Gateway" width="22" height="22" /></li>
+        <li title="Cloudflare"><img src="assets/logos/cloudflare.svg" alt="Cloudflare" width="22" height="22" /></li>
+        <li title="OpenCode"><img src="assets/logos/opencode.svg" alt="OpenCode" width="22" height="22" /></li>
+        <li title="Ollama"><img src="assets/logos/ollama.svg" alt="Ollama" width="22" height="22" /></li>
+        <li title="LM Studio"><img src="assets/logos/lmstudio.svg" alt="LM Studio" width="22" height="22" /></li>
+        <li title="vLLM"><img src="assets/logos/vllm.svg" alt="vLLM" width="22" height="22" /></li>
+      </ul>
+      <span class="x-logos-more">+ xAI, Groq, Cerebras, Z.ai &amp; more →</span>
+    </a>
+  </div>
+
+  <div class="h-wrap">
+    <dl class="x-specs">
+      <div><dt>4 files</dt><dd>spec · design · tasks · journal, in your repo</dd></div>
+      <div><dt>FR-1 → @see</dt><dd>every change links to its requirement</dd></div>
+      <div><dt>Agent ✓ Human ✓</dt><dd>two sign-offs before a task is done</dd></div>
+      <div><dt>0 servers</dt><dd>plain Markdown, no AFX account</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="x-section" id="why">
+  <div class="h-wrap">
+    <div class="x-head">
+      <div>
+        <p class="h-kicker">Why spec-driven</p>
+        <h2>The code is fast. The debt is faster.</h2>
+      </div>
+      <p>Run the same prompt twice and you can get two different architectures. A spec doesn’t slow the agent down. It fixes what “right” means, so each run works toward a target instead of inventing one.</p>
+    </div>
+    <div class="x-why-top">
+      <figure class="x-yt-figure">
+        <button class="x-yt" type="button" id="ibm-video" data-youtube="DgXV8QSlI4U" aria-label="Play the IBM Technology video: What is AI Technical Debt?">
+          <img src="https://i.ytimg.com/vi/DgXV8QSlI4U/maxresdefault.jpg" alt="" width="1280" height="720" loading="lazy" />
+          <span class="x-yt-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg></span>
+          <span class="x-yt-len">13:33</span>
+        </button>
+        <figcaption>
+          <span><span class="h-label">IBM Technology · Jeff Crume</span><strong>What is AI Technical Debt? Key Risks for Machine Learning Projects</strong></span>
+          <a class="h-link" href="https://www.youtube.com/watch?v=DgXV8QSlI4U" target="_blank" rel="noopener noreferrer">YouTube ↗</a>
+        </figcaption>
+      </figure>
+      <div class="x-why-notes">
+        <p class="h-label">What the video covers</p>
+        <p class="x-why-quote">“Technical debt is future cost from present shortcuts.”</p>
+        <ul class="x-why-points">
+          <li><b>AI compounds it.</b> Traditional software is deterministic; AI output is probabilistic and context-dependent, so a change anywhere can change everything, and debt grows faster.</li>
+          <li><b>Four places it hides.</b> Data (bias, drift, poisoning), models (no versioning, evals, or rollback), prompts (undocumented system prompts, injection), and the organisation (no owner, no governance).</li>
+          <li><b>Not all debt is reckless.</b> Strategic debt is taken on deliberately: documented, time-bound, with a plan to pay it back.</li>
+          <li><b>The fix is the basics.</b> “Ready, aim, fire”: requirements, then architecture, then implementation, testing, deployment, and evaluation fed back into the requirements.</li>
+        </ul>
+        <p class="x-why-afx"><span class="x-tag">Where AFX fits</span> That loop is what AFX writes down: requirements in <code>spec.md</code>, architecture in <code>design.md</code>, then tasks, verification, and a journal of the shortcuts you chose to take.</p>
+        <p class="h-label x-ch-label">Jump to a chapter</p>
+        <ol class="x-chapters">
+            <li><button type="button" data-youtube-seek="0" data-youtube-target="ibm-video"><span class="x-ch-time">0:00</span><span>Everyone is racing to ship AI</span></button></li>
+            <li><button type="button" data-youtube-seek="30" data-youtube-target="ibm-video"><span class="x-ch-time">0:30</span><span>What AI technical debt is</span></button></li>
+            <li><button type="button" data-youtube-seek="69" data-youtube-target="ibm-video"><span class="x-ch-time">1:09</span><span>“Ready, fire, aim”</span></button></li>
+            <li><button type="button" data-youtube-seek="154" data-youtube-target="ibm-video"><span class="x-ch-time">2:34</span><span>Strategic versus reckless debt</span></button></li>
+            <li><button type="button" data-youtube-seek="225" data-youtube-target="ibm-video"><span class="x-ch-time">3:45</span><span>Why AI makes it worse</span></button></li>
+            <li><button type="button" data-youtube-seek="373" data-youtube-target="ibm-video"><span class="x-ch-time">6:13</span><span>Data debt</span></button></li>
+            <li><button type="button" data-youtube-seek="474" data-youtube-target="ibm-video"><span class="x-ch-time">7:54</span><span>Model debt</span></button></li>
+            <li><button type="button" data-youtube-seek="534" data-youtube-target="ibm-video"><span class="x-ch-time">8:54</span><span>Prompt debt</span></button></li>
+            <li><button type="button" data-youtube-seek="647" data-youtube-target="ibm-video"><span class="x-ch-time">10:47</span><span>Organisational debt</span></button></li>
+            <li><button type="button" data-youtube-seek="723" data-youtube-target="ibm-video"><span class="x-ch-time">12:03</span><span>“Ready, aim, fire”</span></button></li>
+            <li><button type="button" data-youtube-seek="765" data-youtube-target="ibm-video"><span class="x-ch-time">12:45</span><span>Speed minus discipline</span></button></li>
+        </ol>
+        <p class="x-ch-note">Summary and chapter titles written for this site from the video’s transcript.</p>
+      </div>
+    </div>
+
+    <h3 class="x-pains-title">Coded with an agent? You’ve hit these.</h3>
+    <div class="x-pains">
+      <article class="x-pain-card">
+        <div class="x-pain-said">
+          <span class="h-label">01 · Context amnesia</span>
+          <p>“Close the terminal, and the next session starts from scratch.”</p>
+        </div>
+        <div class="x-pain-fix">
+          <span class="x-tag">With AFX</span>
+          <p><code>journal.md</code> keeps every decision, append-only. The next agent loads the state and carries on.</p>
+          <code class="x-cmd">/afx-context load</code>
+        </div>
+      </article>
+      <article class="x-pain-card">
+        <div class="x-pain-said">
+          <span class="h-label">02 · Scope creep</span>
+          <p>“I asked for a bug fix and got a refactor.”</p>
+        </div>
+        <div class="x-pain-fix">
+          <span class="x-tag">With AFX</span>
+          <p>The spec sets the boundary and the non-goals. A Dash records its scope and says when the work outgrows it.</p>
+          <code class="x-cmd">/afx-dash</code>
+        </div>
+      </article>
+      <article class="x-pain-card">
+        <div class="x-pain-said">
+          <span class="h-label">03 · Orphaned code</span>
+          <p>“Where did this function come from? Nobody asked for it.”</p>
+        </div>
+        <div class="x-pain-fix">
+          <span class="x-tag">With AFX</span>
+          <p><code>@see</code> ties code to an FR or DES ID. Code without one is reported; a broken link shows as a ghost reference.</p>
+          <code class="x-cmd">/afx-report orphans</code>
+        </div>
+      </article>
+      <article class="x-pain-card">
+        <div class="x-pain-said">
+          <span class="h-label">04 · “It’s done”</span>
+          <p>“The build is green. The first click goes nowhere.”</p>
+        </div>
+        <div class="x-pain-fix">
+          <span class="x-tag">With AFX</span>
+          <p>Verification checks the evidence per task, and a task needs the agent’s sign-off and yours.</p>
+          <code class="x-cmd">/afx-task verify</code>
+        </div>
+      </article>
+      <article class="x-pain-card">
+        <div class="x-pain-said">
+          <span class="h-label">05 · Lost reasoning</span>
+          <p>“The spec says what we decided. Never why.”</p>
+        </div>
+        <div class="x-pain-fix">
+          <span class="x-tag">With AFX</span>
+          <p>Capture keeps the exact prompt that changed the spec, with the agent, model, and IDs it touched.</p>
+          <code class="x-cmd">/afx-session capture</code>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="x-section h-dark" id="watch">
+  <div class="h-wrap">
+    <div class="x-head">
+      <div>
+        <p class="h-kicker">Watch it work</p>
+        <h2>From a chat to an approved spec to code.</h2>
+      </div>
+      <p>A real capture from the AFX end-to-end suite: Spec mode drafts the documents, the Previewer moves them through approval, and the tasks drive the code.</p>
+    </div>
+    <video class="x-video" controls muted playsinline preload="metadata" aria-label="Recording of the AgenticFlowX spec-driven workflow in VS Code">
+      <source src="assets/site/sdd-demo-full.webm#t=0.5" type="video/webm" />
+      <source src="assets/site/sdd-demo-full.mp4#t=0.5" type="video/mp4" />
+    </video>
+  </div>
+</section>
+
+<section class="x-section x-chain-section" id="thread">
+  <div class="h-wrap">
+    <div class="x-head">
+      <div>
+        <p class="h-kicker">The chain</p>
+        <h2>One requirement, from intent to code.</h2>
+      </div>
+      <p>
+        Each document is approved before the next one starts. Stable IDs carry the requirement
+        through, and the code points back with <code>@see</code>.
+      </p>
+    </div>
+    <ol class="x-chain" aria-label="Workflow order">
+      <li>Idea</li><li>spec.md</li><li>design.md</li><li>tasks.md</li><li>Code</li><li>Verify</li>
+    </ol>
+    <div class="x-modules">
+      <article>
+        <header><span class="x-tag">The what</span><span class="h-label">01</span></header>
+        <h3>spec.md</h3>
+        <p>Problem, users, requirements, acceptance criteria, non-goals.</p>
+        <p class="x-mod-id"><span class="paper-id">FR-1</span> Hero section</p>
+      </article>
+      <article>
+        <header><span class="x-tag">The how</span><span class="h-label">02</span></header>
+        <h3>design.md</h3>
+        <p>Architecture, data, APIs, security, rollout. Every section has an anchor.</p>
+        <p class="x-mod-id"><span class="paper-id">[DES-HERO]</span> @see spec.md [FR-1]</p>
+      </article>
+      <article>
+        <header><span class="x-tag">The when</span><span class="h-label">03</span></header>
+        <h3>tasks.md</h3>
+        <p>An atomic checklist with completion criteria and two sign-offs.</p>
+        <p class="x-mod-id"><span class="paper-id">3.2</span> Covers: FR-1, DES-HERO</p>
+      </article>
+      <article>
+        <header><span class="x-tag">The memory</span><span class="h-label">04</span></header>
+        <h3>journal.md</h3>
+        <p>Append-only decisions and captured prompts, so any session can resume.</p>
+        <p class="x-mod-id"><span class="paper-id">RL-D001</span> Initial requirements capture</p>
+      </article>
+    </div>
+    <dl class="kv kv-wide">
+      <div><dt>Living specs</dt><dd>Spec and design describe the system as it is now, in the present tense. They update in place; the history lives in the journal.</dd></div>
+      <div><dt>Approval</dt><dd>Approving runs validation and review, and is blocked while critical issues remain. Change an approved scope and it goes back to Draft for re-approval.</dd></div>
+      <div><dt>In the editor</dt><dd>Hover an <code>@see</code> to read the requirement, Cmd-click to open it, and get IDs autocompleted. A broken link shows as a ghost reference.</dd></div>
+      <div><dt>Honest limits</dt><dd>A link records intent. <code>/afx-check</code> finds broken links and orphans; whether the code is right still needs your tests and review.</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="x-section" id="sizes">
+  <div class="h-wrap">
+    <div class="x-head">
+      <div>
+        <p class="h-kicker">Right-sized</p>
+        <h2>Pick the smallest document that fits.</h2>
+      </div>
+      <p>Not every change needs four files. The same IDs and links work at every size, so a Dash can become a Sprint, and a Sprint a full spec, without losing anything.</p>
+    </div>
+    {{paper-docs}}
+  </div>
+</section>
+
+<section class="x-section h-dark" id="vscode">
+  <div class="h-wrap">
+    <div class="x-head">
+      <div>
+        <p class="h-kicker">In VS Code</p>
+        <h2>Documents that grade themselves.</h2>
+      </div>
+      <p>The extension adds a <a class="pi-link" href="https://pi.dev">Pi</a>-powered chat with Code, Explore, and Spec modes, a Previewer with actions on every document, and a Workbench of repo-backed views.</p>
+    </div>
+    <div data-tabs class="h-panels">
+      <div class="h-tabs" role="tablist" aria-label="AgenticFlowX in VS Code">
+        <button role="tab" id="tab-previewer" aria-selected="true" aria-controls="panel-previewer">Previewer</button
+        ><button role="tab" id="tab-chat" aria-selected="false" aria-controls="panel-chat" tabindex="-1">Chat</button
+        ><button role="tab" id="tab-studio" aria-selected="false" aria-controls="panel-studio" tabindex="-1">SDD Studio</button
+        ><button role="tab" id="tab-analytics" aria-selected="false" aria-controls="panel-analytics" tabindex="-1">Analytics</button
+        ><button role="tab" id="tab-board" aria-selected="false" aria-controls="panel-board" tabindex="-1">Board &amp; more</button>
+      </div>
+      <div class="h-panel" id="panel-previewer" role="tabpanel" aria-labelledby="tab-previewer">
+        <div class="h-panel-copy">
+          <h3>Your Markdown, with actions on it.</h3>
+          <p>Refine, author, validate, review, approve. Quality Pulse grades strategy, structure, clarity, and completeness; the Refinement Coach suggests the next fix. Task boxes and sign-offs write back to the file.</p>
+          <a class="h-link" href="vscode.html#viewer">Explore the Previewer →</a>
+        </div>
+        <button class="screenshot-button" data-enlarge aria-label="Enlarge Previewer screenshot">
+          <img src="assets/screenshots/previewer-spec.png" alt="AFX Previewer rendering a spec with document actions, Quality Pulse, and Refinement Coach" loading="lazy" />
+        </button>
+      </div>
+      <div class="h-panel" id="panel-chat" role="tabpanel" aria-labelledby="tab-chat" hidden>
+        <div class="h-panel-copy">
+          <h3>Chat first. Spec when it matters.</h3>
+          <p>Code mode for everyday work, Explore for read-only investigation enforced by the host, and Spec mode with a guide that shows where you are and what’s next.</p>
+          <a class="h-link" href="vscode.html#chat">Explore chat →</a>
+        </div>
+        <button class="screenshot-button" data-enlarge aria-label="Enlarge Spec mode screenshot">
+          <img src="assets/screenshots/chat-sdd-guide.png" alt="Spec mode with the SDD guide showing changed documents and next workflow actions" loading="lazy" />
+        </button>
+      </div>
+      <div class="h-panel" id="panel-studio" role="tabpanel" aria-labelledby="tab-studio" hidden>
+        <div class="h-panel-copy">
+          <h3>The whole chain, visible.</h3>
+          <p>What is approved, what is stale, what has evidence, and what should run next, for every feature.</p>
+          <a class="h-link" href="vscode.html#studio">Explore SDD Studio →</a>
+        </div>
+        <button class="screenshot-button" data-enlarge aria-label="Enlarge SDD Studio screenshot">
+          <img src="assets/screenshots/sdd-studio.png" alt="SDD Studio with spec, design, tasks, and session columns per feature" loading="lazy" />
+        </button>
+      </div>
+      <div class="h-panel" id="panel-analytics" role="tabpanel" aria-labelledby="tab-analytics" hidden>
+        <div class="h-panel-copy">
+          <h3>Gaps as numbers, not surprises.</h3>
+          <p>Tasks, sessions, and streaks, a pipeline stage bar, an activity heatmap, and a count of ghost references that need attention.</p>
+        </div>
+        <button class="screenshot-button" data-enlarge aria-label="Enlarge Analytics screenshot">
+          <img src="assets/screenshots/analytics.png" alt="Analytics panel with task and session metrics" loading="lazy" />
+        </button>
+      </div>
+      <div class="h-panel" id="panel-board" role="tabpanel" aria-labelledby="tab-board" hidden>
+        <div class="h-panel-copy">
+          <h3>A workbench, without another database.</h3>
+          <p>Pipeline, Documents, Journal, Board, Notes, and an experimental JSON Canvas. Every view reads files you already own.</p>
+          <a class="h-link" href="vscode.html#panels">See every panel →</a>
+        </div>
+        <button class="screenshot-button" data-enlarge aria-label="Enlarge Board screenshot">
+          <img src="assets/screenshots/board.png" alt="Markdown-backed Kanban board" loading="lazy" />
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="x-section" id="install">
+  <span id="skills" class="x-anchor" aria-hidden="true"></span>
+  <div class="h-wrap">
+    <div class="x-head">
+      <div>
+        <p class="h-kicker">Two doors, one source of truth</p>
+        <h2>Use it in VS Code, or in the agent you already have.</h2>
+      </div>
+      <p>The workflow is a set of open agent skills. The extension bundles them; the Claude plugin and the CLI install them anywhere else. Either way, the output is Markdown in your repo.</p>
+    </div>
+    <div class="x-doors">
+      <div class="x-door">
+        <span class="x-tag">VS Code extension · Apache 2.0</span>
+        <h3>Chat, Previewer, and Workbench.</h3>
+        <div class="x-door-actions">
+          <a class="button" href="https://marketplace.visualstudio.com/items?itemName=AgenticFlowX.agenticflowx">VS Code Marketplace ↗</a
+          ><a class="button button-outline" href="https://open-vsx.org/extension/agenticflowx/agenticflowx">Open VSX ↗</a>
+        </div>
+        <div class="command-block"><pre><code>code --install-extension AgenticFlowX.agenticflowx</code></pre><button class="copy-button" data-copy aria-label="Copy the VS Code install command">Copy</button></div>
+        <p class="h-small">Then open the AgenticFlowX icon, choose Settings → Models, and connect a model.</p>
+      </div>
+      <div class="x-door">
+        <span class="x-tag">Agent skills · MIT</span>
+        <h3>Claude Code, Codex, Copilot.</h3>
+        <p class="h-label">In Claude Code</p>
+        <div class="command-block"><pre><code>/plugin marketplace add AgenticFlowX/afx
+/plugin install afx@afx</code></pre><button class="copy-button" data-copy aria-label="Copy Claude Code commands">Copy</button></div>
+        <p class="h-label x-gap">Any agent, from your project folder</p>
+        <div class="command-block"><pre><code>curl -sL https://raw.githubusercontent.com/AgenticFlowX/afx/main/afx-cli | bash -s -- .</code></pre><button class="copy-button" data-copy aria-label="Copy the afx-cli command">Copy</button></div>
+        <p class="h-small"><a class="h-link" href="workflow.html#claude-desktop">Claude Desktop &amp; Cowork</a> · <a class="h-link" href="workflow.html#install">All install options</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="x-section x-models" id="models">
+  <div class="h-wrap">
+    <div class="x-head">
+      <div>
+        <p class="h-kicker">Models</p>
+        <h2>Bring the access you already have.</h2>
+      </div>
+      <p>The extension runs on the <a class="pi-link" href="https://pi.dev">Pi</a> coding harness: a bundled SDK out of the box, or your installed <a class="pi-link" href="https://pi.dev">Pi</a> CLI with its own config. No vendor billing.</p>
+    </div>
+    {{provider-logos}}
+    <p class="x-models-more"><a class="h-link" href="models.html">Pi &amp; model setup →</a></p>
+  </div>
+</section>
+
+<section class="x-section" id="built-with">
+  <div class="h-wrap">
+    <div class="x-head">
+      <div>
+        <p class="h-kicker">Built with AgenticFlowX</p>
+        <h2>Open source, specified in AFX.</h2>
+      </div>
+      <p>Projects whose specs, designs, and tasks live in their repositories as AFX documents. Open the specs, then follow the <code>@see</code> links into the code.</p>
+    </div>
+
+    <article class="x-proj">
+      <div class="x-proj-copy">
+        <span class="h-label">01 / 03 · VS Code extension</span>
+        <h3>AgenticFlowX<br />for VS Code</h3>
+        <p class="x-proj-tag">Specified in AFX.<br />Built with AFX.</p>
+        <p>The extension is developed with its own workflow: every app and package has a spec, and the code points back to it.</p>
+        <ol class="x-proj-feats">
+          <li><b>54</b><span>spec folders</span></li>
+          <li><b>1,000+</b><span>files with <code>@see</code></span></li>
+          <li><b>Apache 2.0</b><span>TypeScript</span></li>
+        </ol>
+        <div class="x-proj-actions">
+          <a class="button" href="https://github.com/AgenticFlowX/agenticflowx">View repository ↗</a
+          ><a class="h-link" href="https://github.com/AgenticFlowX/agenticflowx/tree/main/docs/specs">Browse its specs ↗</a>
+        </div>
+      </div>
+      <figure class="x-proj-shot">
+        <button class="screenshot-button" data-enlarge aria-label="Enlarge SDD Studio screenshot">
+          <img src="assets/screenshots/sdd-studio.png" alt="SDD Studio in the AgenticFlowX extension, showing its own feature specs" loading="lazy" />
+        </button>
+        <figcaption>SDD Studio in the extension.</figcaption>
+      </figure>
+    </article>
+
+    <article class="x-proj x-proj-flip">
+      <div class="x-proj-copy">
+        <span class="h-label">02 / 03 · Workflow &amp; skills</span>
+        <h3>AFX<br />workflow</h3>
+        <p class="x-proj-tag">The skills behind it all.<br />Spec’d the same way.</p>
+        <p>The open skills, packs, and installer that run in Claude Code, Codex, and Copilot. Pack management is specified with a full spec, design, tasks, and journal.</p>
+        <ol class="x-proj-feats">
+          <li><b>19</b><span>core skills</span></li>
+          <li><b>5</b><span>role packs</span></li>
+          <li><b>MIT</b><span>Markdown + Bash</span></li>
+        </ol>
+        <div class="x-proj-actions">
+          <a class="button" href="https://github.com/AgenticFlowX/afx">View repository ↗</a
+          ><a class="h-link" href="https://github.com/AgenticFlowX/afx/tree/main/docs/specs">Browse its specs ↗</a>
+        </div>
+      </div>
+      <figure class="x-proj-shot">
+        <button class="screenshot-button" data-enlarge aria-label="Enlarge afx-cli install illustration">
+          <img src="assets/illustrations/afx-cli.svg" alt="Terminal showing afx-cli asking which agents to install for" loading="lazy" />
+        </button>
+        <figcaption>Illustration reproduced from a real afx-cli run.</figcaption>
+      </figure>
+    </article>
+
+    <article class="x-proj">
+      <div class="x-proj-copy">
+        <span class="h-label">03 / 03 · Example app</span>
+        <h3>RoomLedger</h3>
+        <p class="x-proj-tag">A room inspection app.<br />Three stages to copy.</p>
+        <p>From an approved spec, to a planned build, to four features with an ADR. Copy any stage into a folder with <code>afx-cli example</code>.</p>
+        <ol class="x-proj-feats">
+          <li><b>4</b><span>features</span></li>
+          <li><b>3</b><span>stages</span></li>
+          <li><b>1</b><span>ADR</span></li>
+        </ol>
+        <div class="x-proj-actions">
+          <a class="button" href="https://github.com/AgenticFlowX/afx/tree/main/examples">View repository ↗</a
+          ><a class="h-link" href="examples.html#example-full">Read the documents →</a>
+        </div>
+      </div>
+      <figure class="x-proj-shot x-proj-paper">
+        <div class="paper-sheet">
+          <div class="paper-meta"><span class="paper-type">SPEC</span><span>v1.2</span><span class="paper-stamp">Approved</span></div>
+          <h4>RoomLedger — Room Dashboard</h4>
+          <h5>Functional Requirements</h5>
+          <table>
+            <tbody>
+              <tr><td class="paper-id">FR-1</td><td>Hero section</td><td>Room identity, status chip, and a workflow timeline.</td></tr>
+              <tr><td class="paper-id">FR-2</td><td>KPI row</td><td>Four metric cards.</td></tr>
+              <tr><td class="paper-id">FR-3</td><td>Room card</td><td>Summary card and two actions.</td></tr>
+              <tr><td class="paper-id">FR-4</td><td>Approval summary</td><td>Owner and renter boxes.</td></tr>
+              <tr><td class="paper-id">NFR-1</td><td>No dependencies</td><td>Plain HTML, CSS, and JavaScript.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <figcaption>docs/specs/01-room-dashboard/spec.md</figcaption>
+      </figure>
+    </article>
+
+    <a class="x-proj-yours" href="https://www.reddit.com/r/agenticflowx/">
+      <span class="h-label">Your project</span>
+      <strong>Built something open source with AFX?</strong>
+      <span>Share it with the community, with a link to its repository and a screenshot, and it can be listed here.</span>
+      <span class="x-built-go">r/agenticflowx ↗</span>
+    </a>
+  </div>
+</section>
+
+<section class="h-closing">
+  <div class="h-wrap">
+    <svg class="h-closing-mark" viewBox="0 0 240 60" aria-hidden="true">
+      <path d="M10 30 C10 5, 60 5, 60 30 C60 55, 110 55, 110 30 C110 5, 160 5, 160 30 C160 55, 210 55, 210 30" />
+    </svg>
+    <h2>Pause. Think. Plan. Ship.</h2>
+    <div class="h-closing-actions">
+      <a class="button" href="#install">Install AgenticFlowX</a
+      ><a class="button button-outline button-on-dark" href="learn.html">Learn spec-driven development</a>
+    </div>
+    <p class="h-small">Open source · Extension Apache 2.0 · Workflow MIT</p>
+  </div>
+</section>
+
+<section class="x-section" id="credits">
+  <div class="h-wrap">
+    <div class="x-head">
+      <div>
+        <p class="h-kicker">Built in the open</p>
+        <h2>Good tools, shared foundations.</h2>
+      </div>
+      <p>AgenticFlowX brings established practice and open tools together.</p>
+    </div>
+    <dl class="kv kv-wide">
+      <div><dt><a class="pi-link" href="https://pi.dev">Pi</a></dt><dd><a class="h-link" href="https://pi.dev">Pi</a> provides the coding harness: sessions, tools, skill discovery, and the provider catalog.</dd></div>
+      <div><dt>Open formats</dt><dd>Plain Markdown, <a class="h-link" href="https://agentskills.io">Agent Skills</a>, and <a class="h-link" href="https://jsoncanvas.org">JSON Canvas</a> rendered with <a class="h-link" href="https://reactflow.dev">React Flow</a>.</dd></div>
+      <div><dt>Practice</dt><dd>IEEE 29148 requirements, MoSCoW, user stories, C4, ADRs, and work breakdown. Inspired in part by GitHub Spec Kit. <a class="h-link" href="spec-reference.html#credits">Origins →</a></dd></div>
+      <div><dt>Interface</dt><dd>react-markdown, remark-gfm, shadcn/ui, Radix, Tailwind, and Lucide. This site’s presentation took cues from <a class="h-link" href="https://livtramusic.com/">Livtra Music</a>.</dd></div>
+    </dl>
+  </div>
+</section>

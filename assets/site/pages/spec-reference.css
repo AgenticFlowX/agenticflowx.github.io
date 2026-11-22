@@ -1,0 +1,19 @@
+/* Cross-links that replaced the embedded Previewer illustration. */
+.reference-crosslinks {
+  margin: 22px 0 0;
+  padding: 16px 0;
+  border-block: 1px solid var(--line);
+  color: var(--muted);
+}
+.reference-crosslinks a {
+  color: var(--thread);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+/* Section numbers and IDs follow the amber "thread" colour. */
+.reference-content h2 {
+  scroll-margin-top: 110px;
+}
+.reference-content h2 .n {
+  color: var(--thread);
+}

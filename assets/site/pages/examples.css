@@ -1,0 +1,145 @@
+/* Examples page. Document viewer styles come from refresh.css. */
+.e-hero {
+  padding-bottom: clamp(40px, 5vw, 72px);
+}
+.e-hero h1 {
+  font-size: clamp(2.8rem, 4.8vw, 5.2rem);
+  line-height: 1.02;
+  max-width: 18ch;
+}
+.e-hero .h-lead {
+  margin-top: 26px;
+}
+.e-jump {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(20px, 3vw, 48px);
+  margin-top: clamp(44px, 5vw, 72px);
+}
+.e-jump a {
+  display: grid;
+  gap: 8px;
+  align-content: start;
+  border-top: 1px solid var(--ink);
+  padding-top: 16px;
+  color: inherit;
+}
+.e-jump .h-chip {
+  justify-self: start;
+  color: var(--thread);
+  border-color: #b4530966;
+  background: var(--thread-soft);
+}
+.e-jump strong {
+  font-size: 1.25rem;
+  font-weight: 650;
+  letter-spacing: -0.015em;
+}
+.e-jump a:hover strong {
+  color: var(--thread);
+}
+.e-jump small {
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+.e-notes {
+  margin-top: clamp(44px, 5vw, 72px);
+}
+.e-notes code {
+  font-family: var(--mono);
+  font-size: 0.86em;
+}
+.e-docs {
+  padding-top: 0;
+}
+.e-docs .document-example:first-child {
+  border-top: 1px solid var(--line);
+}
+.h-closing .h-small {
+  max-width: 60ch;
+}
+
+@media (max-width: 900px) {
+  .e-jump {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Rendered view: the same PDF-like sheet used across the site. */
+.document-view-preview {
+  padding: 8px 0 24px;
+}
+.markdown-paper {
+  background: #fff;
+  border: 1px solid #e2e0d8;
+  border-radius: 3px;
+  box-shadow:
+    0 1px 1px #10121b0a,
+    0 3px 6px #10121b0a,
+    0 30px 60px -28px #10121b55;
+  padding: clamp(28px, 4vw, 64px) clamp(24px, 5vw, 80px) !important;
+  font: 400 1rem/1.7 var(--serif);
+  color: #23242a;
+  max-width: 980px;
+  margin-inline: auto;
+}
+.markdown-paper h1,
+.markdown-paper h2,
+.markdown-paper h3 {
+  font-family: var(--display);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+.markdown-paper h1 {
+  font-size: clamp(1.7rem, 2.4vw, 2.2rem);
+  line-height: 1.15;
+  margin: 0 0 20px;
+}
+.markdown-paper h2 {
+  font-size: 0.78rem;
+  font-family: var(--sans);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 34px 0 12px;
+  padding-top: 14px;
+  border-top: 1px solid #ecebe5;
+}
+.markdown-paper h3 {
+  font-size: 1.15rem;
+  margin: 24px 0 8px;
+}
+.markdown-paper table {
+  width: 100%;
+  border-collapse: collapse;
+  font: 0.86rem/1.5 var(--sans);
+}
+.markdown-paper th {
+  text-align: left;
+  color: var(--muted);
+  font-weight: 600;
+  border-bottom: 1px solid #dddbd3;
+  padding: 7px 10px 7px 0;
+}
+.markdown-paper td {
+  border-bottom: 1px solid #efede7;
+  padding: 9px 12px 9px 0;
+  vertical-align: top;
+}
+.markdown-paper code {
+  font: 0.82em var(--mono);
+  background: #f4f2ec;
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+.markdown-paper pre.markdown-frontmatter {
+  font: 0.74rem/1.6 var(--mono);
+  color: var(--muted);
+  background: #faf9f5;
+  border: 1px solid #efede7;
+  border-radius: 4px;
+  padding: 12px 16px;
+  margin: 0 0 26px;
+  overflow-x: auto;
+}

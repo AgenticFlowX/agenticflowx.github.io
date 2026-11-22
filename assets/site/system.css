@@ -1388,3 +1388,60 @@ kbd {
     padding: 14px;
   }
 }
+
+/* GitHub links */
+.nav-gh {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+.nav-gh img {
+  width: 20px;
+  height: 20px;
+}
+@media (min-width: 951px) {
+  .nav-gh span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+}
+.gh-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 18px;
+  margin-top: 14px;
+}
+.gh-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px 7px 9px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--ink);
+  font-size: 0.86rem;
+  font-weight: 600;
+  transition: border-color 0.15s;
+}
+.gh-link:hover {
+  border-color: var(--ink);
+}
+.gh-link img {
+  width: 18px;
+  height: 18px;
+}
+.gh-door {
+  margin-top: 14px;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+}
+.h-install-route .gh-link {
+  margin-top: 12px;
+  text-decoration: none;
+  color: var(--ink);
+}

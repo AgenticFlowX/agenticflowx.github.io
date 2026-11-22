@@ -1,0 +1,404 @@
+<section class="h-hero page-hero">
+  <div class="h-wrap has-art">
+    <figure class="hero-art ">
+      <button class="screenshot-button" data-enlarge aria-label="Enlarge: Installing the AgenticFlowX extension in VS Code">
+        <img src="assets/illustrations/install.svg" alt="Installing the AgenticFlowX extension in VS Code" />
+      </button>
+      <figcaption>Step 01: install from the Extensions view.</figcaption>
+    </figure>
+    <p class="h-kicker"><span class="h-dot" aria-hidden="true"></span>Get started</p>
+    <h1>From install to a verified change in six steps.</h1>
+    <p class="h-lead">
+      Install the extension, connect a model you already have, and take one small change from a
+      question to a checked result. Add more structure only when the work asks for it.
+    </p>
+    <ol class="gs-path" aria-label="Steps on this page">
+      <li><a href="#install"><span class="h-id">01</span>Install</a></li>
+      <li><a href="#connect"><span class="h-id">02</span>Connect a model</a></li>
+      <li><a href="#first-change"><span class="h-id">03</span>First chat</a></li>
+      <li><a href="#first-doc"><span class="h-id">04</span>First Dash or spec</a></li>
+      <li><a href="#preview"><span class="h-id">05</span>Open the Previewer</a></li>
+      <li><a href="#verify"><span class="h-id">06</span>Verify</a></li>
+    </ol>
+  </div>
+</section>
+<div class="container guide-layout">
+  <aside class="guide-nav">
+    <span class="eyebrow">On this page</span>
+    <nav aria-label="On this page">
+      <a href="#install">01 · Install</a><a href="#connect">02 · Connect a model</a
+      ><a href="#first-change">03 · First chat</a><a href="#first-doc">04 · First Dash or spec</a
+      ><a href="#preview">05 · Open the Previewer</a><a href="#verify">06 · Verify</a
+      ><a href="#skills">Skills &amp; trust</a><a href="#settings">Settings &amp; privacy</a
+      ><a href="#faq">Troubleshooting &amp; FAQ</a>
+    </nav>
+    <a class="guide-related" href="models.html">Models &amp; Pi setup →</a>
+  </aside>
+  <article class="guide-article">
+    <section id="install">
+      <p class="h-kicker">01 · Install</p>
+      <h2>Pick where you want to work.</h2>
+      <div class="guide-choice">
+        <div>
+          <h3>In VS Code</h3>
+          <p>
+            Install AgenticFlowX, then open it from the activity bar (<kbd>Cmd</kbd>/<kbd>Ctrl</kbd>
+            + <kbd>Alt</kbd> + <kbd>A</kbd>). <code>AgenticFlowX: Open Workbench</code> opens the
+            project panels.
+          </p>
+          <div class="actions">
+            <a
+              class="button button-small"
+              href="https://marketplace.visualstudio.com/items?itemName=AgenticFlowX.agenticflowx"
+              >VS Code Marketplace ↗</a
+            ><a
+              class="button button-small button-outline"
+              href="https://open-vsx.org/extension/agenticflowx/agenticflowx"
+              >Open VSX ↗</a
+            >
+          </div>
+        </div>
+        <div id="cli">
+          <h3>In the agent you already use</h3>
+          <p>
+            Install the Claude Code plugin, or run <code>afx-cli</code> to add the skills for
+            Claude Code, Codex, or Copilot. The workflow runs without the extension.
+          </p>
+          <div class="command-block">
+            <pre><code>/plugin marketplace add AgenticFlowX/afx
+/plugin install afx@afx</code></pre>
+            <button class="copy-button" data-copy aria-label="Copy Claude Code plugin commands">Copy</button>
+          </div>
+          <p><a href="workflow.html#install">All install options, including the CLI →</a></p>
+        </div>
+      </div>
+      <p class="guide-note">
+        The extension bundles the <a class="pi-link" href="https://pi.dev">Pi</a> SDK and the core workflow skills. You don't need to install <a class="pi-link" href="https://pi.dev">Pi</a>
+        separately unless you want to use your own <a class="pi-link" href="https://pi.dev">Pi</a> CLI.
+      </p>
+    </section>
+
+    <section id="connect">
+      <p class="h-kicker">02 · Connect a model</p>
+      <h2>Bring the access you already have.</h2>
+      <ol class="guide-steps">
+        <li>
+          <strong>Open Settings → Models.</strong> Sign in with a supported subscription, add an
+          API key, or point a preset at a local server.
+        </li>
+        <li>
+          <strong>Pick a model in chat.</strong> The picker groups models by configured provider.
+          Thinking levels and image input follow the selected model.
+        </li>
+        <li>
+          <strong>Already use <a class="pi-link" href="https://pi.dev">Pi</a>?</strong> In Settings → Runtimes, detect your <a class="pi-link" href="https://pi.dev">Pi</a> CLI and turn on
+          <a class="pi-link" href="https://pi.dev">Pi</a> RPC to use its own catalog and sign-in.
+        </li>
+      </ol>
+      <p class="guide-note">
+        Which models you see depends on the active runtime, the provider, and your account. Keys you
+        enter are stored in VS Code SecretStorage.
+      </p>
+      <figure class="guide-shot">
+        <button class="screenshot-button" data-enlarge aria-label="Enlarge provider settings">
+          <img
+            src="assets/screenshots/chat-providers.png"
+            alt="AgenticFlowX provider settings with sign-in, API key, and local options"
+            loading="lazy"
+          />
+        </button>
+        <figcaption>
+          Settings → Models. Screenshots may show labels from an earlier version.
+        </figcaption>
+      </figure>
+      <p><a class="h-link" href="models.html">Every provider, recipe, and Pi option →</a></p>
+    </section>
+
+    <section id="first-change">
+      <p class="h-kicker">03 · First chat</p>
+      <h2>Ask before you change anything.</h2>
+      <p>
+        Chat has three modes. Switch with <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>Shift</kbd> +
+        <kbd>M</kbd>; the status bar shows the current one.
+      </p>
+      <div id="modes" class="gs-modes">
+        <div>
+          <span class="h-chip">Code</span>
+          <p>Edits, implementation, debugging, and commands. Full access.</p>
+        </div>
+        <div>
+          <span class="h-chip">Explore</span>
+          <p>Read-only investigation, enforced by the extension. Ask where behaviour lives.</p>
+        </div>
+        <div>
+          <span class="h-chip">Spec</span>
+          <p>Planning first: clarify requirements, review the design, and turn it into tasks.</p>
+        </div>
+      </div>
+      <div class="guide-prompt">
+        <span class="h-label">Try this in Explore</span>
+        <p>
+          “How does project search work today? Show me the relevant files and the gaps in its
+          tests.”
+        </p>
+      </div>
+      <p>
+        Type <code>/</code> for AFX skills and commands, <code>@</code> to mention a file, and
+        <code>!</code> to run a shell command. Commands that look destructive are flagged before
+        they run.
+      </p>
+    </section>
+
+    <section id="first-doc">
+      <p class="h-kicker">04 · First Dash or spec</p>
+      <h2>Write down the change before the agent makes it.</h2>
+      <div class="gs-sizes">
+        <div>
+          <h3>Dash</h3>
+          <p>A known-scope fix or refactor. Purpose and tasks in one file. Try <code>/afx-dash</code>.</p>
+        </div>
+        <div>
+          <h3>Sprint</h3>
+          <p>A focused feature. Spec, design, and tasks in one file, approved in stages. Try <code>/afx-sprint</code>.</p>
+        </div>
+        <div>
+          <h3>Full spec</h3>
+          <p>Auth, migrations, public APIs, cross-team work. Four files. Start with <code>AgenticFlowX: New SDD</code> or <code>/afx-scaffold</code>.</p>
+        </div>
+      </div>
+      <p>
+        Review the proposed scope before implementation. If a Dash outgrows itself, AFX says so;
+        moving up keeps your IDs and links.
+        <a href="learn.html#first">Follow the first-feature walkthrough →</a>
+      </p>
+    </section>
+
+    <section id="preview">
+      <p class="h-kicker">05 · Open the Previewer</p>
+      <h2>Read the plan as a document, then act on it.</h2>
+      <p>
+        Open any spec Markdown file and choose <code>AgenticFlowX: Open Preview</code> from the
+        editor title bar. Each document type gets its own actions. A spec offers Refine, Author,
+        Validate, Review, and Approve. Actions that create content draft a command in chat for you
+        to review; checks and approvals, such as Validate, Review, and Approve, run straight away.
+      </p>
+      <figure class="guide-shot">
+        <button class="screenshot-button" data-enlarge aria-label="Enlarge Previewer screenshot">
+          <img
+            src="assets/screenshots/previewer-spec.png"
+            alt="The AFX Previewer showing a specification with document actions, Quality Pulse, and Refinement Coach"
+            loading="lazy"
+          />
+        </button>
+        <figcaption>
+          Quality Pulse rates structure and clarity; the Refinement Coach suggests the next fix.
+        </figcaption>
+      </figure>
+      <p><a class="h-link" href="vscode.html#viewer">What the Previewer can do →</a></p>
+    </section>
+
+    <section id="verify">
+      <p class="h-kicker">06 · Verify</p>
+      <h2>Check the work, then sign it off.</h2>
+      <ol class="guide-steps">
+        <li>
+          <strong>Run the task check.</strong> From a tasks document, choose Verify, or run
+          <code>/afx-task verify</code>. It checks files, <code>@see</code> links, and leftover
+          TODOs against the spec.
+        </li>
+        <li>
+          <strong>Trace the links.</strong> <code>/afx-check trace</code> or
+          <code>AgenticFlowX: Verify Traceability</code> looks for broken or missing references.
+        </li>
+        <li>
+          <strong>Test and review it yourself.</strong> These are text checks; they don't run your
+          code. Run your tests, then tick the human sign-off after the agent's.
+        </li>
+      </ol>
+    </section>
+
+    <section id="skills">
+      <p class="h-kicker">Skills &amp; trust</p>
+      <h2>Know where every skill comes from.</h2>
+      <p>
+        Settings → Support shows loaded commands, their source paths, and scope. Core skills are
+        bundled; personal and team skills are discovered from standard <code>SKILL.md</code>
+        folders.
+      </p>
+      <div class="table-scroll">
+        <table class="guide-table">
+          <thead>
+            <tr>
+              <th>Scope</th>
+              <th>Locations</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Global</td>
+              <td>
+                <code>~/.pi/agent/skills</code> or <code>$PI_CODING_AGENT_DIR/skills</code>;
+                <code>~/.agents/skills</code>
+              </td>
+            </tr>
+            <tr>
+              <td>Project</td>
+              <td><code>.pi/skills</code> and <code>.agents/skills</code></td>
+            </tr>
+            <tr>
+              <td>Custom</td>
+              <td>
+                <code>afx.skills.extraPaths</code> accepts absolute, home-relative, and
+                workspace-relative paths.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        Names and descriptions load first; full instructions load when needed. Project-local <a class="pi-link" href="https://pi.dev">Pi</a>
+        settings, skills, extensions, and packages follow <code>afx.pi.projectTrust</code>:
+        <strong>ask</strong>, <strong>trust</strong>, or <strong>ignore</strong>. Exclude
+        individual tools with <code>afx.pi.excludedTools</code>.
+      </p>
+      <p id="packs">
+        <a href="workflow.html#packs"
+          >Add role packs for development, QA, security, architecture, or product work →</a
+        >
+      </p>
+      <p id="claude-desktop">
+        <a href="workflow.html#claude-desktop">Install in Claude Desktop or Cowork →</a>
+      </p>
+    </section>
+
+    <section id="settings">
+      <p class="h-kicker">Settings &amp; privacy</p>
+      <h2>Make the workspace yours.</h2>
+      <p>
+        Settings covers Models, Runtimes, Skills, and appearance. About shows the bundled skill
+        version. The Meridian theme comes in seven styles: lyra, luma, maia, nova, vega, mira, and
+        sera.
+      </p>
+      <div class="guide-choice">
+        <div>
+          <h3>Keep useful history</h3>
+          <p>
+            Search, reopen, rename, or export a session. Copy a recap for the next agent or your
+            next day of work.
+          </p>
+        </div>
+        <div>
+          <h3>Choose your panels</h3>
+          <p>
+            Hide unused Workbench tabs with <code>afx.experimental.workbenchHiddenViews</code>.
+            Turn on the experimental Canvas with <code>afx.experimental.canvas</code>.
+          </p>
+        </div>
+      </div>
+      <figure class="guide-shot">
+        <button
+          class="screenshot-button"
+          data-enlarge
+          aria-label="Enlarge searchable conversation history"
+        >
+          <img
+            src="assets/screenshots/history-light.png"
+            alt="Searchable conversation history"
+            loading="lazy"
+          />
+        </button>
+        <figcaption>Reopen a session or copy a recap to carry the context forward.</figcaption>
+      </figure>
+      <div class="gs-privacy">
+        <h3>What leaves your machine</h3>
+        <ul>
+          <li>
+            <strong>Your prompts and context</strong> go to the model provider you choose. With a
+            local runtime, they go to the endpoint you configure.
+          </li>
+          <li>
+            <strong>Your documents</strong> stay as Markdown files in your repository. There is no
+            AgenticFlowX account or backend.
+          </li>
+          <li>
+            <strong>UI analytics</strong> (Microsoft Clarity in the extension's panels) are on by
+            default. They respect VS Code's telemetry setting and Do Not Track, and you can turn them
+            off with <code>afx.telemetry.enabled</code>.
+          </li>
+        </ul>
+      </div>
+      <details class="guide-details">
+        <summary>Context, logging, and network settings</summary>
+        <p>
+          <code>afx.context.includeActiveFileContext</code> controls active-file context.
+          <code>afx.logLevel</code> sets output verbosity; <code>afx.debugPerf</code> adds
+          streaming diagnostics. <code>afx.network.httpProxy</code> routes requests through a proxy.
+          <code>afx.chat.autoOpenModifiedFiles</code> opens files the agent changes.
+        </p>
+        <a href="https://github.com/AgenticFlowX/agenticflowx#14--settings-and-configuration"
+          >Complete settings reference ↗</a
+        >
+      </details>
+    </section>
+
+    <section id="faq">
+      <p class="h-kicker">Troubleshooting &amp; FAQ</p>
+      <h2>Practical answers.</h2>
+      <div class="faq">
+        <details>
+          <summary>Do I need an AgenticFlowX account?</summary>
+          <p>
+            No. AgenticFlowX is open source. Connect your own model account, API provider, or local
+            runtime; provider usage and limits are separate.
+          </p>
+        </details>
+        <details>
+          <summary>A model doesn't appear, or a request fails.</summary>
+          <p>
+            Check which runtime is active first. The bundled SDK uses Settings → Models; <a class="pi-link" href="https://pi.dev">Pi</a> RPC uses
+            <a class="pi-link" href="https://pi.dev">Pi</a>'s own sign-in and catalog. Then confirm your sign-in or key, endpoint, and model ID.
+            For slow local startup, raise <code>afx.runtime.responseStartTimeoutMs</code>.
+          </p>
+          <a href="models.html">Open model setup →</a>
+        </details>
+        <details>
+          <summary>The agent stops responding.</summary>
+          <p>
+            Run <code>AgenticFlowX: Agent Smoke Test</code> to check the runtime, then
+            <code>AgenticFlowX: Restart Agent Process</code>. <code>AgenticFlowX: Show Logs</code>
+            opens the output panel for details.
+          </p>
+        </details>
+        <details>
+          <summary>A skill I expected isn't listed.</summary>
+          <p>
+            Open Settings → Support to see where skills load from. Project-local skills follow
+            <code>afx.pi.projectTrust</code>; if it's set to ignore, they won't load. Add extra
+            folders with <code>afx.skills.extraPaths</code>.
+          </p>
+        </details>
+        <details>
+          <summary>Where are the documents?</summary>
+          <p>
+            Specs, designs, tasks, and journals are Markdown in your workspace, usually under
+            <code>docs/specs/</code>. Workbench notes and the board live under <code>.afx/</code>;
+            Canvas uses <code>.afx/project.canvas</code>.
+          </p>
+        </details>
+        <details>
+          <summary>Can I try a complete example?</summary>
+          <p>
+            <code>afx-cli example starter|basic|full</code> copies the RoomLedger example, with
+            documents and traceable code. <a href="examples.html">Read the examples online →</a>
+          </p>
+        </details>
+      </div>
+      <p>
+        <a class="h-link" href="https://github.com/AgenticFlowX/agenticflowx/issues"
+          >Report an issue ↗</a
+        >
+        · <a class="h-link" href="https://www.reddit.com/r/agenticflowx/">Ask the community ↗</a>
+      </p>
+    </section>
+  </article>
+</div>

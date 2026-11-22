@@ -1,0 +1,179 @@
+<div class="spec-example" data-example>
+  <div class="example-toolbar">
+    <span>project-search / spec.md</span>
+    <div class="example-tabs" role="tablist" aria-label="Spec example views">
+      <button role="tab" id="tab-rendered" aria-controls="example-rendered" aria-selected="false" tabindex="-1">
+        Rendered</button
+      ><button
+        role="tab"
+        id="tab-source"
+        aria-controls="example-source"
+        aria-selected="false"
+        tabindex="-1"
+      >
+        Markdown</button
+      ><button
+        role="tab"
+        id="tab-viewer"
+        aria-controls="example-viewer"
+        aria-selected="true"
+      >
+        AFX Previewer
+      </button>
+    </div>
+  </div>
+  <div
+    class="example-panel"
+    id="example-rendered"
+    role="tabpanel"
+    aria-labelledby="tab-rendered"
+    tabindex="0"
+    hidden
+  >
+    <article class="spec-document" data-spec-document>
+      <span class="eyebrow rust">Product specification</span>
+      <h3>Find the right project.</h3>
+      <div class="spec-meta">
+        <span class="chip chip-rust">Draft</span><span class="chip">@team</span
+        ><span class="chip">v1.0</span>
+      </div>
+      <h4>The problem</h4>
+      <p>
+        As the project list grows, people spend too long finding their work. Add search to the
+        existing project list.
+      </p>
+      <h4>Requirements</h4>
+      <table class="spec-table">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Requirement</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>FR-1</td>
+            <td>Filter projects by name, ignoring letter case.</td>
+          </tr>
+          <tr>
+            <td>FR-2</td>
+            <td>Show “No projects found” when nothing matches.</td>
+          </tr>
+          <tr>
+            <td>FR-3</td>
+            <td>Clearing the search restores the full project list.</td>
+          </tr>
+        </tbody>
+      </table>
+      <h4>Acceptance criteria</h4>
+      <ul>
+        <li>Searching “garden” finds “Garden Planner”.</li>
+        <li>An unmatched query shows the empty state.</li>
+        <li>Clearing the field restores every project.</li>
+      </ul>
+      <h4>Out of scope</h4>
+      <p>Searching file contents, fuzzy matching, and saved searches.</p>
+      <h4>Open question</h4>
+      <p>Should the search text survive a page refresh?</p>
+    </article>
+  </div>
+  <div
+    class="example-panel"
+    id="example-source"
+    role="tabpanel"
+    aria-labelledby="tab-source"
+    tabindex="0"
+    hidden
+  >
+    <pre class="example-source"><code>---
+afx: true
+type: SPEC
+status: Draft
+owner: "@team"
+version: "1.0"
+created_at: "2026-11-21T08:43:18.000Z"
+updated_at: "2026-11-21T08:43:18.000Z"
+tags: [project-search]
+---
+
+# Find the right project.
+
+## The problem
+As the project list grows, people spend too long finding
+their work. Add search to the existing project list.
+
+## Requirements
+| ID   | Requirement |
+| ---- | ----------- |
+| FR-1 | Filter projects by name, ignoring letter case. |
+| FR-2 | Show “No projects found” when nothing matches. |
+| FR-3 | Clearing the search restores the full project list. |
+
+## Acceptance criteria
+- Searching “garden” finds “Garden Planner”.
+- An unmatched query shows the empty state.
+- Clearing the field restores every project.
+
+## Out of scope
+Searching file contents, fuzzy matching, and saved searches.
+
+## Open question
+Should the search text survive a page refresh?</code></pre>
+  </div>
+  <div
+    class="example-panel"
+    id="example-viewer"
+    role="tabpanel"
+    aria-labelledby="tab-viewer"
+    tabindex="0"
+  >
+    <div class="example-viewer">
+      <div class="viewer-main">
+        <div class="viewer-actions" aria-label="Illustrative workflow actions">
+          <button data-demo-command="/afx-spec refine project-search">Refine</button
+          ><button data-demo-command="/afx-design author project-search">Author</button
+          ><button data-demo-command="/afx-spec validate project-search">Validate</button
+          ><button data-demo-command="/afx-spec review project-search">Review</button>
+        </div>
+        <div data-viewer-document></div>
+      </div>
+      <aside class="viewer-rail" aria-label="Illustrative document checks">
+        <span class="eyebrow">Quality Pulse</span>
+        <div class="quality-item">
+          <div>Structure <span>GOOD</span></div>
+          <p>Requirements and criteria are present.</p>
+        </div>
+        <div class="quality-item">
+          <div>Clarity <span class="rust">REVIEW</span></div>
+          <p>One open question to resolve.</p>
+        </div>
+        <div class="quality-item">
+          <div>Ownership <span>GOOD</span></div>
+          <p>A named owner and draft status.</p>
+        </div>
+        <div class="coach-box">
+          <strong>Refinement Coach</strong>
+          <p>Decide whether search survives a refresh before planning the implementation.</p>
+        </div>
+        <div class="coach-box">
+          <strong>Linked task · tasks.md</strong
+          ><label class="demo-checkbox"
+            ><input type="checkbox" data-demo-task /> Implement name filtering [FR-1]</label
+          >
+          <p>Try the checkbox. In AFX, task changes update the Markdown source.</p>
+        </div>
+      </aside>
+    </div>
+    <div class="demo-feedback" role="status" aria-live="polite">
+      Interactive illustration. Try Refine, Validate, Review, or the section actions to see the command AFX prepares or sends.
+    </div>
+  </div>
+  <div class="example-footer">
+    <span>One plain-text document. Different ways to work with it.</span
+    ><a href="spec-reference.html">Explore the document anatomy</a>
+  </div>
+</div>
+<p class="example-note">
+  A shortened example for this tour. The Previewer illustration runs locally in this page; it does
+  not call an agent or change your files.
+</p>

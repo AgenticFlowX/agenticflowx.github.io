@@ -1,0 +1,299 @@
+<section class="h-hero page-hero">
+  <div class="h-wrap has-art">
+    <figure class="hero-art ">
+      <button class="screenshot-button" data-enlarge aria-label="Enlarge: The model picker grouping configured models by provider">
+        <img src="assets/screenshots/model-selector.png" alt="The model picker grouping configured models by provider" />
+      </button>
+      <figcaption>The model picker: every configured provider in one list.</figcaption>
+    </figure>
+    <p class="h-kicker"><span class="h-dot" aria-hidden="true"></span><a class="pi-link" href="https://pi.dev">Pi</a> coding harness &amp; models</p>
+    <h1>Use the model you already have, on Pi.</h1>
+    <p class="h-lead">
+      <a class="pi-link" href="https://pi.dev">Pi</a> is the coding harness inside AgenticFlowX: sessions, tools, skills, and model access.
+      Use the bundled SDK out of the box, or connect the <a class="pi-link" href="https://pi.dev">Pi</a> CLI you already work with.
+    </p>
+    <div class="md-facts">
+      <div><span class="h-label">Subscription sign-in</span><strong>6 providers</strong></div>
+      <div><span class="h-label">Local presets</span><strong>Ollama · LM Studio · vLLM</strong></div>
+      <div><span class="h-label">Custom endpoints</span><strong>4 API formats</strong></div>
+      <div><span class="h-label">Keys stored in</span><strong>VS Code SecretStorage</strong></div>
+    </div>
+  </div>
+</section>
+<div class="container guide-layout">
+  <aside class="guide-nav">
+    <span class="eyebrow">On this page</span>
+    <nav aria-label="On this page">
+      <a href="#pi">Two Pi runtimes</a><a href="#providers">Supported access</a
+      ><a href="#recipes">Connect a provider</a><a href="#local">Run local models</a
+      ><a href="#pi-users">Use your Pi CLI</a><a href="#custom">Custom endpoints</a>
+    </nav>
+    <a class="guide-related" href="get-started.html">Get started →</a>
+  </aside>
+  <article class="guide-article">
+    <section id="pi">
+      <p class="h-kicker">The <a class="pi-link" href="https://pi.dev">Pi</a> foundation</p>
+      <h2>One harness, two ways to run it.</h2>
+      <p>
+        AgenticFlowX builds the editor, document workflow, and Workbench around
+        <a href="https://pi.dev">Pi</a>. Both runtimes run the same conversation workflow; each
+        owns its own model configuration.
+      </p>
+      <div class="md-runtimes">
+        <div>
+          <span class="h-chip">Default</span>
+          <h3>Bundled <a class="pi-link" href="https://pi.dev">Pi</a> SDK</h3>
+          <p>
+            Runs inside the extension, on by default (<code>afx.sdk.enabled</code>). Configure
+            providers in <strong>Settings → Models</strong>. No separate <a class="pi-link" href="https://pi.dev">Pi</a> install.
+          </p>
+        </div>
+        <div>
+          <span class="h-chip">Optional</span>
+          <h3><a class="pi-link" href="https://pi.dev">Pi</a> CLI over RPC</h3>
+          <p>
+            Runs your installed <a class="pi-link" href="https://pi.dev">Pi</a> as a subprocess, off by default (<code>afx.rpc.enabled</code>).
+            Reuses <a class="pi-link" href="https://pi.dev">Pi</a>'s model catalog, sign-in, sessions, and skills.
+          </p>
+        </div>
+      </div>
+      <p class="guide-note">
+        If a model is missing, check which runtime is active before changing credentials: SDK
+        providers and <a class="pi-link" href="https://pi.dev">Pi</a> providers are configured in different places.
+      </p>
+    </section>
+
+    <section id="providers">
+      <p class="h-kicker">Supported access</p>
+      <h2>Sign in, add a key, or run locally.</h2>
+      <p>
+        Claude, GPT and Codex, Gemini, DeepSeek, Grok, Mistral, Kimi, Qwen, MiMo, GLM, MiniMax,
+        and open-weight models, through the providers below.
+      </p>
+      {{provider-logos}}
+      <div class="provider-ledger md-ledger">
+        <div>
+          <span class="h-label">01 · Subscription sign-in</span>
+          <h3>Connect an account</h3>
+          <p>Anthropic (Claude) · ChatGPT / Codex · GitHub Copilot · OpenRouter · Kimi For Coding · xAI</p>
+        </div>
+        <div>
+          <span class="h-label">02 · API key</span>
+          <h3>Use your API access</h3>
+          <p>
+            OpenAI · Anthropic · Gemini · Google Vertex · DeepSeek · Groq · Cerebras · Mistral ·
+            OpenRouter · Amazon Bedrock · Azure OpenAI · Cloudflare · Vercel AI Gateway · xAI ·
+            Kimi · Qwen token plans · Xiaomi · Z.ai · MiniMax · and more
+          </p>
+        </div>
+        <div>
+          <span class="h-label">03 · Local &amp; custom</span>
+          <h3>Run on your hardware</h3>
+          <p>
+            Presets for Ollama, LM Studio, and vLLM. Anything else that speaks an OpenAI-compatible
+            API, such as llama.cpp's server, through the Custom option.
+          </p>
+        </div>
+      </div>
+      <p class="guide-note">
+        Sign-in support doesn't guarantee a particular plan or model. Which models you can use
+        depends on the runtime, the provider, and your account; provider limits and charges still
+        apply. The model picker shows what your current setup exposes.
+      </p>
+      <figure class="guide-shot">
+        <button class="screenshot-button" data-enlarge aria-label="Enlarge model selector">
+          <img
+            src="assets/screenshots/model-selector.png"
+            alt="Models grouped by configured provider"
+            loading="lazy"
+          />
+        </button>
+        <figcaption>
+          Switch models within a conversation. Thinking levels, image input, and usage reporting
+          follow the selected model.
+        </figcaption>
+      </figure>
+    </section>
+
+    <section id="recipes">
+      <p class="h-kicker">Connect a provider</p>
+      <h2>Three recipes cover most setups.</h2>
+      <div id="r-oauth" class="md-recipe">
+        <h3>Subscription sign-in</h3>
+        <ol class="guide-steps">
+          <li>
+            In <strong>Settings → Models</strong>, choose the provider and select
+            <strong>Sign in</strong>.
+          </li>
+          <li>Complete its browser or device-code flow.</li>
+          <li>Return to the model picker and choose an available model.</li>
+        </ol>
+      </div>
+      <div id="r-keys" class="md-recipe">
+        <h3>API key</h3>
+        <p>
+          Select the provider, add its key, and choose a model. Keys you enter are stored in VS Code
+          SecretStorage. Supported environment variables can also supply keys.
+        </p>
+      </div>
+      <details class="guide-details">
+        <summary>Provider examples and environment variables</summary>
+        <div class="table-scroll">
+          <table class="guide-table">
+            <thead>
+              <tr>
+                <th>Provider</th>
+                <th>Environment variable</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>OpenAI</td>
+                <td><code>OPENAI_API_KEY</code></td>
+              </tr>
+              <tr>
+                <td>Anthropic</td>
+                <td><code>ANTHROPIC_API_KEY</code></td>
+              </tr>
+              <tr>
+                <td>Gemini</td>
+                <td><code>GEMINI_API_KEY</code> or <code>GOOGLE_API_KEY</code></td>
+              </tr>
+              <tr id="r-deepseek">
+                <td>DeepSeek</td>
+                <td><code>DEEPSEEK_API_KEY</code></td>
+              </tr>
+              <tr>
+                <td>xAI</td>
+                <td><code>XAI_API_KEY</code></td>
+              </tr>
+              <tr>
+                <td>Mistral</td>
+                <td><code>MISTRAL_API_KEY</code></td>
+              </tr>
+              <tr>
+                <td>Groq</td>
+                <td><code>GROQ_API_KEY</code></td>
+              </tr>
+              <tr id="r-xiaomi">
+                <td>Xiaomi</td>
+                <td>
+                  <code>XIAOMI_API_KEY</code> for the standard API; token plans use a regional entry
+                  with its own variable.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p id="r-more">
+          Kimi, MiniMax, Z.ai, and Qwen token plans have their own catalog entries and regional
+          variants. Select the provider and region that match your account.
+        </p>
+      </details>
+      <div id="r-routers" class="md-recipe">
+        <h3>Gateways and enterprise providers</h3>
+        <p>
+          OpenRouter, Vercel AI Gateway, Cloudflare AI Gateway and Workers AI, Amazon Bedrock,
+          Azure OpenAI, and Google Vertex have catalog entries. Fill in the provider's required
+          authentication and endpoint fields.
+        </p>
+      </div>
+    </section>
+
+    <section id="local">
+      <p class="h-kicker">Run local models</p>
+      <h2>Keep inference on your own machine.</h2>
+      <p>
+        Start your model server, load a model that supports the tools your task needs, then point
+        AgenticFlowX at its endpoint.
+      </p>
+      <div class="guide-choice">
+        <div id="r-ollama">
+          <h3>Ollama</h3>
+          <p>
+            Choose the Ollama preset and point it at your running server, usually
+            <code>http://localhost:11434</code>. You can also set
+            <code>afx.sdk.ollamaBaseUrl</code>.
+          </p>
+        </div>
+        <div id="r-llamacpp">
+          <h3>LM Studio, vLLM, and llama.cpp</h3>
+          <p>
+            LM Studio and vLLM have presets. For llama.cpp's server or any other OpenAI-compatible
+            server, use <strong>Custom</strong> with the OpenAI completions format. Enter the actual
+            base URL and model ID, and a key if your server needs one.
+          </p>
+        </div>
+      </div>
+      <p class="guide-note">
+        Requests go only to the endpoint you configure. Image input, tool use, reasoning, and speed
+        depend on the model and the server.
+      </p>
+    </section>
+
+    <section id="pi-users">
+      <p class="h-kicker">Use your <a class="pi-link" href="https://pi.dev">Pi</a> CLI</p>
+      <h2>Keep the Pi setup you already have.</h2>
+      <ol class="guide-steps">
+        <li>
+          Open <strong>Settings → Runtimes</strong> and run
+          <code>AgenticFlowX: Auto-detect Pi CLI Binary</code>, or set
+          <code>afx.agentBinaryPath</code>.
+        </li>
+        <li>
+          Turn on <a class="pi-link" href="https://pi.dev">Pi</a> RPC with <code>afx.rpc.enabled</code>. Sign in to providers with <a class="pi-link" href="https://pi.dev">Pi</a>'s
+          <code>/login</code>.
+        </li>
+        <li>
+          Choose from <a class="pi-link" href="https://pi.dev">Pi</a>'s model catalog. RPC custom providers come from <a class="pi-link" href="https://pi.dev">Pi</a>'s
+          <code>models.json</code>, not the SDK settings.
+        </li>
+      </ol>
+      <p>
+        <a class="pi-link" href="https://pi.dev">Pi</a> configuration lives in <code>~/.pi/agent</code> or <code>$PI_CODING_AGENT_DIR</code>.
+        Project-local resources still follow <code>afx.pi.projectTrust</code>.
+      </p>
+      <figure class="guide-shot">
+        <button
+          class="screenshot-button"
+          data-enlarge
+          aria-label="Enlarge Pi CLI and local runtime settings"
+        >
+          <img
+            src="assets/screenshots/providers-runtimes.png"
+            alt="Pi CLI and local runtime settings"
+            loading="lazy"
+          />
+        </button>
+        <figcaption>Connect your installed <a class="pi-link" href="https://pi.dev">Pi</a> instead of configuring providers twice.</figcaption>
+      </figure>
+    </section>
+
+    <section id="custom">
+      <p class="h-kicker">Custom endpoints</p>
+      <h2>Configure any endpoint explicitly.</h2>
+      <p>
+        SDK custom providers speak four formats: OpenAI completions, OpenAI responses, Anthropic
+        messages, and Google Generative AI. Presets cover Ollama, LM Studio, vLLM, OpenRouter,
+        Vercel AI Gateway, Moonshot (Kimi), an Anthropic proxy, and Google AI Studio; Custom covers
+        the rest. Set the format, base URL, authentication, and model capabilities to match your
+        endpoint.
+      </p>
+      <figure class="guide-shot">
+        <button class="screenshot-button" data-enlarge aria-label="Enlarge custom provider form">
+          <img
+            src="assets/screenshots/custom-provider.png"
+            alt="Custom provider configuration form"
+            loading="lazy"
+          />
+        </button>
+        <figcaption>A custom provider in Settings → Models.</figcaption>
+      </figure>
+      <p>
+        SDK custom providers are managed by AgenticFlowX. RPC custom providers belong in <a class="pi-link" href="https://pi.dev">Pi</a>'s
+        configuration.
+      </p>
+      <a class="h-link" href="get-started.html#skills">Next: skills, trust, and settings →</a>
+    </section>
+  </article>
+</div>

@@ -1,0 +1,11 @@
+{
+  "name": "afx-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/check.mjs",
+    "test": "node --test scripts/serve.test.mjs",
+    "dev": "node scripts/serve.mjs"
+  }
+}

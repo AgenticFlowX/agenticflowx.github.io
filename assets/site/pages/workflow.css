@@ -1,0 +1,270 @@
+/* Skills page (workflow.html). Shared primitives come from system.css. */
+.w-hero h1 {
+  font-size: clamp(2.8rem, 4.8vw, 5.2rem);
+  line-height: 1.02;
+}
+.w-hero .h-lead {
+  margin-top: 28px;
+}
+.w-hero .h-install-buttons {
+  margin-top: 32px;
+}
+.w-shapes {
+  display: grid;
+  border-top: 1px solid var(--ink);
+  padding-top: 14px;
+}
+.w-shapes > .h-label {
+  margin-bottom: 6px;
+}
+.w-shapes a {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2px 14px;
+  align-items: baseline;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+  color: inherit;
+}
+.w-shapes a:hover strong {
+  color: var(--thread);
+}
+.w-shapes .h-chip {
+  grid-row: span 2;
+  color: var(--thread);
+  border-color: #b4530966;
+  background: var(--thread-soft);
+}
+.w-shapes strong {
+  font-size: 1.1rem;
+  font-weight: 650;
+}
+.w-shapes small {
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+.w-hero .h-works-with {
+  margin-top: clamp(48px, 6vw, 80px);
+  border-top: 1px solid var(--line);
+}
+
+.h-ladder code,
+.w-moveup code,
+.h-grid-3 h3 code {
+  font-family: var(--mono);
+  font-size: 0.86em;
+}
+.h-ladder .h-label code {
+  font-size: 1em;
+  text-transform: none;
+  color: var(--thread);
+}
+.w-moveup {
+  margin-top: clamp(48px, 5vw, 72px);
+}
+
+/* Excerpts: paper documents, not dumps. */
+.w-excerpts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(24px, 3vw, 48px);
+}
+.w-excerpts article {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+.w-excerpt-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.w-excerpt-head .h-chip {
+  color: var(--thread);
+  border-color: #b4530966;
+  background: var(--thread-soft);
+}
+.w-excerpts h3 {
+  font-size: 1.35rem;
+  font-weight: 650;
+  letter-spacing: -0.015em;
+}
+.w-excerpt {
+  margin: 0;
+  flex: 1;
+  background: var(--sheet);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 22px 24px;
+  font: 400 0.8rem/1.75 var(--mono);
+  color: #343640;
+  overflow-x: auto;
+  box-shadow: 0 24px 50px -40px #15161b66;
+}
+.w-excerpts .h-link {
+  align-self: flex-start;
+}
+
+/* Install */
+.w-routes {
+  display: grid;
+  grid-template-columns: 1.15fr 0.8fr 1.15fr;
+  gap: clamp(24px, 3vw, 48px);
+}
+.w-routes article {
+  border-top: 1px solid var(--ink);
+  padding-top: 16px;
+  min-width: 0;
+}
+.w-routes h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  margin: 8px 0 12px;
+}
+.w-routes article > p {
+  color: var(--muted);
+  margin-top: 14px;
+}
+.w-routes .command-block {
+  border-radius: 6px;
+}
+.w-routes .command-block pre {
+  white-space: pre;
+  overflow-x: auto;
+}
+.w-cli {
+  margin-top: clamp(56px, 6vw, 88px);
+}
+.w-cli h3,
+.w-ref h3 {
+  font-size: 1.3rem;
+  margin-bottom: 12px;
+}
+.w-cli > div > p {
+  color: var(--muted);
+}
+.w-cli .table-scroll {
+  margin: 20px 0 4px;
+}
+.w-cli .h-commands dt code {
+  font-family: var(--mono);
+  font-size: 0.86em;
+}
+.w-notes {
+  margin-top: clamp(48px, 5vw, 72px);
+}
+
+/* Claude Desktop steps */
+.w-steps {
+  list-style: none;
+  counter-reset: step;
+  padding: 0;
+  margin: 0;
+  border-top: 1px solid var(--ink);
+}
+.w-steps li {
+  counter-increment: step;
+  position: relative;
+  padding: 18px 0 18px 48px;
+  border-bottom: 1px solid var(--line);
+  font-size: 1.05rem;
+}
+.w-steps li:before {
+  content: "0" counter(step);
+  position: absolute;
+  left: 0;
+  top: 20px;
+  font: 500 0.8rem/1.9 var(--mono);
+  color: var(--thread);
+}
+
+/* Lifecycle reuses the thread; chips sit on paper. */
+.w-lifecycle .h-chip {
+  margin: 12px 0 14px;
+}
+
+/* Skill catalogue */
+.w-catalog {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(28px, 4vw, 64px);
+}
+.w-catalog h3 {
+  font-size: 0.78rem;
+  font-family: var(--mono);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  border-top: 1px solid var(--ink);
+  padding-top: 14px;
+  margin-bottom: 4px;
+}
+.w-catalog dl {
+  margin: 0 0 32px;
+}
+.w-catalog dl > div {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+.w-catalog dt code {
+  font: 500 0.86rem var(--mono);
+  color: var(--thread);
+}
+.w-catalog dd {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+#gates .h-grid-3 h3 code,
+#pack-commands td code {
+  color: var(--thread);
+}
+.w-ref {
+  margin-top: 44px;
+}
+.w-ref .command-block {
+  border-radius: 6px;
+}
+#faq .faq {
+  margin-top: 0;
+}
+.h-closing .h-small {
+  max-width: 60ch;
+}
+
+@media (max-width: 1100px) {
+  .w-routes,
+  .w-excerpts,
+  .w-catalog {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Hero: terminal above the document list */
+.w-hero .h-hero-top {
+  align-items: center;
+}
+.w-hero-right {
+  display: grid;
+  gap: 28px;
+  min-width: 0;
+}
+.w-terminal {
+  margin: 0;
+}
+.w-terminal img {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid var(--dark-line);
+  box-shadow: 0 40px 80px -36px #10121b99;
+}
+.w-terminal figcaption {
+  margin-top: 10px;
+  font-size: 0.8rem;
+  color: var(--muted);
+}

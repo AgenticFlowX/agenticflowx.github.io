@@ -1,0 +1,431 @@
+<section class="h-hero v-hero">
+  <div class="h-wrap">
+    <div class="h-hero-top">
+      <div class="h-hero-copy">
+        <p class="h-kicker"><span class="h-dot" aria-hidden="true"></span>AgenticFlowX for VS Code</p>
+        <h1>Chat, plan, and build without leaving the editor.</h1>
+        <p class="h-lead">
+          A coding chat on the <a class="pi-link" href="https://pi.dev">Pi</a> harness, a Markdown Previewer that turns your specs into a working
+          surface, and a Workbench that shows where every feature stands.
+        </p>
+            <div class="h-install v-install" aria-label="Install the extension">
+          <div class="h-install-route">
+            <span class="h-label">Install</span>
+            <div class="h-install-buttons">
+              <a
+                class="button"
+                href="https://marketplace.visualstudio.com/items?itemName=AgenticFlowX.agenticflowx"
+                >VS Code Marketplace ↗</a
+              ><a
+                class="button button-outline"
+                href="https://open-vsx.org/extension/agenticflowx/agenticflowx"
+                >Open VSX ↗</a
+              >
+            </div>
+            <div class="command-block">
+              <pre><code>code --install-extension AgenticFlowX.agenticflowx</code></pre>
+              <button class="copy-button" data-copy aria-label="Copy extension install command">Copy</button>
+            </div>
+            <p>Open source · Apache 2.0 · Bring your own model access.</p>
+          </div>
+        </div>
+      </div>
+      <figure class="v-collage" aria-label="AgenticFlowX in VS Code">
+        <img class="v-c1" src="assets/screenshots/sdd-studio.png" alt="SDD Studio showing features with spec, design, tasks, and sessions" />
+        <img class="v-c2" src="assets/screenshots/previewer-spec.png" alt="The AFX Previewer with document actions and Quality Pulse" />
+        <img class="v-c3" src="assets/screenshots/chat-sdd-guide.png" alt="Spec mode chat with the SDD guide" />
+      </figure>
+    </div>
+  </div>
+  <figure class="h-stage">
+    <div class="h-wrap">
+      <button class="screenshot-button h-stage-shot" data-enlarge aria-label="Enlarge the Spec mode screenshot">
+        <img
+          src="assets/screenshots/chat-sdd-guide.png"
+          alt="AgenticFlowX chat in Spec mode with guided workflow actions in the VS Code sidebar"
+          width="1280"
+          height="720"
+        />
+      </button>
+      <figcaption class="h-stage-notes">
+        <div><span class="h-id">01</span><p><strong>Chat.</strong> Code, Explore, or Spec mode, on the model you choose.</p></div>
+        <div><span class="h-id">02</span><p><strong>Previewer.</strong> Each document type gets its own actions, beside the Markdown.</p></div>
+        <div><span class="h-id">03</span><p><strong>Workbench.</strong> Studio, Pipeline, Documents, Journal, Board, and more.</p></div>
+      </figcaption>
+    </div>
+  </figure>
+  <div class="h-wrap">
+    <nav class="v-jump" aria-label="On this page">
+      <span class="h-label">On this page</span>
+      <a href="#chat">Chat</a><a href="#viewer">Previewer</a><a href="#doc-actions">Document actions</a
+      ><a href="#studio">SDD Studio</a><a href="#panels">Workbench</a><a href="#trace">@see in code</a
+      ><a href="#daily-tools">Everyday tools</a><a href="#models">Models</a><a href="#install">Install</a>
+    </nav>
+  </div>
+</section>
+
+<section class="h-section" id="chat">
+  <div class="h-wrap">
+    <div class="x-head">
+      <div>
+        <p class="h-kicker">Chat</p>
+        <h2>Start with a question. Add a plan when the work needs one.</h2>
+      </div>
+      <p>The chat runs on <a class="pi-link" href="https://pi.dev">Pi</a>. The bundled <a class="pi-link" href="https://pi.dev">Pi</a> SDK works out of the box; you can switch to your own <a class="pi-link" href="https://pi.dev">Pi</a>
+        CLI over RPC if you already use it. Three modes set what the agent may do.</p>
+    </div>
+    <div class="h-grid-3 v-modes">
+      <div>
+        <span class="h-chip">Code</span>
+        <h3>Make the change</h3>
+        <p>Implement, debug, and run commands with full tool access.</p>
+        <p class="h-small">Intents: Default · Ask · Architect · Code</p>
+      </div>
+      <div>
+        <span class="h-chip">Explore</span>
+        <h3>Understand the project</h3>
+        <p>Read-only investigation, enforced: no edits, no mutating shell commands. Home of Blueprint.</p>
+        <p class="h-small">Intents: Default · Ask · Architect · PRD</p>
+      </div>
+      <div>
+        <span class="h-chip">Spec</span>
+        <h3>Give the work a plan</h3>
+        <p>Shape requirements, design, and tasks with a stepper and actions that follow the document’s stage.</p>
+        <p class="h-small">Switch modes with <kbd>⌘/Ctrl</kbd> <kbd>⇧</kbd> <kbd>M</kbd>; intents with <kbd>⌘/Ctrl</kbd> <kbd>⌥/Alt</kbd> <kbd>M</kbd>.</p>
+      </div>
+    </div>
+    <div class="h-split v-chat-detail">
+      <dl class="h-commands">
+        <div><dt><code>/</code> slash menu</dt><dd>AFX skills, other commands, and actions such as <code>/new</code> and <code>/abort</code>.</dd></div>
+        <div><dt><code>@file</code> mentions</dt><dd>Bring files and selections into the conversation.</dd></div>
+        <div><dt><code>!</code> shell commands</dt><dd>Run a command from the composer. A guard flags destructive patterns before they run.</dd></div>
+        <div><dt>Images</dt><dd>Attach PNG, JPEG, WebP, or GIF when the selected model accepts images.</dd></div>
+        <div><dt>Sessions</dt><dd>Search, reopen, rename, recap, and export past sessions. Modified files stay listed beside the chat.</dd></div>
+      </dl>
+      <figure class="v-video">
+        <video controls preload="none" poster="assets/screenshots/chat-desktop.png" aria-label="Silent screen recording of the AFX chat workflow">
+          <source src="assets/screenshots/chat-flow.webm" type="video/webm" />
+          <a href="assets/screenshots/chat-flow.webm">Download the chat demonstration</a>
+        </video>
+        <figcaption class="h-footnote">A silent walkthrough of the chat in the extension.</figcaption>
+      </figure>
+    </div>
+    <div class="h-split v-blueprint">
+      <div>
+        <p class="h-kicker">Blueprint · Explore mode</p>
+        <h3 class="v-h3">Understand a repository before you change it.</h3>
+        <p>
+          Inspect a project, review findings and evidence gaps, then save a portable
+          <code>blueprint.json</code> and <code>blueprint.md</code>. Check Changes compares locally;
+          Update and Rebuild produce proposals to review. Start a Sprint from selected findings
+          when you’re ready.
+        </p>
+        <p class="h-footnote">
+          Blueprint findings describe the sources that were inspected. They don’t prove that
+          behaviour was executed, and changed or missing evidence stays visible as a limitation.
+        </p>
+      </div>
+      <button class="screenshot-button" data-enlarge aria-label="Enlarge Explore mode screenshot">
+        <img src="assets/screenshots/chat-explore.png" alt="AgenticFlowX chat in Explore mode" loading="lazy" />
+      </button>
+    </div>
+  </div>
+</section>
+
+<section class="h-section" id="viewer">
+  <div class="h-wrap">
+    <div class="x-head">
+      <div>
+        <p class="h-kicker">The AFX Previewer</p>
+        <h2>Your Markdown, as a document you can work from.</h2>
+      </div>
+      <p>Open any Markdown file in the Previewer from the editor title bar. It sits beside the
+        source, updates as you type, and adds actions for the document you’re reading. The file
+        stays plain Markdown in your repository.</p>
+    </div>
+    <div class="h-grid-3">
+      <div>
+        <h3>Draft or Auto</h3>
+        <p>Actions that create content <strong>draft</strong> a command into the chat for you to edit first. Read-only checks run <strong>automatically</strong>. Each button says which.</p>
+      </div>
+      <div>
+        <h3>Quality Pulse</h3>
+        <p>A scorecard for Strategy, Structure, Clarity, and Completeness, each rated good, watch, or gap.</p>
+      </div>
+      <div>
+        <h3>Refinement Coach</h3>
+        <p>Suggestions that say why a gap matters, show the evidence, and offer a one-click next step.</p>
+      </div>
+      <div>
+        <h3>Section actions</h3>
+        <p>Open Questions get Answer, Resolve, and Journal. Acceptance and proof sections get Add proof. Decisions and risks get Journal and Refine.</p>
+      </div>
+      <div>
+        <h3>Writes back to the file</h3>
+        <p>Tick a task, or the agent and human sign-off for a work session, and the Markdown file changes.</p>
+      </div>
+      <div>
+        <h3>Made for reading</h3>
+        <p>An outline, jump links for IDs like <code>FR-1</code> and <code>DES-API</code>, and saved preferences for width, size, paper tone, font, and focus.</p>
+      </div>
+    </div>
+    <div class="v-illustration">
+      <div class="v-illustration-head">
+        <span class="h-label">Website illustration · not the extension</span>
+        <p>
+          Try a small spec three ways: rendered, as source, and with AFX Previewer controls. The
+          buttons explain the command the extension would draft or run; nothing here changes files
+          or calls an agent.
+        </p>
+      </div>
+      {{spec-example}}
+    </div>
+  </div>
+</section>
+
+<section class="h-section h-dark" id="doc-actions">
+  <div class="h-wrap">
+    <div class="x-head">
+      <div>
+        <p class="h-kicker">Document actions</p>
+        <h2>Each document type gets the actions it needs.</h2>
+      </div>
+      <p>The Previewer reads the document’s <code>type</code> from its frontmatter and shows a
+        matching action bar.</p>
+    </div>
+    <div class="v-table-wrap">
+      <table class="v-actions">
+        <thead><tr><th scope="col">Document</th><th scope="col">Actions</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Spec</th><td>Refine · Author design · Validate · Review · Approve</td></tr>
+          <tr><th scope="row">Design</th><td>Refine · Author task plan · Validate · Review · Approve</td></tr>
+          <tr><th scope="row">Tasks</th><td>Code · Verify · Pick · Review · Status</td></tr>
+          <tr><th scope="row">Sprint</th><td>Verify · Graduate, plus actions per spec, design, and tasks section</td></tr>
+          <tr><th scope="row">Journal</th><td>Note · Log · Recap · Promote · Capture</td></tr>
+          <tr><th scope="row">Research</th><td>Explore · Compare · Summarize · Finalize</td></tr>
+          <tr><th scope="row">ADR</th><td>Review · Supersede · List</td></tr>
+          <tr><th scope="row">Dash</th><td>No dedicated action bar yet. Dash files open in the general reader.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div data-tabs class="h-panels v-types">
+      <div class="h-tabs" role="tablist" aria-label="Previewer by document type">
+        <button role="tab" id="tab-doc-spec" aria-selected="true" aria-controls="panel-doc-spec">Spec</button
+        ><button role="tab" id="tab-doc-design" aria-selected="false" aria-controls="panel-doc-design" tabindex="-1">Design</button
+        ><button role="tab" id="tab-doc-tasks" aria-selected="false" aria-controls="panel-doc-tasks" tabindex="-1">Tasks</button
+        ><button role="tab" id="tab-doc-sprint" aria-selected="false" aria-controls="panel-doc-sprint" tabindex="-1">Sprint</button
+        ><button role="tab" id="tab-doc-research" aria-selected="false" aria-controls="panel-doc-research" tabindex="-1">Research</button
+        ><button role="tab" id="tab-doc-adr" aria-selected="false" aria-controls="panel-doc-adr" tabindex="-1">ADR</button>
+      </div>
+      <div class="h-panel" id="panel-doc-spec" role="tabpanel" aria-labelledby="tab-doc-spec">
+        <div class="h-panel-copy"><h3>Spec</h3><p>Requirements with Quality Pulse and the Refinement Coach alongside. Approve runs validation and review first.</p></div>
+        <button class="screenshot-button" data-enlarge aria-label="Enlarge Previewer spec screenshot"><img src="assets/screenshots/previewer-spec.png" alt="AFX Previewer showing a specification with its action bar" loading="lazy" /></button>
+      </div>
+      <div class="h-panel" id="panel-doc-design" role="tabpanel" aria-labelledby="tab-doc-design" hidden>
+        <div class="h-panel-copy"><h3>Design</h3><p>Design sections carry stable <code>[DES-…]</code> IDs that tasks and code point back to.</p></div>
+        <button class="screenshot-button" data-enlarge aria-label="Enlarge Previewer design screenshot"><img src="assets/screenshots/previewer-design.png" alt="AFX Previewer showing a design document" loading="lazy" /></button>
+      </div>
+      <div class="h-panel" id="panel-doc-tasks" role="tabpanel" aria-labelledby="tab-doc-tasks" hidden>
+        <div class="h-panel-copy"><h3>Tasks</h3><p>Start, verify, or review a task from its group. Checkboxes and session sign-offs write back to the file.</p></div>
+        <button class="screenshot-button" data-enlarge aria-label="Enlarge Previewer tasks screenshot"><img src="assets/screenshots/previewer-tasks.png" alt="AFX Previewer showing a tasks document" loading="lazy" /></button>
+      </div>
+      <div class="h-panel" id="panel-doc-sprint" role="tabpanel" aria-labelledby="tab-doc-sprint" hidden>
+        <div class="h-panel-copy"><h3>Sprint</h3><p>One file, three sections, each with its own actions. Graduate splits it into four files when the scope grows.</p></div>
+        <button class="screenshot-button" data-enlarge aria-label="Enlarge Previewer sprint screenshot"><img src="assets/screenshots/previewer-sprint.png" alt="AFX Previewer showing a Sprint document" loading="lazy" /></button>
+      </div>
+      <div class="h-panel" id="panel-doc-research" role="tabpanel" aria-labelledby="tab-doc-research" hidden>
+        <div class="h-panel-copy"><h3>Research</h3><p>Explore options, compare them, and finalize findings before they become a decision.</p></div>
+        <button class="screenshot-button" data-enlarge aria-label="Enlarge Previewer research screenshot"><img src="assets/screenshots/previewer-research.png" alt="AFX Previewer showing a research document" loading="lazy" /></button>
+      </div>
+      <div class="h-panel" id="panel-doc-adr" role="tabpanel" aria-labelledby="tab-doc-adr" hidden>
+        <div class="h-panel-copy"><h3>ADR</h3><p>Review an architecture decision, or supersede it with a new one.</p></div>
+        <button class="screenshot-button" data-enlarge aria-label="Enlarge Previewer ADR screenshot"><img src="assets/screenshots/previewer-adr.png" alt="AFX Previewer showing an architecture decision record" loading="lazy" /></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="h-section" id="studio">
+  <div class="h-wrap">
+    <div class="x-head">
+      <div>
+        <p class="h-kicker">SDD Studio</p>
+        <h2>See the whole feature, not just the latest message.</h2>
+      </div>
+      <p>Pick a feature and see its spec, design, tasks, and sessions together, with progress and
+        the next step.</p>
+    </div>
+    <div class="h-grid-3">
+      <div><h3>Overview</h3><p>Feature progress, document status, attention signals, and next actions.</p></div>
+      <div><h3>Focus</h3><p>Give one document the space to read, refine, or review it properly.</p></div>
+      <div><h3>Compare</h3><p>Read related documents side by side while you check the plan lines up.</p></div>
+    </div>
+    <button class="screenshot-button v-wide-shot" data-enlarge aria-label="Enlarge SDD Studio">
+      <img src="assets/screenshots/sdd-studio.png" alt="SDD Studio overview with feature status, next work, and document controls" loading="lazy" width="3200" height="2000" />
+    </button>
+  </div>
+</section>
+
+<section class="h-section h-dark" id="panels">
+  <div class="h-wrap">
+    <div class="x-head">
+      <div>
+        <p class="h-kicker">The Workbench</p>
+        <h2>Eight views of your project, in the bottom panel.</h2>
+      </div>
+      <p>Everything is read from files in your repository: <code>docs/specs</code> and
+        <code>.afx/</code>. Hide the tabs you don’t use.</p>
+    </div>
+    <div data-tabs class="h-panels">
+      <div class="h-tabs" role="tablist" aria-label="Workbench tabs">
+        <button role="tab" id="tab-pipeline" aria-selected="true" aria-controls="panel-pipeline">Pipeline</button
+        ><button role="tab" id="tab-studio-tab" aria-selected="false" aria-controls="panel-studio-tab" tabindex="-1">SDD Studio</button
+        ><button role="tab" id="tab-documents" aria-selected="false" aria-controls="panel-documents" tabindex="-1">Documents</button
+        ><button role="tab" id="tab-analytics" aria-selected="false" aria-controls="panel-analytics" tabindex="-1">Analytics</button
+        ><button role="tab" id="tab-journal" aria-selected="false" aria-controls="panel-journal" tabindex="-1">Journal</button
+        ><button role="tab" id="tab-board" aria-selected="false" aria-controls="panel-board" tabindex="-1">Board</button
+        ><button role="tab" id="tab-notes" aria-selected="false" aria-controls="panel-notes" tabindex="-1">Notes</button
+        ><button role="tab" id="tab-canvas" aria-selected="false" aria-controls="panel-canvas" tabindex="-1">Canvas <span class="h-tag">Experimental</span></button>
+      </div>
+      <div class="h-panel" id="panel-pipeline" role="tabpanel" aria-labelledby="tab-pipeline">
+        <div class="h-panel-copy"><h3>What’s moving, what’s next.</h3><p>Features grouped by progress, with the next required action. View it as a simple list, a timeline, or a grid.</p></div>
+        <button class="screenshot-button" data-enlarge aria-label="Enlarge Pipeline"><img src="assets/screenshots/pipeline.png" alt="Pipeline showing project progress and next actions" loading="lazy" /></button>
+      </div>
+      <div class="h-panel" id="panel-studio-tab" role="tabpanel" aria-labelledby="tab-studio-tab" hidden>
+        <div class="h-panel-copy"><h3>One feature, all its pieces.</h3><p>Overview, focus, and compare modes for a single feature. <a class="h-link" href="#studio">More on SDD Studio ↑</a></p></div>
+        <button class="screenshot-button" data-enlarge aria-label="Enlarge SDD Studio tab"><img src="assets/screenshots/sdd-studio.png" alt="SDD Studio in the Workbench" loading="lazy" /></button>
+      </div>
+      <div class="h-panel" id="panel-documents" role="tabpanel" aria-labelledby="tab-documents" hidden>
+        <div class="h-panel-copy"><h3>A home for the project’s thinking.</h3><p>Browse specs, designs, ADRs, research, and journals as a tree, and read them in the same Previewer. A launchpad helps on first run.</p></div>
+        <button class="screenshot-button" data-enlarge aria-label="Enlarge Documents"><img src="assets/screenshots/documents.png" alt="Documents tab with a document tree and reader" loading="lazy" /></button>
+      </div>
+      <div class="h-panel" id="panel-analytics" role="tabpanel" aria-labelledby="tab-analytics" hidden>
+        <div class="h-panel-copy"><h3>The work, over time.</h3><p>Tasks, sessions, and your streak, with a sessions sparkline, a pipeline stage bar, top features, and an activity heatmap.</p></div>
+        <button class="screenshot-button" data-enlarge aria-label="Enlarge Analytics"><img src="assets/screenshots/analytics.png" alt="Analytics tab with task and session metrics" loading="lazy" /></button>
+      </div>
+      <div class="h-panel" id="panel-journal" role="tabpanel" aria-labelledby="tab-journal" hidden>
+        <div class="h-panel-copy"><h3>Pick up the thread.</h3><p>A timeline of sessions and decisions with filters and a preview, so the next session starts with the context.</p></div>
+        <button class="screenshot-button" data-enlarge aria-label="Enlarge Journal"><img src="assets/screenshots/journal.png" alt="Journal tab with session and decision history" loading="lazy" /></button>
+      </div>
+      <div class="h-panel" id="panel-board" role="tabpanel" aria-labelledby="tab-board" hidden>
+        <div class="h-panel-copy"><h3>A board beside your code.</h3><p>A Kanban board stored as Markdown in <code>.afx/kanban/</code>. Drag and drop with the keyboard or mouse, and link cards to AFX work.</p></div>
+        <button class="screenshot-button" data-enlarge aria-label="Enlarge Board"><img src="assets/screenshots/board.png" alt="Board tab with Kanban lanes" loading="lazy" /></button>
+      </div>
+      <div class="h-panel" id="panel-notes" role="tabpanel" aria-labelledby="tab-notes" hidden>
+        <div class="h-panel-copy"><h3>Somewhere for quick ideas.</h3><p>Capture notes on a timeline, then edit or remove them. Stored in <code>.afx/notes.md</code>.</p></div>
+        <button class="screenshot-button" data-enlarge aria-label="Enlarge Notes"><img src="assets/screenshots/notes.png" alt="Notes tab with quick-capture notes" loading="lazy" /></button>
+      </div>
+      <div class="h-panel" id="panel-canvas" role="tabpanel" aria-labelledby="tab-canvas" hidden>
+        <div class="h-panel-copy"><h3>Lay out your thinking.</h3><p>Off by default; turn on <code>afx.experimental.canvas</code>. Arrange files, notes, and ideas on a canvas saved in the open JSON Canvas format. Also opens any <code>.canvas</code> file, and exports PNG.</p></div>
+        <button class="screenshot-button" data-enlarge aria-label="Enlarge Canvas"><img src="assets/screenshots/canvas.png" alt="Experimental project canvas" loading="lazy" /></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="h-section" id="trace">
+  <div class="h-wrap h-split">
+    <div>
+      <p class="h-kicker">@see in your code</p>
+      <h2>Ask the code why it exists.</h2>
+      <p class="h-lead">
+        A comment like <code>@see docs/specs/search/spec.md [FR-1]</code> becomes a live link in
+        the editor.
+      </p>
+      <dl class="h-commands">
+        <div><dt>CodeLens</dt><dd>Open spec and Open design, right above the annotated code.</dd></div>
+        <div><dt>Hover</dt><dd>Preview the requirement row or design section without leaving the file.</dd></div>
+        <div><dt><kbd>⌘/Ctrl</kbd>-click</dt><dd>Go to the definition of <code>[FR-X]</code>, <code>[DES-X]</code>, or task <code>[X.Y]</code>.</dd></div>
+        <div><dt>Autocomplete</dt><dd>Paths and IDs complete as you type after <code>@see</code>. An Add @see Link command does it from the context menu.</dd></div>
+      </dl>
+      <p class="h-footnote">
+        Broken or missing links aren’t shown as live editor errors. Check them on demand with Verify
+        Traceability or <code>/afx-check trace</code>. A link records intent; tests and review show
+        whether the code meets it.
+      </p>
+    </div>
+    <button class="screenshot-button" data-enlarge aria-label="Enlarge code traceability example">
+      <img src="assets/vscode/product/traceability.webp" alt="Code editor showing @see links from source code to specification documents" loading="lazy" width="1280" height="720" />
+    </button>
+  </div>
+</section>
+
+<section class="h-section" id="daily-tools">
+  <div class="h-wrap">
+    <div class="x-head">
+      <div>
+        <p class="h-kicker">Everyday details</p>
+        <h2>Settings worth knowing about.</h2>
+      </div>
+    </div>
+    <div class="h-grid-3">
+      <div>
+        <h3>Project trust</h3>
+        <p><code>afx.pi.projectTrust</code> asks before loading a project’s own skills and settings. Choose ask, trust, or ignore.</p>
+      </div>
+      <div>
+        <h3>More skills</h3>
+        <p>Add folders with <code>afx.skills.extraPaths</code>, and exclude tools with <code>afx.pi.excludedTools</code>.</p>
+      </div>
+      <div>
+        <h3>Appearance</h3>
+        <p>The Meridian theme with seven style treatments, and <code>afx.experimental.workbenchHiddenViews</code> to hide tabs.</p>
+      </div>
+      <div>
+        <h3>Networks and proxies</h3>
+        <p>Route provider traffic through <code>afx.network.httpProxy</code>. API keys are kept in VS Code’s secret storage.</p>
+      </div>
+      <div>
+        <h3>Modified files</h3>
+        <p><code>afx.chat.autoOpenModifiedFiles</code> opens files as the agent changes them. Off by default.</p>
+      </div>
+      <div>
+        <h3>Telemetry</h3>
+        <p>The extension’s views use Microsoft Clarity, on by default. It follows VS Code’s telemetry setting and Do Not Track, and <code>afx.telemetry.enabled</code> turns it off.</p>
+      </div>
+    </div>
+    <p class="h-footnote"><a class="h-link" href="get-started.html#settings">All settings, trust, and troubleshooting →</a></p>
+  </div>
+</section>
+
+<section class="h-section h-models" id="models">
+  <div class="h-wrap h-split">
+    <div>
+      <p class="h-kicker">Models</p>
+      <h2>Bring the model you already pay for.</h2>
+      <p class="h-lead">
+        Sign in with a subscription such as Claude, ChatGPT, or GitHub Copilot; add an API key for
+        dozens of providers; or run locally with Ollama, LM Studio, vLLM, or any
+        OpenAI-compatible endpoint.
+      </p>
+      <p class="h-small">
+        Availability depends on the runtime, the provider, and your account. Usage is billed by
+        your provider.
+      </p>
+      <p><a class="h-link" href="models.html">Supported models and Pi setup →</a></p>
+    </div>
+    <button class="screenshot-button" data-enlarge aria-label="Enlarge model selection">
+      <img src="assets/screenshots/model-selector.png" alt="Model picker with configured providers and models" loading="lazy" width="1280" height="720" />
+    </button>
+  </div>
+</section>
+
+<section class="h-closing" id="install">
+  <div class="h-wrap">
+    <svg class="h-closing-mark" viewBox="0 0 240 60" aria-hidden="true">
+      <path d="M10 30 C10 5, 60 5, 60 30 C60 55, 110 55, 110 30 C110 5, 160 5, 160 30 C160 55, 210 55, 210 30" />
+    </svg>
+    <h2>Your next feature starts in the sidebar.</h2>
+    <ol class="v-steps">
+      <li>Install the extension.</li>
+      <li>Open the AgenticFlowX icon in the activity bar.</li>
+      <li>Connect a model in Settings → Models.</li>
+      <li>Ask a question, or switch to Spec to plan a feature.</li>
+    </ol>
+    <div class="h-closing-actions">
+      <a class="button" href="https://marketplace.visualstudio.com/items?itemName=AgenticFlowX.agenticflowx">VS Code Marketplace</a
+      ><a class="button button-outline button-on-dark" href="https://open-vsx.org/extension/agenticflowx/agenticflowx">Open VSX</a>
+    </div>
+    <p class="h-small"><a class="h-link" href="get-started.html">Setup guide and troubleshooting →</a></p>
+  </div>
+</section>
